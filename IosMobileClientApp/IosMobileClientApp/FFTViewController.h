@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface FFTViewController : UIViewController
+{
+    IBOutlet UIButton *connectToWebServiceButton;
+    IBOutlet UILabel *outputLabel;
+}
+
+- (IBAction) buttonClicked:(id)sender ;
 
 @end
+

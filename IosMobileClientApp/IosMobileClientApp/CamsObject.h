@@ -30,7 +30,6 @@
 @end
 
 
-
 @interface ZoneLinePoint : CamsGeoPoint
 @property (readwrite) NSNumber *parentId;
 @property (readwrite) NSNumber *sequence;

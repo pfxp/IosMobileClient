@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EBC6018A32C4000DBE65A /* WebServiceComms.m */; };
 		7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475D18A2F90F007D734A /* Foundation.framework */; };
 		7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475F18A2F90F007D734A /* CoreGraphics.framework */; };
 		7661476218A2F90F007D734A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661476118A2F90F007D734A /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceComms.h; sourceTree = "<group>"; };
+		765EBC6018A32C4000DBE65A /* WebServiceComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceComms.m; sourceTree = "<group>"; };
 		7661475A18A2F90F007D734A /* IosMobileClientApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosMobileClientApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7661475D18A2F90F007D734A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7661475F18A2F90F007D734A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +127,8 @@
 				7661477318A2F90F007D734A /* FFTViewController.m */,
 				7661477518A2F90F007D734A /* Images.xcassets */,
 				7661476418A2F90F007D734A /* Supporting Files */,
+				765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */,
+				765EBC6018A32C4000DBE65A /* WebServiceComms.m */,
 			);
 			path = IosMobileClientApp;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 			files = (
 				7661476A18A2F90F007D734A /* main.m in Sources */,
 				7661476E18A2F90F007D734A /* FFTAppDelegate.m in Sources */,
+				765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */,
 				7677886618A2FEEA001A7B61 /* CamsObject.m in Sources */,
 				7661477418A2F90F007D734A /* FFTViewController.m in Sources */,
 			);

@@ -18,6 +18,6 @@
 - (IBAction) helloWorldButtonClicked:(id)sender ;
 - (IBAction) camsButtonClicked:(id)sender ;
 - (void)fetchHelloWorldGreeting;
-- (void)fetchCamsControllers;
+- (void)invokeJsonData;
 @end
 

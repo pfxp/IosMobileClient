@@ -37,7 +37,7 @@
 {
     NSLog(@"CAMS button pressed.");
     outputLabel.text = @"CAMS button pressed.";
-    [self fetchCamsControllers];
+    [self invokeJsonData];
 }
 
 - (void)fetchHelloWorldGreeting
@@ -65,9 +65,9 @@
      }];
 }
 
-- (void)fetchCamsControllers
+- (void)invokeJsonData
 {
-    NSURL *url = [NSURL URLWithString:@"https://peterpc.fft.local:4568/RestService.svc/json/JSONData?id=123"];
+    NSURL *url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/JSONData?id=123"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
@@ -81,7 +81,7 @@
                                                                         error:NULL];
              
              
-             NSString *result = [[greeting objectForKey:@"JSONDataResult"] stringValue];
+             NSString *result = [greeting objectForKey:@"JSONDataResult"];
              NSString *results = [NSString stringWithFormat:@"Result: %@", result];
              outputLabel.text = results;
              

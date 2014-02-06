@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WebServiceComms : NSObject
+@interface WebServiceComms : NSObject<NSURLConnectionDelegate>
+{
+    NSTimeInterval asyncTimeoutInSec;
+    NSMutableData *httpResponseData;
+}
 
+@property (readwrite, copy) NSString* helloWorldUrl;
+
+- (id) init;
+- (void) asyncTest;
+
+- (NSString *)fetchHelloWorldGreeting;
 @end

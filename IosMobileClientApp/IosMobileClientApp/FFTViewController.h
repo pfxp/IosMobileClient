@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebServiceComms.h"
 
 @interface FFTViewController : UIViewController
 {
     IBOutlet UIButton *connectToHelloWorldWebServiceButton;
     IBOutlet UIButton *connectToCamsWebServiceButton;
     IBOutlet UILabel *outputLabel;
+    WebServiceComms *wsComms;
 }
 
 - (IBAction) helloWorldButtonClicked:(id)sender ;

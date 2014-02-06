@@ -31,7 +31,7 @@
 - (IBAction)helloWorldButtonClicked:(id) sender{
     NSLog(@"Hello world button pressed.");
     outputLabel.text = @"Hello world button pressed.";
-    //outputLabel.text = wsComms.fetchHelloWorldGreeting;    //[self fetchHelloWorldGreeting];
+    
     wsComms.asyncTest;
 }
 
@@ -39,7 +39,7 @@
 {
     NSLog(@"CAMS button pressed.");
     outputLabel.text = @"CAMS button pressed.";
-    [self invokeJsonData];
+    [self invokeGetControllers];
 }
 
 - (void)fetchHelloWorldGreeting
@@ -87,6 +87,41 @@
              NSString *results = [NSString stringWithFormat:@"Result: %@", result];
              outputLabel.text = results;
              
+         }
+     }];
+}
+
+- (void)invokeGetControllers
+{
+    NSURL *url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllControllers"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data, NSError *connectionError)
+     {
+         if (data.length > 0 && connectionError == nil)
+         {
+             NSError *e = nil;
+             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+                                                                      options:NSJSONReadingMutableContainers
+                                                                        error:&e];
+             
+             NSArray *jsonArray = [dict objectForKey:@"GetAllControllersResult"];
+             
+             if (!jsonArray)
+             {
+                 NSLog(@"Error parsing JSON: %@", e);
+             }
+             else
+             {
+                 for (NSDictionary *item in jsonArray)
+                 {
+                     NSString *descript = [item objectForKey:@"Description"];
+                     NSLog(@"Description: %@", descript);
+                     //NSLog(@"Item: %@", item);
+                 }
+             }
          }
      }];
 }

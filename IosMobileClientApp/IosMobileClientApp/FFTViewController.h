@@ -10,11 +10,14 @@
 
 @interface FFTViewController : UIViewController
 {
-    IBOutlet UIButton *connectToWebServiceButton;
+    IBOutlet UIButton *connectToHelloWorldWebServiceButton;
+    IBOutlet UIButton *connectToCamsWebServiceButton;
     IBOutlet UILabel *outputLabel;
 }
 
-- (IBAction) buttonClicked:(id)sender ;
-
+- (IBAction) helloWorldButtonClicked:(id)sender ;
+- (IBAction) camsButtonClicked:(id)sender ;
+- (void)fetchHelloWorldGreeting;
+- (void)fetchCamsControllers;
 @end
 

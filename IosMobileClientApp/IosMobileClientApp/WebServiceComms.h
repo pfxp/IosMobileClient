@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "GlobalSettings.h"
+#import "CamsObjectRepository.h"
 
 @interface WebServiceComms : NSObject<NSURLConnectionDelegate>
 {
     NSTimeInterval asyncTimeoutInSec;
     NSMutableData *httpResponseData;
     BOOL finishedRequest;
+    CamsObjectRepository *repository;
 }
 
 @property (readwrite, copy) NSString* helloWorldUrl;

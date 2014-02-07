@@ -33,7 +33,7 @@
     NSLog(@"Hello world button pressed.");
     outputLabel.text = @"Hello world button pressed.";
     
-    wsComms.asyncTest;
+    [wsComms asyncTest];
 }
 
 - (IBAction) camsButtonClicked:(id)sender
@@ -148,6 +148,20 @@
 {
     NSLog(@"Get Controllers button clicked.");
     [wsComms callCamsWsMethod:GetControllers];
+}
+
+// Gets the sensors from the web service.
+- (IBAction) getSensorsButtonClicked:(id)sender
+{
+    NSLog(@"Get Sensors button clicked.");
+    [wsComms callCamsWsMethod:GetSensors];
+}
+
+// Gets the zones from the web service.
+- (IBAction) getZonesButtonClicked:(id)sender
+{
+    NSLog(@"Get Zones button clicked.");
+    [wsComms callCamsWsMethod:GetZones];
 }
 
 @end

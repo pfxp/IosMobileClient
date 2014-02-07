@@ -14,6 +14,8 @@
     IBOutlet UIButton *connectToHelloWorldWebServiceButton;
     IBOutlet UIButton *connectToCamsWebServiceButton;
     IBOutlet UIButton *getControllersButton;
+    IBOutlet UIButton *getSensorsButton;
+    IBOutlet UIButton *getZonesButton;
     IBOutlet UILabel *outputLabel;
     WebServiceComms *wsComms;
 }
@@ -21,6 +23,8 @@
 - (IBAction) helloWorldButtonClicked:(id)sender ;
 - (IBAction) camsButtonClicked:(id)sender ;
 - (IBAction) getControllersButtonClicked:(id)sender ;
+- (IBAction) getSensorsButtonClicked:(id)sender ;
+- (IBAction) getZonesButtonClicked:(id)sender ;
 - (void)fetchHelloWorldGreeting;
 - (void)invokeJsonData;
 - (void)invokeGetControllers;

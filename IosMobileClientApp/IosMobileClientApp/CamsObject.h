@@ -41,11 +41,19 @@
 @end
 
 @interface Sensor : NSObject
-@property (readwrite) NSString *description;
+@property (readwrite) NSString *sensorDescription;
 @property (readwrite) NSNumber *sensorId;
 @property (readwrite) NSNumber *channelNumber;
 @property (readwrite) NSString *sensorGuid;
 @property (readwrite) NSArray *points;
+
+- (id) initWithDesc:(NSString*)desc
+                sensorid:(NSNumber *)sId
+                  channelNumber:(NSNumber *)cNum
+              sensorGuid:(NSString *)sguid;
+
+- (NSString *)description;
+
 @end
 
 @interface Controller : NSObject

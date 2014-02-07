@@ -21,6 +21,7 @@
         self.helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
         asyncTimeoutInSec = 20.0;
         finishedRequest=TRUE;
+        repository = [[CamsObjectRepository alloc] init];
     }
     return self;
 }
@@ -61,41 +62,13 @@
         return;
     }
     
+
     NSLog(@"About to process JSON dictionary.");
 
     NSError *e = nil;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:httpResponseData   options:NSJSONReadingMutableContainers  error:&e];
-    NSArray *jsonArray = [dict objectForKey:@"GetAllControllersResult"];
-    
-    if (!jsonArray)
-    {
-        NSLog(@"Error parsing JSON: %@", e);
-    }
-    else
-    {
-        for (NSDictionary *item in jsonArray)
-        {
-            NSString *connected = [item objectForKey:@"Connected"];
-            NSString *description = [item objectForKey:@"Description"];
-            NSString *hostname = [item objectForKey:@"Hostname"];
-            NSString *idString = [item objectForKey:@"Id"];
-            NSString *isLocator = [item objectForKey:@"Locator"];
-            NSString *name = [item objectForKey:@"Name"];
-            
-            //BOOL connectedAsBool = [connected boolValue];
-            //NSNumber *idNumber = [NSNumber numberWithInteger:[idString integerValue]];
-            //BOOL locatorAsBool = [isLocator boolValue];
-            
-            //Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
-            //                                                        ctrlid:idNumber locator:locatorAsBool name:name];
-            
-            
-            NSLog(@"%@, %@,%@,%@,%@,%@,", connected, description, hostname, idString, isLocator, name);
-            //NSLog(@"CONT: %@", controller);
-            
-        }
-    }
-    
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:httpResponseData  options:NSJSONReadingMutableContainers  error:&e];
+   
+    [repository parseJsonDictionary:dict command:_currentRequest];
     
     finishedRequest=true;
 }
@@ -113,8 +86,7 @@
     NSURL *url = [NSURL URLWithString:self.helloWorldUrl];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed
                                                        timeoutInterval:asyncTimeoutInSec];
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 //

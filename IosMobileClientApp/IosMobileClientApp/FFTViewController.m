@@ -7,6 +7,7 @@
 //
 
 #import "FFTViewController.h"
+#import "CamsObject.h"
 
 @interface FFTViewController ()
 
@@ -117,9 +118,24 @@
              {
                  for (NSDictionary *item in jsonArray)
                  {
-                     NSString *descript = [item objectForKey:@"Description"];
-                     NSLog(@"Description: %@", descript);
-                     //NSLog(@"Item: %@", item);
+                     NSString *connected = [item objectForKey:@"Connected"];
+                     NSString *description = [item objectForKey:@"Description"];
+                     NSString *hostname = [item objectForKey:@"Hostname"];
+                     NSString *idString = [item objectForKey:@"Id"];
+                     NSString *isLocator = [item objectForKey:@"Locator"];
+                     NSString *name = [item objectForKey:@"Name"];
+                     
+                     BOOL connectedAsBool = [connected boolValue];
+                     NSNumber *idNumber = [NSNumber numberWithInteger:[idString integerValue]];
+                     BOOL locatorAsBool = [isLocator boolValue];
+
+                     Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
+                                                                                   ctrlid:idNumber locator:locatorAsBool name:name];
+                     
+                     
+                     //NSLog(@"%@, %@,%@,%@,%@,%@,", connected, description, hostname, idString, isLocator, name);
+                     NSLog(@"CONT: %@", controller);
+                                          
                  }
              }
          }

@@ -50,11 +50,21 @@
 
 @interface Controller : NSObject
 @property (readwrite) BOOL connected;
-@property (readwrite) NSString *description;
-@property (readwrite) NSString *hostname;
+@property (readwrite, copy) NSString *controllerDescription;
+@property (readwrite, copy) NSString *hostname;
 @property (readwrite) NSNumber *ctrlId;
 @property (readwrite) BOOL locator;
-@property (readwrite) NSString *name;
+@property (readwrite, copy) NSString *name;
+
+- (id) initWithAllValues:(BOOL)conn
+            description:(NSString*)desc
+            hostname:(NSString *)host
+            ctrlid:(NSNumber *)cId
+            locator:(BOOL)loc
+            name:(NSString*)nm;
+
+- (NSString *)description;
+- (void) doSomething;
 @end
 
 @interface Zone : NSObject

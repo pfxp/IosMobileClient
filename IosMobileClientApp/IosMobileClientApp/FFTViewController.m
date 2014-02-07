@@ -142,4 +142,12 @@
      }];
 }
 
+
+// Gets the controllers from the web service.
+- (IBAction) getControllersButtonClicked:(id)sender
+{
+    NSLog(@"Get Controllers button clicked.");
+    [wsComms callCamsWsMethod:GetControllers];
+}
+
 @end

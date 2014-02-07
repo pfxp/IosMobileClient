@@ -13,12 +13,14 @@
 {
     IBOutlet UIButton *connectToHelloWorldWebServiceButton;
     IBOutlet UIButton *connectToCamsWebServiceButton;
+    IBOutlet UIButton *getControllersButton;
     IBOutlet UILabel *outputLabel;
     WebServiceComms *wsComms;
 }
 
 - (IBAction) helloWorldButtonClicked:(id)sender ;
 - (IBAction) camsButtonClicked:(id)sender ;
+- (IBAction) getControllersButtonClicked:(id)sender ;
 - (void)fetchHelloWorldGreeting;
 - (void)invokeJsonData;
 - (void)invokeGetControllers;

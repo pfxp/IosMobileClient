@@ -9,9 +9,9 @@
 // Performs asynchronous communicates with the web service
 
 #import "WebServiceComms.h"
+#import "GlobalSettings.h"
 
 @implementation WebServiceComms
-
 
 - (id) init
 {
@@ -20,6 +20,7 @@
     {
         self.helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
         asyncTimeoutInSec = 20.0;
+        finishedRequest=TRUE;
     }
     return self;
 }
@@ -54,36 +55,70 @@
 // You can parse the stuff in your instance variable now
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    if (httpResponseData.length > 0 )
+    if (httpResponseData.length <= 0 )
     {
-        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:httpResponseData
-                                                                 options:0
-                                                                   error:NULL];
-        
-        NSString *idValue = [[jsonDictionary objectForKey:@"id"] stringValue];
-        NSString *content = [jsonDictionary objectForKey:@"content"];
-        NSString *results = [NSString stringWithFormat:@"ID: %@ Content: %@", idValue, content];
-        NSLog(@"Results: %@", results);
+        finishedRequest=true;
+        return;
     }
+    
+    NSLog(@"About to process JSON dictionary.");
+
+    NSError *e = nil;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:httpResponseData   options:NSJSONReadingMutableContainers  error:&e];
+    NSArray *jsonArray = [dict objectForKey:@"GetAllControllersResult"];
+    
+    if (!jsonArray)
+    {
+        NSLog(@"Error parsing JSON: %@", e);
+    }
+    else
+    {
+        for (NSDictionary *item in jsonArray)
+        {
+            NSString *connected = [item objectForKey:@"Connected"];
+            NSString *description = [item objectForKey:@"Description"];
+            NSString *hostname = [item objectForKey:@"Hostname"];
+            NSString *idString = [item objectForKey:@"Id"];
+            NSString *isLocator = [item objectForKey:@"Locator"];
+            NSString *name = [item objectForKey:@"Name"];
+            
+            //BOOL connectedAsBool = [connected boolValue];
+            //NSNumber *idNumber = [NSNumber numberWithInteger:[idString integerValue]];
+            //BOOL locatorAsBool = [isLocator boolValue];
+            
+            //Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
+            //                                                        ctrlid:idNumber locator:locatorAsBool name:name];
+            
+            
+            NSLog(@"%@, %@,%@,%@,%@,%@,", connected, description, hostname, idString, isLocator, name);
+            //NSLog(@"CONT: %@", controller);
+            
+        }
+    }
+    
+    
+    finishedRequest=true;
 }
 
 // The request has failed for some reason!
 // Check the error var
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-
+   
 }
 
-
+// tests the hello worls
 - (void) asyncTest
 {
     NSURL *url = [NSURL URLWithString:self.helloWorldUrl];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed
                                                        timeoutInterval:asyncTimeoutInSec];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
 }
 
-
+//
+// Does an HTTP request on a very simple web service.
 - (NSString *)fetchHelloWorldGreeting
 {
     __block NSString *results;
@@ -110,6 +145,41 @@
      }];
     
     return results;
+}
+
+- (void) callCamsWsMethod:(CamsWsRequent) command
+{
+    NSURL *url;
+    NSMutableURLRequest *request;
+    
+    if (!finishedRequest)
+    {
+        NSLog(@"Have not finished request");
+    }
+    
+    finishedRequest=false;
+    self.currentRequest = command;
+    
+    switch (command)
+    {
+        case GetControllers:
+            url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllControllers"];
+            break;
+        case GetSensors:
+            url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllSensors"];
+            break;
+        case GetZones:
+            url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllZones"];
+            break;
+        default:
+            return;
+            break;
+    }
+    
+    NSLog(@"Calling URL: %@", url);
+    
+    request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed  timeoutInterval:asyncTimeoutInSec];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 

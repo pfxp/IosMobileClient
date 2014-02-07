@@ -7,17 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GlobalSettings.h"
 
 @interface WebServiceComms : NSObject<NSURLConnectionDelegate>
 {
     NSTimeInterval asyncTimeoutInSec;
     NSMutableData *httpResponseData;
+    BOOL finishedRequest;
 }
 
 @property (readwrite, copy) NSString* helloWorldUrl;
+@property (readwrite, atomic) CamsWsRequent currentRequest;
+
 
 - (id) init;
 - (void) asyncTest;
 
 - (NSString *)fetchHelloWorldGreeting;
+- (void) callCamsWsMethod:(CamsWsRequent) command;
+
+
 @end

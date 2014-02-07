@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7605FAD418A4721E00BCE00F /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7605FAD318A4721E00BCE00F /* GlobalSettings.m */; };
 		765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EBC6018A32C4000DBE65A /* WebServiceComms.m */; };
 		7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475D18A2F90F007D734A /* Foundation.framework */; };
 		7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475F18A2F90F007D734A /* CoreGraphics.framework */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7605FAD218A4721E00BCE00F /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
+		7605FAD318A4721E00BCE00F /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
 		765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceComms.h; sourceTree = "<group>"; };
 		765EBC6018A32C4000DBE65A /* WebServiceComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceComms.m; sourceTree = "<group>"; };
 		7661475A18A2F90F007D734A /* IosMobileClientApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosMobileClientApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +132,8 @@
 				7661476418A2F90F007D734A /* Supporting Files */,
 				765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */,
 				765EBC6018A32C4000DBE65A /* WebServiceComms.m */,
+				7605FAD218A4721E00BCE00F /* GlobalSettings.h */,
+				7605FAD318A4721E00BCE00F /* GlobalSettings.m */,
 			);
 			path = IosMobileClientApp;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 				765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */,
 				7677886618A2FEEA001A7B61 /* CamsObject.m in Sources */,
 				7661477418A2F90F007D734A /* FFTViewController.m in Sources */,
+				7605FAD418A4721E00BCE00F /* GlobalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

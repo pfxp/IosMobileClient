@@ -80,15 +80,6 @@
    
 }
 
-// tests the hello worls
-- (void) asyncTest
-{
-    NSURL *url = [NSURL URLWithString:self.helloWorldUrl];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed
-                                                       timeoutInterval:asyncTimeoutInSec];
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
-}
-
 //
 // Does an HTTP request on a very simple web service.
 - (NSString *)fetchHelloWorldGreeting
@@ -152,6 +143,8 @@
     
     request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed  timeoutInterval:asyncTimeoutInSec];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSLog(@"Connection=%@", conn.description);
+    
 }
 
 

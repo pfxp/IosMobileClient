@@ -407,6 +407,7 @@
 				GCC_PREFIX_HEADER = "IosMobileClientApp/IosMobileClientApp-Prefix.pch";
 				INFOPLIST_FILE = "IosMobileClientApp/IosMobileClientApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -420,6 +421,7 @@
 				GCC_PREFIX_HEADER = "IosMobileClientApp/IosMobileClientApp-Prefix.pch";
 				INFOPLIST_FILE = "IosMobileClientApp/IosMobileClientApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

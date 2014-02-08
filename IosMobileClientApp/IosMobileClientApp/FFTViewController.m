@@ -32,8 +32,6 @@
 - (IBAction)helloWorldButtonClicked:(id) sender{
     NSLog(@"Hello world button pressed.");
     outputLabel.text = @"Hello world button pressed.";
-    
-    [wsComms asyncTest];
 }
 
 - (IBAction) camsButtonClicked:(id)sender

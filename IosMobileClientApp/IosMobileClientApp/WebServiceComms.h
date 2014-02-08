@@ -23,8 +23,6 @@
 
 
 - (id) init;
-- (void) asyncTest;
-
 - (NSString *)fetchHelloWorldGreeting;
 - (void) callCamsWsMethod:(CamsWsRequent) command;
 

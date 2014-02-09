@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7600C20918A71CF100A27FDC /* libIosMobileClientLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */; };
+		7600C22418A73EA300A27FDC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7600C22318A73EA300A27FDC /* Settings.bundle */; };
 		765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EBC6018A32C4000DBE65A /* WebServiceComms.m */; };
 		7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475D18A2F90F007D734A /* Foundation.framework */; };
 		7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475F18A2F90F007D734A /* CoreGraphics.framework */; };
@@ -36,7 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libIosMobileClientLib.a; path = "../IosMobileClientLib/build/Debug-iphoneos/libIosMobileClientLib.a"; sourceTree = "<group>"; };
+		7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIosMobileClientLib.a; path = "../IosMobileClientLib/build/Debug-iphoneos/libIosMobileClientLib.a"; sourceTree = "<group>"; };
+		7600C22318A73EA300A27FDC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceComms.h; sourceTree = "<group>"; };
 		765EBC6018A32C4000DBE65A /* WebServiceComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceComms.m; sourceTree = "<group>"; };
 		7661475A18A2F90F007D734A /* IosMobileClientApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosMobileClientApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 		7661475118A2F90E007D734A = {
 			isa = PBXGroup;
 			children = (
+				7600C22318A73EA300A27FDC /* Settings.bundle */,
 				7661476318A2F90F007D734A /* IosMobileClientApp */,
 				7661478218A2F90F007D734A /* IosMobileClientAppTests */,
 				7661475C18A2F90F007D734A /* Frameworks */,
@@ -238,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7600C22418A73EA300A27FDC /* Settings.bundle in Resources */,
 				7661477618A2F90F007D734A /* Images.xcassets in Resources */,
 				7661476818A2F90F007D734A /* InfoPlist.strings in Resources */,
 				7661477118A2F90F007D734A /* Main.storyboard in Resources */,

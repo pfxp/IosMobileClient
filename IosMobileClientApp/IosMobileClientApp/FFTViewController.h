@@ -11,6 +11,7 @@
 
 @interface FFTViewController : UIViewController
 {
+    IBOutlet UIButton *helloWorldButton;
     IBOutlet UIButton *getControllersButton;
     IBOutlet UIButton *getSensorsButton;
     IBOutlet UIButton *getZonesButton;
@@ -18,10 +19,12 @@
     WebServiceComms *wsComms;
 }
 
-- (void)fetchHelloWorldGreeting;
+- (IBAction) helloWorldButtonClicked:(id)sender ;
 - (IBAction) getControllersButtonClicked:(id)sender ;
 - (IBAction) getSensorsButtonClicked:(id)sender ;
 - (IBAction) getZonesButtonClicked:(id)sender ;
+
+- (void)fetchHelloWorldGreeting;
 
 
 @end

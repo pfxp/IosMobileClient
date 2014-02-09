@@ -10,6 +10,7 @@
 #import "CamsObjectRepository.h"
 #import "Controller.h"
 #import "Sensor.h"
+#import "Zone.h"
 
 @implementation CamsObjectRepository
 
@@ -18,7 +19,6 @@
     self = [super init];
     
     return self;
-    
 }
 
 - (int) GetControllers
@@ -68,8 +68,8 @@
                     self.controllers[idNumber] = controller;
                 }
             }
-            
             break;
+        
         case GetSensors:
             jsonArray = [dict objectForKey:@"GetAllSensorsResult"];
             
@@ -93,8 +93,25 @@
             }
             
             break;
-        case GetZones:
             
+        case GetZones:
+            jsonArray = [dict objectForKey:@"GetAllZonesResult"];
+            
+            if (jsonArray)
+            {
+                for (NSDictionary *item in jsonArray)
+                {
+                    NSString *zoneIdAsString = [item objectForKey:@"ZoneId"];
+                    NSString *name = [item objectForKey:@"Name"];
+                    NSString *description = [item objectForKey:@"Description"];
+                    NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
+                    
+                    Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name description:description];
+                    NSLog(@"ZONE: %@", zone);
+                    self.zones[zoneIdNumber] = zone;
+                }
+            }
+
             break;
     }
 }

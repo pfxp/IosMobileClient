@@ -13,4 +13,8 @@
 @property (readwrite) NSString *name;
 @property (readwrite) NSString *description;
 @property (readwrite) NSArray *points;
+
+- (id) initWithZoneId:(NSNumber*)zid
+           name:(NSString *)name
+      description:(NSString *)desc;
 @end

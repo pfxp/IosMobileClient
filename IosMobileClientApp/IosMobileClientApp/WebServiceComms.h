@@ -12,20 +12,19 @@
 
 @interface WebServiceComms : NSObject<NSURLConnectionDelegate>
 {
+    NSString *baseUrl;
+    NSString *helloWorldUrl;
+    
     NSTimeInterval asyncTimeoutInSec;
     NSMutableData *httpResponseData;
     BOOL finishedRequest;
     CamsObjectRepository *repository;
-    NSString *baseUrl;
 }
 
-@property (readwrite, copy) NSString* helloWorldUrl;
 @property (readwrite, atomic) CamsWsRequent currentRequest;
-
 
 - (id) init;
 - (NSString *)fetchHelloWorldGreeting;
 - (void) callCamsWsMethod:(CamsWsRequent) command;
-
 
 @end

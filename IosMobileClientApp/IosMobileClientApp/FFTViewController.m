@@ -7,7 +7,6 @@
 //
 
 #import "FFTViewController.h"
-
 #import "IosMobileClientLib/Controller.h"
 
 @interface FFTViewController ()
@@ -29,29 +28,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)fetchHelloWorldGreeting
+- (IBAction) helloWorldButtonClicked:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"http://rest-service.guides.spring.io/greeting"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response,
-                                               NSData *data, NSError *connectionError)
-     {
-         if (data.length > 0 && connectionError == nil)
-         {
-             NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
-                                                                      options:0
-                                                                        error:NULL];
-             
-             
-             NSString *idValue = [[greeting objectForKey:@"id"] stringValue];
-             NSString *content = [greeting objectForKey:@"content"];
-             NSString *results = [NSString stringWithFormat:@"ID: %@ Content: %@", idValue, content];
-             outputLabel.text = results;
-
-         }
-     }];
+    [self fetchHelloWorldGreeting];
 }
 
 // Gets the controllers from the web service.
@@ -70,6 +49,32 @@
 - (IBAction) getZonesButtonClicked:(id)sender
 {
     [wsComms callCamsWsMethod:GetZones];
+}
+
+
+// Gets a Hello World from a publicly availble web service.
+- (void)fetchHelloWorldGreeting
+{
+    NSURL *url = [NSURL URLWithString:@"http://rest-service.guides.spring.io/greeting"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data, NSError *connectionError)
+     {
+         if (data.length > 0 && connectionError == nil)
+         {
+             NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
+                                                                      options:0
+                                                                        error:NULL];
+             
+             
+             NSString *idValue = [[greeting objectForKey:@"id"] stringValue];
+             NSString *content = [greeting objectForKey:@"content"];
+             NSString *results = [NSString stringWithFormat:@"Hello World! ID: %@ Content: %@", idValue, content];
+             outputLabel.text = results;
+         }
+     }];
 }
 
 @end

@@ -18,12 +18,13 @@
     self = [super init];
     if (self != nil)
     {
-        self.helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
+        baseUrl = @"http://192.168.66.107:4567/RestService.svc";
+        helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
         asyncTimeoutInSec = 20.0;
         finishedRequest=TRUE;
         repository = [[CamsObjectRepository alloc] init];
-        baseUrl = @"http://192.168.66.107:4567/RestService.svc";
     }
+    
     return self;
 }
 

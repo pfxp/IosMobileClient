@@ -10,4 +10,18 @@
 
 @implementation Zone
 
+- (id) initWithZoneId:(NSNumber*)zid
+                 name:(NSString *)name
+          description:(NSString *)desc
+{
+    self = [super init];
+    if (self)
+    {
+        self.zoneId = zid;
+        self.name = name;
+        self.description=desc;
+    }
+    return self;
+}
+
 @end

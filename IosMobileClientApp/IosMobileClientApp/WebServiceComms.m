@@ -9,7 +9,7 @@
 // Performs asynchronous communicates with the web service
 
 #import "WebServiceComms.h"
-#import "GlobalSettings.h"
+#import "IosMobileClientLib/GlobalSettings.h"
 
 @implementation WebServiceComms
 
@@ -22,6 +22,7 @@
         asyncTimeoutInSec = 20.0;
         finishedRequest=TRUE;
         repository = [[CamsObjectRepository alloc] init];
+        baseUrl = @"http://192.168.66.107:4567/RestService.svc";
     }
     return self;
 }
@@ -62,14 +63,10 @@
         return;
     }
     
-
-    NSLog(@"About to process JSON dictionary.");
-
     NSError *e = nil;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:httpResponseData  options:NSJSONReadingMutableContainers  error:&e];
    
     [repository parseJsonDictionary:dict command:_currentRequest];
-    
     finishedRequest=true;
 }
 
@@ -110,6 +107,7 @@
     return results;
 }
 
+// Calls CAMS web service methods.
 - (void) callCamsWsMethod:(CamsWsRequent) command
 {
     NSURL *url;
@@ -126,25 +124,22 @@
     switch (command)
     {
         case GetControllers:
-            url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllControllers"];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllControllers", baseUrl]];
             break;
         case GetSensors:
-            url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllSensors"];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllSensors", baseUrl]];
             break;
         case GetZones:
-            url = [NSURL URLWithString:@"http://10.0.0.74:4567/RestService.svc/json/GetAllZones"];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllZones", baseUrl]];
             break;
         default:
             return;
             break;
     }
     
-    NSLog(@"Calling URL: %@", url);
-    
+    //NSLog(@"Calling URL: %@", url);
     request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed  timeoutInterval:asyncTimeoutInSec];
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    NSLog(@"Connection=%@", conn.description);
-    
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 

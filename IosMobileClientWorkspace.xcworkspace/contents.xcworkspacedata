@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:IosMobileClientLib/IosMobileClientLib.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:IosMobileClientApp/IosMobileClientApp.xcodeproj">
    </FileRef>
 </Workspace>

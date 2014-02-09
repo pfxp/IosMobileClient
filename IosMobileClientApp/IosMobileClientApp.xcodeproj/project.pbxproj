@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7605FAD418A4721E00BCE00F /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7605FAD318A4721E00BCE00F /* GlobalSettings.m */; };
-		7605FAD718A4850000BCE00F /* CamsObjectRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 7605FAD618A4850000BCE00F /* CamsObjectRepository.m */; };
+		7600C20918A71CF100A27FDC /* libIosMobileClientLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */; };
 		765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EBC6018A32C4000DBE65A /* WebServiceComms.m */; };
 		7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475D18A2F90F007D734A /* Foundation.framework */; };
 		7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475F18A2F90F007D734A /* CoreGraphics.framework */; };
@@ -24,7 +23,6 @@
 		7661477F18A2F90F007D734A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661476118A2F90F007D734A /* UIKit.framework */; };
 		7661478718A2F90F007D734A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7661478518A2F90F007D734A /* InfoPlist.strings */; };
 		7661478918A2F90F007D734A /* IosMobileClientAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661478818A2F90F007D734A /* IosMobileClientAppTests.m */; };
-		7677886618A2FEEA001A7B61 /* CamsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7677886518A2FEEA001A7B61 /* CamsObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7605FAD218A4721E00BCE00F /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
-		7605FAD318A4721E00BCE00F /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
-		7605FAD518A4850000BCE00F /* CamsObjectRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CamsObjectRepository.h; sourceTree = "<group>"; };
-		7605FAD618A4850000BCE00F /* CamsObjectRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamsObjectRepository.m; sourceTree = "<group>"; };
+		7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libIosMobileClientLib.a; path = "../IosMobileClientLib/build/Debug-iphoneos/libIosMobileClientLib.a"; sourceTree = "<group>"; };
 		765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceComms.h; sourceTree = "<group>"; };
 		765EBC6018A32C4000DBE65A /* WebServiceComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceComms.m; sourceTree = "<group>"; };
 		7661475A18A2F90F007D734A /* IosMobileClientApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosMobileClientApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,8 +58,6 @@
 		7661478418A2F90F007D734A /* IosMobileClientAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IosMobileClientAppTests-Info.plist"; sourceTree = "<group>"; };
 		7661478618A2F90F007D734A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7661478818A2F90F007D734A /* IosMobileClientAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IosMobileClientAppTests.m; sourceTree = "<group>"; };
-		7677886418A2FEEA001A7B61 /* CamsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CamsObject.h; sourceTree = "<group>"; };
-		7677886518A2FEEA001A7B61 /* CamsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamsObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7600C20918A71CF100A27FDC /* libIosMobileClientLib.a in Frameworks */,
 				7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */,
 				7661476218A2F90F007D734A /* UIKit.framework in Frameworks */,
 				7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */,
@@ -113,6 +107,7 @@
 		7661475C18A2F90F007D734A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */,
 				7661475D18A2F90F007D734A /* Foundation.framework */,
 				7661475F18A2F90F007D734A /* CoreGraphics.framework */,
 				7661476118A2F90F007D734A /* UIKit.framework */,
@@ -124,21 +119,15 @@
 		7661476318A2F90F007D734A /* IosMobileClientApp */ = {
 			isa = PBXGroup;
 			children = (
-				7677886418A2FEEA001A7B61 /* CamsObject.h */,
-				7677886518A2FEEA001A7B61 /* CamsObject.m */,
 				7661476C18A2F90F007D734A /* FFTAppDelegate.h */,
 				7661476D18A2F90F007D734A /* FFTAppDelegate.m */,
-				7661476F18A2F90F007D734A /* Main.storyboard */,
 				7661477218A2F90F007D734A /* FFTViewController.h */,
 				7661477318A2F90F007D734A /* FFTViewController.m */,
 				7661477518A2F90F007D734A /* Images.xcassets */,
+				7661476F18A2F90F007D734A /* Main.storyboard */,
 				7661476418A2F90F007D734A /* Supporting Files */,
 				765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */,
 				765EBC6018A32C4000DBE65A /* WebServiceComms.m */,
-				7605FAD218A4721E00BCE00F /* GlobalSettings.h */,
-				7605FAD318A4721E00BCE00F /* GlobalSettings.m */,
-				7605FAD518A4850000BCE00F /* CamsObjectRepository.h */,
-				7605FAD618A4850000BCE00F /* CamsObjectRepository.m */,
 			);
 			path = IosMobileClientApp;
 			sourceTree = "<group>";
@@ -273,10 +262,7 @@
 				7661476A18A2F90F007D734A /* main.m in Sources */,
 				7661476E18A2F90F007D734A /* FFTAppDelegate.m in Sources */,
 				765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */,
-				7677886618A2FEEA001A7B61 /* CamsObject.m in Sources */,
 				7661477418A2F90F007D734A /* FFTViewController.m in Sources */,
-				7605FAD418A4721E00BCE00F /* GlobalSettings.m in Sources */,
-				7605FAD718A4850000BCE00F /* CamsObjectRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +392,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IosMobileClientApp/IosMobileClientApp-Prefix.pch";
 				INFOPLIST_FILE = "IosMobileClientApp/IosMobileClientApp-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
@@ -420,6 +407,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IosMobileClientApp/IosMobileClientApp-Prefix.pch";
 				INFOPLIST_FILE = "IosMobileClientApp/IosMobileClientApp-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;

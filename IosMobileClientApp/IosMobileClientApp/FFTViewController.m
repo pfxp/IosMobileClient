@@ -7,7 +7,8 @@
 //
 
 #import "FFTViewController.h"
-#import "CamsObject.h"
+
+#import "IosMobileClientLib/Controller.h"
 
 @interface FFTViewController ()
 
@@ -144,21 +145,18 @@
 // Gets the controllers from the web service.
 - (IBAction) getControllersButtonClicked:(id)sender
 {
-    NSLog(@"Get Controllers button clicked.");
     [wsComms callCamsWsMethod:GetControllers];
 }
 
 // Gets the sensors from the web service.
 - (IBAction) getSensorsButtonClicked:(id)sender
 {
-    NSLog(@"Get Sensors button clicked.");
     [wsComms callCamsWsMethod:GetSensors];
 }
 
 // Gets the zones from the web service.
 - (IBAction) getZonesButtonClicked:(id)sender
 {
-    NSLog(@"Get Zones button clicked.");
     [wsComms callCamsWsMethod:GetZones];
 }
 

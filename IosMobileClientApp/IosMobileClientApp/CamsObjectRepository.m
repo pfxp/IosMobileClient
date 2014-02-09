@@ -8,7 +8,8 @@
 
 #import "CamsObjectRepository.h"
 #import "GlobalSettings.h"
-#import "CamsObject.h"
+#import "IosMobileClientLib/Controller.h"
+#import "IosMobileClientLib/Sensor.h"
 
 @implementation CamsObjectRepository
 
@@ -17,6 +18,7 @@
     self = [super init];
 
     return self;
+    
 }
 
 - (int) GetControllers

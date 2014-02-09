@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GlobalSettings.h"
+#import "IosMobileClientLib/GlobalSettings.h"
 #import "CamsObjectRepository.h"
 
 @interface WebServiceComms : NSObject<NSURLConnectionDelegate>
@@ -16,6 +16,7 @@
     NSMutableData *httpResponseData;
     BOOL finishedRequest;
     CamsObjectRepository *repository;
+    NSString *baseUrl;
 }
 
 @property (readwrite, copy) NSString* helloWorldUrl;

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GlobalSettings.h"
+#import "IosMobileClientLib/GlobalSettings.h"
 
 @interface CamsObjectRepository : NSObject
 

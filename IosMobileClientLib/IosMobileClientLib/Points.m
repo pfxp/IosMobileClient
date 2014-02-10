@@ -59,8 +59,8 @@
     self = [super initWithLatStr:latitudeValue longStr:longitudeValue altStr:altitudeValue];
     if (self)
     {
-        NSNumber *parentIdNumber = [NSNumber numberWithDouble:[parentId doubleValue]];
-        NSNumber *sequenceNumber = [NSNumber numberWithDouble:[sequence doubleValue]];
+        NSNumber *parentIdNumber = [NSNumber numberWithInt:[parentId intValue]];
+        NSNumber *sequenceNumber = [NSNumber numberWithInt:[sequence intValue]];
         
         self.parentId = parentIdNumber;
         self.sequence = sequenceNumber;

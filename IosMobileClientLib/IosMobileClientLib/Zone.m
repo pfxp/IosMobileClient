@@ -15,6 +15,7 @@
           description:(NSString *)desc
 {
     self = [super init];
+    
     if (self)
     {
         self.zoneId = zid;

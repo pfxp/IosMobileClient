@@ -15,6 +15,6 @@
 @property (readwrite) NSArray *points;
 
 - (id) initWithZoneId:(NSNumber*)zid
-           name:(NSString *)name
-      description:(NSString *)desc;
+                 name:(NSString *)name
+          description:(NSString *)desc;
 @end

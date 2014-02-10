@@ -11,6 +11,7 @@
 #import "Controller.h"
 #import "Sensor.h"
 #import "Zone.h"
+#import "Points.h"
 
 @implementation CamsObjectRepository
 
@@ -40,6 +41,14 @@
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequent)req
 {
     NSArray *jsonArray;
+    NSString *latitude;
+    NSString *longitude;
+    NSString *altitude;
+    NSString *parentId;
+    NSString *sequence;
+    NSString *cableDistance;
+    NSString *perimeterDistance;
+
     
     switch(req)
     {
@@ -71,21 +80,40 @@
             break;
         
         case GetSensors:
+            
             jsonArray = [dict objectForKey:@"GetAllSensorsResult"];
             
             if (jsonArray)
             {
-                for (NSDictionary *item in jsonArray)
+                for (NSDictionary *sensorItem in jsonArray)
                 {
-                    NSString *description = [item objectForKey:@"Description"];
-                    NSString *sensorId = [item objectForKey:@"SensorId"];
-                    NSString *channelNumber = [item objectForKey:@"ChannelNumber"];
-                    NSString *sensorGuid = [item objectForKey:@"SensorGuid"];
-                    
+                    NSString *description = [sensorItem objectForKey:@"Description"];
+                    NSString *sensorId = [sensorItem objectForKey:@"SensorId"];
+                    NSString *channelNumber = [sensorItem objectForKey:@"ChannelNumber"];
+                    NSString *sensorGuid = [sensorItem objectForKey:@"SensorGuid"];
+                    NSString *pointCount = [sensorItem objectForKey:@"PointCount"];
                     NSNumber *sensorIdNumber = [NSNumber numberWithInteger:[sensorId integerValue]];
                     NSNumber *channelNumberNumber = [NSNumber numberWithInteger:[channelNumber integerValue]];
                     
-                    Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid];
+                    NSMutableArray *pointsForSensor = [NSMutableArray arrayWithCapacity:[pointCount intValue]];
+                    
+                    NSArray *pointsJSONArray = [sensorItem objectForKey:@"Points"];
+                    for (NSDictionary *pointItem in pointsJSONArray)
+                    {
+                        latitude = [pointItem objectForKey:@"Lat"];
+                        longitude = [pointItem objectForKey:@"Long"];
+                        altitude = [pointItem objectForKey:@"Alt"];
+                        parentId = [pointItem objectForKey:@"ParentId"];
+                        sequence = [pointItem objectForKey:@"Seq"];
+                        cableDistance = [pointItem objectForKey:@"CabDist"];
+                        perimeterDistance = [pointItem objectForKey:@"PerDist"];
+                        
+                        SensorLinePoint *sensorLinePoint = [[SensorLinePoint alloc] initWithLatStr:latitude longStr:longitude altStr:altitude parentIdStr:parentId sequenceStr:sequence cableDistanceStr:cableDistance perimeterDistanceStr:perimeterDistance];
+                        
+                        [pointsForSensor addObject:sensorLinePoint];
+                    }
+                    
+                    Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid points:pointsForSensor];
                     
                     NSLog(@"SENS: %@", sensor);
                     self.sensors[sensorIdNumber] = sensor;

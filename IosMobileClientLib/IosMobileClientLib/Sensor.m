@@ -13,6 +13,7 @@
            sensorid:(NSNumber *)sId
       channelNumber:(NSNumber *)cNum
          sensorGuid:(NSString *)sguid
+             points:(NSArray *)pointsArray
 {
     self = [super init];
     
@@ -22,6 +23,7 @@
         [self setSensorId:sId];
         [self setChannelNumber:cNum];
         [self setSensorGuid:sguid];
+        [self setPoints:pointsArray];
     }
     return self;
 }
@@ -29,8 +31,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Desc=%@ SensorID=%@ Channel number=%@ Sensor GUID=%@", self.sensorDescription, self.sensorId,
-            self.channelNumber, self.sensorGuid];
+    return [NSString stringWithFormat:@"Desc=%@ SensorID=%@ Channel number=%@ Sensor GUID=%@ Points count=%d", self.sensorDescription, self.sensorId,
+            self.channelNumber, self.sensorGuid, [self.points count]];
 }
 
 @end

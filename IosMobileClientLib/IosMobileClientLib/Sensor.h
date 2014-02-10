@@ -9,16 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface Sensor : NSObject
-@property (readwrite) NSString *sensorDescription;
-@property (readwrite) NSNumber *sensorId;
-@property (readwrite) NSNumber *channelNumber;
-@property (readwrite) NSString *sensorGuid;
-@property (readwrite) NSArray *points;
+@property (readwrite, copy) NSString *sensorDescription;
+@property (readwrite, copy) NSNumber *sensorId;
+@property (readwrite, copy) NSNumber *channelNumber;
+@property (readwrite, copy) NSString *sensorGuid;
+@property (readwrite, copy) NSArray *points;
 
 - (id) initWithDesc:(NSString*)desc
            sensorid:(NSNumber *)sId
       channelNumber:(NSNumber *)cNum
-         sensorGuid:(NSString *)sguid;
+         sensorGuid:(NSString *)sguid
+             points:(NSArray *)pointsArray;
 
 - (NSString *)description;
 

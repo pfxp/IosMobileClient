@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Zone : NSObject
-@property (readwrite) NSNumber *zoneId;
-@property (readwrite) NSString *name;
-@property (readwrite) NSString *description;
+@property (readwrite, copy) NSNumber *zoneId;
+@property (readwrite, copy) NSString *name;
+@property (readwrite, copy) NSString *description;
 @property (readwrite) NSArray *points;
 
 - (id) initWithZoneId:(NSNumber*)zid

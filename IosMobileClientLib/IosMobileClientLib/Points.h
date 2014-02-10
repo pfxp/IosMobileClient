@@ -9,23 +9,35 @@
 #import <Foundation/Foundation.h>
 
 @interface CamsGeoPoint : NSObject
-@property (readwrite) NSNumber *latitude;
-@property (readwrite) NSNumber *longitude;
-@property (readwrite) NSNumber *altitude;
+@property (readwrite, copy) NSNumber *latitude;
+@property (readwrite, copy) NSNumber *longitude;
+@property (readwrite, copy) NSNumber *altitude;
 
-- (id) initWithPeter;
-- (id) initWithLatLongAlt:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue;
-- (NSString *) toString;
+- (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue;
+- (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue;
 @end
 
 
 
 @interface ZoneLinePoint : CamsGeoPoint
-@property (readwrite) NSNumber *parentId;
-@property (readwrite) NSNumber *sequence;
+@property (readwrite, copy) NSNumber *parentId;
+@property (readwrite, copy) NSNumber *sequence;
+
+- (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
+parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence;
+- (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue
+          parentIdStr:(NSString *)parentId sequenceStr:(NSString *)sequence;
+
 @end
 
 @interface SensorLinePoint : ZoneLinePoint
-@property (readwrite) NSNumber *cableDistance;
-@property (readwrite) NSNumber *perimeterDistance;
+@property (readwrite, copy) NSNumber *cableDistance;
+@property (readwrite, copy) NSNumber *perimeterDistance;
+
+- (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
+          parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence
+     cableDistance:(NSNumber *)cableDistance perimeterDistance:(NSNumber *)perimeterDistance;
+- (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue
+          parentIdStr:(NSString *)parentId sequenceStr:(NSString *)sequence
+     cableDistanceStr:(NSString *)cableDistance perimeterDistanceStr:(NSString *)perimeterDistance;
 @end

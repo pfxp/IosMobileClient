@@ -13,12 +13,18 @@
 
 @implementation WebServiceComms
 
+// TODO Check for when the URL is invalid.
 - (id) init
 {
     self = [super init];
     if (self != nil)
     {
-        baseUrl = @"http://192.168.66.107:4567/RestService.svc";
+        //baseUrl = @"http://192.168.66.107:4567/RestService.svc";
+        //baseUrl = @"http://10.0.0.74:4567/RestService.svc";
+        
+        
+        self.baseUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"];
+        NSLog(@"Base url=%@", self.baseUrl);
         helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
         asyncTimeoutInSec = 20.0;
         finishedRequest=TRUE;
@@ -125,13 +131,13 @@
     switch (command)
     {
         case GetControllers:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllControllers", baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllControllers", self.baseUrl]];
             break;
         case GetSensors:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllSensors", baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllSensors", self.baseUrl]];
             break;
         case GetZones:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllZones", baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllZones", self.baseUrl]];
             break;
         default:
             return;

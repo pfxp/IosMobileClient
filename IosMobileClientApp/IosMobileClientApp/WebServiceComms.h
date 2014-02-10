@@ -12,7 +12,6 @@
 
 @interface WebServiceComms : NSObject<NSURLConnectionDelegate>
 {
-    NSString *baseUrl;
     NSString *helloWorldUrl;
     
     NSTimeInterval asyncTimeoutInSec;
@@ -21,6 +20,7 @@
     CamsObjectRepository *repository;
 }
 
+@property (readwrite, atomic) NSString *baseUrl;
 @property (readwrite, atomic) CamsWsRequent currentRequest;
 
 - (id) init;

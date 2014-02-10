@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 
-typedef enum CamsWsRequent : NSInteger CamsWsRequent;
+typedef enum CamsWsRequest : NSInteger CamsWsRequent;
 
-enum CamsWsRequent : NSInteger {
+enum CamsWsRequest : NSInteger {
     GetControllers,
     GetZones,
     GetSensors

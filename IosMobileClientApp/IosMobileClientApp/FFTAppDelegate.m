@@ -13,6 +13,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //NSDictionary *appDefaults = [NSDictionary dictionaryWithObject:@"http://blah" forKey:@"url_pref"];
+    //[defaults setBool:TRUE forKey:@"play_sound_pref"];
+    //[defaults setValue:@"http://blah" forKey:@"url_pref"];
+    [defaults synchronize];
     return YES;
 }
 							

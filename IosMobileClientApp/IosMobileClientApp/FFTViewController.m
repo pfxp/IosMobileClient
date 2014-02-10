@@ -20,7 +20,29 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     wsComms = [[WebServiceComms alloc] init];
+    
+    if ([wsComms.baseUrl length] == 0)
+    {
+             
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"URL"
+                                               message:@"Enter the URL of the Web Service"
+                                               delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    }
+    
+    
     outputLabel.text = wsComms.baseUrl;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *url = [[alertView textFieldAtIndex:0] text];
+    
+    //NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
+    [[NSUserDefaults standardUserDefaults] setValue:url forKey:@"url_pref"];
 }
 
 - (void)didReceiveMemoryWarning

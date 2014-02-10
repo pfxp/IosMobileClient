@@ -146,7 +146,8 @@
     
     //NSLog(@"Calling URL: %@", url);
     request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed  timeoutInterval:asyncTimeoutInSec];
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    #pragma unused (conn)
 }
 
 

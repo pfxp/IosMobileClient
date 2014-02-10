@@ -77,6 +77,8 @@
 			<string>No</string>
 			<key>KeyboardType</key>
 			<string>URL</string>
+			<key>DefaultValue</key>
+			<string>http://10.0.0.74:4567/RestService.svc</string>
 		</dict>
 		<dict>
 			<key>Values</key>

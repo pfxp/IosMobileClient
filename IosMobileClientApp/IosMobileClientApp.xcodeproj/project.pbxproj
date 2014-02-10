@@ -396,8 +396,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IosMobileClientApp/IosMobileClientApp-Prefix.pch";
 				INFOPLIST_FILE = "IosMobileClientApp/IosMobileClientApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -411,8 +413,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IosMobileClientApp/IosMobileClientApp-Prefix.pch";
 				INFOPLIST_FILE = "IosMobileClientApp/IosMobileClientApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
 			};

@@ -57,8 +57,8 @@
 		761012F718A9D19C0067C5B2 /* Gestures@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Gestures@2x.png"; path = "../images/Gestures@2x.png"; sourceTree = "<group>"; };
 		761012F818A9D19C0067C5B2 /* Players.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Players.png; path = ../images/Players.png; sourceTree = "<group>"; };
 		761012F918A9D19C0067C5B2 /* Players@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Players@2x.png"; path = "../images/Players@2x.png"; sourceTree = "<group>"; };
-		7610130118A9D7030067C5B2 /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsViewController.h; sourceTree = "<group>"; };
-		7610130218A9D7030067C5B2 /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsViewController.m; sourceTree = "<group>"; };
+		7610130118A9D7030067C5B2 /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapsViewController.h; path = ../MapsViewController.h; sourceTree = "<group>"; };
+		7610130218A9D7030067C5B2 /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapsViewController.m; path = ../MapsViewController.m; sourceTree = "<group>"; };
 		765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceComms.h; sourceTree = "<group>"; };
 		765EBC6018A32C4000DBE65A /* WebServiceComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceComms.m; sourceTree = "<group>"; };
 		7661475A18A2F90F007D734A /* IosMobileClientApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosMobileClientApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,8 +124,6 @@
 		7661475118A2F90E007D734A = {
 			isa = PBXGroup;
 			children = (
-				7610130118A9D7030067C5B2 /* MapsViewController.h */,
-				7610130218A9D7030067C5B2 /* MapsViewController.m */,
 				761012F218A9D16B0067C5B2 /* Images */,
 				7600C22318A73EA300A27FDC /* Settings.bundle */,
 				7661476318A2F90F007D734A /* IosMobileClientApp */,
@@ -159,14 +157,16 @@
 		7661476318A2F90F007D734A /* IosMobileClientApp */ = {
 			isa = PBXGroup;
 			children = (
-				761012EC18A9B9BB0067C5B2 /* HomeScreenViewController.m */,
-				761012EB18A9B9BB0067C5B2 /* HomeScreenViewController.h */,
 				7661476C18A2F90F007D734A /* FFTAppDelegate.h */,
 				7661476D18A2F90F007D734A /* FFTAppDelegate.m */,
 				7661477218A2F90F007D734A /* FFTViewController.h */,
 				7661477318A2F90F007D734A /* FFTViewController.m */,
+				761012EB18A9B9BB0067C5B2 /* HomeScreenViewController.h */,
+				761012EC18A9B9BB0067C5B2 /* HomeScreenViewController.m */,
 				7661477518A2F90F007D734A /* Images.xcassets */,
 				7661476F18A2F90F007D734A /* Main.storyboard */,
+				7610130118A9D7030067C5B2 /* MapsViewController.h */,
+				7610130218A9D7030067C5B2 /* MapsViewController.m */,
 				7661476418A2F90F007D734A /* Supporting Files */,
 				765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */,
 				765EBC6018A32C4000DBE65A /* WebServiceComms.m */,

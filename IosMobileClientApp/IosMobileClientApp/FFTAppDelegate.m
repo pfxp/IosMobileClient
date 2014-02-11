@@ -7,8 +7,13 @@
 //
 
 #import "FFTAppDelegate.h"
+#import "IosMobileClientLib/Map.h"
+#import "MapsViewController.h"
 
 @implementation FFTAppDelegate
+{
+    NSMutableArray *_maps;
+}
 
 #pragma mark Standard overrides
 
@@ -22,6 +27,17 @@
     {
         [self registerDefaultsFromSettingsBundle];
     }
+    
+    // Custom initialization
+    _maps = [NSMutableArray arrayWithCapacity:20];
+    Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
+    [_maps addObject:map];
+
+    
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    UINavigationController *navigationController = [tabBarController viewControllers][1];
+    MapsViewController *playersViewController = [navigationController viewControllers][0];
+    playersViewController.maps = _maps;
     return YES;
 }
 							

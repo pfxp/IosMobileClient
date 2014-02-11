@@ -15,15 +15,10 @@
 
 @implementation MapsViewController
 
-// TODO fix the array hardcode
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
-        //self.maps = [NSMutableArray arrayWithCapacity:100];
-        //Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
-        //[_maps addObject:map];
     }
     return self;
 }
@@ -56,17 +51,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
-    //return [self.maps count];
+    //return 1;
+    return [self.maps count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapCell"];
     
-    //Map *map = (self.maps)[indexPath.row];
-    //cell.textLabel.text = map.displayName;
-    cell.textLabel.text = @"Perter";
+    Map *map = (self.maps)[indexPath.row];
+    cell.textLabel.text = map.displayName;
     //cell.detailTextLabel.text = player.game;
     
     return cell;

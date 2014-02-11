@@ -16,4 +16,7 @@
 @property (readwrite) CamsGeoPoint *topRightCorner;
 @property (readwrite) CamsGeoPoint *bottomLeftCorner;
 @property (readwrite) CamsGeoPoint *bottomCorner;
+
+- (id) initWithDisplayName:(NSString *)displayName;
+
 @end

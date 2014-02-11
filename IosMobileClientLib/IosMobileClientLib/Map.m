@@ -10,4 +10,15 @@
 
 @implementation Map
 
+- (id) initWithDisplayName:(NSString *)displayName
+{
+    self = [super init];
+    if (self)
+    {
+        self.displayName = displayName;
+    }
+    return self;
+}
+
+
 @end

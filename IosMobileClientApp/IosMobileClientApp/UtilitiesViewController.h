@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WebServiceComms.h"
 
-@interface FFTViewController : UIViewController
+@interface UtilitiesViewController : UIViewController
 {
     IBOutlet UIButton *helloWorldButton;
     IBOutlet UIButton *getControllersButton;

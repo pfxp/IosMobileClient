@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Peter Pellegrini. All rights reserved.
 //
 
-#import "FFTViewController.h"
+#import "UtilitiesViewController.h"
 #import "IosMobileClientLib/Controller.h"
 
-@interface FFTViewController ()
+@interface UtilitiesViewController ()
 
 @end
 
-@implementation FFTViewController
+@implementation UtilitiesViewController
 
 - (void)viewDidLoad
 {

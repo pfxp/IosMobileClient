@@ -26,13 +26,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    mapNameLabel.text = self.map.displayName;
+	
+    // Do any additional setup after loading the view.
+    self.navigationItem.title = self.map.displayName;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
     // Dispose of any resources that can be recreated.
 }
 

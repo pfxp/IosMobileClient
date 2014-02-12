@@ -18,12 +18,7 @@
 
 
 @interface MapDetailsViewController : UIViewController
-{
-    IBOutlet UILabel *mapNameLabel;
-}
-
-@property (nonatomic, weak) id <MapDetailsViewControllerDelegate> delegate;
-@property (nonatomic, strong) Map *map;
-- (IBAction)back:(id)sender;
-
+    @property (nonatomic, weak) id <MapDetailsViewControllerDelegate> delegate;
+    @property (nonatomic, strong) Map *map;
+    - (IBAction)back:(id)sender;
 @end

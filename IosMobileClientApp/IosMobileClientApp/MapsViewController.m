@@ -61,7 +61,6 @@
     Map *map = (self.maps)[indexPath.row];
     cell.textLabel.text = map.displayName;
     //cell.detailTextLabel.text = player.game;
-    
     return cell;
 }
 
@@ -129,6 +128,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// This 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayMap"]) {

@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "IosMobileClientLib/Map.h"
 
+// This is a forward declaration.
 @class MapDetailsViewController;
 
+//Uses delegation. The child view controller defines a delegate protocol that the parent view controller implements. Before the parent view controller displays the child view controller, it sets itself as the delegate of the child view controller. When the user has selected a row or what ever in the child view, the child view controller calls a method on its delegate and dismisses itself.
+
+// This protocol enables a Cancel or Save button to be used in the navigation bar.
 @protocol MapDetailsViewControllerDelegate <NSObject>
 - (void)playerDetailsViewControllerDidCancel:(MapDetailsViewController *)controller;
 - (void)playerDetailsViewControllerDidSave:(MapDetailsViewController *)controller;

@@ -12,30 +12,16 @@
 #import "Sensor.h"
 #import "Zone.h"
 #import "Points.h"
+#import "Map.h"
 
 @implementation CamsObjectRepository
 
 - (id) init
 {
     self = [super init];
-    
     return self;
 }
 
-- (int) GetControllers
-{
-    return 0;
-}
-
-- (int) GetSensors
-{
-    return 0;
-}
-
-- (int) GetGetZones
-{
-    return 0;
-}
 
 // Parses the JSON dictionary.
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequent)req
@@ -48,7 +34,6 @@
     NSString *sequence;
     NSString *cableDistance;
     NSString *perimeterDistance;
-
     
     switch(req)
     {
@@ -138,6 +123,57 @@
                     NSLog(@"ZONE: %@", zone);
                     self.zones[zoneIdNumber] = zone;
                 }
+            }
+
+            break;
+            
+        case GetMaps:
+            jsonArray = [dict objectForKey:@"GetAllMapsResult"];
+            
+            if (jsonArray)
+            {
+                for (NSDictionary *item in jsonArray)
+                {
+                    NSString *displayName = [item objectForKey:@"DisplayName"];
+                    NSString *idString = [item objectForKey:@"Id"];
+                    NSString *description = [item objectForKey:@"Description"];
+                    
+                    NSDictionary *topLeftCorner = [item objectForKey:@"TopLeftCorner"];
+                    CamsGeoPoint *topLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[topLeftCorner objectForKey:@"Lat"]
+                                                 longStr:[topLeftCorner objectForKey:@"Long"]
+                                                  altStr:[topLeftCorner objectForKey:@"Alt"]];
+                    
+                    NSDictionary *topRightCorner = [item objectForKey:@"TopRightCorner"];
+                    CamsGeoPoint *topRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[topRightCorner objectForKey:@"Lat"]
+                                                                              longStr:[topRightCorner objectForKey:@"Long"]
+                                                                               altStr:[topRightCorner objectForKey:@"Alt"]];
+                    
+                    NSDictionary *bottomLeftCorner = [item objectForKey:@"BottomLeftCorner"];
+                    CamsGeoPoint *bottomLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomLeftCorner objectForKey:@"Lat"]
+                                                                               longStr:[bottomLeftCorner objectForKey:@"Long"]
+                                                                                altStr:[bottomLeftCorner objectForKey:@"Alt"]];
+                   
+                    NSDictionary *bottomRightCorner = [item objectForKey:@"BottomRightCorner"];
+                    CamsGeoPoint *bottomRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomRightCorner objectForKey:@"Lat"]
+                                                                                 longStr:[bottomRightCorner objectForKey:@"Long"]
+                                                                                  altStr:[bottomRightCorner objectForKey:@"Alt"]];
+
+                    
+                    Map *map = [[Map alloc] initWithDisplayName:displayName
+                                                          mapId:idString
+                                                        topLeft:topLeftPoint
+                                                       topRight:topRightPoint
+                                                     bottomLeft:bottomLeftPoint
+                                                    bottomRight:bottomRightPoint];
+                  
+                    NSLog(@"MAP: %@", map);
+                    
+                    if (map==nil)
+                        continue;
+                    
+                    self.maps[idString] = map;
+                    
+                  }
             }
 
             break;

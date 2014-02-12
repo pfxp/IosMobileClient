@@ -15,15 +15,16 @@
     IBOutlet UIButton *getControllersButton;
     IBOutlet UIButton *getSensorsButton;
     IBOutlet UIButton *getZonesButton;
+    IBOutlet UIButton *getMapsButton;
     IBOutlet UILabel *outputLabel;
     WebServiceComms *wsComms;
 }
 
-- (IBAction) helloWorldButtonClicked:(id)sender ;
-- (IBAction) getControllersButtonClicked:(id)sender ;
-- (IBAction) getSensorsButtonClicked:(id)sender ;
-- (IBAction) getZonesButtonClicked:(id)sender ;
-
+- (IBAction) helloWorldButtonClicked:(id)sender;
+- (IBAction) getControllersButtonClicked:(id)sender;
+- (IBAction) getSensorsButtonClicked:(id)sender;
+- (IBAction) getZonesButtonClicked:(id)sender;
+- (IBAction) getMapsButtonClicked:(id)sender;
 
 @end
 

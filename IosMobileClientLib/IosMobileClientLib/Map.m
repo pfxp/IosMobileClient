@@ -15,7 +15,30 @@
     self = [super init];
     if (self)
     {
-        self.displayName = displayName;
+        [self setDisplayName:displayName];
+    }
+    return self;
+}
+
+- (id) initWithDisplayName:(NSString *)displayName
+                     mapId:(NSString *)mapId
+                   topLeft:(CamsGeoPoint *)topLeft
+                  topRight:(CamsGeoPoint *)topRight
+                bottomLeft:(CamsGeoPoint *)bottomLeft
+               bottomRight:(CamsGeoPoint *)bottomRight;
+{
+    self = [self initWithDisplayName:displayName];
+    
+    if (self)
+    {
+        //if (!([self topLeftCorner]) || !([self topRightCorner]) || !([self bottomLeftCorner]) || !([self bottomRightCorner]))
+        //    return nil;
+            
+        [self setMapId:mapId];
+        [self setTopLeftCorner:topLeft];
+        [self setTopRightCorner:topRight];
+        [self setBottomLeftCorner:bottomLeft];
+        [self setBottomRightCorner:bottomRight];
     }
     return self;
 }

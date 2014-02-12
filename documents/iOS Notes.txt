@@ -1,0 +1,39 @@
+
+GITHUB Repository
+=================
+HTTP: https://github.com/pfxp/IosMobileClient.git
+SSH: git@github.com:pfxp/IosMobileClient.git
+Username: pfxp
+
+Install the GitHub desktop application on Mac and PC.
+
+Setup GitHub in Xcode 5
+=======================
+http://www.reddit.com/r/iOSProgramming/comments/1omi4n/setup_github_in_xcode_5/
+
+Need to add public SSH keys to the GitHub account.
+
+Close Xcode
+Go the workspace folder.
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:pfxp/IosMobileClient.git
+git push -u origin master
+
+
+When you open the workspace you should see the source control menu.
+
+Web Services
+============
+http://rest-service.guides.spring.io/greeting
+
+http://stackoverflow.com/questions/1449698/confusion-with-header-and-implementation-files-in-objective-c
+
+http://codewithchris.com/tutorial-how-to-use-ios-nsurlconnection-by-example/
+
+http://10.0.0.74:4567/RestService.svc
+
+To get the default values
+http://stackoverflow.com/questions/6291477/how-to-retrieve-values-from-settings-bundle-in-objective-c
+

@@ -19,10 +19,6 @@
     self = [super init];
     if (self != nil)
     {
-        //baseUrl = @"http://192.168.66.107:4567/RestService.svc";
-        //baseUrl = @"http://10.0.0.74:4567/RestService.svc";
-        
-        
         self.baseUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"];
         NSLog(@"Base url=%@", self.baseUrl);
         helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
@@ -139,13 +135,15 @@
         case GetZones:
             url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllZones", self.baseUrl]];
             break;
+        case GetMaps:
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllMaps", self.baseUrl]];
+            break;
         default:
             return;
             break;
     }
     
-    //NSLog(@"Calling URL: %@", url);
-    request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed  timeoutInterval:asyncTimeoutInSec];
+    request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:asyncTimeoutInSec];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     #pragma unused (conn)
 }

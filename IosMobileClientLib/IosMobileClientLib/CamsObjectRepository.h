@@ -13,10 +13,8 @@
 @property (readwrite) NSMutableDictionary *controllers;
 @property (readwrite) NSMutableDictionary *sensors;
 @property (readwrite) NSMutableDictionary *zones;
+@property (readwrite) NSMutableDictionary *maps;
 
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequent) req;
 
-- (int) GetControllers;
-- (int) GetSensors;
-- (int) GetGetZones;
 @end

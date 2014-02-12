@@ -22,6 +22,7 @@
     return self;
 }
 
+// TODO Check for bad arguments
 - (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue
 {
     NSNumber *latitudeNumber = [NSNumber numberWithDouble:[latitudeValue doubleValue]];

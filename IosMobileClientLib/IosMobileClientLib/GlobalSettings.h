@@ -14,7 +14,8 @@ typedef enum CamsWsRequest : NSInteger CamsWsRequent;
 enum CamsWsRequest : NSInteger {
     GetControllers,
     GetZones,
-    GetSensors
+    GetSensors,
+    GetMaps
 };
 
 @interface GlobalSettings : NSObject

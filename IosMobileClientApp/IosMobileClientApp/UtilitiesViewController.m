@@ -74,6 +74,10 @@
     [wsComms callCamsWsMethod:GetZones];
 }
 
+- (IBAction) getMapsButtonClicked:(id)sender
+{
+    [wsComms callCamsWsMethod:GetMaps];
+}
 
 // Gets a Hello World from a publicly availble web service.
 - (void)fetchHelloWorldGreeting

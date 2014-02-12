@@ -24,8 +24,6 @@
 - (IBAction) getSensorsButtonClicked:(id)sender ;
 - (IBAction) getZonesButtonClicked:(id)sender ;
 
-- (void)fetchHelloWorldGreeting;
-
 
 @end
 

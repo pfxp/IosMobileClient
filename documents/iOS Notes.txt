@@ -37,3 +37,13 @@ http://10.0.0.74:4567/RestService.svc
 To get the default values
 http://stackoverflow.com/questions/6291477/how-to-retrieve-values-from-settings-bundle-in-objective-c
 
+
+IDs
+===
+Peter's iPhone UDID: 675d58b2217099b51a89c51ef606d4dc5647d2b2
+Bundle ID (App ID Suffix): FFT.IosMobileClientApp
+Developer ID: M9Y9L7V3JJ
+Organisation Unit (Team ID) (Used as App ID Prefix)	: RZBCVNC4VX
+Full App ID: RZBCVNC4VX.FFT.IosMobileClientApp
+
+

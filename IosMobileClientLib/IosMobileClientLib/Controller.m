@@ -17,24 +17,21 @@
     self = [super init];
     if (self)
     {
-        [self setConnected:conn];
-        [self setControllerDescription:desc];
-        [self setHostname:host];
-        [self setCtrlId:cId];
-        [self setLocator:loc];
-        [self setName:nm];
+        _connected=conn;
+        _controllerDescription=desc;
+        _hostname=host;
+        _ctrlId=cId;
+        _locator=loc;
+        _name=nm;
     }
     return self;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@" Name=%@ Desc=%@ Conn=%@ Hostname=%@ CtrlID=%@ Locator=%@", self.name, self.controllerDescription, self.connected ? @"YES" : @"NO",
+    return [NSString stringWithFormat:@" Name=%@ Desc=%@ Conn=%@ Hostname=%@ CtrlID=%@ Locator=%@",
+            self.name, self.controllerDescription, self.connected ? @"YES" : @"NO",
             self.hostname, self.ctrlId, self.locator ? @"YES" : @"NO"];
 }
 
-- (void) doSomething
-{
-    
-}
 
 @end

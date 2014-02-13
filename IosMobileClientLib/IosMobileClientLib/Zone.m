@@ -18,9 +18,9 @@
     
     if (self)
     {
-        self.zoneId = zid;
-        self.name = name;
-        self.description=desc;
+        _zoneId = zid;
+        _name = name;
+        _description=desc;
     }
     return self;
 }

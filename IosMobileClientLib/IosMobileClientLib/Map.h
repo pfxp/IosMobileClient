@@ -10,14 +10,13 @@
 #import "Points.h"
 
 @interface Map : NSObject
-@property (readwrite, copy) NSString *displayName;
-@property (readwrite, copy) NSString *mapId;
-@property (readwrite, strong) CamsGeoPoint *topLeftCorner;
-@property (readwrite, strong) CamsGeoPoint *topRightCorner;
-@property (readwrite, strong) CamsGeoPoint *bottomLeftCorner;
-@property (readwrite, strong) CamsGeoPoint *bottomRightCorner;
+@property (readonly, copy) NSString *displayName;
+@property (readonly, copy) NSString *mapId;
+@property (readonly, strong) CamsGeoPoint *topLeftCorner;
+@property (readonly, strong) CamsGeoPoint *topRightCorner;
+@property (readonly, strong) CamsGeoPoint *bottomLeftCorner;
+@property (readonly, strong) CamsGeoPoint *bottomRightCorner;
 
-- (NSString *)description;
 
 - (id) initWithDisplayName:(NSString *)displayName;
 - (id) initWithDisplayName:(NSString *)displayName
@@ -27,5 +26,6 @@
                 bottomLeft:(CamsGeoPoint *)bottomLeft
                bottomRight:(CamsGeoPoint *)bottomRight;
 
+- (NSString *)description;
 
 @end

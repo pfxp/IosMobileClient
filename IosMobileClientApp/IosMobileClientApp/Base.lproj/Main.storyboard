@@ -130,7 +130,7 @@
         <scene sceneID="RUx-hV-1ST">
             <objects>
                 <navigationController title="Map Details" definesPresentationContext="YES" id="rUU-V8-vzV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="1Star.png" id="e1x-T2-3C4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e1x-T2-3C4">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSv-zH-Hu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="931"/>
+            <point key="canvasLocation" x="1062" y="931"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fRD-Np-xEF">

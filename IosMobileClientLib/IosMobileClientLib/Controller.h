@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface Controller : NSObject
-@property (readwrite) BOOL connected;
-@property (readwrite, copy) NSString *controllerDescription;
-@property (readwrite, copy) NSString *hostname;
-@property (readwrite) NSNumber *ctrlId;
-@property (readwrite) BOOL locator;
-@property (readwrite, copy) NSString *name;
+@property (readonly) BOOL connected;
+@property (readonly, copy) NSString *controllerDescription;
+@property (readonly, copy) NSString *hostname;
+@property (readonly, copy) NSNumber *ctrlId;
+@property (readonly) BOOL locator;
+@property (readonly, copy) NSString *name;
 
 - (id) initWithAllValues:(BOOL)conn
              description:(NSString*)desc
@@ -24,5 +24,4 @@
                     name:(NSString*)nm;
 
 - (NSString *)description;
-- (void) doSomething;
 @end

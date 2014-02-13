@@ -15,7 +15,7 @@
     self = [super init];
     if (self)
     {
-        [self setDisplayName:displayName];
+        _displayName=displayName;
     }
     return self;
 }
@@ -34,11 +34,11 @@
         if (!topLeft || !topRight || !bottomLeft || !bottomRight)
             return nil;
         
-        [self setMapId:mapId];
-        [self setTopLeftCorner:topLeft];
-        [self setTopRightCorner:topRight];
-        [self setBottomLeftCorner:bottomLeft];
-        [self setBottomRightCorner:bottomRight];
+        _mapId=mapId;
+        _topLeftCorner=topLeft;
+        _topRightCorner=topRight;
+        _bottomLeftCorner=bottomLeft;
+        _bottomRightCorner=bottomRight;
     }
     return self;
 }

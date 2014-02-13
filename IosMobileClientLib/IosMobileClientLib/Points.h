@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+////////////////////////////////////////////////////////////////////
+// Describes a geographic point at the corners of a map.
+////////////////////////////////////////////////////////////////////
 @interface CamsGeoPoint : NSObject
 @property (readonly, strong) NSNumber *latitude;
 @property (readonly, strong) NSNumber *longitude;
@@ -19,7 +22,9 @@
 @end
 
 
-
+////////////////////////////////////////////////////////////////////
+// Describes a geographic point used for zone lines.
+////////////////////////////////////////////////////////////////////
 @interface ZoneLinePoint : CamsGeoPoint
 @property (readonly, strong) NSNumber *parentId;
 @property (readonly, strong) NSNumber *sequence;
@@ -31,6 +36,10 @@ parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence;
 
 @end
 
+
+////////////////////////////////////////////////////////////////////
+// Describes the geographic points that make up a sensor line.
+////////////////////////////////////////////////////////////////////
 @interface SensorLinePoint : ZoneLinePoint
 @property (readonly, strong) NSNumber *cableDistance;
 @property (readonly, strong) NSNumber *perimeterDistance;

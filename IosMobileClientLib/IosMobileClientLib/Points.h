@@ -9,19 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface CamsGeoPoint : NSObject
-@property (readwrite, copy) NSNumber *latitude;
-@property (readwrite, copy) NSNumber *longitude;
-@property (readwrite, copy) NSNumber *altitude;
+@property (readonly, strong) NSNumber *latitude;
+@property (readonly, strong) NSNumber *longitude;
+@property (readwrite, strong) NSNumber *altitude;
 
 - (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue;
 - (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue;
+- (NSString *)description;
 @end
 
 
 
 @interface ZoneLinePoint : CamsGeoPoint
-@property (readwrite, copy) NSNumber *parentId;
-@property (readwrite, copy) NSNumber *sequence;
+@property (readonly, strong) NSNumber *parentId;
+@property (readonly, strong) NSNumber *sequence;
 
 - (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
 parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence;
@@ -31,8 +32,8 @@ parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence;
 @end
 
 @interface SensorLinePoint : ZoneLinePoint
-@property (readwrite, copy) NSNumber *cableDistance;
-@property (readwrite, copy) NSNumber *perimeterDistance;
+@property (readonly, strong) NSNumber *cableDistance;
+@property (readonly, strong) NSNumber *perimeterDistance;
 
 - (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
           parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence

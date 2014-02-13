@@ -31,9 +31,9 @@
     
     if (self)
     {
-        //if (!([self topLeftCorner]) || !([self topRightCorner]) || !([self bottomLeftCorner]) || !([self bottomRightCorner]))
-        //    return nil;
-            
+        if (!topLeft || !topRight || !bottomLeft || !bottomRight)
+            return nil;
+        
         [self setMapId:mapId];
         [self setTopLeftCorner:topLeft];
         [self setTopRightCorner:topRight];
@@ -43,5 +43,13 @@
     return self;
 }
 
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"Display name: %@ Map id: %@ Top left:%@ Top right:%@ Bottom left: %@ Bottom right:%@",
+            self.displayName, self.mapId,
+            self.topLeftCorner.description, self.topRightCorner.description,
+            self.bottomLeftCorner.description, self.bottomRightCorner.description];
+}
 
 @end

@@ -136,8 +136,7 @@
                 {
                     NSString *displayName = [item objectForKey:@"DisplayName"];
                     NSString *idString = [item objectForKey:@"Id"];
-                    NSString *description = [item objectForKey:@"Description"];
-                    
+                   
                     NSDictionary *topLeftCorner = [item objectForKey:@"TopLeftCorner"];
                     CamsGeoPoint *topLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[topLeftCorner objectForKey:@"Lat"]
                                                  longStr:[topLeftCorner objectForKey:@"Long"]

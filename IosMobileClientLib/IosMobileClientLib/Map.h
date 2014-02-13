@@ -12,18 +12,20 @@
 @interface Map : NSObject
 @property (readwrite, copy) NSString *displayName;
 @property (readwrite, copy) NSString *mapId;
-@property (readwrite, copy) CamsGeoPoint *topLeftCorner;
-@property (readwrite, copy) CamsGeoPoint *topRightCorner;
-@property (readwrite, copy) CamsGeoPoint *bottomLeftCorner;
-@property (readwrite, copy) CamsGeoPoint *bottomRightCorner;
+@property (readwrite, strong) CamsGeoPoint *topLeftCorner;
+@property (readwrite, strong) CamsGeoPoint *topRightCorner;
+@property (readwrite, strong) CamsGeoPoint *bottomLeftCorner;
+@property (readwrite, strong) CamsGeoPoint *bottomRightCorner;
+
+- (NSString *)description;
 
 - (id) initWithDisplayName:(NSString *)displayName;
-
 - (id) initWithDisplayName:(NSString *)displayName
                      mapId:(NSString *)mapId
                    topLeft:(CamsGeoPoint *)topLeft
                   topRight:(CamsGeoPoint *)topRight
                 bottomLeft:(CamsGeoPoint *)bottomLeft
                bottomRight:(CamsGeoPoint *)bottomRight;
+
 
 @end

@@ -15,9 +15,9 @@
     self = [super init];
     if (self)
     {
-        self.latitude = latitudeValue;
-        self.longitude = longitudeValue;
-        self.altitude = altitudeValue;
+        _latitude = latitudeValue;
+        _longitude = longitudeValue;
+        _altitude = altitudeValue;
     }
     return self;
 }
@@ -34,7 +34,7 @@
 
 
 - (NSString *)description {
-   return [NSString stringWithFormat:@"Lat: %@ Long: %@ Alt: %@", self.latitude, self.longitude, self.altitude];
+   return [NSString stringWithFormat:@"(Lat: %@ Long: %@ Alt: %@)", self.latitude, self.longitude, self.altitude];
 }
 
 @end
@@ -48,8 +48,8 @@
     self = [super initWithLat:latitudeValue long:longitudeValue alt:altitudeValue];
     if (self)
     {
-        self.parentId = parentId;
-        self.sequence = sequence;
+        _parentId = parentId;
+        _sequence = sequence;
     }
     return self;
 }
@@ -63,8 +63,8 @@
         NSNumber *parentIdNumber = [NSNumber numberWithInt:[parentId intValue]];
         NSNumber *sequenceNumber = [NSNumber numberWithInt:[sequence intValue]];
         
-        self.parentId = parentIdNumber;
-        self.sequence = sequenceNumber;
+        _parentId = parentIdNumber;
+        _sequence = sequenceNumber;
     }
     return self;
 }
@@ -86,8 +86,8 @@
     
     if (self)
     {
-        self.cableDistance = cableDistance;
-        self.perimeterDistance = perimeterDistance;
+        _cableDistance = cableDistance;
+        _perimeterDistance = perimeterDistance;
     }
     return self;
 }
@@ -103,8 +103,8 @@
         NSNumber *cableDistNumber = [NSNumber numberWithDouble:[cableDistance doubleValue]];
         NSNumber *perimDistNumber = [NSNumber numberWithDouble:[perimeterDistance doubleValue]];
         
-        self.cableDistance = cableDistNumber;
-        self.perimeterDistance = perimDistNumber;
+        _cableDistance = cableDistNumber;
+        _perimeterDistance = perimDistNumber;
     }
     return self;
 

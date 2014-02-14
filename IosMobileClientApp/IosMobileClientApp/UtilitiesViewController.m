@@ -104,4 +104,12 @@
      }];
 }
 
+//
+- (IBAction) postTokenButtonClicked:(id)sender
+{
+    NSLog(@"Setting token");
+    [wsComms setAPNSTokenToWebService:@"Banana"];
+}
+
+
 @end

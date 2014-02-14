@@ -148,5 +148,33 @@
     #pragma unused (conn)
 }
 
-
+- (void) setAPNSTokenToWebService:(NSString *)token
+{
+    NSString *post = [NSString stringWithFormat:@"id=%@", token];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSURL *url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/xml/SetApnsToken?id=%@", self.baseUrl, token]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod: @"POST"];
+    //[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
+    
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    //[request setHTTPBody:postData];
+    
+    // Fetch the JSON response
+    NSData *urlData;
+    NSURLResponse *response;
+    NSError *error;
+    
+    // Make synchronous request
+    urlData = [NSURLConnection sendSynchronousRequest:request
+                                    returningResponse:&response
+                                                error:&error];
+    
+    // Construct a String around the Data from the response
+    NSString *res = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+}
 @end

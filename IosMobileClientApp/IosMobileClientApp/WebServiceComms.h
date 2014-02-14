@@ -26,5 +26,5 @@
 - (id) init;
 - (NSString *)fetchHelloWorldGreeting;
 - (void) callCamsWsMethod:(CamsWsRequent) command;
-
+- (void) setAPNSTokenToWebService:(NSString *)token;
 @end

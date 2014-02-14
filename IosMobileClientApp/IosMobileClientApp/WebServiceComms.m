@@ -19,7 +19,7 @@
     self = [super init];
     if (self != nil)
     {
-        self.baseUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"];
+        
         NSLog(@"Base url=%@", self.baseUrl);
         helloWorldUrl = @"http://rest-service.guides.spring.io/greeting";
         asyncTimeoutInSec = 20.0;

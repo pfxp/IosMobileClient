@@ -9,6 +9,7 @@
 #import "FFTAppDelegate.h"
 #import "IosMobileClientLib/Map.h"
 #import "MapsViewController.h"
+#import "UtilitiesViewController.h"
 
 @implementation FFTAppDelegate
 {
@@ -21,7 +22,7 @@
 {
     // Override point for customization after application launch.
     
-    // Register for push notifications.
+       // Register for push notifications.
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound| UIRemoteNotificationTypeAlert)];
     
     NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -31,24 +32,38 @@
         [self registerDefaultsFromSettingsBundle];
     }
     
+    wsComms = [[WebServiceComms alloc] init];
+    wsComms.baseUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"];
+    
     // Custom initialization
     _maps = [NSMutableArray arrayWithCapacity:20];
     Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
     [_maps addObject:map];
 
-    
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UINavigationController *navigationController = [tabBarController viewControllers][1];
     MapsViewController *playersViewController = [navigationController viewControllers][0];
     playersViewController.maps = _maps;
+    
+    UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
+    utilitiesVC.wsComms = wsComms;
+    
     return YES;
 }
 
+///////////////////////////////////////////////
+// Sends the APNS token to the Web Service.
+///////////////////////////////////////////////
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"TOKEN: %@", token);
+    
+    if (wsComms)
+    {
+        [wsComms setAPNSTokenOnWebServiceAsStream:token];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

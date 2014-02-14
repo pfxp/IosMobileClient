@@ -19,9 +19,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    wsComms = [[WebServiceComms alloc] init];
     
-    if ([wsComms.baseUrl length] == 0)
+    if ([self.wsComms.baseUrl length] == 0)
     {
              
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"URL"
@@ -34,7 +33,7 @@
     }
     
     
-    outputLabel.text = wsComms.baseUrl;
+    outputLabel.text = self.wsComms.baseUrl;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -59,24 +58,24 @@
 // Gets the controllers from the web service.
 - (IBAction) getControllersButtonClicked:(id)sender
 {
-    [wsComms callCamsWsMethod:GetControllers];
+    [self.wsComms callCamsWsMethod:GetControllers];
 }
 
 // Gets the sensors from the web service.
 - (IBAction) getSensorsButtonClicked:(id)sender
 {
-    [wsComms callCamsWsMethod:GetSensors];
+    [self.wsComms callCamsWsMethod:GetSensors];
 }
 
 // Gets the zones from the web service.
 - (IBAction) getZonesButtonClicked:(id)sender
 {
-    [wsComms callCamsWsMethod:GetZones];
+    [self.wsComms callCamsWsMethod:GetZones];
 }
 
 - (IBAction) getMapsButtonClicked:(id)sender
 {
-    [wsComms callCamsWsMethod:GetMaps];
+    [self.wsComms callCamsWsMethod:GetMaps];
 }
 
 // Gets a Hello World from a publicly availble web service.
@@ -108,13 +107,13 @@
 - (IBAction) postTokenButtonClicked:(id)sender
 {
     NSLog(@"Setting token");
-    [wsComms setAPNSTokenOnWebService:@"Banana"];
+    [self.wsComms setAPNSTokenOnWebService:@"Banana"];
 }
 
 - (IBAction) postTokenButtonClicked2:(id)sender
 {
     NSLog(@"Setting token 2");
-    [wsComms setAPNSTokenOnWebServiceAsStream:@"Cherry"];
+    [self.wsComms setAPNSTokenOnWebServiceAsStream:@"Cherry"];
 }
 
 @end

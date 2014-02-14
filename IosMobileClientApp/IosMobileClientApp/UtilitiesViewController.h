@@ -19,9 +19,9 @@
     IBOutlet UIButton *setTokenButton;
     IBOutlet UIButton *setTokenButton2;
     IBOutlet UILabel *outputLabel;
-    WebServiceComms *wsComms;
 }
 
+@property (readwrite, weak) WebServiceComms *wsComms;
 - (IBAction) helloWorldButtonClicked:(id)sender;
 - (IBAction) getControllersButtonClicked:(id)sender;
 - (IBAction) getSensorsButtonClicked:(id)sender;

@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FFTAppDelegate : UIResponder <UIApplicationDelegate>
 
+#import "WebServiceComms.h"
+@interface FFTAppDelegate : UIResponder <UIApplicationDelegate>
+{
+    WebServiceComms *wsComms;
+}
 @property (strong, nonatomic) UIWindow *window;
 
 @end

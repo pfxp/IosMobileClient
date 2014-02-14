@@ -24,7 +24,7 @@
 
 
 // Parses the JSON dictionary.
--(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequent)req
+-(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req
 {
     NSArray *jsonArray;
     NSString *latitude;
@@ -175,6 +175,9 @@
                   }
             }
 
+            break;
+        case SetAPNSToken:
+            NSLog(@"APNS: %@", @"Set the APNS token.");
             break;
     }
 }

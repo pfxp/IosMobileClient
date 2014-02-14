@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 
 
-typedef enum CamsWsRequest : NSInteger CamsWsRequent;
+typedef enum CamsWsRequest : NSInteger CamsWsRequest;
 
 enum CamsWsRequest : NSInteger {
     GetControllers,
     GetZones,
     GetSensors,
-    GetMaps
+    GetMaps,
+    SetAPNSToken
 };
 
 @interface GlobalSettings : NSObject

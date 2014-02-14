@@ -21,11 +21,11 @@
 }
 
 @property (readwrite, atomic) NSString *baseUrl;
-@property (readwrite, atomic) CamsWsRequent currentRequest;
+@property (readwrite, atomic) CamsWsRequest currentRequest;
 
 - (id) init;
 - (NSString *)fetchHelloWorldGreeting;
-- (void) callCamsWsMethod:(CamsWsRequent) command;
+- (void) callCamsWsMethod:(CamsWsRequest) command;
 - (void) setAPNSTokenOnWebService:(NSString *)token;
 - (void) setAPNSTokenOnWebServiceAsStream:(NSString *)token;
 @end

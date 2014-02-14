@@ -111,7 +111,7 @@
 }
 
 // Calls CAMS web service methods.
-- (void) callCamsWsMethod:(CamsWsRequent) command
+- (void) callCamsWsMethod:(CamsWsRequest) command
 {
     NSURL *url;
     NSMutableURLRequest *request;
@@ -122,7 +122,7 @@
     }
     
     finishedRequest=false;
-    self.currentRequest = command;
+    [self setCurrentRequest:command];
     
     switch (command)
     {
@@ -192,12 +192,17 @@
     NSError *error;
     
     // Make synchronous request
-    urlData = [NSURLConnection sendSynchronousRequest:request
-                                    returningResponse:&response
-                                                error:&error];
+    //urlData = [NSURLConnection sendSynchronousRequest:request
+     //                               returningResponse:&response
+      //                                          error:&error];
     
     // Construct a String around the Data from the response
-    NSString *res = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+    //NSString *res = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+    
+    self.currentRequest = SetAPNSToken;
+    [request setTimeoutInterval:asyncTimeoutInSec];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+
 }
 
 @end

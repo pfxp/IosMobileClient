@@ -15,7 +15,7 @@
 @property (readwrite) NSMutableDictionary *sensors;
 @property (readwrite) NSMutableDictionary *zones;
 
--(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequent) req;
+-(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
 
 - (int) GetControllers;
 - (int) GetSensors;

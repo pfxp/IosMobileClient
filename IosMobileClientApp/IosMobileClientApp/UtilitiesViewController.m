@@ -108,8 +108,13 @@
 - (IBAction) postTokenButtonClicked:(id)sender
 {
     NSLog(@"Setting token");
-    [wsComms setAPNSTokenToWebService:@"Banana"];
+    [wsComms setAPNSTokenOnWebService:@"Banana"];
 }
 
+- (IBAction) postTokenButtonClicked2:(id)sender
+{
+    NSLog(@"Setting token 2");
+    [wsComms setAPNSTokenOnWebServiceAsStream:@"Cherry"];
+}
 
 @end

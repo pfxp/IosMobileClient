@@ -17,6 +17,7 @@
     IBOutlet UIButton *getZonesButton;
     IBOutlet UIButton *getMapsButton;
     IBOutlet UIButton *setTokenButton;
+    IBOutlet UIButton *setTokenButton2;
     IBOutlet UILabel *outputLabel;
     WebServiceComms *wsComms;
 }
@@ -27,6 +28,7 @@
 - (IBAction) getZonesButtonClicked:(id)sender;
 - (IBAction) getMapsButtonClicked:(id)sender;
 - (IBAction) postTokenButtonClicked:(id)sender;
+- (IBAction) postTokenButtonClicked2:(id)sender;
 
 @end
 

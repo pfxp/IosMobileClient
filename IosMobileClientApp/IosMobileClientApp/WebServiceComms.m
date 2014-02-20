@@ -170,39 +170,29 @@
     
     // Construct a String around the Data from the response
     NSString *res = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+    #pragma unused (res)
 }
 
-// 
+//
+// Streams data to the WebService
+//
 - (void) setAPNSTokenOnWebServiceAsStream:(NSString *)token
 {
     NSLog(@"setAPNSTokenToWebService2 called.");
     NSData *postData = [token dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
-    NSURL *url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/xml/SetApnsTokenAsStream", self.baseUrl]];
+    NSURL *url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/SetApnsTokenAsStream", self.baseUrl]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod: @"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
-    // Fetch the JSON response
-    NSData *urlData;
-    NSURLResponse *response;
-    NSError *error;
-    
-    // Make synchronous request
-    //urlData = [NSURLConnection sendSynchronousRequest:request
-     //                               returningResponse:&response
-      //                                          error:&error];
-    
-    // Construct a String around the Data from the response
-    //NSString *res = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
-    
     self.currentRequest = SetAPNSToken;
     [request setTimeoutInterval:asyncTimeoutInSec];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
+    #pragma unused (conn)
 }
 
 @end

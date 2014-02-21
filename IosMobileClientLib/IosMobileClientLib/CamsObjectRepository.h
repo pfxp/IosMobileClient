@@ -10,6 +10,7 @@
 #import "GlobalSettings.h"
 
 @interface CamsObjectRepository : NSObject
+
 @property (readwrite) NSMutableDictionary *controllers;
 @property (readwrite) NSMutableDictionary *sensors;
 @property (readwrite) NSMutableDictionary *zones;

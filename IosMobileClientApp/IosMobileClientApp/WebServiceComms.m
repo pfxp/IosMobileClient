@@ -110,6 +110,40 @@
     return results;
 }
 
+/*
+- (NSString *)fetchHelloWorldGreetingTwo
+{
+    __block NSString *results;
+    
+    NSURL *url = [NSURL URLWithString:@"http://rest-service.guides.spring.io/greeting"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:helloWorldcompletionHandler ];
+    
+    return results;
+}
+
+-(NSString *)helloWorldcompletionHandler:(NSURLResponse *)response  data:(NSData *)data  connError:(NSError *)connectionError
+{
+    NSString *results;
+    if (data.length > 0 && connectionError == nil)
+    {
+        NSDictionary *greeting = [NSJSONSerialization JSONObjectWithData:data
+                                                                 options:0
+                                                                   error:NULL];
+        
+        
+        NSString *idValue = [[greeting objectForKey:@"id"] stringValue];
+        NSString *content = [greeting objectForKey:@"content"];
+        results = [NSString stringWithFormat:@"ID: %@ Content: %@", idValue, content];
+        NSLog(@"%@",results);
+    }
+    return results;
+};
+*/
+
+
 // Calls CAMS web service methods.
 - (void) callCamsWsMethod:(CamsWsRequest) command
 {
@@ -149,6 +183,7 @@
 }
 
 
+// Sets the APNS token using a URL.
 - (void) setAPNSTokenOnWebService:(NSString *)token
 {
     NSURL *url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/xml/SetApnsTokenAsString?id=%@", self.baseUrl, token]];
@@ -174,7 +209,7 @@
 }
 
 //
-// Streams data to the WebService
+// Streams APNS token data to the WebService
 //
 - (void) setAPNSTokenOnWebServiceAsStream:(NSString *)token
 {

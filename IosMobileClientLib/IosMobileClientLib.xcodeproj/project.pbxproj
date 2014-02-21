@@ -28,6 +28,8 @@
 		7600C22018A725B100A27FDC /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7600C21F18A725B100A27FDC /* GlobalSettings.m */; };
 		7600C22118A726AB00A27FDC /* CamsObjectRepository.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21B18A724D800A27FDC /* CamsObjectRepository.h */; };
 		7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21E18A725B100A27FDC /* GlobalSettings.h */; };
+		76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7623B41618B6D2000096F024 /* Cams.h */; };
+		7623B41818B6D2000096F024 /* Cams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623B41718B6D2000096F024 /* Cams.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */,
 				7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */,
 				7600C20A18A71D4C00A27FDC /* Controller.h in CopyFiles */,
 				7600C20E18A71EFF00A27FDC /* Sensor.h in CopyFiles */,
@@ -83,6 +86,8 @@
 		7600C21C18A724D800A27FDC /* CamsObjectRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamsObjectRepository.m; sourceTree = "<group>"; };
 		7600C21E18A725B100A27FDC /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
 		7600C21F18A725B100A27FDC /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
+		7623B41618B6D2000096F024 /* Cams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cams.h; sourceTree = "<group>"; };
+		7623B41718B6D2000096F024 /* Cams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cams.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +145,8 @@
 		7600C1E118A71C8300A27FDC /* IosMobileClientLib */ = {
 			isa = PBXGroup;
 			children = (
+				7623B41618B6D2000096F024 /* Cams.h */,
+				7623B41718B6D2000096F024 /* Cams.m */,
 				7600C21B18A724D800A27FDC /* CamsObjectRepository.h */,
 				7600C21C18A724D800A27FDC /* CamsObjectRepository.m */,
 				7600C20518A71CB400A27FDC /* Controller.h */,
@@ -271,6 +278,7 @@
 				7600C21118A71F3A00A27FDC /* Zone.m in Sources */,
 				7600C20718A71CB400A27FDC /* Controller.m in Sources */,
 				7600C21D18A724D800A27FDC /* CamsObjectRepository.m in Sources */,
+				7623B41818B6D2000096F024 /* Cams.m in Sources */,
 				7600C20D18A71EAF00A27FDC /* Sensor.m in Sources */,
 				7600C22018A725B100A27FDC /* GlobalSettings.m in Sources */,
 			);
@@ -457,6 +465,7 @@
 				7600C20118A71C8300A27FDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7600C20218A71C8300A27FDC /* Build configuration list for PBXNativeTarget "IosMobileClientLibTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +474,7 @@
 				7600C20418A71C8300A27FDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

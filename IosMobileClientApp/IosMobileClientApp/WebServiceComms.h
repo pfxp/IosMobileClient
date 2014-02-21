@@ -25,6 +25,9 @@
 
 - (id) init;
 - (NSString *)fetchHelloWorldGreeting;
+//- (NSString *)fetchHelloWorldGreetingTwo;
+//- (NSString *)helloWorldcompletionHandler:(NSURLResponse *)response  data:(NSData *)data  connError:(NSError *)connectionError;
+
 - (void) callCamsWsMethod:(CamsWsRequest) command;
 - (void) setAPNSTokenOnWebService:(NSString *)token;
 - (void) setAPNSTokenOnWebServiceAsStream:(NSString *)token;

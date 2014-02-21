@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 #import "WebServiceComms.h"
 @interface FFTAppDelegate : UIResponder <UIApplicationDelegate>
 {

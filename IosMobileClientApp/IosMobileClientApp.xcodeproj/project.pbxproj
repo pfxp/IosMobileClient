@@ -17,6 +17,7 @@
 		761012FF18A9D19C0067C5B2 /* Players.png in Resources */ = {isa = PBXBuildFile; fileRef = 761012F818A9D19C0067C5B2 /* Players.png */; };
 		7610130018A9D19C0067C5B2 /* Players@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 761012F918A9D19C0067C5B2 /* Players@2x.png */; };
 		7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610130218A9D7030067C5B2 /* MapsViewController.m */; };
+		7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7623B41418B6C2170096F024 /* MapKit.framework */; };
 		765EBC6118A32C4000DBE65A /* WebServiceComms.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EBC6018A32C4000DBE65A /* WebServiceComms.m */; };
 		76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76609E8A18A9E7CD00D56FD0 /* MapDetailsViewController.m */; };
 		76609E8D18AB300200D56FD0 /* documents in Resources */ = {isa = PBXBuildFile; fileRef = 76609E8C18AB300200D56FD0 /* documents */; };
@@ -58,6 +59,7 @@
 		761012F918A9D19C0067C5B2 /* Players@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Players@2x.png"; path = "../images/Players@2x.png"; sourceTree = "<group>"; };
 		7610130118A9D7030067C5B2 /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapsViewController.h; path = IosMobileClientApp/MapsViewController.h; sourceTree = SOURCE_ROOT; };
 		7610130218A9D7030067C5B2 /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapsViewController.m; path = IosMobileClientApp/MapsViewController.m; sourceTree = SOURCE_ROOT; };
+		7623B41418B6C2170096F024 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		765EBC5F18A32C3F00DBE65A /* WebServiceComms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceComms.h; sourceTree = "<group>"; };
 		765EBC6018A32C4000DBE65A /* WebServiceComms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceComms.m; sourceTree = "<group>"; };
 		76609E8918A9E7CD00D56FD0 /* MapDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDetailsViewController.h; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */,
 				7600C20918A71CF100A27FDC /* libIosMobileClientLib.a in Frameworks */,
 				7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */,
 				7661476218A2F90F007D734A /* UIKit.framework in Frameworks */,
@@ -148,6 +151,7 @@
 		7661475C18A2F90F007D734A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7623B41418B6C2170096F024 /* MapKit.framework */,
 				7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */,
 				7661475D18A2F90F007D734A /* Foundation.framework */,
 				7661475F18A2F90F007D734A /* CoreGraphics.framework */,

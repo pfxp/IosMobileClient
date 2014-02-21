@@ -9,6 +9,7 @@
 #import "UtilitiesViewController.h"
 #import "IosMobileClientLib/Controller.h"
 
+
 @interface UtilitiesViewController ()
 
 @end
@@ -32,7 +33,7 @@
         [alert show];
     }
     
-    
+    cams = [[Cams alloc] init];
     outputLabel.text = self.wsComms.baseUrl;
 }
 
@@ -116,4 +117,15 @@
     [self.wsComms setAPNSTokenOnWebServiceAsStream:@"Cherry"];
 }
 
+- (IBAction) camsButtonClicked:(id)sender
+{
+    NSLog(@"camsButtonClicked");
+    [cams GetControllers];
+}
+
+- (IBAction) camsButton2Clicked:(id)sender
+{
+    NSLog(@"camsButton2Clicked");
+    [cams GetControllers2];
+}
 @end

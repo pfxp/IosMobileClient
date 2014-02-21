@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WebServiceComms.h"
+#import "IosMobileClientLib/Cams.h"
 
 @interface UtilitiesViewController : UIViewController
 {
@@ -18,7 +19,10 @@
     IBOutlet UIButton *getMapsButton;
     IBOutlet UIButton *setTokenButton;
     IBOutlet UIButton *setTokenButton2;
+    IBOutlet UIButton *camsButton;
+    IBOutlet UIButton *camsButton2;
     IBOutlet UILabel *outputLabel;
+    Cams *cams;
 }
 
 @property (readwrite, weak) WebServiceComms *wsComms;
@@ -29,6 +33,7 @@
 - (IBAction) getMapsButtonClicked:(id)sender;
 - (IBAction) postTokenButtonClicked:(id)sender;
 - (IBAction) postTokenButtonClicked2:(id)sender;
-
+- (IBAction) camsButtonClicked:(id)sender;
+- (IBAction) camsButton2Clicked:(id)sender;
 @end
 

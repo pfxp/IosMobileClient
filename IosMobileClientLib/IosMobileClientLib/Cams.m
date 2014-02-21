@@ -8,7 +8,7 @@
 
 #import "Cams.h"
 #import "GlobalSettings.h"
-
+#import "CamsObjectRepository.h"
 
 @implementation Cams 
 
@@ -19,7 +19,7 @@
     if (self)
     {
         _controllersUrl = @"http://10.0.0.74:4567/RestService.svc/json/GetAllControllers";
-        //repository = [[CamsObjectRepository alloc] init];
+        _repository = [[CamsObjectRepository alloc] init];
         [self start];
     }
     return self;
@@ -31,23 +31,18 @@
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"}];
     [sessionConfig setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
-    
     [sessionConfig setTimeoutIntervalForRequest:10.0];
+    [sessionConfig setTimeoutIntervalForResource:30.0];
+    [sessionConfig setHTTPMaximumConnectionsPerHost:1];
     
-    //sessionConfig.timeoutIntervalForRequest = 10.0;
-    sessionConfig.timeoutIntervalForResource = 30.0;
-    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
-    
-
     _session = [NSURLSession sessionWithConfiguration:sessionConfig
-                                                          delegate:self
-                                                     delegateQueue:[NSOperationQueue mainQueue]];
-
+                                             delegate:self
+                                        delegateQueue:[NSOperationQueue mainQueue]];
 }
 
 -(void) GetControllers
 {
-        NSURLSessionDownloadTask *getImageTask = [_session downloadTaskWithURL:[NSURL URLWithString:_controllersUrl]];
+    NSURLSessionDownloadTask *getImageTask = [_session downloadTaskWithURL:[NSURL URLWithString:_controllersUrl]];
     [getImageTask resume];
 }
 
@@ -99,17 +94,15 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-    // Handle data here.
     NSLog(@"Received data.");
     
-    
     NSError *e = nil;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data  options:NSJSONReadingMutableContainers  error:&e];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
     
     
-    //[repository parseJsonDictionary:dict command:GetControllers];
-    int k=0;
-    
+    [self.repository parseJsonDictionary:dict command:GetControllers];
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
@@ -117,23 +110,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     //Called when the data transfer is complete
     //Client side errors are indicated with the error parameter
     
-    
 }
-
-/*
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
-{
-    NSLog(@"Received response.");
-    
-}
-*/
-
-/*
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse *cachedResponse))completionHandler
-{
-    NSLog(@"Cached response.");
-}
-*/
 
 
 @end

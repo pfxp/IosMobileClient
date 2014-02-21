@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 typedef enum CamsWsRequest : NSInteger CamsWsRequest;
 
 enum CamsWsRequest : NSInteger {

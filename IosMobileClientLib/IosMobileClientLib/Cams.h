@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GlobalSettings.h"
-//#import "CamsObjectRepository.h"
+
+@class CamsObjectRepository;
 
 @interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate>
-{
-  //  CamsObjectRepository *repository;
-}
 
+@property (readwrite) CamsObjectRepository *repository;
 @property (readonly, copy) NSString *controllersUrl;
 @property (readwrite) NSURLSession *session;
 -(id) init;

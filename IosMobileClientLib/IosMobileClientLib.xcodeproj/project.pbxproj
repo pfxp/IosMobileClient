@@ -30,6 +30,7 @@
 		7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21E18A725B100A27FDC /* GlobalSettings.h */; };
 		76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7623B41618B6D2000096F024 /* Cams.h */; };
 		7623B41818B6D2000096F024 /* Cams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623B41718B6D2000096F024 /* Cams.m */; };
+		762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F661818B9D91000195CE9 /* IosSessionDataTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		7600C21F18A725B100A27FDC /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
 		7623B41618B6D2000096F024 /* Cams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cams.h; sourceTree = "<group>"; };
 		7623B41718B6D2000096F024 /* Cams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cams.m; sourceTree = "<group>"; };
+		762F661718B9D91000195CE9 /* IosSessionDataTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosSessionDataTask.h; sourceTree = "<group>"; };
+		762F661818B9D91000195CE9 /* IosSessionDataTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IosSessionDataTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +156,8 @@
 				7600C20618A71CB400A27FDC /* Controller.m */,
 				7600C21E18A725B100A27FDC /* GlobalSettings.h */,
 				7600C21F18A725B100A27FDC /* GlobalSettings.m */,
+				762F661718B9D91000195CE9 /* IosSessionDataTask.h */,
+				762F661818B9D91000195CE9 /* IosSessionDataTask.m */,
 				7600C21518A71FC700A27FDC /* Map.h */,
 				7600C21618A71FC700A27FDC /* Map.m */,
 				7600C21218A71F8400A27FDC /* Points.h */,
@@ -280,6 +285,7 @@
 				7600C21D18A724D800A27FDC /* CamsObjectRepository.m in Sources */,
 				7623B41818B6D2000096F024 /* Cams.m in Sources */,
 				7600C20D18A71EAF00A27FDC /* Sensor.m in Sources */,
+				762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */,
 				7600C22018A725B100A27FDC /* GlobalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -161,16 +161,16 @@
     switch (command)
     {
         case GetControllers:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllControllers", self.baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetControllers", self.baseUrl]];
             break;
         case GetSensors:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllSensors", self.baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetSensors", self.baseUrl]];
             break;
         case GetZones:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllZones", self.baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetZones", self.baseUrl]];
             break;
         case GetMaps:
-            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetAllMaps", self.baseUrl]];
+            url = [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetMaps", self.baseUrl]];
             break;
         default:
             return;

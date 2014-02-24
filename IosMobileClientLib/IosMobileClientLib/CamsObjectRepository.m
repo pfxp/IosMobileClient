@@ -39,7 +39,7 @@
     {
         case GetControllers:
             
-            jsonArray = [dict objectForKey:@"GetAllControllersResult"];
+            jsonArray = [dict objectForKey:@"GetControllersResult"];
             
             if (jsonArray)
             {
@@ -66,7 +66,7 @@
         
         case GetSensors:
             
-            jsonArray = [dict objectForKey:@"GetAllSensorsResult"];
+            jsonArray = [dict objectForKey:@"GetSensorsResult"];
             
             if (jsonArray)
             {
@@ -108,7 +108,7 @@
             break;
             
         case GetZones:
-            jsonArray = [dict objectForKey:@"GetAllZonesResult"];
+            jsonArray = [dict objectForKey:@"GetZonesResult"];
             
             if (jsonArray)
             {
@@ -128,7 +128,7 @@
             break;
             
         case GetMaps:
-            jsonArray = [dict objectForKey:@"GetAllMapsResult"];
+            jsonArray = [dict objectForKey:@"GetMapsResult"];
             
             if (jsonArray)
             {

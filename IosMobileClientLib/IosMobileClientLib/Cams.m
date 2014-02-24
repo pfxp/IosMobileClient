@@ -9,6 +9,7 @@
 #import "Cams.h"
 #import "GlobalSettings.h"
 #import "CamsObjectRepository.h"
+#import "IosSessionDataTask.h"
 
 @implementation Cams 
 
@@ -18,13 +19,33 @@
     
     if (self)
     {
-        _controllersUrl = @"http://10.0.0.74:4567/RestService.svc/json/GetAllControllers";
+        _controllersUrl = @"http://192.168.66.107:4567/RestService.svc/json/GetControllers";
         _repository = [[CamsObjectRepository alloc] init];
-        [self start];
+        
+        queue = [NSMutableArray new];
+        
+               [self start];
     }
     return self;
 }
 
+-(void) PushGETRequestToQueue:(IosSessionDataTask *) request
+{
+    [queue addObject:request];
+}
+
+// Returns nil if the queue is empty.
+-(IosSessionDataTask *) PopGETRequestFromQueue
+{
+    if (queue==nil)
+        return nil;
+    if (queue.count == 0)
+        return nil;
+    
+    IosSessionDataTask *result = [queue lastObject];
+    [queue removeLastObject];
+    return result;
+}
 
 -(void) start
 {

@@ -18,5 +18,5 @@
                  dataTask:(NSURLSessionDataTask *)dataTask
                   baseUrl:(NSURL *)url;
 
-+(NSString *) generateUrlForRequest:(CamsWsRequest)request baseUrl:(NSURL *)url;
++(NSURL *) generateUrlForRequest:(CamsWsRequest)request baseUrl:(NSURL *)url;
 @end

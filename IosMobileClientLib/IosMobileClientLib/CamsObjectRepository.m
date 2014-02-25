@@ -25,7 +25,7 @@
 // Parses the JSON dictionary.
 -(void) parseJsonDictionary:(NSDictionary *)dict
 {
-    NSLog(@"Parsing JSON dictionary.");
+   
     if ([dict objectForKey:@"GetControllersResult"] != nil)
         [self parseJsonDictionary:dict command:GetControllers];
     else if ([dict objectForKey:@"GetSensorsResult"] != nil)
@@ -36,7 +36,7 @@
         [self parseJsonDictionary:dict command:GetMaps];
     else
     {
-    NSLog(@"UNKNOWN Parsing JSON dictionary.");
+        NSLog(@"UNKNOWN Parsing JSON dictionary. %@", dict);
     }
 }
 

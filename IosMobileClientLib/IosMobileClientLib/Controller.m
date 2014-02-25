@@ -28,10 +28,11 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@" Name=%@ Desc=%@ Conn=%@ Hostname=%@ CtrlID=%@ Locator=%@",
-            self.name, self.controllerDescription, self.connected ? @"YES" : @"NO",
-            self.hostname, self.ctrlId, self.locator ? @"YES" : @"NO"];
-}
+//    return [NSString stringWithFormat:@" Name=%@ Desc=%@ Conn=%@ Hostname=%@ CtrlID=%@ Locator=%@",
+//            self.name, self.controllerDescription, self.connected ? @"YES" : @"NO",
+//            self.hostname, self.ctrlId, self.locator ? @"YES" : @"NO"];
 
+    return [NSString stringWithFormat:@" Name=%@ Desc=%@", self.name, self.controllerDescription];
+}
 
 @end

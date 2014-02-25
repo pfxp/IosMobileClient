@@ -71,38 +71,41 @@
 // Add requests to get the controllers, sensors, zones and maps.
 -(void) addRequests
 {
-    NSURL *getControllersUrl = (NSURL *) [IosSessionDataTask generateUrlForRequest:GetControllers baseUrl:[self baseUrl]];
-    
-    NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:getControllersUrl ];
-    
-    
+    NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetControllers
+                                                                                                               baseUrl:[self baseUrl]] ];
     IosSessionDataTask *getContoller = [[IosSessionDataTask alloc] initWithRequestType:GetControllers
                                                                               dataTask:getControllersDataTask
                                                                                baseUrl:[self baseUrl]];
     
+    NSURLSessionDataTask *getSensorsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetSensors
+                                                                                                             baseUrl:[self baseUrl]] ];
+    IosSessionDataTask *getSensors = [[IosSessionDataTask alloc] initWithRequestType:GetSensors
+                                                                              dataTask:getSensorsDataTask
+                                                                               baseUrl:[self baseUrl]];
+
+    NSURLSessionDataTask *getZonesDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZones
+                                                                                                           baseUrl:[self baseUrl]] ];
+    IosSessionDataTask *getZones = [[IosSessionDataTask alloc] initWithRequestType:GetZones
+                                                                            dataTask:getZonesDataTask
+                                                                             baseUrl:[self baseUrl]];
     
-    [ self PushGETRequestToQueue:getContoller];
-    //[getControllersDataTask resume];
+    NSURLSessionDataTask *getMapsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetMaps
+                                                                                                         baseUrl:[self baseUrl]] ];
+    IosSessionDataTask *getMaps = [[IosSessionDataTask alloc] initWithRequestType:GetMaps
+                                                                          dataTask:getMapsDataTask
+                                                                           baseUrl:[self baseUrl]];
     
-    //NSURL *u2 = (NSURL *) [IosSessionDataTask generateUrlForRequest:GetSensors baseUrl:[self baseUrl]];
-    //NSURLSessionDataTask *dataTask2 = [_session dataTaskWithURL:[u2 absoluteURL] ];
-    //IosSessionDataTask *getSensor = [[IosSessionDataTask alloc] initWithRequestType:GetSensors dataTask:dataTask2 baseUrl:[self baseUrl]];
-    //[ self PushGETRequestToQueue:getSensor];
-    //[dataTask2 resume];
-  
-    //NSURLSessionDataTask *dataTask = [_session dataTaskWithURL:[NSURL URLWithString:@"http://peterpc.fft.local:4567/RestService.svc/json/GetControllers"] ];
-    //[dataTask resume];
+    [self PushGETRequestToQueue:getContoller];
+    [self PushGETRequestToQueue:getSensors];
+    [self PushGETRequestToQueue:getZones];
+    [self PushGETRequestToQueue:getMaps];
 }
 
 // Do requests.
 -(void) doRequests
 {
-    NSLog(@"doRequests called.");
     for (IosSessionDataTask* request in queue)
-    {
-        NSLog(@"Processing request.");
         [request.sessionDataTask resume];
-    }
 }
 
 #pragma mark NSUrlSessionDelegate methods
@@ -154,17 +157,18 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                                                          options:NSJSONReadingMutableContainers
                                                            error:&e];
     
-    IosSessionDataTask *first = [self PopGETRequestFromQueue];
-    
-    [self.repository parseJsonDictionary:dict];
+    [_repository parseJsonDictionary:dict];
 }
 
+
+//Called when the data transfer is complete
+//Client side errors are indicated with the error parameter
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    //Called when the data transfer is complete
-    //Client side errors are indicated with the error parameter
-    NSLog(@"task completed.");
+       if (error != nil)
+        NSLog(@"Task completed with an error");
+    else
+        NSLog(@"Task completed successfully.");
 }
-
 
 @end

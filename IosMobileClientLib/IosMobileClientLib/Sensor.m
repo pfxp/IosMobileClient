@@ -32,8 +32,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Desc=%@ SensorID=%@ Channel number=%@ Sensor GUID=%@ Points count=%d",
-            self.sensorDescription, self.sensorId, self.channelNumber, self.sensorGuid, [self.points count]];
+    return [NSString stringWithFormat:@"Desc=%@ SensorID=%@ Channel=%@",
+            _sensorDescription, _sensorId, _channelNumber];
 }
 
 @end

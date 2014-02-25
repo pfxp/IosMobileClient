@@ -46,10 +46,11 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Display name: %@ Map id: %@ Top left:%@ Top right:%@ Bottom left: %@ Bottom right:%@",
+ /*   return [NSString stringWithFormat:@"Display name: %@ Map id: %@ Top left:%@ Top right:%@ Bottom left: %@ Bottom right:%@",
             self.displayName, self.mapId,
             self.topLeftCorner.description, self.topRightCorner.description,
-            self.bottomLeftCorner.description, self.bottomRightCorner.description];
+            self.bottomLeftCorner.description, self.bottomRightCorner.description];  */
+    return [NSString stringWithFormat:@"Display name: %@", self.displayName];
 }
 
 @end

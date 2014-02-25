@@ -16,12 +16,14 @@
 
 @implementation UtilitiesViewController
 
+// Checks if the URL has been set.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    if ([self.wsComms.baseUrl length] == 0)
+    
+    if ([self.wsComms.baseUrl.absoluteString isEqualToString:@""] == TRUE)
     {
              
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"URL"
@@ -33,8 +35,9 @@
         [alert show];
     }
     
-    cams = [[Cams alloc] init];
-    outputLabel.text = self.wsComms.baseUrl;
+    cams = [[Cams alloc] initWithBaseUrl:self.wsComms.baseUrl];
+    outputLabel.text = self.wsComms.baseUrl.absoluteString;
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -104,28 +107,11 @@
      }];
 }
 
-//
-- (IBAction) postTokenButtonClicked:(id)sender
+
+- (IBAction) multipleGetsButtonClicked:(id)sender
 {
-    NSLog(@"Setting token");
-    [self.wsComms setAPNSTokenOnWebService:@"Banana"];
+    NSLog(@"Multi button clicked.");
+    [cams doRequests];
 }
 
-- (IBAction) postTokenButtonClicked2:(id)sender
-{
-    NSLog(@"Setting token 2");
-    [self.wsComms setAPNSTokenOnWebServiceAsStream:@"Cherry"];
-}
-
-- (IBAction) camsButtonClicked:(id)sender
-{
-    NSLog(@"camsButtonClicked");
-    [cams GetControllers];
-}
-
-- (IBAction) camsButton2Clicked:(id)sender
-{
-    NSLog(@"camsButton2Clicked");
-    [cams GetControllers2];
-}
 @end

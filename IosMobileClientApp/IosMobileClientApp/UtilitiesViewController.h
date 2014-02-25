@@ -17,10 +17,7 @@
     IBOutlet UIButton *getSensorsButton;
     IBOutlet UIButton *getZonesButton;
     IBOutlet UIButton *getMapsButton;
-    IBOutlet UIButton *setTokenButton;
-    IBOutlet UIButton *setTokenButton2;
-    IBOutlet UIButton *camsButton;
-    IBOutlet UIButton *camsButton2;
+    IBOutlet UIButton *multipleGetsButton;
     IBOutlet UILabel *outputLabel;
     Cams *cams;
 }
@@ -31,9 +28,6 @@
 - (IBAction) getSensorsButtonClicked:(id)sender;
 - (IBAction) getZonesButtonClicked:(id)sender;
 - (IBAction) getMapsButtonClicked:(id)sender;
-- (IBAction) postTokenButtonClicked:(id)sender;
-- (IBAction) postTokenButtonClicked2:(id)sender;
-- (IBAction) camsButtonClicked:(id)sender;
-- (IBAction) camsButton2Clicked:(id)sender;
+- (IBAction) multipleGetsButtonClicked:(id)sender;
 @end
 

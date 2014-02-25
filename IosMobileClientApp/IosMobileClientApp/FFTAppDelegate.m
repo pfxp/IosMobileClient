@@ -33,7 +33,7 @@
     }
     
     wsComms = [[WebServiceComms alloc] init];
-    wsComms.baseUrl = [[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"];
+    wsComms.baseUrl = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"]];
     
     // Custom initialization
     _maps = [NSMutableArray arrayWithCapacity:20];

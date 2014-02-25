@@ -22,6 +22,23 @@
     return self;
 }
 
+// Parses the JSON dictionary.
+-(void) parseJsonDictionary:(NSDictionary *)dict
+{
+    NSLog(@"Parsing JSON dictionary.");
+    if ([dict objectForKey:@"GetControllersResult"] != nil)
+        [self parseJsonDictionary:dict command:GetControllers];
+    else if ([dict objectForKey:@"GetSensorsResult"] != nil)
+        [self parseJsonDictionary:dict command:GetSensors];
+    else if ([dict objectForKey:@"GetZonesResult"] != nil)
+        [self parseJsonDictionary:dict command:GetZones];
+    else if ([dict objectForKey:@"GetMapsResult"] != nil)
+        [self parseJsonDictionary:dict command:GetMaps];
+    else
+    {
+    NSLog(@"UNKNOWN Parsing JSON dictionary.");
+    }
+}
 
 // Parses the JSON dictionary.
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req

@@ -13,14 +13,13 @@
 @interface WebServiceComms : NSObject<NSURLConnectionDelegate>
 {
     NSString *helloWorldUrl;
-    
     NSTimeInterval asyncTimeoutInSec;
     NSMutableData *httpResponseData;
     BOOL finishedRequest;
     CamsObjectRepository *repository;
 }
 
-@property (readwrite, atomic) NSString *baseUrl;
+@property (readwrite, atomic) NSURL *baseUrl;
 @property (readwrite, atomic) CamsWsRequest currentRequest;
 
 - (id) init;

@@ -11,40 +11,42 @@
 
 @implementation IosSessionDataTask
 
--(id) initWithRequestSype:(CamsWsRequest) request dataTask:(NSURLSessionDataTask *) dataTask baseUrl:(NSString *)url
+-(id) initWithRequestType:(CamsWsRequest)request dataTask:(NSURLSessionDataTask *)dataTask baseUrl:(NSURL *)url
 {
     self = [super init];
     if (self)
     {
-        self.camsRequestType = request;
-        self.sessionDataTask = dataTask;
-        self.baseUrl = url;
+        [self setCamsRequestType:request];
+        [self setSessionDataTask:dataTask];
+        [self setBaseUrl:url];
     }
     return self;
 }
 
 // Generates a full URL for the given command.
 // Returns nil if there is a problem.
-+(NSURL *) GetUrlSuffixForRequest:(CamsWsRequest) request
-                             baseUrl:(NSString *) baseUrl;
+// TODO Investigate what happens if users leave the trailing slash on the baseUrl
++(NSURL *) generateUrlForRequest:(CamsWsRequest) request
+                             baseUrl:(NSURL *) baseUrl;
 {
     switch (request) {
         
         case GetControllers:
-            return [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetControllers", baseUrl]];
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetControllers", baseUrl]];
             break;
         
         case GetSensors:
-            return [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/AllSensors", baseUrl]];
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetSensors", baseUrl]];
             break;
         
         case GetZones:
-            return [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetZones", baseUrl]];
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetZones", baseUrl]];
             break;
         
         case GetMaps:
-            return [NSURL URLWithString:[[NSString alloc] initWithFormat:@"%@/json/GetMaps", baseUrl]];
-        
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetMaps", baseUrl]];
+            break;
+            
         default:
             return nil;
             break;

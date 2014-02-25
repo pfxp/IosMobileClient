@@ -11,30 +11,36 @@
 #import "CamsObjectRepository.h"
 #import "IosSessionDataTask.h"
 
-@implementation Cams 
+@implementation Cams
 
--(id) init
+-(id) initWithBaseUrl:(NSURL *)url
 {
     self = [super init];
     
     if (self)
     {
-        _controllersUrl = @"http://192.168.66.107:4567/RestService.svc/json/GetControllers";
         _repository = [[CamsObjectRepository alloc] init];
-        
         queue = [NSMutableArray new];
-        
-               [self start];
+        [self setBaseUrl:url];
+        [self createSession];
+        [self addRequests];
     }
     return self;
 }
 
+
+//
+// Adds a GET request to the queue.
+//
 -(void) PushGETRequestToQueue:(IosSessionDataTask *) request
 {
     [queue addObject:request];
 }
 
+
+//
 // Returns nil if the queue is empty.
+//
 -(IosSessionDataTask *) PopGETRequestFromQueue
 {
     if (queue==nil)
@@ -47,7 +53,8 @@
     return result;
 }
 
--(void) start
+// Create the NSURLSession
+-(void) createSession
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"}];
@@ -61,17 +68,41 @@
                                         delegateQueue:[NSOperationQueue mainQueue]];
 }
 
--(void) GetControllers
+// Add requests to get the controllers, sensors, zones and maps.
+-(void) addRequests
 {
-    NSURLSessionDownloadTask *getImageTask = [_session downloadTaskWithURL:[NSURL URLWithString:_controllersUrl]];
-    [getImageTask resume];
+    NSURL *getControllersUrl = (NSURL *) [IosSessionDataTask generateUrlForRequest:GetControllers baseUrl:[self baseUrl]];
+    
+    NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:getControllersUrl ];
+    
+    
+    IosSessionDataTask *getContoller = [[IosSessionDataTask alloc] initWithRequestType:GetControllers
+                                                                              dataTask:getControllersDataTask
+                                                                               baseUrl:[self baseUrl]];
+    
+    
+    [ self PushGETRequestToQueue:getContoller];
+    //[getControllersDataTask resume];
+    
+    //NSURL *u2 = (NSURL *) [IosSessionDataTask generateUrlForRequest:GetSensors baseUrl:[self baseUrl]];
+    //NSURLSessionDataTask *dataTask2 = [_session dataTaskWithURL:[u2 absoluteURL] ];
+    //IosSessionDataTask *getSensor = [[IosSessionDataTask alloc] initWithRequestType:GetSensors dataTask:dataTask2 baseUrl:[self baseUrl]];
+    //[ self PushGETRequestToQueue:getSensor];
+    //[dataTask2 resume];
+  
+    //NSURLSessionDataTask *dataTask = [_session dataTaskWithURL:[NSURL URLWithString:@"http://peterpc.fft.local:4567/RestService.svc/json/GetControllers"] ];
+    //[dataTask resume];
 }
 
--(void) GetControllers2
+// Do requests.
+-(void) doRequests
 {
-    NSURLSessionDataTask *dataTask = [_session dataTaskWithURL:[NSURL URLWithString:_controllersUrl] ];
-    [dataTask resume];
-    
+    NSLog(@"doRequests called.");
+    for (IosSessionDataTask* request in queue)
+    {
+        NSLog(@"Processing request.");
+        [request.sessionDataTask resume];
+    }
 }
 
 #pragma mark NSUrlSessionDelegate methods
@@ -113,6 +144,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     NSLog(@"Became download task.");
 }
 
+// Called when a request is finished.
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
     NSLog(@"Received data.");
@@ -122,15 +154,16 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                                                          options:NSJSONReadingMutableContainers
                                                            error:&e];
     
+    IosSessionDataTask *first = [self PopGETRequestFromQueue];
     
-    [self.repository parseJsonDictionary:dict command:GetControllers];
+    [self.repository parseJsonDictionary:dict];
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
     //Called when the data transfer is complete
     //Client side errors are indicated with the error parameter
-    
+    NSLog(@"task completed.");
 }
 
 

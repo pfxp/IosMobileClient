@@ -11,12 +11,12 @@
 
 @interface IosSessionDataTask : NSObject
 @property (readwrite) CamsWsRequest camsRequestType;
-@property (readwrite) NSURLSessionDataTask* sessionDataTask;
-@property (readwrite, copy) NSString* baseUrl;
+@property (readwrite, strong) NSURLSessionDataTask* sessionDataTask;
+@property (readwrite, copy) NSURL* baseUrl;
 
--(id) initWithRequestSype:(CamsWsRequest)request
+-(id) initWithRequestType:(CamsWsRequest)request
                  dataTask:(NSURLSessionDataTask *)dataTask
-                  baseUrl:(NSString *)url;
+                  baseUrl:(NSURL *)url;
 
-+(NSString *) GetUrlSuffixForRequest:(CamsWsRequest) request baseUrl:(NSString *)url;
++(NSString *) generateUrlForRequest:(CamsWsRequest)request baseUrl:(NSURL *)url;
 @end

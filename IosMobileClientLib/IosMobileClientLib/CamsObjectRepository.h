@@ -16,6 +16,7 @@
 @property (readwrite) NSMutableDictionary *zones;
 @property (readwrite) NSMutableDictionary *maps;
 
+-(void) parseJsonDictionary:(NSDictionary *)dict;
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
 
 @end

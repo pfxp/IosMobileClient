@@ -15,16 +15,15 @@
 {
     NSMutableArray *queue;
 }
+@property (readwrite, copy) NSURL *baseUrl;
 @property (readwrite) CamsObjectRepository *repository;
-@property (readonly, copy) NSString *controllersUrl;
 @property (readwrite) NSURLSession *session;
--(id) init;
--(void) start;
--(void) GetControllers;
--(void) GetControllers2;
+
+-(id) initWithBaseUrl:(NSURL*) url;
+-(void) createSession;
+-(void) addRequests;
+-(void) doRequests;
 
 -(void) PushGETRequestToQueue:(IosSessionDataTask *) request;
 -(IosSessionDataTask *) PopGETRequestFromQueue;
-
-
 @end

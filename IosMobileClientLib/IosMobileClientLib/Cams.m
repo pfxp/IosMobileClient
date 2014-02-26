@@ -36,7 +36,7 @@
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"}];
-    //[sessionConfig setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    [sessionConfig setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
     [sessionConfig setTimeoutIntervalForRequest:10.0];
     [sessionConfig setTimeoutIntervalForResource:30.0];
     [sessionConfig setHTTPMaximumConnectionsPerHost:1];
@@ -167,8 +167,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     {
         [val appendData:data];
     }
-    int k=0;
-}
+  }
 
 
 //Called when the data transfer is complete
@@ -178,12 +177,9 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     if (error != nil)
     {
         NSLog(@"Task completed with an error");
-     
-           }
+    }
     else
     {
-        NSLog(@"Task completed successfully.");
-        
         NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:[task taskIdentifier]];
         NSMutableData *data = [_dataFromWebService objectForKey:key];
         NSError *e = nil;
@@ -191,10 +187,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                                                              options:NSJSONReadingMutableContainers
                                                                error:&e];
         
-        
-        
         [[self repository] parseJsonDictionary:dict];
-
     }
 }
 

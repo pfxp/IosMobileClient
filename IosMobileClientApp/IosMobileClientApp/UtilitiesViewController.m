@@ -104,7 +104,7 @@
 }
 
 
-- (IBAction) multipleGetsButtonClicked:(id)sender
+- (IBAction) getsCamsObjectsButtonClicked:(id)sender
 {
     NSLog(@"Multi button clicked.");
     [_cams doRequests];

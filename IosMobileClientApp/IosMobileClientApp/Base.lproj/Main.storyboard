@@ -55,7 +55,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdv-lY-juc">
-                                <rect key="frame" x="6" y="225" width="108" height="30"/>
+                                <rect key="frame" x="176" y="39" width="108" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Hello World WS">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,13 +75,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mA-hc-ZVd">
-                                <rect key="frame" x="172" y="130" width="132" height="30"/>
+                                <rect key="frame" x="6" y="225" width="132" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Multi Get Requests">
+                                <state key="normal" title="Get CAMS objects">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="multipleGetsButtonClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4fz-6q-QN7"/>
+                                    <action selector="getsCamsObjectsButtonClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n0U-nl-biX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -107,7 +107,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MapCell" textLabel="Cj2-I5-0qG" style="IBUITableViewCellStyleDefault" id="PEg-ma-5gS">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEg-ma-5gS" id="fme-Ga-eko">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>

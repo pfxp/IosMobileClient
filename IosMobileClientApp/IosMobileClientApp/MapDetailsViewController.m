@@ -34,10 +34,10 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Navigation functions
 - (IBAction)back:(id)sender
 {
     [self.delegate playerDetailsViewControllerDidCancel:self];

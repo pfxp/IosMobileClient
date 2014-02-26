@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Sensor : NSObject
+
 @property (readonly, copy) NSString *sensorDescription;
 @property (readonly, copy) NSNumber *sensorId;
 @property (readonly, copy) NSNumber *channelNumber;

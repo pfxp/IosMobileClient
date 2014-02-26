@@ -12,7 +12,7 @@
 
 - (id) initWithZoneId:(NSNumber*)zid
                  name:(NSString *)name
-          description:(NSString *)desc
+          zoneDescription:(NSString *)desc
 {
     self = [super init];
     
@@ -20,9 +20,14 @@
     {
         _zoneId = zid;
         _name = name;
-        _description=desc;
+        _zoneDescription=desc;
     }
     return self;
+}
+
+-(NSString*) description
+{
+    return [NSString stringWithFormat:@"ZONE: Name: %@,  Description: %@", [self name], [self zoneDescription]];
 }
 
 @end

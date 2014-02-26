@@ -19,8 +19,9 @@
     
     if (self)
     {
-        queue = [NSMutableArray new];
+        _queue = [[NSMutableArray alloc] init];
         _repository = [[CamsObjectRepository alloc] init];
+        _dataFromWebService = [[NSMutableDictionary alloc] init];
         [self setBaseUrl:url];
         [self createSession];
     }
@@ -35,7 +36,7 @@
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"}];
-    [sessionConfig setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    //[sessionConfig setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
     [sessionConfig setTimeoutIntervalForRequest:10.0];
     [sessionConfig setTimeoutIntervalForResource:30.0];
     [sessionConfig setHTTPMaximumConnectionsPerHost:1];
@@ -43,7 +44,7 @@
     _session = [NSURLSession sessionWithConfiguration:sessionConfig
                                              delegate:self
                                         delegateQueue:[NSOperationQueue mainQueue]];
-}
+    }
 
 //
 // Add requests to get the controllers, sensors, zones and maps.
@@ -57,27 +58,27 @@
                                                                                baseUrl:[self baseUrl]];
     
     NSURLSessionDataTask *getSensorsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetSensors
-                                                                                                             baseUrl:[self baseUrl]] ];
-    IosSessionDataTask *getSensors = [[IosSessionDataTask alloc] initWithRequestType:GetSensors
-                                                                              dataTask:getSensorsDataTask
-                                                                               baseUrl:[self baseUrl]];
-
-    NSURLSessionDataTask *getZonesDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZones
                                                                                                            baseUrl:[self baseUrl]] ];
-    IosSessionDataTask *getZones = [[IosSessionDataTask alloc] initWithRequestType:GetZones
-                                                                            dataTask:getZonesDataTask
+    IosSessionDataTask *getSensors = [[IosSessionDataTask alloc] initWithRequestType:GetSensors
+                                                                            dataTask:getSensorsDataTask
                                                                              baseUrl:[self baseUrl]];
     
-    NSURLSessionDataTask *getMapsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetMaps
+    NSURLSessionDataTask *getZonesDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZones
                                                                                                          baseUrl:[self baseUrl]] ];
-    IosSessionDataTask *getMaps = [[IosSessionDataTask alloc] initWithRequestType:GetMaps
-                                                                          dataTask:getMapsDataTask
+    IosSessionDataTask *getZones = [[IosSessionDataTask alloc] initWithRequestType:GetZones
+                                                                          dataTask:getZonesDataTask
                                                                            baseUrl:[self baseUrl]];
     
-    [self PushGETRequestToQueue:getContoller];
-    //[self PushGETRequestToQueue:getSensors];
-    //[self PushGETRequestToQueue:getZones];
-    //[self PushGETRequestToQueue:getMaps];
+    NSURLSessionDataTask *getMapsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetMaps
+                                                                                                        baseUrl:[self baseUrl]]];
+    IosSessionDataTask *getMaps = [[IosSessionDataTask alloc] initWithRequestType:GetMaps
+                                                                         dataTask:getMapsDataTask
+                                                                          baseUrl:[self baseUrl]];
+    
+    [self pushGETRequestToQueue:getContoller];
+    [self pushGETRequestToQueue:getSensors];
+    [self pushGETRequestToQueue:getZones];
+    [self pushGETRequestToQueue:getMaps];
 }
 
 //
@@ -85,9 +86,9 @@
 //
 -(void) doRequests
 {
-    [queue removeAllObjects];
+    [_queue removeAllObjects];
     [self addRequests];
-    for (IosSessionDataTask* request in queue)
+    for (IosSessionDataTask* request in _queue)
         [request.sessionDataTask resume];
 }
 
@@ -133,20 +134,40 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 // Called when a request is finished.
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-    NSLog(@"Received data.");
+    [self addData:[dataTask taskIdentifier]  data:data];
     
+    /*
     NSError *e = nil;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
                                                            error:&e];
     
-    if (data==nil)
-    {
-        NSLog(@"Data is nil. %@", e.description);
-        return;
-    }
+
     
     [[self repository] parseJsonDictionary:dict];
+     */
+}
+
+//
+// Adds data to the queue
+//
+-(void) addData:(NSUInteger)taskId  data:(NSData*)data
+{
+    NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:taskId];
+    NSMutableData *val = [_dataFromWebService objectForKey:key];
+    
+    if (val==nil)
+    {
+        NSMutableData *firstdata = [[NSMutableData alloc] init];
+        [firstdata appendData:data];
+        [_dataFromWebService setObject:firstdata forKey:key];
+        
+    }
+    else
+    {
+        [val appendData:data];
+    }
+    int k=0;
 }
 
 
@@ -154,35 +175,66 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 //Client side errors are indicated with the error parameter
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-       if (error != nil)
+    if (error != nil)
+    {
         NSLog(@"Task completed with an error");
+     
+           }
     else
+    {
         NSLog(@"Task completed successfully.");
+        
+        NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:[task taskIdentifier]];
+        NSMutableData *data = [_dataFromWebService objectForKey:key];
+        NSError *e = nil;
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+                                                             options:NSJSONReadingMutableContainers
+                                                               error:&e];
+        
+        
+        
+        [[self repository] parseJsonDictionary:dict];
+
+    }
 }
+
 
 #pragma mark Queue functions.
 //
 // Adds a GET request to the queue.
 //
--(void) PushGETRequestToQueue:(IosSessionDataTask *) request
+-(void) pushGETRequestToQueue:(IosSessionDataTask *) request
 {
-    [queue addObject:request];
+    [_queue addObject:request];
 }
 
 
 //
 // Returns nil if the queue is empty.
 //
--(IosSessionDataTask *) PopGETRequestFromQueue
+-(IosSessionDataTask *) popGETRequestFromQueue
 {
-    if (queue==nil)
+    if (_queue==nil)
         return nil;
-    if (queue.count == 0)
+    if ([_queue count] == 0)
         return nil;
     
-    IosSessionDataTask *result = [queue lastObject];
-    [queue removeLastObject];
+    IosSessionDataTask *result = [_queue lastObject];
+    [_queue removeLastObject];
     return result;
+}
+
+#pragma mark APNS functions.
+-(void) registerApnsToken:(NSString *) token
+{
+    /*
+     NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetControllers
+     baseUrl:[self baseUrl]] ];
+     IosSessionDataTask *getContoller = [[IosSessionDataTask alloc] initWithRequestType:GetControllers
+     dataTask:getControllersDataTask
+     baseUrl:[self baseUrl]];
+     */
+    
 }
 
 @end

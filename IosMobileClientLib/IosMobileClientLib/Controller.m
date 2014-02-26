@@ -32,7 +32,7 @@
 //            self.name, self.controllerDescription, self.connected ? @"YES" : @"NO",
 //            self.hostname, self.ctrlId, self.locator ? @"YES" : @"NO"];
 
-    return [NSString stringWithFormat:@" Name=%@ Desc=%@", self.name, self.controllerDescription];
+    return [NSString stringWithFormat:@"CONT Name=%@ Desc=%@", self.name, self.controllerDescription];
 }
 
 @end

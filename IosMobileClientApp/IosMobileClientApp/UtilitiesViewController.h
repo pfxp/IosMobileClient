@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WebServiceComms.h"
 #import "IosMobileClientLib/Cams.h"
 
 @interface UtilitiesViewController : UIViewController
@@ -21,7 +20,6 @@
     IBOutlet UILabel *outputLabel;
 }
 
-@property (readwrite, weak) WebServiceComms *wsComms;
 @property (readwrite, weak) Cams *cams;
 
 - (IBAction) helloWorldButtonClicked:(id)sender;
@@ -30,5 +28,7 @@
 - (IBAction) getZonesButtonClicked:(id)sender;
 - (IBAction) getMapsButtonClicked:(id)sender;
 - (IBAction) multipleGetsButtonClicked:(id)sender;
+
++ (NSString *) displayDictionaryAsString:(NSDictionary *) dict;
 @end
 

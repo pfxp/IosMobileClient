@@ -34,7 +34,7 @@
 
 
 - (NSString *)description {
-   return [NSString stringWithFormat:@"(Lat: %@ Long: %@ Alt: %@)", self.latitude, self.longitude, self.altitude];
+    return [NSString stringWithFormat:@"(Lat: %@ Long: %@ Alt: %@)", self.latitude, self.longitude, self.altitude];
 }
 
 @end
@@ -70,7 +70,9 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ ParentID: %@ Sequence: %@", super.description, self.parentId, self.sequence];
+    NSMutableString *result = [[NSMutableString alloc] init];
+    [result appendFormat:@"%@ ParentID: %@ Sequence: %@\n", [super description], [self parentId], [self sequence]];
+    return result;
 }
 
 @end
@@ -107,7 +109,13 @@
         _perimeterDistance = perimDistNumber;
     }
     return self;
-
 }
+
+- (NSString *)description {
+    NSMutableString *result = [[NSMutableString alloc] init];
+    [result appendFormat:@"%@ Cable distance: %d Perimeter distance: %d\n", [super description], [[self cableDistance] intValue], [[self perimeterDistance] intValue]];
+    return result;
+}
+
 @end
 

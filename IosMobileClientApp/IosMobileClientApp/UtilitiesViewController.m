@@ -9,7 +9,6 @@
 #import "UtilitiesViewController.h"
 #import "IosMobileClientLib/Controller.h"
 
-
 @interface UtilitiesViewController ()
 
 @end
@@ -23,25 +22,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    if ([self.wsComms.baseUrl.absoluteString isEqualToString:@""] == TRUE)
-    {
-             
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"URL"
-                                               message:@"Enter the URL of the Web Service"
-                                               delegate:self
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        [alert show];
-    }
-    
-    NSDictionary *controllers = [[[self cams] repository] controllers];
+}
+
++(NSString *) displayDictionaryAsString:(NSDictionary *) dict
+{
     NSMutableString *outputText = [NSMutableString new];
-    for(id key in controllers)
-        [outputText appendFormat:@"key=%@ val=%@\n", key, [controllers objectForKey:key]];
-    
-    outputLabel.text = outputText;
+    for(id key in dict)
+        [outputText appendFormat:@"key=%@ val=%@\n", key, [dict objectForKey:key]];
+    return outputText;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -66,24 +54,28 @@
 // Gets the controllers from the web service.
 - (IBAction) getControllersButtonClicked:(id)sender
 {
-    [self.wsComms callCamsWsMethod:GetControllers];
+    NSDictionary *controllers = [[[self cams] repository] controllers];
+    outputLabel.text = [UtilitiesViewController displayDictionaryAsString:controllers];
 }
 
 // Gets the sensors from the web service.
 - (IBAction) getSensorsButtonClicked:(id)sender
 {
-    [self.wsComms callCamsWsMethod:GetSensors];
+    NSDictionary *sensors = [[[self cams] repository] sensors];
+    outputLabel.text = [UtilitiesViewController displayDictionaryAsString:sensors];
 }
 
 // Gets the zones from the web service.
 - (IBAction) getZonesButtonClicked:(id)sender
 {
-    [self.wsComms callCamsWsMethod:GetZones];
+    NSDictionary *zones = [[[self cams] repository] zones];
+    outputLabel.text = [UtilitiesViewController displayDictionaryAsString:zones];
 }
 
 - (IBAction) getMapsButtonClicked:(id)sender
 {
-    [self.wsComms callCamsWsMethod:GetMaps];
+    NSDictionary *maps = [[[self cams] repository] maps];
+    outputLabel.text = [UtilitiesViewController displayDictionaryAsString:maps];
 }
 
 // Gets a Hello World from a publicly availble web service.

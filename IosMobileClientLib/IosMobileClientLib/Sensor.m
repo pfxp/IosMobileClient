@@ -32,7 +32,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Desc=%@ SensorID=%@ Channel=%@",
+    return [NSString stringWithFormat:@"SENSOR Desc=%@ SensorID=%@ Channel=%@",
             _sensorDescription, _sensorId, _channelNumber];
 }
 

@@ -47,3 +47,15 @@ Organisation Unit (Team ID) (Used as App ID Prefix)	: RZBCVNC4VX
 Full App ID: RZBCVNC4VX.FFT.IosMobileClientApp
 
 
+To display an alert
+===================
+
+             
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"URL"
+                                               message:@"Enter the URL of the Web Service"
+                                               delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+

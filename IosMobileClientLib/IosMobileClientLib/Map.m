@@ -50,7 +50,7 @@
             self.displayName, self.mapId,
             self.topLeftCorner.description, self.topRightCorner.description,
             self.bottomLeftCorner.description, self.bottomRightCorner.description];  */
-    return [NSString stringWithFormat:@"Display name: %@", self.displayName];
+    return [NSString stringWithFormat:@"MAP Display name: %@", self.displayName];
 }
 
 @end

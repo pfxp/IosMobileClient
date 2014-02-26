@@ -32,7 +32,13 @@
 
 // Parses the JSON dictionary.
 -(void) parseJsonDictionary:(NSDictionary *)dict
-{    
+{
+    if (dict==nil)
+    {
+        NSLog(@"Dictionary passed to parseJsonDictionary is null.");
+        return;
+    }
+    
     if ([dict objectForKey:@"GetControllersResult"] != nil)
         [self parseJsonDictionary:dict command:GetControllers];
     else if ([dict objectForKey:@"GetSensorsResult"] != nil)
@@ -58,13 +64,13 @@
     NSString *sequence;
     NSString *cableDistance;
     NSString *perimeterDistance;
+    bool alreadyShownLogMessage=false;
     
     switch(req)
     {
         case GetControllers:
             
             jsonArray = [dict objectForKey:@"GetControllersResult"];
-            
             if (!jsonArray)
                 return;
             
@@ -82,11 +88,13 @@
                 BOOL locatorAsBool = [isLocator boolValue];
                 Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
                                                                         ctrlid:idNumber locator:locatorAsBool name:name];
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", controller);
                 
-                NSLog(@"CONT: %@", controller);
+                alreadyShownLogMessage=true;
                 
-
-                self.controllers[idNumber] = controller;
+                if (controller)
+                    self.controllers[idNumber] = controller;
             }
             
             break;
@@ -128,7 +136,11 @@
                 
                 Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid points:pointsForSensor];
                 
-                NSLog(@"SENS: %@", sensor);
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", sensor);
+                
+                alreadyShownLogMessage=true;
+
                 if (sensor)
                     self.sensors[sensorIdNumber] = sensor;
             }
@@ -149,8 +161,13 @@
                 NSString *description = [item objectForKey:@"Description"];
                 NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
                 
-                Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name description:description];
-                NSLog(@"ZONE: %@", zone);
+                Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
+                
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", zone);
+                
+                alreadyShownLogMessage=true;
+
                 if (zone)
                     self.zones[zoneIdNumber] = zone;
             }
@@ -196,8 +213,11 @@
                                                  bottomLeft:bottomLeftPoint
                                                 bottomRight:bottomRightPoint];
                 
-                NSLog(@"MAP: %@", map);
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", map);
                 
+                alreadyShownLogMessage=true;
+
                 if (map)
                     self.maps[idString] = map;
             }

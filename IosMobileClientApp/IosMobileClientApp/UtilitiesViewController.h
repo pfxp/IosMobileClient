@@ -19,10 +19,11 @@
     IBOutlet UIButton *getMapsButton;
     IBOutlet UIButton *multipleGetsButton;
     IBOutlet UILabel *outputLabel;
-    Cams *cams;
 }
 
 @property (readwrite, weak) WebServiceComms *wsComms;
+@property (readwrite, weak) Cams *cams;
+
 - (IBAction) helloWorldButtonClicked:(id)sender;
 - (IBAction) getControllersButtonClicked:(id)sender;
 - (IBAction) getSensorsButtonClicked:(id)sender;

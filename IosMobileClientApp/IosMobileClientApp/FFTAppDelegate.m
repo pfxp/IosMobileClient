@@ -35,6 +35,9 @@
     wsComms = [[WebServiceComms alloc] init];
     wsComms.baseUrl = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"]];
     
+    cams = [[Cams alloc] initWithBaseUrl:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"]]];
+    [cams doRequests];
+    
     // Custom initialization
     _maps = [NSMutableArray arrayWithCapacity:20];
     Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
@@ -46,6 +49,7 @@
     playersViewController.maps = _maps;
     
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
+    utilitiesVC.cams = cams;
     utilitiesVC.wsComms = wsComms;
     
     return YES;

@@ -19,41 +19,18 @@
     
     if (self)
     {
-        _repository = [[CamsObjectRepository alloc] init];
         queue = [NSMutableArray new];
+        _repository = [[CamsObjectRepository alloc] init];
         [self setBaseUrl:url];
         [self createSession];
-        [self addRequests];
     }
     return self;
 }
 
-
+#pragma mark Session and data
 //
-// Adds a GET request to the queue.
-//
--(void) PushGETRequestToQueue:(IosSessionDataTask *) request
-{
-    [queue addObject:request];
-}
-
-
-//
-// Returns nil if the queue is empty.
-//
--(IosSessionDataTask *) PopGETRequestFromQueue
-{
-    if (queue==nil)
-        return nil;
-    if (queue.count == 0)
-        return nil;
-    
-    IosSessionDataTask *result = [queue lastObject];
-    [queue removeLastObject];
-    return result;
-}
-
 // Create the NSURLSession
+//
 -(void) createSession
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -68,7 +45,9 @@
                                         delegateQueue:[NSOperationQueue mainQueue]];
 }
 
+//
 // Add requests to get the controllers, sensors, zones and maps.
+//
 -(void) addRequests
 {
     NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetControllers
@@ -96,14 +75,18 @@
                                                                            baseUrl:[self baseUrl]];
     
     [self PushGETRequestToQueue:getContoller];
-    [self PushGETRequestToQueue:getSensors];
-    [self PushGETRequestToQueue:getZones];
-    [self PushGETRequestToQueue:getMaps];
+    //[self PushGETRequestToQueue:getSensors];
+    //[self PushGETRequestToQueue:getZones];
+    //[self PushGETRequestToQueue:getMaps];
 }
 
+//
 // Do requests.
+//
 -(void) doRequests
 {
+    [queue removeAllObjects];
+    [self addRequests];
     for (IosSessionDataTask* request in queue)
         [request.sessionDataTask resume];
 }
@@ -157,7 +140,13 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                                                          options:NSJSONReadingMutableContainers
                                                            error:&e];
     
-    [_repository parseJsonDictionary:dict];
+    if (data==nil)
+    {
+        NSLog(@"Data is nil. %@", e.description);
+        return;
+    }
+    
+    [[self repository] parseJsonDictionary:dict];
 }
 
 
@@ -169,6 +158,31 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
         NSLog(@"Task completed with an error");
     else
         NSLog(@"Task completed successfully.");
+}
+
+#pragma mark Queue functions.
+//
+// Adds a GET request to the queue.
+//
+-(void) PushGETRequestToQueue:(IosSessionDataTask *) request
+{
+    [queue addObject:request];
+}
+
+
+//
+// Returns nil if the queue is empty.
+//
+-(IosSessionDataTask *) PopGETRequestFromQueue
+{
+    if (queue==nil)
+        return nil;
+    if (queue.count == 0)
+        return nil;
+    
+    IosSessionDataTask *result = [queue lastObject];
+    [queue removeLastObject];
+    return result;
 }
 
 @end

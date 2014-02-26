@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "WebServiceComms.h"
+#import "IosMobileClientLib/Cams.h"
+
 @interface FFTAppDelegate : UIResponder <UIApplicationDelegate>
 {
     WebServiceComms *wsComms;
+    Cams *cams;
 }
 @property (strong, nonatomic) UIWindow *window;
 

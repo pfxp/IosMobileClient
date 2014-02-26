@@ -16,12 +16,13 @@
 
 @implementation UtilitiesViewController
 
+//
 // Checks if the URL has been set.
+//
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
     
     if ([self.wsComms.baseUrl.absoluteString isEqualToString:@""] == TRUE)
     {
@@ -35,9 +36,12 @@
         [alert show];
     }
     
-    cams = [[Cams alloc] initWithBaseUrl:self.wsComms.baseUrl];
-    outputLabel.text = self.wsComms.baseUrl.absoluteString;
+    NSDictionary *controllers = [[[self cams] repository] controllers];
+    NSMutableString *outputText = [NSMutableString new];
+    for(id key in controllers)
+        [outputText appendFormat:@"key=%@ val=%@\n", key, [controllers objectForKey:key]];
     
+    outputLabel.text = outputText;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -111,7 +115,7 @@
 - (IBAction) multipleGetsButtonClicked:(id)sender
 {
     NSLog(@"Multi button clicked.");
-    [cams doRequests];
+    [_cams doRequests];
 }
 
 @end

@@ -227,4 +227,12 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     [postDataTask resume];
 }
 
+//
+// Retrieve the alarms.
+//
+-(void) getAlarms
+{
+    
+}
+
 @end

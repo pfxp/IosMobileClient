@@ -64,6 +64,23 @@
     [cams registerApnsToken:token];
 }
 
+//
+// Called when a push notification is received.
+//
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSDictionary *badgeSoundText = [userInfo objectForKey:@"aps"];
+    if (badgeSoundText!=nil)
+    {
+        //NSString *badge = [badgeSoundText objectForKey:@"badge"];
+        //NSString *sound = [badgeSoundText objectForKey:@"sound"];
+        NSString *alert = [badgeSoundText objectForKey:@"alert"];
+        NSLog(@"APNS push alert: Alert:%@", alert);
+    }
+    
+    [cams getAlarms];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -28,4 +28,5 @@
 -(IosSessionDataTask *) popGETRequestFromQueue;
 -(void) registerApnsToken:(NSString *) token;
 -(void) addData:(NSUInteger)taskId  data:(NSData*)data;
+-(void) getAlarms;
 @end

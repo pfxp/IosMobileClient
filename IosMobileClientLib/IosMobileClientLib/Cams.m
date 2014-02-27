@@ -135,17 +135,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
     [self addData:[dataTask taskIdentifier]  data:data];
-    
-    /*
-    NSError *e = nil;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&e];
-    
-
-    
-    [[self repository] parseJsonDictionary:dict];
-     */
 }
 
 //
@@ -182,6 +171,10 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     {
         NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:[task taskIdentifier]];
         NSMutableData *data = [_dataFromWebService objectForKey:key];
+        
+        if (data==nil)
+            return;
+        
         NSError *e = nil;
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
                                                              options:NSJSONReadingMutableContainers
@@ -218,16 +211,20 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 }
 
 #pragma mark APNS functions.
+//
+// TODO use the queue mechanism
+//
 -(void) registerApnsToken:(NSString *) token
 {
-    /*
-     NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetControllers
-     baseUrl:[self baseUrl]] ];
-     IosSessionDataTask *getContoller = [[IosSessionDataTask alloc] initWithRequestType:GetControllers
-     dataTask:getControllersDataTask
-     baseUrl:[self baseUrl]];
-     */
+    NSURL *url = [IosSessionDataTask generateUrlForApnsRequest:SetAPNSToken baseUrl:[self baseUrl] apnsid:token];
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
+    NSURLSessionDataTask *postDataTask = [_session dataTaskWithRequest:request];
+    [postDataTask resume];
 }
 
 @end

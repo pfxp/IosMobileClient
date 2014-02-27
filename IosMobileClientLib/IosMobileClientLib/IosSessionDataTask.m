@@ -53,5 +53,11 @@
     }
 }
 
++(NSURL *) generateUrlForApnsRequest:(CamsWsRequest)request baseUrl:(NSURL *)baseUrl apnsid:(NSString*)apnsid
+{
+    NSString *val = [NSString stringWithFormat:@"%@/json/SetApnsTokenAsString?id=%@", baseUrl, apnsid];
+    NSURL *result = [NSURL URLWithString:val];
+    return result;
+}
 
 @end

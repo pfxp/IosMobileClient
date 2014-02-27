@@ -19,4 +19,5 @@
                   baseUrl:(NSURL *)url;
 
 +(NSURL *) generateUrlForRequest:(CamsWsRequest)request baseUrl:(NSURL *)url;
++(NSURL *) generateUrlForApnsRequest:(CamsWsRequest)request baseUrl:(NSURL *)url apnsid:(NSString*)apnsid;
 @end

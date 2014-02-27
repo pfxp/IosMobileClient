@@ -18,6 +18,7 @@
 		7610130018A9D19C0067C5B2 /* Players@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 761012F918A9D19C0067C5B2 /* Players@2x.png */; };
 		7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610130218A9D7030067C5B2 /* MapsViewController.m */; };
 		7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7623B41418B6C2170096F024 /* MapKit.framework */; };
+		7628962818BEB735003FC83F /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7628962718BEB735003FC83F /* DashboardViewController.m */; };
 		76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76609E8A18A9E7CD00D56FD0 /* MapDetailsViewController.m */; };
 		76609E8D18AB300200D56FD0 /* documents in Resources */ = {isa = PBXBuildFile; fileRef = 76609E8C18AB300200D56FD0 /* documents */; };
 		7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475D18A2F90F007D734A /* Foundation.framework */; };
@@ -25,7 +26,7 @@
 		7661476218A2F90F007D734A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661476118A2F90F007D734A /* UIKit.framework */; };
 		7661476818A2F90F007D734A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7661476618A2F90F007D734A /* InfoPlist.strings */; };
 		7661476A18A2F90F007D734A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661476918A2F90F007D734A /* main.m */; };
-		7661476E18A2F90F007D734A /* FFTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661476D18A2F90F007D734A /* FFTAppDelegate.m */; };
+		7661476E18A2F90F007D734A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661476D18A2F90F007D734A /* AppDelegate.m */; };
 		7661477118A2F90F007D734A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7661476F18A2F90F007D734A /* Main.storyboard */; };
 		7661477418A2F90F007D734A /* UtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661477318A2F90F007D734A /* UtilitiesViewController.m */; };
 		7661477618A2F90F007D734A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7661477518A2F90F007D734A /* Images.xcassets */; };
@@ -59,6 +60,8 @@
 		7610130118A9D7030067C5B2 /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapsViewController.h; path = IosMobileClientApp/MapsViewController.h; sourceTree = SOURCE_ROOT; };
 		7610130218A9D7030067C5B2 /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapsViewController.m; path = IosMobileClientApp/MapsViewController.m; sourceTree = SOURCE_ROOT; };
 		7623B41418B6C2170096F024 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7628962618BEB735003FC83F /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
+		7628962718BEB735003FC83F /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
 		76609E8918A9E7CD00D56FD0 /* MapDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDetailsViewController.h; sourceTree = "<group>"; };
 		76609E8A18A9E7CD00D56FD0 /* MapDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDetailsViewController.m; sourceTree = "<group>"; };
 		76609E8C18AB300200D56FD0 /* documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = documents; path = ../documents; sourceTree = "<group>"; };
@@ -70,8 +73,8 @@
 		7661476718A2F90F007D734A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7661476918A2F90F007D734A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7661476B18A2F90F007D734A /* IosMobileClientApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IosMobileClientApp-Prefix.pch"; sourceTree = "<group>"; };
-		7661476C18A2F90F007D734A /* FFTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFTAppDelegate.h; sourceTree = "<group>"; };
-		7661476D18A2F90F007D734A /* FFTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFTAppDelegate.m; sourceTree = "<group>"; };
+		7661476C18A2F90F007D734A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7661476D18A2F90F007D734A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7661477018A2F90F007D734A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7661477218A2F90F007D734A /* UtilitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilitiesViewController.h; sourceTree = "<group>"; };
 		7661477318A2F90F007D734A /* UtilitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilitiesViewController.m; sourceTree = "<group>"; };
@@ -161,8 +164,10 @@
 		7661476318A2F90F007D734A /* IosMobileClientApp */ = {
 			isa = PBXGroup;
 			children = (
-				7661476C18A2F90F007D734A /* FFTAppDelegate.h */,
-				7661476D18A2F90F007D734A /* FFTAppDelegate.m */,
+				7661476C18A2F90F007D734A /* AppDelegate.h */,
+				7661476D18A2F90F007D734A /* AppDelegate.m */,
+				7628962618BEB735003FC83F /* DashboardViewController.h */,
+				7628962718BEB735003FC83F /* DashboardViewController.m */,
 				7661477518A2F90F007D734A /* Images.xcassets */,
 				7661476F18A2F90F007D734A /* Main.storyboard */,
 				76609E8918A9E7CD00D56FD0 /* MapDetailsViewController.h */,
@@ -316,8 +321,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7661476A18A2F90F007D734A /* main.m in Sources */,
+				7628962818BEB735003FC83F /* DashboardViewController.m in Sources */,
 				76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */,
-				7661476E18A2F90F007D734A /* FFTAppDelegate.m in Sources */,
+				7661476E18A2F90F007D734A /* AppDelegate.m in Sources */,
 				7661477418A2F90F007D734A /* UtilitiesViewController.m in Sources */,
 				7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */,
 			);

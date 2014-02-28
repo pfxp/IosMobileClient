@@ -13,6 +13,8 @@
 #import "Zone.h"
 #import "Points.h"
 #import "Map.h"
+#import "ZoneEvent.h"
+
 
 @implementation CamsObjectRepository
 
@@ -25,6 +27,7 @@
         _sensors = [NSMutableDictionary new];
         _zones = [NSMutableDictionary new];
         _maps = [NSMutableDictionary new];
+        _zoneEvents = [NSMutableDictionary new];
     }
     
     return self;
@@ -47,6 +50,9 @@
         [self parseJsonDictionary:dict command:GetZones];
     else if ([dict objectForKey:@"GetMapsResult"] != nil)
         [self parseJsonDictionary:dict command:GetMaps];
+    else if ([dict objectForKey:@"GetZoneEventsResult"] != nil)
+        [self parseJsonDictionary:dict command:GetZoneEvents];
+
     else
     {
         NSLog(@"UNKNOWN Parsing JSON dictionary. %@", dict);
@@ -57,95 +63,50 @@
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req
 {
     NSArray *jsonArray;
-    NSString *latitude;
-    NSString *longitude;
-    NSString *altitude;
-    NSString *parentId;
-    NSString *sequence;
-    NSString *cableDistance;
-    NSString *perimeterDistance;
-    bool alreadyShownLogMessage=false;
+     bool alreadyShownLogMessage=false;
     
     switch(req)
     {
         case GetControllers:
-            
             jsonArray = [dict objectForKey:@"GetControllersResult"];
             if (!jsonArray)
                 return;
             
             for (NSDictionary *item in jsonArray)
             {
-                NSString *connected = [item objectForKey:@"Connected"];
-                NSString *description = [item objectForKey:@"Description"];
-                NSString *hostname = [item objectForKey:@"Hostname"];
-                NSString *idString = [item objectForKey:@"Id"];
-                NSString *isLocator = [item objectForKey:@"Locator"];
-                NSString *name = [item objectForKey:@"Name"];
+                Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:item];
+                if (controller==nil)
+                    continue;
                 
-                BOOL connectedAsBool = [connected boolValue];
-                NSNumber *idNumber = [NSNumber numberWithInteger:[idString integerValue]];
-                BOOL locatorAsBool = [isLocator boolValue];
-                Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
-                                                                        ctrlid:idNumber locator:locatorAsBool name:name];
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", controller);
                 
                 alreadyShownLogMessage=true;
                 
                 if (controller)
-                    self.controllers[idNumber] = controller;
+                    self.controllers[[controller ctrlId]] = controller;
             }
-            
             break;
             
         case GetSensors:
-            
             jsonArray = [dict objectForKey:@"GetSensorsResult"];
-            
             if (!jsonArray)
                 return;
             
-            for (NSDictionary *sensorItem in jsonArray)
+            for (NSDictionary *sensorDict in jsonArray)
             {
-                NSString *description = [sensorItem objectForKey:@"Description"];
-                NSString *sensorId = [sensorItem objectForKey:@"SensorId"];
-                NSString *channelNumber = [sensorItem objectForKey:@"ChannelNumber"];
-                NSString *sensorGuid = [sensorItem objectForKey:@"SensorGuid"];
-                NSString *pointCount = [sensorItem objectForKey:@"PointCount"];
-                NSNumber *sensorIdNumber = [NSNumber numberWithInteger:[sensorId integerValue]];
-                NSNumber *channelNumberNumber = [NSNumber numberWithInteger:[channelNumber integerValue]];
-                
-                NSMutableArray *pointsForSensor = [NSMutableArray arrayWithCapacity:[pointCount intValue]];
-                
-                NSArray *pointsJSONArray = [sensorItem objectForKey:@"Points"];
-                for (NSDictionary *pointItem in pointsJSONArray)
-                {
-                    latitude = [pointItem objectForKey:@"Lat"];
-                    longitude = [pointItem objectForKey:@"Long"];
-                    altitude = [pointItem objectForKey:@"Alt"];
-                    parentId = [pointItem objectForKey:@"ParentId"];
-                    sequence = [pointItem objectForKey:@"Seq"];
-                    cableDistance = [pointItem objectForKey:@"CabDist"];
-                    perimeterDistance = [pointItem objectForKey:@"PerDist"];
-                    
-                    SensorLinePoint *sensorLinePoint = [[SensorLinePoint alloc] initWithLatStr:latitude longStr:longitude altStr:altitude parentIdStr:parentId sequenceStr:sequence cableDistanceStr:cableDistance perimeterDistanceStr:perimeterDistance];
-                    
-                    [pointsForSensor addObject:sensorLinePoint];
-                }
-                
-                Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid points:pointsForSensor];
+                Sensor *sensor = [CamsObjectRepository parseSensorJsonDictionary:sensorDict];
+                if (sensor==nil)
+                    continue;
                 
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", sensor);
                 
                 alreadyShownLogMessage=true;
-
+                
                 if (sensor)
-                    self.sensors[sensorIdNumber] = sensor;
+                    self.sensors[[sensor sensorId]] = sensor;
             }
-            
-            
             break;
             
         case GetZones:
@@ -154,11 +115,11 @@
             if (!jsonArray)
                 return;
             
-            for (NSDictionary *item in jsonArray)
+            for (NSDictionary *zoneDict in jsonArray)
             {
-                NSString *zoneIdAsString = [item objectForKey:@"ZoneId"];
-                NSString *name = [item objectForKey:@"Name"];
-                NSString *description = [item objectForKey:@"Description"];
+                NSString *zoneIdAsString = [zoneDict objectForKey:@"ZoneId"];
+                NSString *name = [zoneDict objectForKey:@"Name"];
+                NSString *description = [zoneDict objectForKey:@"Description"];
                 NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
                 
                 Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
@@ -167,11 +128,10 @@
                     NSLog(@"%@", zone);
                 
                 alreadyShownLogMessage=true;
-
+                
                 if (zone)
                     self.zones[zoneIdNumber] = zone;
             }
-            
             break;
             
         case GetMaps:
@@ -217,16 +177,128 @@
                     NSLog(@"%@", map);
                 
                 alreadyShownLogMessage=true;
-
+                
                 if (map)
                     self.maps[idString] = map;
             }
             
             break;
+            
+        case GetZoneEvents:
+            jsonArray = [dict objectForKey:@"GetZoneEventsResult"];
+            
+            if (!jsonArray)
+                return;
+            
+            for (NSDictionary *zoneEventDict in jsonArray)
+            {
+                NSString *eventIdAsString = [zoneEventDict objectForKey:@"EventId"];
+                NSString *eventTimeUtc1970sec = [zoneEventDict objectForKey:@"EventTimeUtc1970sec"];
+                NSString *acknowledged = [zoneEventDict objectForKey:@"Acknowledged"];
+                NSString *active = [zoneEventDict objectForKey:@"Active"];
+                NSString *dynamic = [zoneEventDict objectForKey:@"Dynamic"];
+                NSDictionary *controllerDict = [zoneEventDict objectForKey:@"Controller"];
+                NSDictionary *sensorDict = [zoneEventDict objectForKey:@"Sensor"];
+                
+                Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:controllerDict];
+                Sensor *sensor = [CamsObjectRepository parseSensorJsonDictionary:sensorDict];
+                
+                NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
+                
+                NSDate *eventTime = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue]];
+                NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
+                ZoneEvent *zoneEvent = [[ZoneEvent alloc] initWithEventId:eventId
+                                                                eventTime:eventTime
+                                                             acknowledged:[acknowledged boolValue]
+                                                                   active:[active boolValue]
+                                                                  dynamic:[dynamic boolValue]
+                                                               controller:controller
+                                                                   sensor:sensor];
+                
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", zoneEvent);
+                
+                alreadyShownLogMessage=true;
+
+                if (zoneEvent)
+                    self.zoneEvents[eventId] = zoneEvent;
+            }
+            
+            break;
+            
         case SetAPNSToken:
             NSLog(@"APNS: %@", @"Set the APNS token.");
             break;
     }
 }
+
+#pragma mark CAMS object desierializers
+//
+// Returns a controller from a JSON dictionary
+//
++ (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict
+{
+    
+    NSString *connected = [dict objectForKey:@"Connected"];
+    NSString *description = [dict objectForKey:@"Description"];
+    NSString *hostname = [dict objectForKey:@"Hostname"];
+    NSString *idString = [dict objectForKey:@"Id"];
+    NSString *isLocator = [dict objectForKey:@"Locator"];
+    NSString *name = [dict objectForKey:@"Name"];
+    
+    BOOL connectedAsBool = [connected boolValue];
+    NSNumber *idNumber = [NSNumber numberWithInteger:[idString integerValue]];
+    BOOL locatorAsBool = [isLocator boolValue];
+    
+    Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
+                                                            ctrlid:idNumber locator:locatorAsBool name:name];
+    
+    return controller;
+}
+
+//
+// Returns a sensor from a JSON dictionary
+//
++ (Sensor *) parseSensorJsonDictionary:(NSDictionary *) dict
+{
+    NSString *latitude;
+    NSString *longitude;
+    NSString *altitude;
+    NSString *parentId;
+    NSString *sequence;
+    NSString *cableDistance;
+    NSString *perimeterDistance;
+    
+    NSString *description = [dict objectForKey:@"Description"];
+    NSString *sensorId = [dict objectForKey:@"SensorId"];
+    NSString *channelNumber = [dict objectForKey:@"ChannelNumber"];
+    NSString *sensorGuid = [dict objectForKey:@"SensorGuid"];
+    NSString *pointCount = [dict objectForKey:@"PointCount"];
+    NSNumber *sensorIdNumber = [NSNumber numberWithInteger:[sensorId integerValue]];
+    NSNumber *channelNumberNumber = [NSNumber numberWithInteger:[channelNumber integerValue]];
+    
+    NSMutableArray *pointsForSensor = [NSMutableArray arrayWithCapacity:[pointCount intValue]];
+    
+    NSArray *pointsJSONArray = [dict objectForKey:@"Points"];
+    for (NSDictionary *pointDict in pointsJSONArray)
+    {
+        latitude = [pointDict objectForKey:@"Lat"];
+        longitude = [pointDict objectForKey:@"Long"];
+        altitude = [pointDict objectForKey:@"Alt"];
+        parentId = [pointDict objectForKey:@"ParentId"];
+        sequence = [pointDict objectForKey:@"Seq"];
+        cableDistance = [pointDict objectForKey:@"CabDist"];
+        perimeterDistance = [pointDict objectForKey:@"PerDist"];
+        
+        SensorLinePoint *sensorLinePoint = [[SensorLinePoint alloc] initWithLatStr:latitude longStr:longitude altStr:altitude parentIdStr:parentId sequenceStr:sequence cableDistanceStr:cableDistance perimeterDistanceStr:perimeterDistance];
+        
+        [pointsForSensor addObject:sensorLinePoint];
+    }
+    
+    Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid points:pointsForSensor];
+    
+    return sensor;
+}
+
 
 @end

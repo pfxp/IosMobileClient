@@ -104,6 +104,12 @@
 }
 
 
+- (IBAction) getZoneEventsButtonClicked:(id)sender
+{
+    NSDictionary *zoneEvents = [[[self cams] repository] zoneEvents];
+    outputLabel.text = [UtilitiesViewController displayDictionaryAsString:zoneEvents];
+}
+
 - (IBAction) getsCamsObjectsButtonClicked:(id)sender
 {
     NSLog(@"Multi button clicked.");

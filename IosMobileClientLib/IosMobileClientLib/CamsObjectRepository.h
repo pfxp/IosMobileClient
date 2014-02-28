@@ -9,14 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "GlobalSettings.h"
 
+@class Controller;
+@class Sensor;
+
 @interface CamsObjectRepository : NSObject
 
 @property (readwrite) NSMutableDictionary *controllers;
 @property (readwrite) NSMutableDictionary *sensors;
 @property (readwrite) NSMutableDictionary *zones;
 @property (readwrite) NSMutableDictionary *maps;
+@property (readwrite) NSMutableDictionary *zoneEvents;
 
 -(void) parseJsonDictionary:(NSDictionary *)dict;
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
+
++ (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict;
++ (Sensor *) parseSensorJsonDictionary:(NSDictionary *) dict;
 
 @end

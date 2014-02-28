@@ -34,19 +34,18 @@
         case GetControllers:
             return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetControllers", baseUrl]];
             break;
-        
         case GetSensors:
             return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetSensors", baseUrl]];
             break;
-        
         case GetZones:
             return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetZones", baseUrl]];
             break;
-        
         case GetMaps:
             return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetMaps", baseUrl]];
             break;
-            
+        case GetZoneEvents:
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetZoneEvents", baseUrl]];
+            break;
         default:
             return nil;
             break;

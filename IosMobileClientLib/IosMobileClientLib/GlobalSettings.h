@@ -15,7 +15,8 @@ enum CamsWsRequest : NSInteger {
     GetZones,
     GetSensors,
     GetMaps,
-    SetAPNSToken
+    SetAPNSToken,
+    GetZoneEvents
 };
 
 @interface GlobalSettings : NSObject

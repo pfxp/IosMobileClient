@@ -29,6 +29,7 @@
 		7600C22118A726AB00A27FDC /* CamsObjectRepository.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21B18A724D800A27FDC /* CamsObjectRepository.h */; };
 		7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21E18A725B100A27FDC /* GlobalSettings.h */; };
 		76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7623B41618B6D2000096F024 /* Cams.h */; };
+		761C801F18C003D5009EC655 /* ZoneEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 761C801E18C003D5009EC655 /* ZoneEvent.m */; };
 		7623B41818B6D2000096F024 /* Cams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623B41718B6D2000096F024 /* Cams.m */; };
 		762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F661818B9D91000195CE9 /* IosSessionDataTask.m */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,8 @@
 		7600C21C18A724D800A27FDC /* CamsObjectRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamsObjectRepository.m; sourceTree = "<group>"; };
 		7600C21E18A725B100A27FDC /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
 		7600C21F18A725B100A27FDC /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
+		761C801D18C003D5009EC655 /* ZoneEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneEvent.h; sourceTree = "<group>"; };
+		761C801E18C003D5009EC655 /* ZoneEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneEvent.m; sourceTree = "<group>"; };
 		7623B41618B6D2000096F024 /* Cams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cams.h; sourceTree = "<group>"; };
 		7623B41718B6D2000096F024 /* Cams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cams.m; sourceTree = "<group>"; };
 		762F661718B9D91000195CE9 /* IosSessionDataTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosSessionDataTask.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				7600C1E218A71C8300A27FDC /* Supporting Files */,
 				7600C20F18A71F3A00A27FDC /* Zone.h */,
 				7600C21018A71F3A00A27FDC /* Zone.m */,
+				761C801D18C003D5009EC655 /* ZoneEvent.h */,
+				761C801E18C003D5009EC655 /* ZoneEvent.m */,
 			);
 			path = IosMobileClientLib;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761C801F18C003D5009EC655 /* ZoneEvent.m in Sources */,
 				7600C21418A71F8400A27FDC /* Points.m in Sources */,
 				7600C21718A71FC700A27FDC /* Map.m in Sources */,
 				7600C21118A71F3A00A27FDC /* Zone.m in Sources */,

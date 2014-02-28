@@ -75,11 +75,21 @@
                                                                          dataTask:getMapsDataTask
                                                                           baseUrl:[self baseUrl]];
     
+    
+    NSURLSessionDataTask *getZoneEventsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZoneEvents
+                                                                                                        baseUrl:[self baseUrl]]];
+    IosSessionDataTask *getZoneEvents = [[IosSessionDataTask alloc] initWithRequestType:GetZoneEvents
+                                                                         dataTask:getZoneEventsDataTask
+                                                                          baseUrl:[self baseUrl]];
+    
+    
     [self pushGETRequestToQueue:getContoller];
     [self pushGETRequestToQueue:getSensors];
     [self pushGETRequestToQueue:getZones];
     [self pushGETRequestToQueue:getMaps];
+    [self pushGETRequestToQueue:getZoneEvents];
 }
+
 
 //
 // Do requests.

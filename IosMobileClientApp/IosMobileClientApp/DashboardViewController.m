@@ -65,4 +65,29 @@
     
 }
 
+#pragma mark AlarmDetailsViewControllerDelegate
+- (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)alarmDetailsViewControllerDidGoToMap:(AlarmDetailsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"DisplayAlarm"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        UINavigationController *navigationController = segue.destinationViewController;
+        AlarmDetailsViewController *alarmDetailsViewController = [navigationController viewControllers][0];
+        
+        alarmDetailsViewController.delegate = self;
+        //mapDetailsViewController.map = [self.maps objectAtIndex:indexPath.row];
+    }
+}
+
+
 @end

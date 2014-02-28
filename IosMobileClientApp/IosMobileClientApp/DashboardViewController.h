@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AlarmDetailsViewController.h"
 
 @class Cams;
 
-@protocol DashboardViewControllerDelegate <NSObject>
-@end
 
-
-@interface DashboardViewController : UITableViewController <DashboardViewControllerDelegate>
+@interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate>
 
 @property (readwrite, weak) Cams *cams;
 

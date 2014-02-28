@@ -242,7 +242,9 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 //
 -(void) getAlarms
 {
-    
+    NSURLSessionDataTask *getZoneEventsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZoneEvents
+                                                                                                              baseUrl:[self baseUrl]]];
+    [getZoneEventsDataTask resume];
 }
 
 @end

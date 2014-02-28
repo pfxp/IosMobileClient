@@ -33,7 +33,9 @@
     return self;
 }
 
+//
 // Parses the JSON dictionary.
+//
 -(void) parseJsonDictionary:(NSDictionary *)dict
 {
     if (dict==nil)
@@ -52,18 +54,18 @@
         [self parseJsonDictionary:dict command:GetMaps];
     else if ([dict objectForKey:@"GetZoneEventsResult"] != nil)
         [self parseJsonDictionary:dict command:GetZoneEvents];
-
     else
-    {
         NSLog(@"UNKNOWN Parsing JSON dictionary. %@", dict);
-    }
 }
 
-// Parses the JSON dictionary.
+//
+// Parses the JSON dictionary. Invoked when the NSURLSessionDataRequest finishes.
+// Some tasks, such as when the APNS token is set do not require a response.
+//
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req
 {
     NSArray *jsonArray;
-     bool alreadyShownLogMessage=false;
+    bool alreadyShownLogMessage=false;
     
     switch(req)
     {
@@ -117,12 +119,7 @@
             
             for (NSDictionary *zoneDict in jsonArray)
             {
-                NSString *zoneIdAsString = [zoneDict objectForKey:@"ZoneId"];
-                NSString *name = [zoneDict objectForKey:@"Name"];
-                NSString *description = [zoneDict objectForKey:@"Description"];
-                NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
-                
-                Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
+                Zone *zone = [CamsObjectRepository parseZoneJsonDictionary:zoneDict];
                 
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", zone);
@@ -130,7 +127,7 @@
                 alreadyShownLogMessage=true;
                 
                 if (zone)
-                    self.zones[zoneIdNumber] = zone;
+                    self.zones[[zone zoneId]] = zone;
             }
             break;
             
@@ -142,36 +139,7 @@
             
             for (NSDictionary *item in jsonArray)
             {
-                NSString *displayName = [item objectForKey:@"DisplayName"];
-                NSString *idString = [item objectForKey:@"Id"];
-                
-                NSDictionary *topLeftCorner = [item objectForKey:@"TopLeftCorner"];
-                CamsGeoPoint *topLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[topLeftCorner objectForKey:@"Lat"]
-                                                                          longStr:[topLeftCorner objectForKey:@"Long"]
-                                                                           altStr:[topLeftCorner objectForKey:@"Alt"]];
-                
-                NSDictionary *topRightCorner = [item objectForKey:@"TopRightCorner"];
-                CamsGeoPoint *topRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[topRightCorner objectForKey:@"Lat"]
-                                                                           longStr:[topRightCorner objectForKey:@"Long"]
-                                                                            altStr:[topRightCorner objectForKey:@"Alt"]];
-                
-                NSDictionary *bottomLeftCorner = [item objectForKey:@"BottomLeftCorner"];
-                CamsGeoPoint *bottomLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomLeftCorner objectForKey:@"Lat"]
-                                                                             longStr:[bottomLeftCorner objectForKey:@"Long"]
-                                                                              altStr:[bottomLeftCorner objectForKey:@"Alt"]];
-                
-                NSDictionary *bottomRightCorner = [item objectForKey:@"BottomRightCorner"];
-                CamsGeoPoint *bottomRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomRightCorner objectForKey:@"Lat"]
-                                                                              longStr:[bottomRightCorner objectForKey:@"Long"]
-                                                                               altStr:[bottomRightCorner objectForKey:@"Alt"]];
-                
-                
-                Map *map = [[Map alloc] initWithDisplayName:displayName
-                                                      mapId:idString
-                                                    topLeft:topLeftPoint
-                                                   topRight:topRightPoint
-                                                 bottomLeft:bottomLeftPoint
-                                                bottomRight:bottomRightPoint];
+                Map *map = [CamsObjectRepository parseMapJsonDictionary:item];
                 
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", map);
@@ -179,9 +147,8 @@
                 alreadyShownLogMessage=true;
                 
                 if (map)
-                    self.maps[idString] = map;
+                    self.maps[[map mapId]] = map;
             }
-            
             break;
             
         case GetZoneEvents:
@@ -192,38 +159,16 @@
             
             for (NSDictionary *zoneEventDict in jsonArray)
             {
-                NSString *eventIdAsString = [zoneEventDict objectForKey:@"EventId"];
-                NSString *eventTimeUtc1970sec = [zoneEventDict objectForKey:@"EventTimeUtc1970sec"];
-                NSString *acknowledged = [zoneEventDict objectForKey:@"Acknowledged"];
-                NSString *active = [zoneEventDict objectForKey:@"Active"];
-                NSString *dynamic = [zoneEventDict objectForKey:@"Dynamic"];
-                NSDictionary *controllerDict = [zoneEventDict objectForKey:@"Controller"];
-                NSDictionary *sensorDict = [zoneEventDict objectForKey:@"Sensor"];
-                
-                Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:controllerDict];
-                Sensor *sensor = [CamsObjectRepository parseSensorJsonDictionary:sensorDict];
-                
-                NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
-                
-                NSDate *eventTime = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue]];
-                NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
-                ZoneEvent *zoneEvent = [[ZoneEvent alloc] initWithEventId:eventId
-                                                                eventTime:eventTime
-                                                             acknowledged:[acknowledged boolValue]
-                                                                   active:[active boolValue]
-                                                                  dynamic:[dynamic boolValue]
-                                                               controller:controller
-                                                                   sensor:sensor];
+                ZoneEvent *zoneEvent = [CamsObjectRepository parseZoneEventJsonDictionary:zoneEventDict];
                 
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", zoneEvent);
                 
                 alreadyShownLogMessage=true;
-
+                
                 if (zoneEvent)
-                    self.zoneEvents[eventId] = zoneEvent;
+                    self.zoneEvents[[zoneEvent eventId]] = zoneEvent;
             }
-            
             break;
             
         case SetAPNSToken:
@@ -298,6 +243,90 @@
     Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid points:pointsForSensor];
     
     return sensor;
+}
+
+//
+// Parses a zone.
+//
++ (Zone *) parseZoneJsonDictionary:(NSDictionary *) dict
+{
+    NSString *zoneIdAsString = [dict objectForKey:@"ZoneId"];
+    NSString *name = [dict objectForKey:@"Name"];
+    NSString *description = [dict objectForKey:@"Description"];
+    NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
+    
+    Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
+    return zone;
+}
+
+
+//
+// Parses a map
+//
++ (Map *) parseMapJsonDictionary:(NSDictionary *) dict
+{
+    NSString *displayName = [dict objectForKey:@"DisplayName"];
+    NSString *idString = [dict objectForKey:@"Id"];
+    
+    NSDictionary *topLeftCorner = [dict objectForKey:@"TopLeftCorner"];
+    CamsGeoPoint *topLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[topLeftCorner objectForKey:@"Lat"]
+                                                              longStr:[topLeftCorner objectForKey:@"Long"]
+                                                               altStr:[topLeftCorner objectForKey:@"Alt"]];
+    
+    NSDictionary *topRightCorner = [dict objectForKey:@"TopRightCorner"];
+    CamsGeoPoint *topRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[topRightCorner objectForKey:@"Lat"]
+                                                               longStr:[topRightCorner objectForKey:@"Long"]
+                                                                altStr:[topRightCorner objectForKey:@"Alt"]];
+    
+    NSDictionary *bottomLeftCorner = [dict objectForKey:@"BottomLeftCorner"];
+    CamsGeoPoint *bottomLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomLeftCorner objectForKey:@"Lat"]
+                                                                 longStr:[bottomLeftCorner objectForKey:@"Long"]
+                                                                  altStr:[bottomLeftCorner objectForKey:@"Alt"]];
+    
+    NSDictionary *bottomRightCorner = [dict objectForKey:@"BottomRightCorner"];
+    CamsGeoPoint *bottomRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomRightCorner objectForKey:@"Lat"]
+                                                                  longStr:[bottomRightCorner objectForKey:@"Long"]
+                                                                   altStr:[bottomRightCorner objectForKey:@"Alt"]];
+    
+    
+    Map *map = [[Map alloc] initWithDisplayName:displayName
+                                          mapId:idString
+                                        topLeft:topLeftPoint
+                                       topRight:topRightPoint
+                                     bottomLeft:bottomLeftPoint
+                                    bottomRight:bottomRightPoint];
+
+    return map;
+}
+
+//
+// Parses a zone event.
+//
++ (ZoneEvent *) parseZoneEventJsonDictionary:(NSDictionary *) dict
+{
+    NSString *eventIdAsString = [dict objectForKey:@"EventId"];
+    NSString *eventTimeUtc1970sec = [dict objectForKey:@"EventTimeUtc1970sec"];
+    NSString *acknowledged = [dict objectForKey:@"Acknowledged"];
+    NSString *active = [dict objectForKey:@"Active"];
+    NSString *dynamic = [dict objectForKey:@"Dynamic"];
+    NSDictionary *controllerDict = [dict objectForKey:@"Controller"];
+    NSDictionary *sensorDict = [dict objectForKey:@"Sensor"];
+    
+    Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:controllerDict];
+    Sensor *sensor = [CamsObjectRepository parseSensorJsonDictionary:sensorDict];
+    
+    NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
+    
+    NSDate *eventTime = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue]];
+    NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
+    ZoneEvent *zoneEvent = [[ZoneEvent alloc] initWithEventId:eventId
+                                                    eventTime:eventTime
+                                                 acknowledged:[acknowledged boolValue]
+                                                       active:[active boolValue]
+                                                      dynamic:[dynamic boolValue]
+                                                   controller:controller
+                                                       sensor:sensor];
+    return zoneEvent;
 }
 
 

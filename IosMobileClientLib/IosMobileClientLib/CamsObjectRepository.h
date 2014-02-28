@@ -11,6 +11,9 @@
 
 @class Controller;
 @class Sensor;
+@class Zone;
+@class ZoneEvent;
+@class Map;
 
 @interface CamsObjectRepository : NSObject
 
@@ -25,5 +28,8 @@
 
 + (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict;
 + (Sensor *) parseSensorJsonDictionary:(NSDictionary *) dict;
++ (Zone *) parseZoneJsonDictionary:(NSDictionary *) dict;
++ (Map *) parseMapJsonDictionary:(NSDictionary *) dict;
++ (ZoneEvent *) parseZoneEventJsonDictionary:(NSDictionary *) dict;
 
 @end

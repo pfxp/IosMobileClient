@@ -41,11 +41,13 @@
     Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
     [_maps addObject:map];
 
+    // Give CAMS data to Maps view
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UINavigationController *navigationController = [tabBarController viewControllers][1];
     MapsViewController *playersViewController = [navigationController viewControllers][0];
     playersViewController.maps = _maps;
-    
+
+    // Give CAMS data to Utilities view.
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
     utilitiesVC.cams = cams;
 

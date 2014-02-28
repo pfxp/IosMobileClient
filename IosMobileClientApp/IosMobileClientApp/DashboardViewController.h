@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DashboardViewController : UIViewController
+@class Cams;
+
+@protocol DashboardViewControllerDelegate <NSObject>
+@end
+
+
+@interface DashboardViewController : UITableViewController <DashboardViewControllerDelegate>
+
+@property (readwrite, weak) Cams *cams;
+
+-(void) drawAlarms;
 
 @end

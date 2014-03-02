@@ -309,11 +309,12 @@
     NSString *acknowledged = [dict objectForKey:@"Acknowledged"];
     NSString *active = [dict objectForKey:@"Active"];
     NSString *dynamic = [dict objectForKey:@"Dynamic"];
-    NSDictionary *controllerDict = [dict objectForKey:@"Controller"];
-    NSDictionary *sensorDict = [dict objectForKey:@"Sensor"];
+    NSString *controllerIdAsString = [dict objectForKey:@"ControllerId"];
+    NSString *sensorIdAsString = [dict objectForKey:@"SensorId"];
     
-    Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:controllerDict];
-    Sensor *sensor = [CamsObjectRepository parseSensorJsonDictionary:sensorDict];
+    int controllerId = [controllerIdAsString intValue];
+    int sensorId = [sensorIdAsString intValue];
+    
     
     NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
     
@@ -324,8 +325,8 @@
                                                  acknowledged:[acknowledged boolValue]
                                                        active:[active boolValue]
                                                       dynamic:[dynamic boolValue]
-                                                   controller:controller
-                                                       sensor:sensor];
+                                                   controllerId:controllerId
+                                                       sensorId:sensorId];
     return zoneEvent;
 }
 

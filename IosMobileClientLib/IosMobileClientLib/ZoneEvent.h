@@ -18,16 +18,16 @@
 @property (readwrite) BOOL acknowledged;
 @property (readwrite) BOOL active;
 @property (readwrite) BOOL dynamic;
-@property (readwrite, strong) Controller *controller;
-@property (readwrite, strong) Sensor *sensor;
+@property (readwrite) int controllerId;
+@property (readwrite) int sensorId;
 
 -(id) initWithEventId:(NSNumber *)eventId
             eventTime:(NSDate *)eventTime
          acknowledged:(BOOL)acknowledged
                active:(BOOL)active
               dynamic:(BOOL)dynamic
-           controller:(Controller*)controller
-               sensor:(Sensor *)sensor;
+           controllerId:(int)controllerId
+               sensorId:(int)sensorId;
 
 - (NSString*) description;
 @end

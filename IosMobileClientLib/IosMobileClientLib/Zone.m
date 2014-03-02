@@ -27,7 +27,7 @@
 
 -(NSString*) description
 {
-    return [NSString stringWithFormat:@"ZONE: Name: %@,  Description: %@", [self name], [self zoneDescription]];
+    return [NSString stringWithFormat:@"ZONE: Name: %@,  Desc: %@", [self name], [self zoneDescription]];
 }
 
 @end

@@ -13,10 +13,16 @@
 @property (readwrite) CamsWsRequest camsRequestType;
 @property (readwrite, strong) NSURLSessionDataTask* sessionDataTask;
 @property (readwrite, copy) NSURL* baseUrl;
+@property (readwrite) RequestPriority priority;
+@property (readwrite) NSUInteger taskIdentifier;
+@property (readwrite) NSDate *submitTime;
 
 -(id) initWithRequestType:(CamsWsRequest)request
                  dataTask:(NSURLSessionDataTask *)dataTask
-                  baseUrl:(NSURL *)url;
+                  baseUrl:(NSURL *)url
+                 priority:(int)priority
+           taskIdentifier:(NSUInteger)taskId
+               submitTime:(NSDate*) submitTime;
 
 +(NSURL *) generateUrlForRequest:(CamsWsRequest)request baseUrl:(NSURL *)url;
 +(NSURL *) generateUrlForApnsRequest:(CamsWsRequest)request baseUrl:(NSURL *)url apnsid:(NSString*)apnsid;

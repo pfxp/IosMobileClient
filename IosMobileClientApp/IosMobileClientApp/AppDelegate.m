@@ -32,9 +32,11 @@
         [self registerDefaultsFromSettingsBundle];
     }
     
-    // Initialize the CAMS object.
+    // Initialize the CAMS object, request configuration data and alarm data.
     cams = [[Cams alloc] initWithBaseUrl:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"]]];
-    [cams doRequests];
+    [cams addConfigurationRequests];
+    [cams addAlarmsRequests];
+    [cams executeRequests];
     
     // Custom initialization
     _maps = [NSMutableArray arrayWithCapacity:20];

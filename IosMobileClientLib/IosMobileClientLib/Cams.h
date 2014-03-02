@@ -11,10 +11,11 @@
 #import "CamsObjectRepository.h"
 
 @class IosSessionDataTask;
+@class RequestQueue;
 
 @interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate>
 
-@property (readwrite) NSMutableArray *queue;
+@property (readwrite) RequestQueue *requeustQueue;
 @property (readwrite, copy) NSURL *baseUrl;
 @property (readwrite) NSURLSession *session;
 @property (readwrite) CamsObjectRepository *repository;
@@ -22,11 +23,11 @@
 
 -(id) initWithBaseUrl:(NSURL*) url;
 -(void) createSession;
--(void) addRequests;
--(void) doRequests;
--(void) pushGETRequestToQueue:(IosSessionDataTask *) request;
--(IosSessionDataTask *) popGETRequestFromQueue;
+-(void) addConfigurationRequests;
+-(void) addAlarmsRequests;
+-(void) executeRequests;
+
 -(void) registerApnsToken:(NSString *) token;
--(void) addData:(NSUInteger)taskId  data:(NSData*)data;
+-(void) joinTogetherWsData:(NSUInteger)taskId  data:(NSData*)data;
 -(void) getAlarms;
 @end

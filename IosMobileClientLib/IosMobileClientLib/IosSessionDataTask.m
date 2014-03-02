@@ -11,7 +11,13 @@
 
 @implementation IosSessionDataTask
 
--(id) initWithRequestType:(CamsWsRequest)request dataTask:(NSURLSessionDataTask *)dataTask baseUrl:(NSURL *)url
+-(id) initWithRequestType:(CamsWsRequest)request
+                 dataTask:(NSURLSessionDataTask *)dataTask
+                  baseUrl:(NSURL *)url
+                 priority:(int)priority
+           taskIdentifier:(NSUInteger)taskId
+               submitTime:(NSDate*) submitTime;
+
 {
     self = [super init];
     if (self)
@@ -19,6 +25,10 @@
         [self setCamsRequestType:request];
         [self setSessionDataTask:dataTask];
         [self setBaseUrl:url];
+        [self setPriority:priority];
+        [self setTaskIdentifier:taskId];
+        [self setSubmitTime:submitTime];
+        
     }
     return self;
 }

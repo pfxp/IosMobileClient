@@ -32,6 +32,7 @@
 		761C801F18C003D5009EC655 /* ZoneEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 761C801E18C003D5009EC655 /* ZoneEvent.m */; };
 		7623B41818B6D2000096F024 /* Cams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623B41718B6D2000096F024 /* Cams.m */; };
 		762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F661818B9D91000195CE9 /* IosSessionDataTask.m */; };
+		76B18ABB18C2D73F0031EA0A /* RequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B18ABA18C2D73E0031EA0A /* RequestQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		7623B41718B6D2000096F024 /* Cams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cams.m; sourceTree = "<group>"; };
 		762F661718B9D91000195CE9 /* IosSessionDataTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IosSessionDataTask.h; sourceTree = "<group>"; };
 		762F661818B9D91000195CE9 /* IosSessionDataTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IosSessionDataTask.m; sourceTree = "<group>"; };
+		76B18AB918C2D73E0031EA0A /* RequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestQueue.h; sourceTree = "<group>"; };
+		76B18ABA18C2D73E0031EA0A /* RequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,8 @@
 				7600C21618A71FC700A27FDC /* Map.m */,
 				7600C21218A71F8400A27FDC /* Points.h */,
 				7600C21318A71F8400A27FDC /* Points.m */,
+				76B18AB918C2D73E0031EA0A /* RequestQueue.h */,
+				76B18ABA18C2D73E0031EA0A /* RequestQueue.m */,
 				7600C20B18A71EAF00A27FDC /* Sensor.h */,
 				7600C20C18A71EAF00A27FDC /* Sensor.m */,
 				7600C1E218A71C8300A27FDC /* Supporting Files */,
@@ -283,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B18ABB18C2D73F0031EA0A /* RequestQueue.m in Sources */,
 				761C801F18C003D5009EC655 /* ZoneEvent.m in Sources */,
 				7600C21418A71F8400A27FDC /* Points.m in Sources */,
 				7600C21718A71FC700A27FDC /* Map.m in Sources */,

@@ -28,7 +28,10 @@
 {
     NSMutableString *outputText = [NSMutableString new];
     for(id key in dict)
-        [outputText appendFormat:@"key=%@ val=%@\n", key, [dict objectForKey:key]];
+    {
+        //[outputText appendFormat:@"key=%@ val=%@\n", key, [dict objectForKey:key]];
+        [outputText appendFormat:@"%@\n", [dict objectForKey:key]];
+    }
     return outputText;
 }
 
@@ -110,10 +113,14 @@
     outputLabel.text = [UtilitiesViewController displayDictionaryAsString:zoneEvents];
 }
 
+//
+// Get everything from CAMS Server
+//
 - (IBAction) getsCamsObjectsButtonClicked:(id)sender
 {
-    NSLog(@"Multi button clicked.");
-    [_cams doRequests];
+    [_cams addConfigurationRequests];
+    [_cams addAlarmsRequests];
+    [_cams executeRequests];
 }
 
 @end

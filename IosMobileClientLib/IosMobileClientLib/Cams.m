@@ -10,6 +10,7 @@
 #import "GlobalSettings.h"
 #import "CamsObjectRepository.h"
 #import "IosSessionDataTask.h"
+#import "RequestQueue.h"
 
 @implementation Cams
 
@@ -19,11 +20,11 @@
     
     if (self)
     {
-        _queue = [[NSMutableArray alloc] init];
         _repository = [[CamsObjectRepository alloc] init];
         _dataFromWebService = [[NSMutableDictionary alloc] init];
         [self setBaseUrl:url];
         [self createSession];
+        _requeustQueue = [[RequestQueue alloc] initWithBaseUrl:url session:[self session]];
     }
     return self;
 }
@@ -44,62 +45,39 @@
     _session = [NSURLSession sessionWithConfiguration:sessionConfig
                                              delegate:self
                                         delegateQueue:[NSOperationQueue mainQueue]];
-    }
+}
+
 
 //
 // Add requests to get the controllers, sensors, zones and maps.
 //
--(void) addRequests
+-(void) addConfigurationRequests
 {
-    NSURLSessionDataTask *getControllersDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetControllers
-                                                                                                               baseUrl:[self baseUrl]] ];
-    IosSessionDataTask *getContoller = [[IosSessionDataTask alloc] initWithRequestType:GetControllers
-                                                                              dataTask:getControllersDataTask
-                                                                               baseUrl:[self baseUrl]];
-    
-    NSURLSessionDataTask *getSensorsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetSensors
-                                                                                                           baseUrl:[self baseUrl]] ];
-    IosSessionDataTask *getSensors = [[IosSessionDataTask alloc] initWithRequestType:GetSensors
-                                                                            dataTask:getSensorsDataTask
-                                                                             baseUrl:[self baseUrl]];
-    
-    NSURLSessionDataTask *getZonesDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZones
-                                                                                                         baseUrl:[self baseUrl]] ];
-    IosSessionDataTask *getZones = [[IosSessionDataTask alloc] initWithRequestType:GetZones
-                                                                          dataTask:getZonesDataTask
-                                                                           baseUrl:[self baseUrl]];
-    
-    NSURLSessionDataTask *getMapsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetMaps
-                                                                                                        baseUrl:[self baseUrl]]];
-    IosSessionDataTask *getMaps = [[IosSessionDataTask alloc] initWithRequestType:GetMaps
-                                                                         dataTask:getMapsDataTask
-                                                                          baseUrl:[self baseUrl]];
-    
-    
-    NSURLSessionDataTask *getZoneEventsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZoneEvents
-                                                                                                        baseUrl:[self baseUrl]]];
-    IosSessionDataTask *getZoneEvents = [[IosSessionDataTask alloc] initWithRequestType:GetZoneEvents
-                                                                         dataTask:getZoneEventsDataTask
-                                                                          baseUrl:[self baseUrl]];
-    
-    
-    [self pushGETRequestToQueue:getContoller];
-    [self pushGETRequestToQueue:getSensors];
-    [self pushGETRequestToQueue:getZones];
-    [self pushGETRequestToQueue:getMaps];
-    [self pushGETRequestToQueue:getZoneEvents];
+    [_requeustQueue addRequest:GetControllers];
+    [_requeustQueue addRequest:GetSensors];
+    [_requeustQueue addRequest:GetZones];
+    [_requeustQueue addRequest:GetMaps];
+ }
+
+
+//
+// Add requests to get alarms.
+-(void) addAlarmsRequests
+{
+    [_requeustQueue addRequest:GetZoneEvents];
 }
 
 
 //
 // Do requests.
 //
--(void) doRequests
+-(void) executeRequests
 {
-    [_queue removeAllObjects];
-    [self addRequests];
-    for (IosSessionDataTask* request in _queue)
-        [request.sessionDataTask resume];
+    IosSessionDataTask *task;
+    while ((task = [_requeustQueue popGETRequestFromQueue]) != nil)
+    {
+        [task.sessionDataTask resume];
+    }
 }
 
 #pragma mark NSUrlSessionDelegate methods
@@ -109,6 +87,7 @@ didFinishDownloadingToURL:(NSURL *)location
 {
     NSLog(@"download task");
 }
+
 
 -(void)URLSession:(NSURLSession *)session
      downloadTask:(NSURLSessionDownloadTask *)downloadTask
@@ -120,15 +99,18 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
           (double)totalBytesExpectedToWrite);
 }
 
+
 - (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error
 {
     NSLog(@"didBecomeInvalidWithError");
 }
 
+
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     NSLog(@"didReceiveChallenge");
 }
+
 
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
 {
@@ -144,29 +126,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 // Called when a request is finished.
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-    [self addData:[dataTask taskIdentifier]  data:data];
+    [self joinTogetherWsData:[dataTask taskIdentifier]  data:data];
 }
-
-//
-// Adds data to the queue
-//
--(void) addData:(NSUInteger)taskId  data:(NSData*)data
-{
-    NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:taskId];
-    NSMutableData *val = [_dataFromWebService objectForKey:key];
-    
-    if (val==nil)
-    {
-        NSMutableData *firstdata = [[NSMutableData alloc] init];
-        [firstdata appendData:data];
-        [_dataFromWebService setObject:firstdata forKey:key];
-        
-    }
-    else
-    {
-        [val appendData:data];
-    }
-  }
 
 
 //Called when the data transfer is complete
@@ -195,30 +156,28 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 }
 
 
-#pragma mark Queue functions.
+#pragma mark WS response functions.
 //
-// Adds a GET request to the queue.
+// Data comes back from WebService in pieces. This function concatenates the NSData.
 //
--(void) pushGETRequestToQueue:(IosSessionDataTask *) request
+-(void) joinTogetherWsData:(NSUInteger)taskId  data:(NSData*)data
 {
-    [_queue addObject:request];
-}
-
-
-//
-// Returns nil if the queue is empty.
-//
--(IosSessionDataTask *) popGETRequestFromQueue
-{
-    if (_queue==nil)
-        return nil;
-    if ([_queue count] == 0)
-        return nil;
+    NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:taskId];
+    NSMutableData *val = [_dataFromWebService objectForKey:key];
     
-    IosSessionDataTask *result = [_queue lastObject];
-    [_queue removeLastObject];
-    return result;
+    if (val==nil)
+    {
+        NSMutableData *firstdata = [[NSMutableData alloc] init];
+        [firstdata appendData:data];
+        [_dataFromWebService setObject:firstdata forKey:key];
+        
+    }
+    else
+    {
+        [val appendData:data];
+    }
 }
+
 
 #pragma mark APNS functions.
 //
@@ -227,7 +186,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 -(void) registerApnsToken:(NSString *) token
 {
     NSURL *url = [IosSessionDataTask generateUrlForApnsRequest:SetAPNSToken baseUrl:[self baseUrl] apnsid:token];
-
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     [request setValue:0 forHTTPHeaderField:@"Content-Length"];
@@ -237,14 +196,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     [postDataTask resume];
 }
 
+
 //
 // Retrieve the alarms.
 //
 -(void) getAlarms
 {
-    NSURLSessionDataTask *getZoneEventsDataTask = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:GetZoneEvents
-                                                                                                              baseUrl:[self baseUrl]]];
-    [getZoneEventsDataTask resume];
+    [self addAlarmsRequests];
+    [self executeRequests];
 }
 
 @end

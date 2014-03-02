@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum CamsWsRequest : NSInteger CamsWsRequest;
+typedef enum RequestPriority : NSInteger RequestPriority;
 
 enum CamsWsRequest : NSInteger {
     GetControllers,
@@ -17,6 +18,12 @@ enum CamsWsRequest : NSInteger {
     GetMaps,
     SetAPNSToken,
     GetZoneEvents
+};
+
+enum RequestPriority : NSInteger {
+    Low,
+    Medium,
+    High
 };
 
 @interface GlobalSettings : NSObject

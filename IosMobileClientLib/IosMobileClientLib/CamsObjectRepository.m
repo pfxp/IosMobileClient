@@ -260,6 +260,7 @@
 }
 
 
+
 //
 // Parses a map
 //
@@ -269,25 +270,16 @@
     NSString *idString = [dict objectForKey:@"Id"];
     
     NSDictionary *topLeftCorner = [dict objectForKey:@"TopLeftCorner"];
-    CamsGeoPoint *topLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[topLeftCorner objectForKey:@"Lat"]
-                                                              longStr:[topLeftCorner objectForKey:@"Long"]
-                                                               altStr:[topLeftCorner objectForKey:@"Alt"]];
+    CamsGeoPoint *topLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:topLeftCorner];
     
     NSDictionary *topRightCorner = [dict objectForKey:@"TopRightCorner"];
-    CamsGeoPoint *topRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[topRightCorner objectForKey:@"Lat"]
-                                                               longStr:[topRightCorner objectForKey:@"Long"]
-                                                                altStr:[topRightCorner objectForKey:@"Alt"]];
+    CamsGeoPoint *topRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:topRightCorner];
     
     NSDictionary *bottomLeftCorner = [dict objectForKey:@"BottomLeftCorner"];
-    CamsGeoPoint *bottomLeftPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomLeftCorner objectForKey:@"Lat"]
-                                                                 longStr:[bottomLeftCorner objectForKey:@"Long"]
-                                                                  altStr:[bottomLeftCorner objectForKey:@"Alt"]];
+    CamsGeoPoint *bottomLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:bottomLeftCorner];
     
     NSDictionary *bottomRightCorner = [dict objectForKey:@"BottomRightCorner"];
-    CamsGeoPoint *bottomRightPoint = [[CamsGeoPoint alloc] initWithLatStr:[bottomRightCorner objectForKey:@"Lat"]
-                                                                  longStr:[bottomRightCorner objectForKey:@"Long"]
-                                                                   altStr:[bottomRightCorner objectForKey:@"Alt"]];
-    
+    CamsGeoPoint *bottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:bottomRightCorner];
     
     Map *map = [[Map alloc] initWithDisplayName:displayName
                                           mapId:idString
@@ -321,6 +313,22 @@
     
     NSDate *eventTime = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue]];
     NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
+    
+    NSDictionary *locInfoDict = [dict objectForKey:@"LocInfo"];
+    NSString *cableDistance = [locInfoDict objectForKey:@"CableDistance"];
+    double cableDistAsDouble = [cableDistance doubleValue];
+    
+    NSDictionary *locationDict = [locInfoDict objectForKey:@"Location"];
+    CamsGeoPoint *locationPoint = [CamsObjectRepository parseCamsGeoPointDictionary:locationDict];
+    
+    NSString *perimeterDistAsString =[locInfoDict objectForKey:@"PerimeterDistance"];
+    NSString *locationWeightAsString =[locInfoDict objectForKey:@"LocationWeight"];
+    NSString *locationWeightThresholdAsString =[locInfoDict objectForKey:@"LocationWeightThreshold"];
+    
+    double perimeterDistAsDouble = [perimeterDistAsString doubleValue];
+    double locationWeightAsDouble = [locationWeightAsString doubleValue];
+    double locationWeightThresholdAsDouble = [locationWeightThresholdAsString doubleValue];
+    
     ZoneEvent *zoneEvent = [[ZoneEvent alloc] initWithEventId:eventId
                                                     eventTime:eventTime
                                                  acknowledged:[acknowledged boolValue]
@@ -328,13 +336,29 @@
                                                       dynamic:[dynamic boolValue]
                                                        zoneId:zoneId
                                                    controllerId:controllerId
-                                                       sensorId:sensorId];
+                                                     sensorId:sensorId
+                                                cableDistance:cableDistAsDouble
+                                                 camsGeoPoint:locationPoint
+                                            perimeterDistance:perimeterDistAsDouble
+                                               locationWeight:locationWeightAsDouble
+                                      locationWeightThreshold:locationWeightThresholdAsDouble];
+
+    
     return zoneEvent;
 }
 
+//
+// Parses CamsGeoPoint
+//
++ (CamsGeoPoint *) parseCamsGeoPointDictionary:(NSDictionary *) dict
+{
+    return [[CamsGeoPoint alloc] initWithLatStr:[dict objectForKey:@"Lat"]
+                                        longStr:[dict objectForKey:@"Long"]
+                                         altStr:[dict objectForKey:@"Alt"]];
+}
 
 //
-//
+// Returns zone event using a 0-based index in reverse chronological order.
 //
 -(ZoneEvent*) getZoneEventOrderedByTimeDesc:(int) index
 {
@@ -349,10 +373,10 @@
         ZoneEvent *event1 = (ZoneEvent *)obj1;
         ZoneEvent *event2 = (ZoneEvent *)obj2;
         
-        NSDate *score1 = [event1 eventTimeUtc];
-        NSDate *score2 = [event2 eventTimeUtc];
+        NSDate *date1 = [event1 eventTimeUtc];
+        NSDate *date2 = [event2 eventTimeUtc];
         
-        return [score2 compare:score1];
+        return [date2 compare:date1];
     }];
 
     return [mutableIntrusions objectAtIndex:index];

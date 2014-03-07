@@ -14,6 +14,7 @@
 @class Zone;
 @class ZoneEvent;
 @class Map;
+@class CamsGeoPoint;
 
 @interface CamsObjectRepository : NSObject
 
@@ -33,5 +34,6 @@
 + (Zone *) parseZoneJsonDictionary:(NSDictionary *) dict;
 + (Map *) parseMapJsonDictionary:(NSDictionary *) dict;
 + (ZoneEvent *) parseZoneEventJsonDictionary:(NSDictionary *) dict;
++ (CamsGeoPoint *) parseCamsGeoPointDictionary:(NSDictionary *) dict;
 
 @end

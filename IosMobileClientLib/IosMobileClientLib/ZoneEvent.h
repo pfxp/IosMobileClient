@@ -10,6 +10,7 @@
 
 @class Controller;
 @class Sensor;
+@class CamsGeoPoint;
 
 @interface ZoneEvent : NSObject
 
@@ -21,6 +22,12 @@
 @property (readwrite) int zoneId;
 @property (readwrite) int controllerId;
 @property (readwrite) int sensorId;
+@property (readwrite) double cableDistance;
+@property (readwrite, strong) CamsGeoPoint* camsGeoPoint;
+@property (readwrite) double perimeterDistance;
+@property (readwrite) double locationWeight;
+@property (readwrite) double locationWeightThreshold;
+
 
 -(id) initWithEventId:(NSNumber *)eventId
             eventTime:(NSDate *)eventTime
@@ -29,7 +36,13 @@
               dynamic:(BOOL)dynamic
                zoneId:(int)zoneId
          controllerId:(int)controllerId
-             sensorId:(int)sensorId;
+             sensorId:(int)sensorId
+        cableDistance:(double)cableDistance
+         camsGeoPoint:(CamsGeoPoint*)camsGeoPoint
+    perimeterDistance:(double)perimeterDistance
+       locationWeight:(double)locationWeight
+locationWeightThreshold:(double)locationWeightThreshold;
 
 - (NSString*) description;
+
 @end

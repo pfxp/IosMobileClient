@@ -7,6 +7,7 @@
 //
 
 #import "AlarmDetailsViewController.h"
+#import "IosMobileClientLib/ZoneEvent.h"
 
 @interface AlarmDetailsViewController ()
 
@@ -27,6 +28,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    perimeterLabel.text = [[NSNumber numberWithDouble:[_zoneEvent perimeterDistance]] stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,6 +40,17 @@
 
 - (IBAction)back:(id)sender
 {
+    [self.delegate alarmDetailsViewControllerDidCancel:self];
+}
+
+- (IBAction)acknowledge:(id)sender
+{
     [self.delegate alarmDetailsViewControllerDidAcknowledge:self];
 }
+
+- (IBAction)goToMap:(id)sender
+{
+    [self.delegate alarmDetailsViewControllerDidGoToMap:self];
+}
+
 @end

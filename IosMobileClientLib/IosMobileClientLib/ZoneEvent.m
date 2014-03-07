@@ -18,6 +18,11 @@
                zoneId:(int)zoneId
          controllerId:(int)controller
              sensorId:(int)sensor
+        cableDistance:(double)cableDistance
+         camsGeoPoint:(CamsGeoPoint*)camsGeoPoint
+    perimeterDistance:(double)perimeterDistance
+       locationWeight:(double)locationWeight
+locationWeightThreshold:(double)locationWeightThreshold;
 {
     self = [super init];
     if (self)
@@ -30,6 +35,11 @@
         [self setZoneId:zoneId];
         [self setControllerId:controller];
         [self setSensorId:sensor];
+        [self setCableDistance:cableDistance];
+        [self setCamsGeoPoint:camsGeoPoint];
+        [self setPerimeterDistance:perimeterDistance];
+        [self setLocationWeight:locationWeight];
+        [self setLocationWeightThreshold:locationWeightThreshold];
     }
     return self;
 }

@@ -83,7 +83,7 @@
     
     NSString *zoneName = [zone name];
     cell.textLabel.text = [NSString stringWithFormat:@"Zone alarm in %@", zoneName];
-    cell.detailTextLabel.text = @"Perimeter distance 30m.";
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Perimeter distance %dm.", (int) [event perimeterDistance]];
     return cell;
 }
 
@@ -96,6 +96,11 @@
 }
 
 #pragma mark AlarmDetailsViewControllerDelegate
+- (void)alarmDetailsViewControllerDidCancel:(AlarmDetailsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -115,7 +120,8 @@
         AlarmDetailsViewController *alarmDetailsViewController = [navigationController viewControllers][0];
         
         alarmDetailsViewController.delegate = self;
-        //mapDetailsViewController.map = [self.maps objectAtIndex:indexPath.row];
+        int row = indexPath.row;
+        [ alarmDetailsViewController setZoneEvent:[self.cams.repository getZoneEventOrderedByTimeDesc:row]];
     }
 }
 

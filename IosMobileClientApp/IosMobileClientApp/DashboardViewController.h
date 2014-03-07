@@ -13,9 +13,13 @@
 
 
 @interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate>
+{
+    IBOutlet UIButton *refreshButton;
+}
 
 @property (readwrite, weak) Cams *cams;
 
+- (IBAction) refreshButtonClicked:(id)sender;
 -(void) drawAlarms;
 
 @end

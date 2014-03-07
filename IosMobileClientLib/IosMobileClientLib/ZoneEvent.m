@@ -15,8 +15,9 @@
          acknowledged:(BOOL)acknowledged
                active:(BOOL)active
               dynamic:(BOOL)dynamic
-           controllerId:(int)controller
-               sensorId:(int)sensor
+               zoneId:(int)zoneId
+         controllerId:(int)controller
+             sensorId:(int)sensor
 {
     self = [super init];
     if (self)
@@ -26,6 +27,7 @@
         [self setAcknowledged:acknowledged];
         [self setActive:active];
         [self setDynamic:dynamic];
+        [self setZoneId:zoneId];
         [self setControllerId:controller];
         [self setSensorId:sensor];
     }

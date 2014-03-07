@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IosMobileClientLib/Map.h"
+#import "DashboardViewController.h"
 #import "MapsViewController.h"
 #import "UtilitiesViewController.h"
 
@@ -38,13 +39,21 @@
     [cams addAlarmsRequests];
     [cams executeRequests];
     
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    
+    // Give CAMS data to Dashboard
+    UINavigationController *dashboardNavController = [tabBarController viewControllers][0];
+    DashboardViewController *dashViewController = [dashboardNavController viewControllers][0];
+    dashViewController.cams = cams;
+
+    
     // Custom initialization
     _maps = [NSMutableArray arrayWithCapacity:20];
     Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
     [_maps addObject:map];
 
+    
     // Give CAMS data to Maps view
-    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UINavigationController *navigationController = [tabBarController viewControllers][1];
     MapsViewController *playersViewController = [navigationController viewControllers][0];
     playersViewController.maps = _maps;

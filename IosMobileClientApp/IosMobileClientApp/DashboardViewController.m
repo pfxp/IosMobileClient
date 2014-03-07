@@ -8,6 +8,8 @@
 
 #import "DashboardViewController.h"
 #import "IosMobileClientLib/Cams.h"
+#import "IosMobileClientLib/Zone.h"b
+#import "IosMobileClientLib/ZoneEvent.h"
 
 @interface DashboardViewController ()
 
@@ -45,14 +47,42 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    int count = [[[_cams repository] zoneEvents] count];
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlarmCell"];
+    int section = indexPath.section;
+    int row = indexPath.row;
     
-    cell.textLabel.text = @"Zone alarm in north";
+       /*
+      
+    
+    for (ZoneEvent *event in mutableIntrusions)
+    {
+        //ZoneEvent *zoneEvent = [[self.cams.repository.zoneEvents objectForKey:key]];
+        
+    }
+    
+   // self.cams.repository.zoneEvents
+    */
+    
+    ZoneEvent *event = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
+    if (event==nil)
+    {
+        cell.textLabel.text = @"Error";
+        cell.detailTextLabel.text = @"Error";
+        return cell;
+    }
+    
+    int zoneId = [event zoneId];
+    NSNumber *zoneIdInt = [[NSNumber alloc] initWithInt:zoneId];
+    Zone *zone = [self.cams.repository getZoneById:zoneIdInt];
+    
+    NSString *zoneName = [zone name];
+    cell.textLabel.text = [NSString stringWithFormat:@"Zone alarm in %@", zoneName];
     cell.detailTextLabel.text = @"Perimeter distance 30m.";
     return cell;
 }
@@ -87,6 +117,14 @@
         alarmDetailsViewController.delegate = self;
         //mapDetailsViewController.map = [self.maps objectAtIndex:indexPath.row];
     }
+}
+
+//
+// Called when the user clicks refresh
+//
+- (IBAction) refreshButtonClicked:(id)sender
+{
+    [self.tableView reloadData];
 }
 
 

@@ -303,7 +303,13 @@
                             <outlet property="delegate" destination="T5O-z6-c0C" id="9Mv-6N-8yD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dashboard" id="IkX-uy-MzM"/>
+                    <navigationItem key="navigationItem" title="Dashboard" id="IkX-uy-MzM">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="KFa-nl-tIP">
+                            <connections>
+                                <action selector="refreshButtonClicked:" destination="T5O-z6-c0C" id="JAi-cu-NPF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBP-3i-cU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

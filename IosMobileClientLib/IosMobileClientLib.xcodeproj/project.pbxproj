@@ -29,6 +29,9 @@
 		7600C22118A726AB00A27FDC /* CamsObjectRepository.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21B18A724D800A27FDC /* CamsObjectRepository.h */; };
 		7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7600C21E18A725B100A27FDC /* GlobalSettings.h */; };
 		76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7623B41618B6D2000096F024 /* Cams.h */; };
+		7616386A18C96FDD00E692BD /* IosSessionDataTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 762F661718B9D91000195CE9 /* IosSessionDataTask.h */; };
+		7616386B18C96FEA00E692BD /* RequestQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76B18AB918C2D73E0031EA0A /* RequestQueue.h */; };
+		7616386C18C96FF000E692BD /* ZoneEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 761C801D18C003D5009EC655 /* ZoneEvent.h */; };
 		761C801F18C003D5009EC655 /* ZoneEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 761C801E18C003D5009EC655 /* ZoneEvent.m */; };
 		7623B41818B6D2000096F024 /* Cams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623B41718B6D2000096F024 /* Cams.m */; };
 		762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F661818B9D91000195CE9 /* IosSessionDataTask.m */; };
@@ -54,9 +57,12 @@
 			files = (
 				76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */,
 				7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */,
+				7616386B18C96FEA00E692BD /* RequestQueue.h in CopyFiles */,
+				7616386A18C96FDD00E692BD /* IosSessionDataTask.h in CopyFiles */,
 				7600C20A18A71D4C00A27FDC /* Controller.h in CopyFiles */,
 				7600C20E18A71EFF00A27FDC /* Sensor.h in CopyFiles */,
 				7600C21A18A71FFA00A27FDC /* Map.h in CopyFiles */,
+				7616386C18C96FF000E692BD /* ZoneEvent.h in CopyFiles */,
 				7600C22118A726AB00A27FDC /* CamsObjectRepository.h in CopyFiles */,
 				7600C21918A71FF800A27FDC /* Points.h in CopyFiles */,
 				7600C21818A71FF500A27FDC /* Zone.h in CopyFiles */,

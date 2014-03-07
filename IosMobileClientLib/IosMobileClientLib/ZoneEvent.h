@@ -18,6 +18,7 @@
 @property (readwrite) BOOL acknowledged;
 @property (readwrite) BOOL active;
 @property (readwrite) BOOL dynamic;
+@property (readwrite) int zoneId;
 @property (readwrite) int controllerId;
 @property (readwrite) int sensorId;
 
@@ -26,8 +27,9 @@
          acknowledged:(BOOL)acknowledged
                active:(BOOL)active
               dynamic:(BOOL)dynamic
-           controllerId:(int)controllerId
-               sensorId:(int)sensorId;
+               zoneId:(int)zoneId
+         controllerId:(int)controllerId
+             sensorId:(int)sensorId;
 
 - (NSString*) description;
 @end

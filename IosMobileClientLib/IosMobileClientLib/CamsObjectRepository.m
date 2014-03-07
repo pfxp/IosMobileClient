@@ -311,10 +311,11 @@
     NSString *dynamic = [dict objectForKey:@"Dynamic"];
     NSString *controllerIdAsString = [dict objectForKey:@"ControllerId"];
     NSString *sensorIdAsString = [dict objectForKey:@"SensorId"];
+    NSString *zoneIdAsString = [dict objectForKey:@"ZoneId"];
     
     int controllerId = [controllerIdAsString intValue];
     int sensorId = [sensorIdAsString intValue];
-    
+    int zoneId = [zoneIdAsString intValue];
     
     NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
     
@@ -325,10 +326,42 @@
                                                  acknowledged:[acknowledged boolValue]
                                                        active:[active boolValue]
                                                       dynamic:[dynamic boolValue]
+                                                       zoneId:zoneId
                                                    controllerId:controllerId
                                                        sensorId:sensorId];
     return zoneEvent;
 }
 
+
+//
+//
+//
+-(ZoneEvent*) getZoneEventOrderedByTimeDesc:(int) index
+{
+    NSArray *intrusions = [_zoneEvents allValues];
+    if ([intrusions count] == 0 || index > ([intrusions count] -1 ))
+        return nil;
+    
+    NSMutableArray *mutableIntrusions = [[NSMutableArray alloc]  initWithArray:intrusions];
+    
+    [mutableIntrusions sortUsingComparator:^(id obj1, id obj2) {
+        
+        ZoneEvent *event1 = (ZoneEvent *)obj1;
+        ZoneEvent *event2 = (ZoneEvent *)obj2;
+        
+        NSDate *score1 = [event1 eventTimeUtc];
+        NSDate *score2 = [event2 eventTimeUtc];
+        
+        return [score2 compare:score1];
+    }];
+
+    return [mutableIntrusions objectAtIndex:index];
+}
+
+-(Zone *) getZoneById:(NSNumber *)zoneId
+{
+    Zone *zone = [_zones objectForKey:zoneId];
+    return zone;
+}
 
 @end

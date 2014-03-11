@@ -15,6 +15,7 @@
 @interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIButton *refreshButton;
+    ZoneEvent *event;
 }
 
 @property (readwrite, weak) Cams *cams;

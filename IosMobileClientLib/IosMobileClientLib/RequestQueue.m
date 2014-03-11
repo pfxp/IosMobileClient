@@ -69,7 +69,7 @@
 //
 -(void) addRequest:(CamsWsRequest) request
 {
-    NSURLSessionDataTask *task = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForRequest:request
+    NSURLSessionDataTask *task = [_session dataTaskWithURL:[IosSessionDataTask generateUrlForGetRequests:request
                                                                                              baseUrl:[self baseUrl]] ];
     
     IosSessionDataTask *iosDataTask = [[IosSessionDataTask alloc] initWithRequestType:request

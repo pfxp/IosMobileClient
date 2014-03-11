@@ -24,6 +24,6 @@
            taskIdentifier:(NSUInteger)taskId
                submitTime:(NSDate*) submitTime;
 
-+(NSURL *) generateUrlForRequest:(CamsWsRequest)request baseUrl:(NSURL *)url;
-+(NSURL *) generateUrlForApnsRequest:(CamsWsRequest)request baseUrl:(NSURL *)url apnsid:(NSString*)apnsid;
++(NSURL *) generateUrlForGetRequests:(CamsWsRequest)request baseUrl:(NSURL *)url;
++(NSURL *) generateUrlForPostRequests:(CamsWsRequest)request baseUrl:(NSURL *)url arguments:(NSArray*)items;
 @end

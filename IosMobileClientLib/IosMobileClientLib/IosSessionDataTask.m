@@ -36,7 +36,7 @@
 // Generates a full URL for the given command.
 // Returns nil if there is a problem.
 // TODO Investigate what happens if users leave the trailing slash on the baseUrl
-+(NSURL *) generateUrlForRequest:(CamsWsRequest) request
++(NSURL *) generateUrlForGetRequests:(CamsWsRequest) request
                              baseUrl:(NSURL *) baseUrl;
 {
     switch (request) {
@@ -62,11 +62,29 @@
     }
 }
 
-+(NSURL *) generateUrlForApnsRequest:(CamsWsRequest)request baseUrl:(NSURL *)baseUrl apnsid:(NSString*)apnsid
++(NSURL *) generateUrlForPostRequests:(CamsWsRequest)request baseUrl:(NSURL *)baseUrl arguments:(NSArray*)apnsid
 {
-    NSString *val = [NSString stringWithFormat:@"%@/json/SetApnsTokenAsString?id=%@", baseUrl, apnsid];
-    NSURL *result = [NSURL URLWithString:val];
-    return result;
+    NSMutableString *val = [[NSMutableString alloc] init];
+    
+    switch (request)
+    {
+        case SetAPNSToken:
+            if ([apnsid count] != 1)
+                return nil;
+            val = [NSMutableString stringWithFormat:@"%@/json/SetApnsTokenAsString?id=%@", baseUrl, apnsid[0]];
+            break;
+            
+        case PostAcknowledgeAlarm:
+            if ([apnsid count] != 1)
+                return nil;
+            val = [NSMutableString stringWithFormat:@"%@/json/AcknowledgeZoneEvent?id=%@", baseUrl, apnsid[0]];
+            break;
+        default:
+            return nil;
+            break;
+    }
+    
+    return [NSURL URLWithString:val];
 }
 
 @end

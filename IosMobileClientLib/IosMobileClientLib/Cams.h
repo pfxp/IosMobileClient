@@ -28,6 +28,8 @@
 -(void) executeRequests;
 
 -(void) registerApnsToken:(NSString *) token;
+-(void) acknowledgeAlarm:(NSNumber *) eventId;
+
 -(void) joinTogetherWsData:(NSUInteger)taskId  data:(NSData*)data;
 -(void) getAlarms;
 @end

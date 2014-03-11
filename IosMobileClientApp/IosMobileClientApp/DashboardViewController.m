@@ -57,8 +57,7 @@
     //int section = indexPath.section;
     int row = indexPath.row;
     
-    
-    ZoneEvent *event = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
+    event = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
     if (event==nil)
     {
         cell.textLabel.text = @"Error";
@@ -90,8 +89,6 @@
 
 - (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller
 {
-    
-    
     NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
     BOOL confirmAck = [standaloneUserDefaults boolForKey:@"confirm_ack_pref"];
     if (confirmAck)
@@ -115,6 +112,8 @@
     else
     {
         NSLog(@"user pressed ok");
+        [self.cams acknowledgeAlarm:[event eventId]];
+        [self.cams getAlarms];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -149,6 +148,7 @@
 //
 - (IBAction) refreshButtonClicked:(id)sender
 {
+    
     [self.tableView reloadData];
 }
 

@@ -185,7 +185,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 //
 -(void) registerApnsToken:(NSString *) token
 {
-    NSURL *url = [IosSessionDataTask generateUrlForApnsRequest:SetAPNSToken baseUrl:[self baseUrl] apnsid:token];
+    NSArray *array = [[NSArray alloc] initWithObjects:token, nil];
+    NSURL *url = [IosSessionDataTask generateUrlForPostRequests:SetAPNSToken baseUrl:[self baseUrl] arguments:array];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
@@ -196,6 +197,23 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     [postDataTask resume];
 }
 
+
+//
+// TODO Use the queue mecahnism
+//
+-(void) acknowledgeAlarm:(NSNumber *) eventId
+{
+    NSArray *array = [[NSArray alloc] initWithObjects:eventId, nil];
+    NSURL *url = [IosSessionDataTask generateUrlForPostRequests:PostAcknowledgeAlarm baseUrl:[self baseUrl] arguments:array];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:0 forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSURLSessionDataTask *postDataTask = [_session dataTaskWithRequest:request];
+    [postDataTask resume];
+}
 
 //
 // Retrieve the alarms.

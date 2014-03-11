@@ -74,6 +74,8 @@
             if (!jsonArray)
                 return;
             
+            [self.controllers removeAllObjects];
+            
             for (NSDictionary *item in jsonArray)
             {
                 Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:item];
@@ -94,6 +96,8 @@
             jsonArray = [dict objectForKey:@"GetSensorsResult"];
             if (!jsonArray)
                 return;
+            
+            [self.sensors removeAllObjects];
             
             for (NSDictionary *sensorDict in jsonArray)
             {
@@ -117,6 +121,8 @@
             if (!jsonArray)
                 return;
             
+            [self.zones removeAllObjects];
+            
             for (NSDictionary *zoneDict in jsonArray)
             {
                 Zone *zone = [CamsObjectRepository parseZoneJsonDictionary:zoneDict];
@@ -137,6 +143,8 @@
             if (!jsonArray)
                 return;
             
+            [self.maps removeAllObjects];
+            
             for (NSDictionary *item in jsonArray)
             {
                 Map *map = [CamsObjectRepository parseMapJsonDictionary:item];
@@ -156,6 +164,8 @@
             
             if (!jsonArray)
                 return;
+            
+            [self.zoneEvents removeAllObjects];
             
             for (NSDictionary *zoneEventDict in jsonArray)
             {
@@ -183,7 +193,6 @@
 //
 + (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict
 {
-    
     NSString *connected = [dict objectForKey:@"Connected"];
     NSString *description = [dict objectForKey:@"Description"];
     NSString *hostname = [dict objectForKey:@"Hostname"];

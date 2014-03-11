@@ -26,6 +26,7 @@
     return self;
 }
 
+// TODO Set to locale specific date formatting.
 - (void)viewDidLoad
 {
     [super viewDidLoad];

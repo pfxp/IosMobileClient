@@ -68,7 +68,7 @@
     
     switch (request)
     {
-        case SetAPNSToken:
+        case PostAPNSToken:
             if ([apnsid count] != 1)
                 return nil;
             val = [NSMutableString stringWithFormat:@"%@/json/SetApnsTokenAsString?id=%@", baseUrl, apnsid[0]];

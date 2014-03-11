@@ -56,7 +56,7 @@
     // Give CAMS data to Maps view
     UINavigationController *navigationController = [tabBarController viewControllers][1];
     MapsViewController *playersViewController = [navigationController viewControllers][0];
-    playersViewController.maps = _maps;
+    playersViewController.cams = cams;
 
     // Give CAMS data to Utilities view.
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];

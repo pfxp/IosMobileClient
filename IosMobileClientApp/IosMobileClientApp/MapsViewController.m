@@ -8,6 +8,7 @@
 
 #import "MapsViewController.h"
 #import "IosMobileClientLib/Map.h"
+#import "IosMobileClientLib/Cams.h"
 
 @interface MapsViewController ()
 
@@ -51,20 +52,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.maps count];
+    int count=[self.cams.repository.maps count];
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapCell"];
     
-    Map *map = (self.maps)[indexPath.row];
+    Map *map = [self.cams.repository getMapByIndex:indexPath.row];
     cell.textLabel.text = map.displayName;
     //cell.detailTextLabel.text = player.game;
     return cell;
 }
-
-
 
 
 /*
@@ -110,7 +110,7 @@
         MapDetailsViewController *mapDetailsViewController = [navigationController viewControllers][0];
         
         mapDetailsViewController.delegate = self;
-        mapDetailsViewController.map = [self.maps objectAtIndex:indexPath.row];
+        mapDetailsViewController.map = [self.cams.repository getMapByIndex:indexPath.row];
     }
 }
 

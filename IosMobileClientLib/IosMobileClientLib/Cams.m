@@ -186,7 +186,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 -(void) registerApnsToken:(NSString *) token
 {
     NSArray *array = [[NSArray alloc] initWithObjects:token, nil];
-    NSURL *url = [IosSessionDataTask generateUrlForPostRequests:SetAPNSToken baseUrl:[self baseUrl] arguments:array];
+    NSURL *url = [IosSessionDataTask generateUrlForPostRequests:PostAPNSToken baseUrl:[self baseUrl] arguments:array];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];

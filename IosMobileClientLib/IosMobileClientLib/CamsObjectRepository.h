@@ -28,6 +28,7 @@
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
 -(ZoneEvent*) getZoneEventOrderedByTimeDesc:(int) index;
 -(Zone *) getZoneById:(NSNumber *)zoneId;
+-(Map *)getMapByIndex:(int) index;
 
 + (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict;
 + (Sensor *) parseSensorJsonDictionary:(NSDictionary *) dict;

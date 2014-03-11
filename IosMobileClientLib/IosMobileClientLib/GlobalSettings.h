@@ -16,8 +16,8 @@ enum CamsWsRequest : NSInteger {
     GetZones,
     GetSensors,
     GetMaps,
-    SetAPNSToken,
     GetZoneEvents,
+    PostAPNSToken,
     PostAcknowledgeAlarm
 };
 

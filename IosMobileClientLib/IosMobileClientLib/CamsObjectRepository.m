@@ -181,7 +181,7 @@
             }
             break;
             
-        case SetAPNSToken:
+        case PostAPNSToken:
             NSLog(@"APNS: %@", @"Set the APNS token.");
             break;
     }
@@ -393,6 +393,32 @@
 {
     Zone *zone = [_zones objectForKey:zoneId];
     return zone;
+}
+
+//
+//
+//
+-(Map *)getMapByIndex:(int) index
+{
+    NSArray *mapList = [_maps allValues];
+    
+    if ([mapList count] == 0 || index > ([mapList count] -1 ))
+        return nil;
+    
+    NSMutableArray *mutableMaps = [[NSMutableArray alloc]  initWithArray:mapList];
+    
+    [mutableMaps sortUsingComparator:^(id obj1, id obj2) {
+        
+        Map *map1 = (Map *)obj1;
+        Map *map2 = (Map *)obj2;
+        
+        NSString *name1 = [map1 displayName];
+        NSString *name2 = [map2 displayName];
+        
+        return [name2 compare:name1];
+    }];
+    
+    return [mutableMaps objectAtIndex:index];
 }
 
 @end

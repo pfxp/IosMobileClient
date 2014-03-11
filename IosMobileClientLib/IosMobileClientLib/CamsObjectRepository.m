@@ -296,12 +296,12 @@
 //
 + (ZoneEvent *) parseZoneEventJsonDictionary:(NSDictionary *) dict
 {
-    NSString *eventIdAsString = [dict objectForKey:@"EventId"];
-    NSString *eventTimeUtc1970sec = [dict objectForKey:@"EventTimeUtc1970sec"];
-    NSString *acknowledged = [dict objectForKey:@"Acknowledged"];
+    NSString *eventIdAsString = [dict objectForKey:@"Id"];
+    NSString *eventTimeUtc1970sec = [dict objectForKey:@"TimeUtc1970sec"];
+    NSString *acknowledged = [dict objectForKey:@"Acked"];
     NSString *active = [dict objectForKey:@"Active"];
     NSString *dynamic = [dict objectForKey:@"Dynamic"];
-    NSString *controllerIdAsString = [dict objectForKey:@"ControllerId"];
+    NSString *controllerIdAsString = [dict objectForKey:@"CtrlId"];
     NSString *sensorIdAsString = [dict objectForKey:@"SensorId"];
     NSString *zoneIdAsString = [dict objectForKey:@"ZoneId"];
     
@@ -315,15 +315,15 @@
     NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
     
     NSDictionary *locInfoDict = [dict objectForKey:@"LocInfo"];
-    NSString *cableDistance = [locInfoDict objectForKey:@"CableDistance"];
+    NSString *cableDistance = [locInfoDict objectForKey:@"CableDist"];
     double cableDistAsDouble = [cableDistance doubleValue];
     
     NSDictionary *locationDict = [locInfoDict objectForKey:@"Location"];
     CamsGeoPoint *locationPoint = [CamsObjectRepository parseCamsGeoPointDictionary:locationDict];
     
-    NSString *perimeterDistAsString =[locInfoDict objectForKey:@"PerimeterDistance"];
-    NSString *locationWeightAsString =[locInfoDict objectForKey:@"LocationWeight"];
-    NSString *locationWeightThresholdAsString =[locInfoDict objectForKey:@"LocationWeightThreshold"];
+    NSString *perimeterDistAsString =[locInfoDict objectForKey:@"PerimDist"];
+    NSString *locationWeightAsString =[locInfoDict objectForKey:@"LocWeight"];
+    NSString *locationWeightThresholdAsString =[locInfoDict objectForKey:@"LocWeightThresh"];
     
     double perimeterDistAsDouble = [perimeterDistAsString doubleValue];
     double locationWeightAsDouble = [locationWeightAsString doubleValue];

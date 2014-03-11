@@ -15,14 +15,14 @@
          acknowledged:(BOOL)acknowledged
                active:(BOOL)active
               dynamic:(BOOL)dynamic
-               zoneId:(int)zoneId
-         controllerId:(int)controller
-             sensorId:(int)sensor
-        cableDistance:(double)cableDistance
+               zoneId:(NSNumber*)zoneId
+         controllerId:(NSNumber*)controller
+             sensorId:(NSNumber*)sensor
+        cableDistance:(NSNumber*)cableDistance
          camsGeoPoint:(CamsGeoPoint*)camsGeoPoint
-    perimeterDistance:(double)perimeterDistance
-       locationWeight:(double)locationWeight
-locationWeightThreshold:(double)locationWeightThreshold;
+    perimeterDistance:(NSNumber*)perimeterDistance
+       locationWeight:(NSNumber*)locationWeight
+locationWeightThreshold:(NSNumber*)locationWeightThreshold;
 {
     self = [super init];
     if (self)

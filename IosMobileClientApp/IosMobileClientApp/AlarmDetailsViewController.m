@@ -7,6 +7,7 @@
 //
 
 #import "AlarmDetailsViewController.h"
+#import "IosMobileClientLib/Zone.h"
 #import "IosMobileClientLib/ZoneEvent.h"
 
 @interface AlarmDetailsViewController ()
@@ -20,6 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+       
     }
     return self;
 }
@@ -29,7 +31,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    perimeterLabel.text = [[NSNumber numberWithDouble:[_zoneEvent perimeterDistance]] stringValue];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    //Optionally for time zone converstions
+    //[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
+    timeLabel.text = [formatter stringFromDate:[_zoneEvent eventTimeUtc]];
+
+    zoneLabel.text = [_zone name];
+    perimeterLabel.text = [[_zoneEvent perimeterDistance] stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +54,7 @@
 
 - (IBAction)acknowledge:(id)sender
 {
+       
     [self.delegate alarmDetailsViewControllerDidAcknowledge:self];
 }
 
@@ -52,5 +62,6 @@
 {
     [self.delegate alarmDetailsViewControllerDidGoToMap:self];
 }
+
 
 @end

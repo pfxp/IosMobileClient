@@ -305,18 +305,15 @@
     NSString *sensorIdAsString = [dict objectForKey:@"SensorId"];
     NSString *zoneIdAsString = [dict objectForKey:@"ZoneId"];
     
-    int controllerId = [controllerIdAsString intValue];
-    int sensorId = [sensorIdAsString intValue];
-    int zoneId = [zoneIdAsString intValue];
-    
+    NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
+    NSNumber *sensorId = [NSNumber numberWithInt:[sensorIdAsString intValue]];
+    NSNumber *zoneId = [NSNumber numberWithInt:[zoneIdAsString intValue]];
     NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
-    
     NSDate *eventTime = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue]];
     NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
     
     NSDictionary *locInfoDict = [dict objectForKey:@"LocInfo"];
     NSString *cableDistance = [locInfoDict objectForKey:@"CableDist"];
-    double cableDistAsDouble = [cableDistance doubleValue];
     
     NSDictionary *locationDict = [locInfoDict objectForKey:@"Location"];
     CamsGeoPoint *locationPoint = [CamsObjectRepository parseCamsGeoPointDictionary:locationDict];
@@ -325,9 +322,10 @@
     NSString *locationWeightAsString =[locInfoDict objectForKey:@"LocWeight"];
     NSString *locationWeightThresholdAsString =[locInfoDict objectForKey:@"LocWeightThresh"];
     
-    double perimeterDistAsDouble = [perimeterDistAsString doubleValue];
-    double locationWeightAsDouble = [locationWeightAsString doubleValue];
-    double locationWeightThresholdAsDouble = [locationWeightThresholdAsString doubleValue];
+    NSNumber *cableDistAsDouble = [NSNumber numberWithDouble:[cableDistance doubleValue]];
+    NSNumber *perimeterDistAsDouble = [NSNumber numberWithDouble:[perimeterDistAsString doubleValue]];
+    NSNumber *locationWeightAsDouble = [NSNumber numberWithDouble:[locationWeightAsString doubleValue]];
+    NSNumber *locationWeightThresholdAsDouble = [NSNumber numberWithDouble:[locationWeightThresholdAsString doubleValue]];
     
     ZoneEvent *zoneEvent = [[ZoneEvent alloc] initWithEventId:eventId
                                                     eventTime:eventTime

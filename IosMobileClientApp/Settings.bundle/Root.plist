@@ -108,6 +108,22 @@
 			<key>DefaultValue</key>
 			<string>15</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Acknowledgement</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Confirm Acknowledgement</string>
+			<key>Key</key>
+			<string>confirm_ack_pref</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>

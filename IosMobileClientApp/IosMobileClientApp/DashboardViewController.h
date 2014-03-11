@@ -12,7 +12,7 @@
 @class Cams;
 
 
-@interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate>
+@interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIButton *refreshButton;
 }

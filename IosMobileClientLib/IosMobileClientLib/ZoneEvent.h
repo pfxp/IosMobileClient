@@ -19,14 +19,14 @@
 @property (readwrite) BOOL acknowledged;
 @property (readwrite) BOOL active;
 @property (readwrite) BOOL dynamic;
-@property (readwrite) int zoneId;
-@property (readwrite) int controllerId;
-@property (readwrite) int sensorId;
-@property (readwrite) double cableDistance;
+@property (readwrite) NSNumber *zoneId;
+@property (readwrite) NSNumber *controllerId;
+@property (readwrite) NSNumber *sensorId;
+@property (readwrite) NSNumber *cableDistance;
 @property (readwrite, strong) CamsGeoPoint* camsGeoPoint;
-@property (readwrite) double perimeterDistance;
-@property (readwrite) double locationWeight;
-@property (readwrite) double locationWeightThreshold;
+@property (readwrite) NSNumber *perimeterDistance;
+@property (readwrite) NSNumber *locationWeight;
+@property (readwrite) NSNumber *locationWeightThreshold;
 
 
 -(id) initWithEventId:(NSNumber *)eventId
@@ -34,14 +34,14 @@
          acknowledged:(BOOL)acknowledged
                active:(BOOL)active
               dynamic:(BOOL)dynamic
-               zoneId:(int)zoneId
-         controllerId:(int)controllerId
-             sensorId:(int)sensorId
-        cableDistance:(double)cableDistance
+               zoneId:(NSNumber*)zoneId
+         controllerId:(NSNumber*)controllerId
+             sensorId:(NSNumber*)sensorId
+        cableDistance:(NSNumber*)cableDistance
          camsGeoPoint:(CamsGeoPoint*)camsGeoPoint
-    perimeterDistance:(double)perimeterDistance
-       locationWeight:(double)locationWeight
-locationWeightThreshold:(double)locationWeightThreshold;
+    perimeterDistance:(NSNumber*)perimeterDistance
+       locationWeight:(NSNumber*)locationWeight
+locationWeightThreshold:(NSNumber*)locationWeightThreshold;
 
 - (NSString*) description;
 

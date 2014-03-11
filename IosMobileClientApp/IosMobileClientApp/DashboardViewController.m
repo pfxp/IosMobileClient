@@ -8,7 +8,7 @@
 
 #import "DashboardViewController.h"
 #import "IosMobileClientLib/Cams.h"
-#import "IosMobileClientLib/Zone.h"b
+#import "IosMobileClientLib/Zone.h"
 #import "IosMobileClientLib/ZoneEvent.h"
 
 @interface DashboardViewController ()
@@ -54,20 +54,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlarmCell"];
-    int section = indexPath.section;
+    //int section = indexPath.section;
     int row = indexPath.row;
     
-       /*
-      
-    
-    for (ZoneEvent *event in mutableIntrusions)
-    {
-        //ZoneEvent *zoneEvent = [[self.cams.repository.zoneEvents objectForKey:key]];
-        
-    }
-    
-   // self.cams.repository.zoneEvents
-    */
     
     ZoneEvent *event = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
     if (event==nil)
@@ -77,13 +66,11 @@
         return cell;
     }
     
-    int zoneId = [event zoneId];
-    NSNumber *zoneIdInt = [[NSNumber alloc] initWithInt:zoneId];
-    Zone *zone = [self.cams.repository getZoneById:zoneIdInt];
+    Zone *zone = [self.cams.repository getZoneById:[event zoneId]];
     
     NSString *zoneName = [zone name];
     cell.textLabel.text = [NSString stringWithFormat:@"Zone alarm in %@", zoneName];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Perimeter distance %dm.", (int) [event perimeterDistance]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Perimeter distance %dm.", [[event perimeterDistance] intValue]];
     return cell;
 }
 
@@ -103,8 +90,35 @@
 
 - (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL confirmAck = [standaloneUserDefaults boolForKey:@"confirm_ack_pref"];
+    if (confirmAck)
+    {
+               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Confirm"
+                                                            message:@"Are you sure you want to acknowledge the alarm?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"OK", nil];
+        
+        [alertView show];
+    }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        NSLog(@"user pressed cancel");
+    }
+    else
+    {
+        NSLog(@"user pressed ok");
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 
 - (void)alarmDetailsViewControllerDidGoToMap:(AlarmDetailsViewController *)controller
 {
@@ -114,14 +128,19 @@
 #pragma mark Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"DisplayAlarm"]) {
+    if ([segue.identifier isEqualToString:@"DisplayAlarm"])
+    {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         UINavigationController *navigationController = segue.destinationViewController;
         AlarmDetailsViewController *alarmDetailsViewController = [navigationController viewControllers][0];
         
         alarmDetailsViewController.delegate = self;
         int row = indexPath.row;
-        [ alarmDetailsViewController setZoneEvent:[self.cams.repository getZoneEventOrderedByTimeDesc:row]];
+        ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
+        Zone *zone = [self.cams.repository getZoneById:[zoneEvent zoneId]];
+       
+        [alarmDetailsViewController setZoneEvent:zoneEvent];
+        [alarmDetailsViewController setZone:zone];
     }
 }
 

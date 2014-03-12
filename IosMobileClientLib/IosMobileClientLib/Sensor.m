@@ -10,11 +10,16 @@
 
 @implementation Sensor
 
-- (id) initWithDesc:(NSString*)desc
-           sensorid:(NSNumber *)sId
-      channelNumber:(NSNumber *)cNum
-         sensorGuid:(NSString *)sguid
-             points:(NSArray *)pointsArray
+- (id)      initWithDesc:(NSString*)desc
+                sensorid:(NSNumber *)sId
+           channelNumber:(NSNumber *)cNum
+              sensorGuid:(NSString *)sguid
+                  points:(NSArray *)pointsArray
+     boundsTopLeftCorner:(CamsGeoPoint*)topLeft
+    boundsTopRightCorner:(CamsGeoPoint*)topRight
+  boundsBottomLeftCorner:(CamsGeoPoint*)bottomLeft
+ boundsBottomRightCorner:(CamsGeoPoint*)bottomRight
+             centerPoint:(CamsGeoPoint*)center;
 {
     self = [super init];
     
@@ -25,6 +30,11 @@
         _channelNumber=cNum;
         _sensorGuid=sguid;
         _points=pointsArray;
+        _boundsTopLeftCorner = topLeft;
+        _boundsTopRightCorner = topRight;
+        _boundsBottomLeftCorner = bottomLeft;
+        _boundsBottomRightCorner = bottomRight;
+        _centerPoint = center;
     }
     return self;
 }
@@ -35,6 +45,8 @@
     return [NSString stringWithFormat:@"SENSOR Desc=%@ SensorID=%@ Channel=%@",
             _sensorDescription, _sensorId, _channelNumber];
 }
+
+
 
 @end
 

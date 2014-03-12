@@ -220,6 +220,7 @@
 
 //
 // Returns a sensor from a JSON dictionary
+// TODO Ensure the points are read in order. Refer to the <Seq> tag.
 //
 + (Sensor *) parseSensorJsonDictionary:(NSDictionary *) dict
 {
@@ -252,12 +253,39 @@
         cableDistance = [pointDict objectForKey:@"CabDist"];
         perimeterDistance = [pointDict objectForKey:@"PerDist"];
         
-        SensorLinePoint *sensorLinePoint = [[SensorLinePoint alloc] initWithLatStr:latitude longStr:longitude altStr:altitude parentIdStr:parentId sequenceStr:sequence cableDistanceStr:cableDistance perimeterDistanceStr:perimeterDistance];
+        SensorLinePoint *sensorLinePoint = [[SensorLinePoint alloc] initWithLatStr:latitude
+                                                                           longStr:longitude
+                                                                            altStr:altitude
+                                                                       parentIdStr:parentId
+                                                                       sequenceStr:sequence
+                                                                  cableDistanceStr:cableDistance
+                                                              perimeterDistanceStr:perimeterDistance];
         
         [pointsForSensor addObject:sensorLinePoint];
     }
     
-    Sensor *sensor = [[Sensor alloc] initWithDesc:description sensorid:sensorIdNumber channelNumber:channelNumberNumber sensorGuid:sensorGuid points:pointsForSensor];
+    // Get the bounding box
+    NSDictionary *boundsTopLeftCorner = [dict objectForKey:@"BoundsTopLeft"];
+    CamsGeoPoint *boundsTopLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsTopLeftCorner];
+    NSDictionary *boundsTopRightCorner = [dict objectForKey:@"BoundsTopRight"];
+    CamsGeoPoint *boundsTopRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsTopRightCorner];
+    NSDictionary *boundsBottomLeftCorner = [dict objectForKey:@"BoundsBottomLeft"];
+    CamsGeoPoint *boundsBottomLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsBottomLeftCorner];
+    NSDictionary *boundsBottomRightCorner = [dict objectForKey:@"BoundsBottomRight"];
+    CamsGeoPoint *boundsBottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsBottomRightCorner];
+    NSDictionary *centerCorner = [dict objectForKey:@"CenterPoint"];
+    CamsGeoPoint *centerPoint = [CamsObjectRepository parseCamsGeoPointDictionary:centerCorner];
+    
+    Sensor *sensor = [[Sensor alloc] initWithDesc:description
+                                         sensorid:sensorIdNumber
+                                    channelNumber:channelNumberNumber
+                                       sensorGuid:sensorGuid
+                                           points:pointsForSensor
+                              boundsTopLeftCorner:boundsTopLeftPoint
+                             boundsTopRightCorner:boundsTopRightPoint
+                           boundsBottomLeftCorner:boundsBottomLeftPoint
+                          boundsBottomRightCorner:boundsBottomRightPoint
+                                      centerPoint:centerPoint];
     
     return sensor;
 }

@@ -184,6 +184,14 @@
         case PostAPNSToken:
             NSLog(@"APNS: %@", @"Set the APNS token.");
             break;
+            
+        case PostAcknowledgeAlarm:
+            NSLog(@"PostAcknowledgeAlarm: %@", @"Acknowledge an alarm.");
+            break;
+            
+        default:
+            NSLog(@"Unknown command.");
+            break;
     }
 }
 

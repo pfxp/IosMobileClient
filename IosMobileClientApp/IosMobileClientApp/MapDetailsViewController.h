@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "IosMobileClientLib/Map.h"
 
 // This is a forward declaration.
@@ -16,13 +17,18 @@
 
 // This protocol enables a Cancel or Save button to be used in the navigation bar.
 @protocol MapDetailsViewControllerDelegate <NSObject>
-- (void)playerDetailsViewControllerDidCancel:(MapDetailsViewController *)controller;
+- (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller;
 - (void)playerDetailsViewControllerDidSave:(MapDetailsViewController *)controller;
 @end
 
 
-@interface MapDetailsViewController : UIViewController
-    @property (nonatomic, weak) id <MapDetailsViewControllerDelegate> delegate;
-    @property (nonatomic, strong) Map *map;
-    - (IBAction)back:(id)sender;
+@interface MapDetailsViewController : UIViewController <MKMapViewDelegate>
+{
+    IBOutlet MKMapView *mapView;
+}
+
+@property (nonatomic, weak) id <MapDetailsViewControllerDelegate> delegate;
+@property (nonatomic, strong) Map *map;
+
+- (IBAction)back:(id)sender;
 @end

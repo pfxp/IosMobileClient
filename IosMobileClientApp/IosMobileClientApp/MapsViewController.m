@@ -43,17 +43,16 @@
 
 #pragma mark - UITableViewDataSource protocol
 
+// Return the number of sections.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
+// Return the number of rows in the section.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    int count=[self.cams.repository.maps count];
-    return count;
+    return [self.cams.repository.maps count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,7 +90,7 @@
 #pragma mark My functions
 
 
-- (void)playerDetailsViewControllerDidCancel:(MapDetailsViewController *)controller
+- (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -101,14 +100,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-// This 
+// Pass the selected map to the MapDetailsViewController
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayMap"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         UINavigationController *navigationController = segue.destinationViewController;
         MapDetailsViewController *mapDetailsViewController = [navigationController viewControllers][0];
-        
         mapDetailsViewController.delegate = self;
         mapDetailsViewController.map = [self.cams.repository getMapByIndex:indexPath.row];
     }

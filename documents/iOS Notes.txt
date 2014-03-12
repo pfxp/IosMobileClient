@@ -57,3 +57,24 @@ UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"URL"
 alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 [alert show];
 
+To asynchronously add lots of annotations
+=========================================
+
+You can use Grand Central Dispatch - GCD for doing this.
+
+Try with:
+
+- (void)viewDidLoad
+{
+  dispatch_async(dispatch_get_global_queue(0, 0), ^{
+     for (NSManagedObject *object in requestResults)
+     {
+        CustomAnnotation *customAnnotation = [[CustomAnnotation alloc] init];
+        customAnnotation.title = object.title;
+        customAnnotation.coordinate = CLLocationCoordinate2DMake([object.latitude doubleValue], [object.longitude doubleValue]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [_mapView addAnnotation:customAnnotation];
+        });
+     }
+  });
+}

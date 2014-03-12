@@ -36,6 +36,8 @@
 		7661477F18A2F90F007D734A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661476118A2F90F007D734A /* UIKit.framework */; };
 		7661478718A2F90F007D734A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7661478518A2F90F007D734A /* InfoPlist.strings */; };
 		7661478918A2F90F007D734A /* IosMobileClientAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661478818A2F90F007D734A /* IosMobileClientAppTests.m */; };
+		768E252B18CFE1DA00101399 /* AlarmAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 768E252A18CFE1DA00101399 /* AlarmAnnotation.m */; };
+		768E252E18CFFB8D00101399 /* MyCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768E252D18CFFB8D00101399 /* MyCustomAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,10 @@
 		7661478418A2F90F007D734A /* IosMobileClientAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IosMobileClientAppTests-Info.plist"; sourceTree = "<group>"; };
 		7661478618A2F90F007D734A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7661478818A2F90F007D734A /* IosMobileClientAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IosMobileClientAppTests.m; sourceTree = "<group>"; };
+		768E252918CFE1DA00101399 /* AlarmAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmAnnotation.h; sourceTree = "<group>"; };
+		768E252A18CFE1DA00101399 /* AlarmAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmAnnotation.m; sourceTree = "<group>"; };
+		768E252C18CFFB8D00101399 /* MyCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomAnnotationView.h; sourceTree = "<group>"; };
+		768E252D18CFFB8D00101399 /* MyCustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomAnnotationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +173,8 @@
 		7661476318A2F90F007D734A /* IosMobileClientApp */ = {
 			isa = PBXGroup;
 			children = (
+				768E252918CFE1DA00101399 /* AlarmAnnotation.h */,
+				768E252A18CFE1DA00101399 /* AlarmAnnotation.m */,
 				762ED5A218C04C2700C95382 /* AlarmDetailsViewController.h */,
 				762ED5A318C04C2700C95382 /* AlarmDetailsViewController.m */,
 				7661476C18A2F90F007D734A /* AppDelegate.h */,
@@ -179,6 +187,8 @@
 				76609E8A18A9E7CD00D56FD0 /* MapDetailsViewController.m */,
 				7610130118A9D7030067C5B2 /* MapsViewController.h */,
 				7610130218A9D7030067C5B2 /* MapsViewController.m */,
+				768E252C18CFFB8D00101399 /* MyCustomAnnotationView.h */,
+				768E252D18CFFB8D00101399 /* MyCustomAnnotationView.m */,
 				7661476418A2F90F007D734A /* Supporting Files */,
 				7661477218A2F90F007D734A /* UtilitiesViewController.h */,
 				7661477318A2F90F007D734A /* UtilitiesViewController.m */,
@@ -327,8 +337,10 @@
 			files = (
 				7661476A18A2F90F007D734A /* main.m in Sources */,
 				7628962818BEB735003FC83F /* DashboardViewController.m in Sources */,
+				768E252E18CFFB8D00101399 /* MyCustomAnnotationView.m in Sources */,
 				762ED5A418C04C2700C95382 /* AlarmDetailsViewController.m in Sources */,
 				76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */,
+				768E252B18CFE1DA00101399 /* AlarmAnnotation.m in Sources */,
 				7661476E18A2F90F007D734A /* AppDelegate.m in Sources */,
 				7661477418A2F90F007D734A /* UtilitiesViewController.m in Sources */,
 				7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */,

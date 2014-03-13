@@ -27,23 +27,27 @@
 @property (readonly, strong) NSArray *points;
 @property (readonly, strong) NSArray *coordinates;
 
+// The bounding rectangle of the sensor.
 @property (readonly, strong) CamsGeoPoint* boundsTopLeftCorner;
 @property (readonly, strong) CamsGeoPoint* boundsTopRightCorner;
 @property (readonly, strong) CamsGeoPoint* boundsBottomLeftCorner;
 @property (readonly, strong) CamsGeoPoint* boundsBottomRightCorner;
 @property (readonly, strong) CamsGeoPoint* centerPoint;
 
+// The bounding rectangle in MapKit coordinates.
 @property (readonly) CLLocationCoordinate2D boundsTopLeftCornerCoord;
 @property (readonly) CLLocationCoordinate2D boundsTopRightCornerCoord;
 @property (readonly) CLLocationCoordinate2D boundsBottomLeftCornerCoord;
 @property (readonly) CLLocationCoordinate2D boundsBottomRightCornerCoord;
 @property (readonly) CLLocationCoordinate2D centerPointCoord;
 
+// The bounding rectangle in Map Points
 @property (readonly) MKMapPoint boundsTopLeftCornerMapPoint;
 @property (readonly) MKMapPoint boundsTopRightCornerMapPoint;
 @property (readonly) MKMapPoint boundsBottomLeftCornerMapPoint;
 @property (readonly) MKMapPoint boundsBottomRightCornerMapPoint;
 @property (readonly) MKMapPoint centerMapPoint;
+
 
 - (id)        initWithDesc:(NSString*)desc
                   sensorid:(NSNumber *)sId

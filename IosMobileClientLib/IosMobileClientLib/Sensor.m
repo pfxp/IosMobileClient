@@ -106,7 +106,7 @@
         SensorLinePoint *slp = [self points][i];
         CLLocationCoordinate2D cor = [Sensor convertCamsGeoPointToCoordinate:slp];
         *pointsToUse=cor;
-        
+        pointsToUse++;
     }
     return start;
 }

@@ -42,19 +42,19 @@
         _centerPoint = center;
         
         // MKOverlay properties
-        coordinate = [Sensor convertCamsGeoPointToCoordinate:center];
+        coordinate = [CamsGeoPoint convertCamsGeoPointToCoordinate:center];
         _centerMapPoint = MKMapPointForCoordinate(coordinate);
         
-        _boundsTopLeftCornerCoord = [Sensor convertCamsGeoPointToCoordinate:topLeft];
+        _boundsTopLeftCornerCoord = [CamsGeoPoint convertCamsGeoPointToCoordinate:topLeft];
         _boundsTopLeftCornerMapPoint = MKMapPointForCoordinate(_boundsTopLeftCornerCoord);
         
-        _boundsTopRightCornerCoord = [Sensor convertCamsGeoPointToCoordinate:topRight];
+        _boundsTopRightCornerCoord = [CamsGeoPoint convertCamsGeoPointToCoordinate:topRight];
         _boundsTopRightCornerMapPoint = MKMapPointForCoordinate(_boundsTopRightCornerCoord);
         
-        _boundsBottomLeftCornerCoord = [Sensor convertCamsGeoPointToCoordinate:bottomLeft];
+        _boundsBottomLeftCornerCoord = [CamsGeoPoint convertCamsGeoPointToCoordinate:bottomLeft];
         _boundsBottomLeftCornerMapPoint = MKMapPointForCoordinate(_boundsBottomLeftCornerCoord);
         
-        _boundsBottomRightCornerCoord = [Sensor convertCamsGeoPointToCoordinate:bottomRight];
+        _boundsBottomRightCornerCoord = [CamsGeoPoint convertCamsGeoPointToCoordinate:bottomRight];
         _boundsBottomRightCornerMapPoint = MKMapPointForCoordinate(_boundsBottomRightCornerCoord);
         
         // Find the latitude and longitude span in degrees.
@@ -104,20 +104,13 @@
     for (int i=0; i < [[self points] count]; i++)
     {
         SensorLinePoint *slp = [self points][i];
-        CLLocationCoordinate2D cor = [Sensor convertCamsGeoPointToCoordinate:slp];
+        CLLocationCoordinate2D cor = [CamsGeoPoint convertCamsGeoPointToCoordinate:slp];
         *pointsToUse=cor;
         pointsToUse++;
     }
     return start;
 }
 
-+ (CLLocationCoordinate2D) convertCamsGeoPointToCoordinate:(CamsGeoPoint*)camsGeoPoint
-{
-    CLLocationCoordinate2D coord;
-    coord.latitude = [camsGeoPoint.latitude doubleValue];
-    coord.longitude = [camsGeoPoint.longitude doubleValue];
-    return coord;
-}
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 ////////////////////////////////////////////////////////////////////
 // Describes a geographic point at the corners of a map.
@@ -24,7 +25,7 @@
               longStr:(NSString *)longitudeValue
                altStr:(NSString *)altitudeValue;
 - (NSString *)description;
-
++ (CLLocationCoordinate2D) convertCamsGeoPointToCoordinate:(CamsGeoPoint*)camsGeoPoint;
 @end
 
 

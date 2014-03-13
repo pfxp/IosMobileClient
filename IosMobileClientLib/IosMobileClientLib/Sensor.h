@@ -63,6 +63,6 @@
 
 - (NSString *)description;
 -(CLLocationCoordinate2D*) pointsToDrawInOverlay;
-+ (CLLocationCoordinate2D) convertCamsGeoPointToCoordinate:(CamsGeoPoint*)camsGeoPoint;
+
 
 @end

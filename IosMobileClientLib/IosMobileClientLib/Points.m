@@ -8,6 +8,7 @@
 
 #import "Points.h"
 
+
 @implementation CamsGeoPoint
 
 - (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
@@ -35,6 +36,14 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"(Lat: %@ Long: %@ Alt: %@)", self.latitude, self.longitude, self.altitude];
+}
+
++ (CLLocationCoordinate2D) convertCamsGeoPointToCoordinate:(CamsGeoPoint*)camsGeoPoint
+{
+    CLLocationCoordinate2D coord;
+    coord.latitude = [camsGeoPoint.latitude doubleValue];
+    coord.longitude = [camsGeoPoint.longitude doubleValue];
+    return coord;
 }
 
 @end

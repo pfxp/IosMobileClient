@@ -31,10 +31,10 @@
 {
     [super viewDidLoad];
     [self.mapView setDelegate:self];
-    [self.mapView setMapType:MKMapTypeSatellite];
+    [self.navigationItem setTitle:self.map.displayName];
     
-    // Do any additional setup after loading the view.
-    self.navigationItem.title = self.map.displayName;
+    [self.mapView setMapType:MKMapTypeSatellite];
+    [self.mapView setShowsUserLocation:YES];
     
     // Find the latitude and longitude span in degrees.
     double latSpan = [self.map.topLeftCorner.latitude doubleValue] - [self.map.bottomLeftCorner.latitude doubleValue];
@@ -182,6 +182,8 @@
         [renderer setLineWidth:lineWidth];
         [renderer setAlpha:transparency];
         [renderer setLineCap:kCGLineCapRound];
+        
+        free(coordinateData);
         return renderer;
     }
     return nil;

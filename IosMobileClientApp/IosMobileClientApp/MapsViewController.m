@@ -109,6 +109,7 @@
         MapDetailsViewController *mapDetailsViewController = [navigationController viewControllers][0];
         mapDetailsViewController.delegate = self;
         mapDetailsViewController.map = [self.cams.repository getMapByIndex:indexPath.row];
+        mapDetailsViewController.repository = self.cams.repository;
     }
 }
 

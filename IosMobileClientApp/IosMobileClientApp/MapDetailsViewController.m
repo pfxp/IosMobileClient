@@ -8,6 +8,9 @@
 
 #import "MapDetailsViewController.h"
 #import "AlarmAnnotation.h"
+#import "IosMobileClientLib/Map.h"
+#import "IosMobileClientLib/CamsObjectRepository.h"
+#import "IosMobileClientLib/Sensor.h"
 
 @interface MapDetailsViewController ()
 
@@ -27,8 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [mapView setDelegate:self];
-
+    [self.mapView setDelegate:self];
+    [self.mapView setMapType:MKMapTypeSatellite];
+    
     // Do any additional setup after loading the view.
     self.navigationItem.title = self.map.displayName;
     
@@ -50,15 +54,37 @@
     MKCoordinateRegion region;
     region.center = origin;
     region.span = span;
+    [self.mapView setRegion:region];
+  
     
-    mapView.region = region;
+    
+    // Draw the overlay
+    CLLocationCoordinate2D pointsToUse[3];
+    pointsToUse[0].latitude = -12.401087;
+    pointsToUse[0].longitude = 130.864336;
+    pointsToUse[1].latitude = -12.422568;
+    pointsToUse[1].longitude = 130.894805;
+    pointsToUse[2].latitude = -12.432568;
+    pointsToUse[2].longitude = 130.904805;
+    MKPolyline *myPolyline = [MKPolyline polylineWithCoordinates:pointsToUse count:3];
+    myPolyline.title = @"Colorado";
+    
+    [self.mapView addOverlay:myPolyline level:MKOverlayLevelAboveLabels];
+    
    
+    
+   // for (Sensor *sensor in [self.repository.sensors allValues])
+    //{
+     //   [self.mapView addOverlay:sensor level:MKOverlayLevelAboveLabels];
+    //}
+    
+    
     AlarmAnnotation *annotation = [[AlarmAnnotation alloc] initWithLocation:origin
                                                                       title:@"Zone 1"
                                                                    subtitle:@"Intrusion at 42m."
                                                                     eventId:[NSNumber numberWithInt:42]];
-   
-    [mapView addAnnotation:annotation];
+    
+    [self.mapView addAnnotation:annotation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,9 +103,10 @@
 #pragma mark MKPamViewDelegate functions
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 {
+    
 	MKAnnotationView *annotationView = [views objectAtIndex:0];
 	id <MKAnnotation> mp = [annotationView annotation];
-	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate], 500, 500);
+	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate], 10000, 10000);
 	[mv setRegion:region animated:YES];
 	[mv selectAnnotation:mp animated:YES];
     
@@ -125,5 +152,34 @@
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     
+}
+
+- (MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay
+{
+    if ([overlay isKindOfClass:[Sensor class]])
+    {
+        MKOverlayRenderer *renderer = [[MKOverlayRenderer alloc] initWithOverlay:overlay];
+        return renderer;
+    }
+    return nil;
+}
+
+- (MKOverlayView *)viewForOverlay:(id < MKOverlay >)overlay
+{
+    return nil;
+}
+
+//
+// Called when the overlay is added
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
+{
+    
+    if ([overlay isKindOfClass:MKPolyline.class]) {
+        MKPolylineView *lineView = [[MKPolylineView alloc] initWithOverlay:overlay];
+        [lineView setStrokeColor:[UIColor purpleColor]];
+        return lineView;
+    }
+    return nil;
+
 }
 @end

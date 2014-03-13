@@ -11,6 +11,9 @@
 #import "Points.h"
 
 @interface Sensor : NSObject <MKOverlay>
+{
+    CLLocationCoordinate2D *coordinatePoints;
+}
 
 #pragma mark MKOverlay protocol properties
 @property (nonatomic, readonly) MKMapRect boundingMapRect;
@@ -22,6 +25,7 @@
 @property (readonly, copy) NSNumber *channelNumber;
 @property (readonly, copy) NSString *sensorGuid;
 @property (readonly, strong) NSArray *points;
+@property (readonly, strong) NSArray *coordinates;
 
 @property (readonly, strong) CamsGeoPoint* boundsTopLeftCorner;
 @property (readonly, strong) CamsGeoPoint* boundsTopRightCorner;
@@ -29,6 +33,17 @@
 @property (readonly, strong) CamsGeoPoint* boundsBottomRightCorner;
 @property (readonly, strong) CamsGeoPoint* centerPoint;
 
+@property (readonly) CLLocationCoordinate2D boundsTopLeftCornerCoord;
+@property (readonly) CLLocationCoordinate2D boundsTopRightCornerCoord;
+@property (readonly) CLLocationCoordinate2D boundsBottomLeftCornerCoord;
+@property (readonly) CLLocationCoordinate2D boundsBottomRightCornerCoord;
+@property (readonly) CLLocationCoordinate2D centerPointCoord;
+
+@property (readonly) MKMapPoint boundsTopLeftCornerMapPoint;
+@property (readonly) MKMapPoint boundsTopRightCornerMapPoint;
+@property (readonly) MKMapPoint boundsBottomLeftCornerMapPoint;
+@property (readonly) MKMapPoint boundsBottomRightCornerMapPoint;
+@property (readonly) MKMapPoint centerMapPoint;
 
 - (id)        initWithDesc:(NSString*)desc
                   sensorid:(NSNumber *)sId
@@ -42,11 +57,8 @@
                centerPoint:(CamsGeoPoint*)center;
 
 
-
-
-
 - (NSString *)description;
-
-
+-(CLLocationCoordinate2D*) pointsToDrawInOverlay;
++ (CLLocationCoordinate2D) convertCamsGeoPointToCoordinate:(CamsGeoPoint*)camsGeoPoint;
 
 @end

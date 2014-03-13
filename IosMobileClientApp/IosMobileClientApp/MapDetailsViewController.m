@@ -101,18 +101,22 @@
 }
 
 #pragma mark MKPamViewDelegate functions
+//
+// When an annotation is added, zoom into a region 1000m x 1000m
+//
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 {
-    
 	MKAnnotationView *annotationView = [views objectAtIndex:0];
 	id <MKAnnotation> mp = [annotationView annotation];
-	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate], 10000, 10000);
+	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
 	[mv setRegion:region animated:YES];
 	[mv selectAnnotation:mp animated:YES];
-    
 }
 
 
+//
+// Retrieve the correct annotation view.
+//
 - (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id <MKAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[AlarmAnnotation class]])
@@ -133,7 +137,9 @@
     return nil;
 }
 
-// Called when the disclosure button in the annotation is tapped.
+//
+// Called when the annotation is tapped.
+//
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     AlarmAnnotation *annotation = (AlarmAnnotation*)view.annotation;
@@ -149,35 +155,20 @@
 
 }
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
-{
-    
-}
 
-- (MKOverlayRenderer *)rendererForOverlay:(id <MKOverlay>)overlay
+// Called when the overlay is added in iOS 7
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
-    if ([overlay isKindOfClass:[Sensor class]])
-    {
-        MKOverlayRenderer *renderer = [[MKOverlayRenderer alloc] initWithOverlay:overlay];
-        return renderer;
-    }
-    return nil;
-}
-
-- (MKOverlayView *)viewForOverlay:(id < MKOverlay >)overlay
-{
-    return nil;
-}
-
-//
-// Called when the overlay is added
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
-{
+    CGFloat transparency = 0.3f;
+    CGFloat lineWidth = 4.0f;
     
     if ([overlay isKindOfClass:MKPolyline.class]) {
-        MKPolylineView *lineView = [[MKPolylineView alloc] initWithOverlay:overlay];
-        [lineView setStrokeColor:[UIColor purpleColor]];
-        return lineView;
+        MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
+        [renderer setStrokeColor:[UIColor greenColor]];
+        [renderer setLineWidth:lineWidth];
+        [renderer setAlpha:transparency];
+        [renderer setLineCap:kCGLineCapRound];
+        return renderer;
     }
     return nil;
 

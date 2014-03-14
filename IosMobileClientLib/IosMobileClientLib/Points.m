@@ -52,27 +52,27 @@
 @implementation ZoneLinePoint
 
 - (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
-          parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence
+          pointId:(NSNumber *)pointId sequence:(NSNumber *)sequence
 {
     self = [super initWithLat:latitudeValue long:longitudeValue alt:altitudeValue];
     if (self)
     {
-        _parentId = parentId;
+        _pointId = pointId;
         _sequence = sequence;
     }
     return self;
 }
 
 - (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue
-          parentIdStr:(NSString *)parentId sequenceStr:(NSString *)sequence
+          pointIdStr:(NSString *)pointId sequenceStr:(NSString *)sequence
 {
     self = [super initWithLatStr:latitudeValue longStr:longitudeValue altStr:altitudeValue];
     if (self)
     {
-        NSNumber *parentIdNumber = [NSNumber numberWithInt:[parentId intValue]];
+        NSNumber *pointIdNumber = [NSNumber numberWithInt:[pointId intValue]];
         NSNumber *sequenceNumber = [NSNumber numberWithInt:[sequence intValue]];
         
-        _parentId = parentIdNumber;
+        _pointId = pointIdNumber;
         _sequence = sequenceNumber;
     }
     return self;
@@ -80,7 +80,7 @@
 
 - (NSString *)description {
     NSMutableString *result = [[NSMutableString alloc] init];
-    [result appendFormat:@"%@ ParentID: %@ Sequence: %@\n", [super description], [self parentId], [self sequence]];
+    [result appendFormat:@"%@ PointID: %@ Sequence: %@\n", [super description], [self pointId], [self sequence]];
     return result;
 }
 
@@ -90,10 +90,10 @@
 @implementation SensorLinePoint
 
 - (id) initWithLat:(NSNumber *)latitudeValue long:(NSNumber *)longitudeValue alt:(NSNumber *)altitudeValue
-          parentId:(NSNumber *)parentId sequence:(NSNumber *)sequence
+          pointId:(NSNumber *)pointId sequence:(NSNumber *)sequence
      cableDistance:(NSNumber *)cableDistance perimeterDistance:(NSNumber *)perimeterDistance
 {
-    self = [super initWithLat:latitudeValue long:longitudeValue alt:altitudeValue parentId:parentId sequence:sequence];
+    self = [super initWithLat:latitudeValue long:longitudeValue alt:altitudeValue pointId:pointId sequence:sequence];
     
     if (self)
     {
@@ -104,11 +104,11 @@
 }
 
 - (id) initWithLatStr:(NSString *)latitudeValue longStr:(NSString *)longitudeValue altStr:(NSString *)altitudeValue
-          parentIdStr:(NSString *)parentId sequenceStr:(NSString *)sequence
+          pointIdStr:(NSString *)pointId sequenceStr:(NSString *)sequence
      cableDistanceStr:(NSString *)cableDistance perimeterDistanceStr:(NSString *)perimeterDistance
 {
     self = [super initWithLatStr:latitudeValue longStr:longitudeValue altStr:altitudeValue
-                     parentIdStr:parentId sequenceStr:sequence];
+                     pointIdStr:pointId sequenceStr:sequence];
     if (self)
     {
         NSNumber *cableDistNumber = [NSNumber numberWithDouble:[cableDistance doubleValue]];

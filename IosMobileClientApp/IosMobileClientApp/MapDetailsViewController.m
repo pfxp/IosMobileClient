@@ -168,7 +168,7 @@
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
     CGFloat transparency = 0.6f;
-    CGFloat lineWidth = 1.0f;
+    CGFloat lineWidth = 2.0f;
     
     if ([overlay isKindOfClass:MKPolyline.class]) {
         MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
@@ -180,12 +180,12 @@
     }
     else if ([overlay isKindOfClass:Sensor.class]) {
         Sensor *sensor = (Sensor *) overlay;
-        NSUInteger numPoints = [[sensor points] count];
+        NSUInteger numPoints = [[sensor sensorPoints] count];
         CLLocationCoordinate2D *coordinateData =[sensor pointsToDrawInOverlay];
         MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinateData count:numPoints];
         
         MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyLine];
-        [renderer setStrokeColor:[UIColor purpleColor]];
+        [renderer setStrokeColor:[UIColor greenColor]];
         [renderer setLineWidth:lineWidth];
         [renderer setAlpha:transparency];
         [renderer setLineCap:kCGLineCapRound];

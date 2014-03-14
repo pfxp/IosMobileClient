@@ -19,7 +19,7 @@
          controllerId:(NSNumber*)controller
              sensorId:(NSNumber*)sensor
         cableDistance:(NSNumber*)cableDistance
-         camsGeoPoint:(CamsGeoPoint*)camsGeoPoint
+         locationGeoPoint:(CamsGeoPoint*)camsGeoPoint
     perimeterDistance:(NSNumber*)perimeterDistance
        locationWeight:(NSNumber*)locationWeight
 locationWeightThreshold:(NSNumber*)locationWeightThreshold;

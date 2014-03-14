@@ -16,9 +16,9 @@
 @interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate>
 
 @property (readwrite) RequestQueue *requeustQueue;
+@property (readwrite) CamsObjectRepository *repository;
 @property (readwrite, copy) NSURL *baseUrl;
 @property (readwrite) NSURLSession *session;
-@property (readwrite) CamsObjectRepository *repository;
 @property (readwrite) NSMutableDictionary *dataFromWebService;
 
 -(id) initWithBaseUrl:(NSURL*) url;

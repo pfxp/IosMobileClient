@@ -163,18 +163,17 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 -(void) joinTogetherWsData:(NSUInteger)taskId  data:(NSData*)data
 {
     NSNumber *key = [[NSNumber alloc] initWithUnsignedInteger:taskId];
-    NSMutableData *val = [_dataFromWebService objectForKey:key];
+    NSMutableData *existingData = [_dataFromWebService objectForKey:key];
     
-    if (val==nil)
+    if (existingData==nil)
     {
         NSMutableData *firstdata = [[NSMutableData alloc] init];
         [firstdata appendData:data];
         [_dataFromWebService setObject:firstdata forKey:key];
-        
     }
     else
     {
-        [val appendData:data];
+        [existingData appendData:data];
     }
 }
 

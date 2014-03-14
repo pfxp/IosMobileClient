@@ -14,7 +14,7 @@
 
 @implementation AppDelegate
 {
-    NSMutableArray *_maps;
+
 }
 
 #pragma mark Standard overrides
@@ -46,17 +46,10 @@
     DashboardViewController *dashViewController = [dashboardNavController viewControllers][0];
     dashViewController.cams = cams;
 
-    
-    // Custom initialization
-    _maps = [NSMutableArray arrayWithCapacity:20];
-    Map *map = [[Map alloc] initWithDisplayName:@"Darwin Airport"];
-    [_maps addObject:map];
-
-    
     // Give CAMS data to Maps view
     UINavigationController *navigationController = [tabBarController viewControllers][1];
-    MapsViewController *playersViewController = [navigationController viewControllers][0];
-    playersViewController.cams = cams;
+    MapsViewController *mapsViewController = [navigationController viewControllers][0];
+    mapsViewController.cams = cams;
 
     // Give CAMS data to Utilities view.
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
@@ -72,7 +65,7 @@
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"TOKEN: %@", token);
+    //NSLog(@"TOKEN: %@", token);
     
     [cams registerApnsToken:token];
 }
@@ -122,6 +115,8 @@
 }
 
 #pragma mark My functions
+//
+// Apply the default settings vaslue.
 - (void) registerDefaultsFromSettingsBundle
 {
     // this function writes default settings as settings
@@ -140,7 +135,7 @@
         NSString *key = [prefSpecification objectForKey:@"Key"];
         if(key) {
             [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
-            NSLog(@"writing as default %@ to the key %@",[prefSpecification objectForKey:@"DefaultValue"],key);
+            //NSLog(@"writing as default %@ to the key %@",[prefSpecification objectForKey:@"DefaultValue"],key);
         }
     }
     

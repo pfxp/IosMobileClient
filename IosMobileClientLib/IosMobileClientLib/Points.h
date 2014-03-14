@@ -34,18 +34,19 @@
 ////////////////////////////////////////////////////////////////////
 @interface ZoneLinePoint : CamsGeoPoint
 
-@property (readonly, strong) NSNumber *parentId;
+@property (readonly, strong) NSNumber *pointId;
 @property (readonly, strong) NSNumber *sequence;
 
 - (id) initWithLat:(NSNumber *)latitudeValue
               long:(NSNumber *)longitudeValue
                alt:(NSNumber *)altitudeValue
-          parentId:(NSNumber *)parentId
+          pointId:(NSNumber *)pointId
           sequence:(NSNumber *)sequence;
+
 - (id) initWithLatStr:(NSString *)latitudeValue
               longStr:(NSString *)longitudeValue
                altStr:(NSString *)altitudeValue
-          parentIdStr:(NSString *)parentId
+          pointIdStr:(NSString *)pointId
           sequenceStr:(NSString *)sequence;
 - (NSString *)description;
 
@@ -63,14 +64,15 @@
 - (id) initWithLat:(NSNumber *)latitudeValue
               long:(NSNumber *)longitudeValue
                alt:(NSNumber *)altitudeValue
-          parentId:(NSNumber *)parentId
+          pointId:(NSNumber *)pointId
           sequence:(NSNumber *)sequence
      cableDistance:(NSNumber *)cableDistance
  perimeterDistance:(NSNumber *)perimeterDistance;
+
 - (id) initWithLatStr:(NSString *)latitudeValue
               longStr:(NSString *)longitudeValue
                altStr:(NSString *)altitudeValue
-          parentIdStr:(NSString *)parentId
+          pointIdStr:(NSString *)pointId
           sequenceStr:(NSString *)sequence
      cableDistanceStr:(NSString *)cableDistance
  perimeterDistanceStr:(NSString *)perimeterDistance;

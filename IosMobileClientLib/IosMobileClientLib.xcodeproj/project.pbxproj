@@ -161,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				768E253318D26AC000101399 /* Global data */,
-				768E252F18D268C900101399 /* CAMS classes */,
-				768E253118D269CB00101399 /* Data communications */,
+				768E252F18D268C900101399 /* Data structures */,
+				768E253118D269CB00101399 /* Web Server Comms */,
 				7600C1E218A71C8300A27FDC /* Supporting Files */,
 			);
 			path = IosMobileClientLib;
@@ -194,7 +194,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		768E252F18D268C900101399 /* CAMS classes */ = {
+		768E252F18D268C900101399 /* Data structures */ = {
 			isa = PBXGroup;
 			children = (
 				7600C20518A71CB400A27FDC /* Controller.h */,
@@ -210,10 +210,10 @@
 				761C801D18C003D5009EC655 /* ZoneEvent.h */,
 				761C801E18C003D5009EC655 /* ZoneEvent.m */,
 			);
-			name = "CAMS classes";
+			name = "Data structures";
 			sourceTree = "<group>";
 		};
-		768E253118D269CB00101399 /* Data communications */ = {
+		768E253118D269CB00101399 /* Web Server Comms */ = {
 			isa = PBXGroup;
 			children = (
 				762F661718B9D91000195CE9 /* IosSessionDataTask.h */,
@@ -221,7 +221,7 @@
 				76B18AB918C2D73E0031EA0A /* RequestQueue.h */,
 				76B18ABA18C2D73E0031EA0A /* RequestQueue.m */,
 			);
-			name = "Data communications";
+			name = "Web Server Comms";
 			sourceTree = "<group>";
 		};
 		768E253318D26AC000101399 /* Global data */ = {

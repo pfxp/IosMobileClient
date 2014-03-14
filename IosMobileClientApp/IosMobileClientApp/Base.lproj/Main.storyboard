@@ -279,7 +279,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xv8-QA-iMg">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xv8-QA-iMg">
                                 <rect key="frame" x="8" y="77" width="304" height="389"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
@@ -288,6 +288,12 @@
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fN3-il-lTg" firstAttribute="top" secondItem="xv8-QA-iMg" secondAttribute="bottom" constant="14" id="4n0-ok-VFY"/>
+                            <constraint firstItem="xv8-QA-iMg" firstAttribute="centerX" secondItem="TwF-23-N0i" secondAttribute="centerX" id="FdK-JP-UBk"/>
+                            <constraint firstItem="xv8-QA-iMg" firstAttribute="top" secondItem="6Sl-8l-1za" secondAttribute="bottom" constant="13" id="r89-3T-vcU"/>
+                            <constraint firstItem="xv8-QA-iMg" firstAttribute="leading" secondItem="TwF-23-N0i" secondAttribute="leading" constant="8" id="v4P-Sh-N33"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="The Map" id="je1-yX-2Yi">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="n9n-Bc-Mof">

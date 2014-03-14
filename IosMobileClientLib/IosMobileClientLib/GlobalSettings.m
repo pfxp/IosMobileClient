@@ -7,8 +7,6 @@
 //
 
 #import "GlobalSettings.h"
-
-//NSNumber *globalSensorPadding = [NSNumber numberWithFloat:1.1f];
                                         
 @implementation  GlobalSettings
 

@@ -24,28 +24,28 @@
 @property (readonly, copy) NSNumber *sensorId;
 @property (readonly, copy) NSNumber *channelNumber;
 @property (readonly, copy) NSString *sensorGuid;
-@property (readonly, strong) NSArray *points;
+@property (readonly, strong) NSMutableArray *sensorPoints;
 @property (readonly, strong) NSArray *coordinates;
 
 // The bounding rectangle of the sensor.
-@property (readonly, strong) CamsGeoPoint* boundsTopLeftCorner;
-@property (readonly, strong) CamsGeoPoint* boundsTopRightCorner;
-@property (readonly, strong) CamsGeoPoint* boundsBottomLeftCorner;
-@property (readonly, strong) CamsGeoPoint* boundsBottomRightCorner;
+@property (readonly, strong) CamsGeoPoint* topLeftCornerGeoPoint;
+@property (readonly, strong) CamsGeoPoint* topRightCornerGeoPoint;
+@property (readonly, strong) CamsGeoPoint* bottomLeftCornerGeoPoint;
+@property (readonly, strong) CamsGeoPoint* bottomRightCornerGeoPoint;
 @property (readonly, strong) CamsGeoPoint* centerPoint;
 
 // The bounding rectangle in MapKit coordinates.
-@property (readonly) CLLocationCoordinate2D boundsTopLeftCornerCoord;
-@property (readonly) CLLocationCoordinate2D boundsTopRightCornerCoord;
-@property (readonly) CLLocationCoordinate2D boundsBottomLeftCornerCoord;
-@property (readonly) CLLocationCoordinate2D boundsBottomRightCornerCoord;
+@property (readonly) CLLocationCoordinate2D topLeftCornerCoord;
+@property (readonly) CLLocationCoordinate2D topRightCornerCoord;
+@property (readonly) CLLocationCoordinate2D bottomLeftCornerCoord;
+@property (readonly) CLLocationCoordinate2D bottomRightCornerCoord;
 @property (readonly) CLLocationCoordinate2D centerPointCoord;
 
 // The bounding rectangle in Map Points
-@property (readonly) MKMapPoint boundsTopLeftCornerMapPoint;
-@property (readonly) MKMapPoint boundsTopRightCornerMapPoint;
-@property (readonly) MKMapPoint boundsBottomLeftCornerMapPoint;
-@property (readonly) MKMapPoint boundsBottomRightCornerMapPoint;
+@property (readonly) MKMapPoint topLeftCornerMapPoint;
+@property (readonly) MKMapPoint topRightCornerMapPoint;
+@property (readonly) MKMapPoint bottomLeftCornerMapPoint;
+@property (readonly) MKMapPoint bottomRightCornerMapPoint;
 @property (readonly) MKMapPoint centerMapPoint;
 
 
@@ -53,11 +53,11 @@
                   sensorid:(NSNumber *)sId
              channelNumber:(NSNumber *)cNum
                 sensorGuid:(NSString *)sguid
-                    points:(NSArray *)pointsArray
-       boundsTopLeftCorner:(CamsGeoPoint*)topLeft
-      boundsTopRightCorner:(CamsGeoPoint*)topRight
-    boundsBottomLeftCorner:(CamsGeoPoint*)bottomLeft
-   boundsBottomRightCorner:(CamsGeoPoint*)bottomRight
+                    sensorPoints:(NSArray *)sensorPointsArray
+       topLeftCorner:(CamsGeoPoint*)topLeft
+      topRightCorner:(CamsGeoPoint*)topRight
+    bottomLeftCorner:(CamsGeoPoint*)bottomLeft
+   bottomRightCorner:(CamsGeoPoint*)bottomRight
                centerPoint:(CamsGeoPoint*)center;
 
 

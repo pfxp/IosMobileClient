@@ -33,6 +33,8 @@
     return self;
 }
 
+
+
 //
 // Parses the JSON dictionary.
 //
@@ -58,9 +60,12 @@
         NSLog(@"UNKNOWN Parsing JSON dictionary. %@", dict);
 }
 
+
+
 //
 // Parses the JSON dictionary. Invoked when the NSURLSessionDataRequest finishes.
 // Some tasks, such as when the APNS token is set do not require a response.
+// Outputs the first object to the Console window.
 //
 -(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req
 {
@@ -75,7 +80,6 @@
                 return;
             
             [self.controllers removeAllObjects];
-            
             for (NSDictionary *item in jsonArray)
             {
                 Controller *controller = [CamsObjectRepository parseControllerJsonDictionary:item];
@@ -86,7 +90,6 @@
                     NSLog(@"%@", controller);
                 
                 alreadyShownLogMessage=true;
-                
                 if (controller)
                     self.controllers[[controller ctrlId]] = controller;
             }
@@ -98,7 +101,6 @@
                 return;
             
             [self.sensors removeAllObjects];
-            
             for (NSDictionary *sensorDict in jsonArray)
             {
                 Sensor *sensor = [CamsObjectRepository parseSensorJsonDictionary:sensorDict];
@@ -107,9 +109,8 @@
                 
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", sensor);
-                
+            
                 alreadyShownLogMessage=true;
-                
                 if (sensor)
                     self.sensors[[sensor sensorId]] = sensor;
             }
@@ -122,7 +123,6 @@
                 return;
             
             [self.zones removeAllObjects];
-            
             for (NSDictionary *zoneDict in jsonArray)
             {
                 Zone *zone = [CamsObjectRepository parseZoneJsonDictionary:zoneDict];
@@ -131,7 +131,6 @@
                     NSLog(@"%@", zone);
                 
                 alreadyShownLogMessage=true;
-                
                 if (zone)
                     self.zones[[zone zoneId]] = zone;
             }
@@ -144,7 +143,6 @@
                 return;
             
             [self.maps removeAllObjects];
-            
             for (NSDictionary *item in jsonArray)
             {
                 Map *map = [CamsObjectRepository parseMapJsonDictionary:item];
@@ -153,7 +151,6 @@
                     NSLog(@"%@", map);
                 
                 alreadyShownLogMessage=true;
-                
                 if (map)
                     self.maps[[map mapId]] = map;
             }
@@ -166,7 +163,6 @@
                 return;
             
             [self.zoneEvents removeAllObjects];
-            
             for (NSDictionary *zoneEventDict in jsonArray)
             {
                 ZoneEvent *zoneEvent = [CamsObjectRepository parseZoneEventJsonDictionary:zoneEventDict];
@@ -175,7 +171,6 @@
                     NSLog(@"%@", zoneEvent);
                 
                 alreadyShownLogMessage=true;
-                
                 if (zoneEvent)
                     self.zoneEvents[[zoneEvent eventId]] = zoneEvent;
             }
@@ -195,6 +190,8 @@
     }
 }
 
+
+
 #pragma mark CAMS object desierializers
 //
 // Returns a controller from a JSON dictionary
@@ -212,26 +209,22 @@
     NSNumber *idNumber = [NSNumber numberWithInteger:[idString integerValue]];
     BOOL locatorAsBool = [isLocator boolValue];
     
-    Controller *controller = [[Controller alloc] initWithAllValues:connectedAsBool description:description hostname:hostname
-                                                            ctrlid:idNumber locator:locatorAsBool name:name];
-    
-    return controller;
+    return [[Controller alloc] initWithAllValues:connectedAsBool
+                                     description:description
+                                        hostname:hostname
+                                          ctrlid:idNumber
+                                         locator:locatorAsBool
+                                            name:name];
 }
 
+
+
 //
-// Returns a sensor from a JSON dictionary
-// TODO Ensure the points are read in order. Refer to the <Seq> tag.
+// Returns a sensor from a JSON dictionary. The Sensor constructor will order the SensorLinePoints by sequence number.
 //
 + (Sensor *) parseSensorJsonDictionary:(NSDictionary *) dict
 {
-    NSString *latitude;
-    NSString *longitude;
-    NSString *altitude;
-    NSString *parentId;
-    NSString *sequence;
-    NSString *cableDistance;
-    NSString *perimeterDistance;
-    
+    // Sensor properties.
     NSString *description = [dict objectForKey:@"Description"];
     NSString *sensorId = [dict objectForKey:@"SensorId"];
     NSString *channelNumber = [dict objectForKey:@"ChannelNumber"];
@@ -240,15 +233,24 @@
     NSNumber *sensorIdNumber = [NSNumber numberWithInteger:[sensorId integerValue]];
     NSNumber *channelNumberNumber = [NSNumber numberWithInteger:[channelNumber integerValue]];
     
+    // Sensor line point properties.
+    NSMutableString *latitude;
+    NSMutableString *longitude;
+    NSMutableString *altitude;
+    NSMutableString *pointId;
+    NSMutableString *sequence;
+    NSMutableString *cableDistance;
+    NSMutableString *perimeterDistance;
     NSMutableArray *pointsForSensor = [NSMutableArray arrayWithCapacity:[pointCount intValue]];
     
+    // Read each sensor line point.
     NSArray *pointsJSONArray = [dict objectForKey:@"Points"];
     for (NSDictionary *pointDict in pointsJSONArray)
     {
         latitude = [pointDict objectForKey:@"Lat"];
         longitude = [pointDict objectForKey:@"Long"];
         altitude = [pointDict objectForKey:@"Alt"];
-        parentId = [pointDict objectForKey:@"ParentId"];
+        pointId = [pointDict objectForKey:@"PointId"];
         sequence = [pointDict objectForKey:@"Seq"];
         cableDistance = [pointDict objectForKey:@"CabDist"];
         perimeterDistance = [pointDict objectForKey:@"PerDist"];
@@ -256,7 +258,7 @@
         SensorLinePoint *sensorLinePoint = [[SensorLinePoint alloc] initWithLatStr:latitude
                                                                            longStr:longitude
                                                                             altStr:altitude
-                                                                       parentIdStr:parentId
+                                                                        pointIdStr:pointId
                                                                        sequenceStr:sequence
                                                                   cableDistanceStr:cableDistance
                                                               perimeterDistanceStr:perimeterDistance];
@@ -265,30 +267,25 @@
     }
     
     // Get the bounding box
-    NSDictionary *boundsTopLeftCorner = [dict objectForKey:@"BoundsTopLeft"];
-    CamsGeoPoint *boundsTopLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsTopLeftCorner];
-    NSDictionary *boundsTopRightCorner = [dict objectForKey:@"BoundsTopRight"];
-    CamsGeoPoint *boundsTopRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsTopRightCorner];
-    NSDictionary *boundsBottomLeftCorner = [dict objectForKey:@"BoundsBottomLeft"];
-    CamsGeoPoint *boundsBottomLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsBottomLeftCorner];
-    NSDictionary *boundsBottomRightCorner = [dict objectForKey:@"BoundsBottomRight"];
-    CamsGeoPoint *boundsBottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:boundsBottomRightCorner];
-    NSDictionary *centerCorner = [dict objectForKey:@"CenterPoint"];
-    CamsGeoPoint *centerPoint = [CamsObjectRepository parseCamsGeoPointDictionary:centerCorner];
+    CamsGeoPoint *boundsTopLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BoundsTopLeft"]];
+    CamsGeoPoint *boundsTopRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BoundsTopRight"]];
+    CamsGeoPoint *boundsBottomLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BoundsBottomLeft"]];
+    CamsGeoPoint *boundsBottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BoundsBottomRight"]];
+    CamsGeoPoint *centerPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"CenterPoint"]];
     
-    Sensor *sensor = [[Sensor alloc] initWithDesc:description
+    return [[Sensor alloc] initWithDesc:description
                                          sensorid:sensorIdNumber
                                     channelNumber:channelNumberNumber
                                        sensorGuid:sensorGuid
-                                           points:pointsForSensor
-                              boundsTopLeftCorner:boundsTopLeftPoint
-                             boundsTopRightCorner:boundsTopRightPoint
-                           boundsBottomLeftCorner:boundsBottomLeftPoint
-                          boundsBottomRightCorner:boundsBottomRightPoint
+                                     sensorPoints:pointsForSensor
+                                    topLeftCorner:boundsTopLeftPoint
+                                   topRightCorner:boundsTopRightPoint
+                                 bottomLeftCorner:boundsBottomLeftPoint
+                                bottomRightCorner:boundsBottomRightPoint
                                       centerPoint:centerPoint];
-    
-    return sensor;
 }
+
+
 
 //
 // Parses a zone.
@@ -300,8 +297,7 @@
     NSString *description = [dict objectForKey:@"Description"];
     NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
     
-    Zone *zone = [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
-    return zone;
+    return [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
 }
 
 
@@ -314,26 +310,17 @@
     NSString *displayName = [dict objectForKey:@"DisplayName"];
     NSString *idString = [dict objectForKey:@"Id"];
     
-    NSDictionary *topLeftCorner = [dict objectForKey:@"TopLeftCorner"];
-    CamsGeoPoint *topLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:topLeftCorner];
+    CamsGeoPoint *topLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"TopLeftCorner"]];
+    CamsGeoPoint *topRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"TopRightCorner"]];
+    CamsGeoPoint *bottomLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BottomLeftCorner"]];
+    CamsGeoPoint *bottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BottomRightCorner"]];
     
-    NSDictionary *topRightCorner = [dict objectForKey:@"TopRightCorner"];
-    CamsGeoPoint *topRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:topRightCorner];
-    
-    NSDictionary *bottomLeftCorner = [dict objectForKey:@"BottomLeftCorner"];
-    CamsGeoPoint *bottomLeftPoint = [CamsObjectRepository parseCamsGeoPointDictionary:bottomLeftCorner];
-    
-    NSDictionary *bottomRightCorner = [dict objectForKey:@"BottomRightCorner"];
-    CamsGeoPoint *bottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:bottomRightCorner];
-    
-    Map *map = [[Map alloc] initWithDisplayName:displayName
+    return [[Map alloc] initWithDisplayName:displayName
                                           mapId:idString
                                         topLeft:topLeftPoint
                                        topRight:topRightPoint
                                      bottomLeft:bottomLeftPoint
-                                    bottomRight:bottomRightPoint];
-
-    return map;
+                                bottomRight:bottomRightPoint];
 }
 
 //
@@ -360,8 +347,7 @@
     NSDictionary *locInfoDict = [dict objectForKey:@"LocInfo"];
     NSString *cableDistance = [locInfoDict objectForKey:@"CableDist"];
     
-    NSDictionary *locationDict = [locInfoDict objectForKey:@"Location"];
-    CamsGeoPoint *locationPoint = [CamsObjectRepository parseCamsGeoPointDictionary:locationDict];
+    CamsGeoPoint *locationGeoPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[locInfoDict objectForKey:@"Location"]];
     
     NSString *perimeterDistAsString =[locInfoDict objectForKey:@"PerimDist"];
     NSString *locationWeightAsString =[locInfoDict objectForKey:@"LocWeight"];
@@ -378,14 +364,14 @@
                                                        active:[active boolValue]
                                                       dynamic:[dynamic boolValue]
                                                        zoneId:zoneId
-                                                   controllerId:controllerId
+                                                 controllerId:controllerId
                                                      sensorId:sensorId
                                                 cableDistance:cableDistAsDouble
-                                                 camsGeoPoint:locationPoint
+                                                 locationGeoPoint:locationGeoPoint
                                             perimeterDistance:perimeterDistAsDouble
                                                locationWeight:locationWeightAsDouble
                                       locationWeightThreshold:locationWeightThresholdAsDouble];
-
+    
     
     return zoneEvent;
 }
@@ -409,22 +395,21 @@
     if ([intrusions count] == 0 || index > ([intrusions count] -1 ))
         return nil;
     
+    // Sort Zone events in reverse chronological order.
     NSMutableArray *mutableIntrusions = [[NSMutableArray alloc]  initWithArray:intrusions];
-    
     [mutableIntrusions sortUsingComparator:^(id obj1, id obj2) {
-        
         ZoneEvent *event1 = (ZoneEvent *)obj1;
         ZoneEvent *event2 = (ZoneEvent *)obj2;
-        
-        NSDate *date1 = [event1 eventTimeUtc];
-        NSDate *date2 = [event2 eventTimeUtc];
-        
-        return [date2 compare:date1];
+        NSDate *eventDate1 = [event1 eventTimeUtc];
+        NSDate *eventDate2 = [event2 eventTimeUtc];
+        return [eventDate2 compare:eventDate1];
     }];
-
+    
     return [mutableIntrusions objectAtIndex:index];
 }
 
+//
+// Get a zone by its ZoneId.
 -(Zone *) getZoneById:(NSNumber *)zoneId
 {
     Zone *zone = [_zones objectForKey:zoneId];
@@ -432,7 +417,8 @@
 }
 
 //
-//
+// Get maps by an arbitrary index. This is not really correct.
+// When the CAMS SDK has the ability to retrieve maps, this will change.
 //
 -(Map *)getMapByIndex:(int) index
 {
@@ -441,17 +427,15 @@
     if ([mapList count] == 0 || index > ([mapList count] -1 ))
         return nil;
     
+    // Sort maps alphabetically.
     NSMutableArray *mutableMaps = [[NSMutableArray alloc]  initWithArray:mapList];
     
     [mutableMaps sortUsingComparator:^(id obj1, id obj2) {
-        
         Map *map1 = (Map *)obj1;
         Map *map2 = (Map *)obj2;
-        
-        NSString *name1 = [map1 displayName];
-        NSString *name2 = [map2 displayName];
-        
-        return [name2 compare:name1];
+        NSString *mapName1 = [map1 displayName];
+        NSString *mapName2 = [map2 displayName];
+        return [mapName1 compare:mapName2];
     }];
     
     return [mutableMaps objectAtIndex:index];

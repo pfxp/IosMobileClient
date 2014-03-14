@@ -12,6 +12,7 @@ typedef enum CamsWsRequest : NSInteger CamsWsRequest;
 typedef enum RequestPriority : NSInteger RequestPriority;
 
 enum CamsWsRequest : NSInteger {
+    Unknown,
     GetControllers,
     GetZones,
     GetSensors,

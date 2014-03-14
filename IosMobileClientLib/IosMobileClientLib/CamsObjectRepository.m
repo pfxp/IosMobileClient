@@ -38,26 +38,29 @@
 //
 // Parses the JSON dictionary.
 //
--(void) parseJsonDictionary:(NSDictionary *)dict
+-(CamsWsRequest) parseJsonDictionary:(NSDictionary *)dict
 {
     if (dict==nil)
     {
         NSLog(@"Dictionary passed to parseJsonDictionary is null.");
-        return;
+        return Unknown;
     }
     
     if ([dict objectForKey:@"GetControllersResult"] != nil)
-        [self parseJsonDictionary:dict command:GetControllers];
+        return[self parseJsonDictionary:dict command:GetControllers];
     else if ([dict objectForKey:@"GetSensorsResult"] != nil)
-        [self parseJsonDictionary:dict command:GetSensors];
+        return [self parseJsonDictionary:dict command:GetSensors];
     else if ([dict objectForKey:@"GetZonesResult"] != nil)
-        [self parseJsonDictionary:dict command:GetZones];
+        return [self parseJsonDictionary:dict command:GetZones];
     else if ([dict objectForKey:@"GetMapsResult"] != nil)
-        [self parseJsonDictionary:dict command:GetMaps];
+        return [self parseJsonDictionary:dict command:GetMaps];
     else if ([dict objectForKey:@"GetZoneEventsResult"] != nil)
-        [self parseJsonDictionary:dict command:GetZoneEvents];
+        return [self parseJsonDictionary:dict command:GetZoneEvents];
     else
+    {
         NSLog(@"UNKNOWN Parsing JSON dictionary. %@", dict);
+        return Unknown;
+    }
 }
 
 
@@ -67,7 +70,7 @@
 // Some tasks, such as when the APNS token is set do not require a response.
 // Outputs the first object to the Console window.
 //
--(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req
+-(CamsWsRequest) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest)req
 {
     NSArray *jsonArray;
     bool alreadyShownLogMessage=false;
@@ -77,7 +80,7 @@
         case GetControllers:
             jsonArray = [dict objectForKey:@"GetControllersResult"];
             if (!jsonArray)
-                return;
+                return Unknown;
             
             [self.controllers removeAllObjects];
             for (NSDictionary *item in jsonArray)
@@ -93,12 +96,13 @@
                 if (controller)
                     self.controllers[[controller ctrlId]] = controller;
             }
+            return GetControllers;
             break;
             
         case GetSensors:
             jsonArray = [dict objectForKey:@"GetSensorsResult"];
             if (!jsonArray)
-                return;
+                return Unknown;
             
             [self.sensors removeAllObjects];
             for (NSDictionary *sensorDict in jsonArray)
@@ -114,13 +118,14 @@
                 if (sensor)
                     self.sensors[[sensor sensorId]] = sensor;
             }
+            return GetSensors;
             break;
             
         case GetZones:
             jsonArray = [dict objectForKey:@"GetZonesResult"];
             
             if (!jsonArray)
-                return;
+                return Unknown;
             
             [self.zones removeAllObjects];
             for (NSDictionary *zoneDict in jsonArray)
@@ -134,13 +139,14 @@
                 if (zone)
                     self.zones[[zone zoneId]] = zone;
             }
+            return GetZones;
             break;
             
         case GetMaps:
             jsonArray = [dict objectForKey:@"GetMapsResult"];
             
             if (!jsonArray)
-                return;
+                return Unknown;
             
             [self.maps removeAllObjects];
             for (NSDictionary *item in jsonArray)
@@ -154,13 +160,14 @@
                 if (map)
                     self.maps[[map mapId]] = map;
             }
+            return GetMaps;
             break;
             
         case GetZoneEvents:
             jsonArray = [dict objectForKey:@"GetZoneEventsResult"];
             
             if (!jsonArray)
-                return;
+                return Unknown;
             
             [self.zoneEvents removeAllObjects];
             for (NSDictionary *zoneEventDict in jsonArray)
@@ -174,18 +181,22 @@
                 if (zoneEvent)
                     self.zoneEvents[[zoneEvent eventId]] = zoneEvent;
             }
+            return GetZoneEvents;
             break;
             
         case PostAPNSToken:
             NSLog(@"APNS: %@", @"Set the APNS token.");
+            return PostAPNSToken;
             break;
             
         case PostAcknowledgeAlarm:
             NSLog(@"PostAcknowledgeAlarm: %@", @"Acknowledge an alarm.");
+            return PostAcknowledgeAlarm;
             break;
             
         default:
             NSLog(@"Unknown command.");
+            return Unknown;
             break;
     }
 }

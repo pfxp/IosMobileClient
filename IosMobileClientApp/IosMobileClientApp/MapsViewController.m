@@ -8,7 +8,6 @@
 
 #import "MapsViewController.h"
 #import "IosMobileClientLib/Map.h"
-#import "IosMobileClientLib/Cams.h"
 
 @interface MapsViewController ()
 
@@ -118,6 +117,12 @@
     //NSUInteger row = [indexPath row];
     //self.selectedMap = (self.maps)[row];
     //int k=0;
+}
+
+#pragma mark MapsArrivedFromServerProtocol methods
+- (void)mapsArrivedFromServer
+{
+   [self.tableView reloadData];
 }
 
 @end

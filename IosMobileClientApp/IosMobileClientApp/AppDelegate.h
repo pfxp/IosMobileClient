@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "IosMobileClientLib/Cams.h"
+#import "MapsViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

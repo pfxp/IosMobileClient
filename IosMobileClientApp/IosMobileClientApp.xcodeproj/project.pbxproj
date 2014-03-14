@@ -173,14 +173,14 @@
 		7661476318A2F90F007D734A /* IosMobileClientApp */ = {
 			isa = PBXGroup;
 			children = (
-				768E253518D26BAB00101399 /* Dashboard */,
-				768E253418D26B8700101399 /* Mapping */,
-				768E253618D26BCC00101399 /* Utilities */,
 				7661476C18A2F90F007D734A /* AppDelegate.h */,
 				7661476D18A2F90F007D734A /* AppDelegate.m */,
+				768E253518D26BAB00101399 /* Dashboard */,
 				7661477518A2F90F007D734A /* Images.xcassets */,
 				7661476F18A2F90F007D734A /* Main.storyboard */,
+				768E253418D26B8700101399 /* Mapping */,
 				7661476418A2F90F007D734A /* Supporting Files */,
+				768E253618D26BCC00101399 /* Utilities */,
 			);
 			path = IosMobileClientApp;
 			sourceTree = "<group>";

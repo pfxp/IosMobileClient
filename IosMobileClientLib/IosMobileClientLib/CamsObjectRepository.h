@@ -24,8 +24,8 @@
 @property (readwrite) NSMutableDictionary *maps;
 @property (readwrite) NSMutableDictionary *zoneEvents;
 
--(void) parseJsonDictionary:(NSDictionary *)dict;
--(void) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
+-(CamsWsRequest) parseJsonDictionary:(NSDictionary *)dict;
+-(CamsWsRequest) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
 -(ZoneEvent*) getZoneEventOrderedByTimeDesc:(int) index;
 -(Zone *) getZoneById:(NSNumber *)zoneId;
 -(Map *) getMapByIndex:(int) index;

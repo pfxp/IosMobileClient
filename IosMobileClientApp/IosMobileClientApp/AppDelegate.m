@@ -35,9 +35,7 @@
     
     // Initialize the CAMS object, request configuration data and alarm data.
     cams = [[Cams alloc] initWithBaseUrl:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"]]];
-    [cams addConfigurationRequests];
-    [cams addAlarmsRequests];
-    [cams executeRequests];
+    
     
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     
@@ -50,11 +48,14 @@
     UINavigationController *navigationController = [tabBarController viewControllers][1];
     MapsViewController *mapsViewController = [navigationController viewControllers][0];
     mapsViewController.cams = cams;
-
+    [cams setDelegateMapsArrived:mapsViewController];
+    
     // Give CAMS data to Utilities view.
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
     utilitiesVC.cams = cams;
 
+    [cams startup];
+    
     return YES;
 }
 
@@ -65,8 +66,7 @@
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //NSLog(@"TOKEN: %@", token);
-    
+   
     [cams registerApnsToken:token];
 }
 

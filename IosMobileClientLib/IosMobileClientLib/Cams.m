@@ -22,14 +22,39 @@
     {
         _repository = [[CamsObjectRepository alloc] init];
         _dataFromWebService = [[NSMutableDictionary alloc] init];
+        _camsObjectsReceived = [[NSMutableDictionary alloc] init];
+        [self initializeCamsObjectsReceived];
         [self setBaseUrl:url];
         [self createSession];
         _requeustQueue = [[RequestQueue alloc] initWithBaseUrl:url session:[self session]];
+        
+        backgroundQueue = dispatch_queue_create("com.fftsecurity.bgqueue", NULL);
     }
     return self;
 }
 
 #pragma mark Session and data
+
+-(void) initializeCamsObjectsReceived
+{
+    [_camsObjectsReceived setObject:[NSNumber numberWithBool:NO] forKey:[NSNumber numberWithInt:GetControllers]];
+    [_camsObjectsReceived setObject:[NSNumber numberWithBool:NO] forKey:[NSNumber numberWithInt:GetSensors]];
+    [_camsObjectsReceived setObject:[NSNumber numberWithBool:NO] forKey:[NSNumber numberWithInt:GetZones]];
+    [_camsObjectsReceived setObject:[NSNumber numberWithBool:NO] forKey:[NSNumber numberWithInt:GetMaps]];
+}
+
+-(void) camsObjectReceived:(CamsWsRequest) request
+{
+    NSNumber *keyAsNumber = [NSNumber numberWithInt:request];
+    [_camsObjectsReceived setObject:[NSNumber numberWithBool:YES] forKey:keyAsNumber];
+    
+    if (request == GetMaps)
+    {
+        [_delegateMapsArrived mapsArrivedFromServer];
+    }
+        
+}
+
 //
 // Create the NSURLSession
 //
@@ -47,7 +72,27 @@
                                         delegateQueue:[NSOperationQueue mainQueue]];
 }
 
-
+//
+// Performs the following startup requests in the background queue.
+//      * addConfigurationRequests
+//      * addAlarmsRequests
+//      * executeRequests
+//
+-(void) startup
+{
+    dispatch_async(backgroundQueue, ^(void) {
+        [self addConfigurationRequests];
+    });
+    
+    dispatch_async(backgroundQueue, ^(void) {
+        [self addAlarmsRequests];
+    });
+    
+    dispatch_async(backgroundQueue, ^(void) {
+        [self executeRequests];
+    });
+    
+}
 //
 // Add requests to get the controllers, sensors, zones and maps.
 //
@@ -151,7 +196,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
                                                              options:NSJSONReadingMutableContainers
                                                                error:&e];
         
-        [[self repository] parseJsonDictionary:dict];
+        CamsWsRequest camsItemsRetrieved = [[self repository] parseJsonDictionary:dict];
+        [self camsObjectReceived:camsItemsRetrieved];
     }
 }
 

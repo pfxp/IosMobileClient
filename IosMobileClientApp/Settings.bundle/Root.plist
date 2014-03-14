@@ -62,13 +62,13 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Communications</string>
+			<string>Server Communications</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>URL</string>
+			<string>Server URL</string>
 			<key>Key</key>
 			<string>url_pref</string>
 			<key>AutocapitalizationType</key>

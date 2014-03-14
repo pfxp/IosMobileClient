@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+//extern NSNumber* globalSensorPadding;
+
 typedef enum CamsWsRequest : NSInteger CamsWsRequest;
 typedef enum RequestPriority : NSInteger RequestPriority;
 

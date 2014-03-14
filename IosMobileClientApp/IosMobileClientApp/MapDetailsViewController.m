@@ -7,10 +7,11 @@
 //
 
 #import "MapDetailsViewController.h"
-#import "AlarmAnnotation.h"
+#import "MyAlarmAnnotation.h"
 #import "IosMobileClientLib/Map.h"
 #import "IosMobileClientLib/CamsObjectRepository.h"
 #import "IosMobileClientLib/Sensor.h"
+#import "IosMobileClientLib/GlobalSettings.h"
 
 @interface MapDetailsViewController ()
 
@@ -36,11 +37,29 @@
     [self.mapView setMapType:MKMapTypeSatellite];
     [self.mapView setShowsUserLocation:YES];
     
+    [self defineMapRegion];
+    [self drawSensors];
+    //[self drawAnnotations];
+  }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Mapping functions
+//
+// Calculates the MKCoordinateRegion which defines the map display bounds.
+// Adds 10% buffer for visual appeal.
+// TODO Remove the 10% buffer hard code.
+-(void) defineMapRegion
+{
     // Find the latitude and longitude span in degrees.
     double latSpan = [self.map.topLeftCorner.latitude doubleValue] - [self.map.bottomLeftCorner.latitude doubleValue];
     double longSpan = [self.map.topRightCorner.longitude doubleValue] - [self.map.topLeftCorner.longitude doubleValue];
     
-    // Put the spans into a MKCoordinateSpan
+    // Put the spans into a MKCoordinateSpan.
     MKCoordinateSpan span;
     span.latitudeDelta = latSpan;
     span.longitudeDelta = longSpan;
@@ -50,48 +69,36 @@
     origin.latitude = [self.map.bottomLeftCorner.latitude doubleValue] + latSpan/2;
     origin.longitude = [self.map.bottomLeftCorner.longitude doubleValue] + longSpan/2;
     
+    // Add a buffer to the span
+    MKCoordinateSpan bufferedSpan;
+    bufferedSpan.latitudeDelta = latSpan * 1.1f;
+    bufferedSpan.longitudeDelta = longSpan * 1.1f;
+
     // Construct a region for the MapView to display.
-    MKCoordinateRegion region;
     region.center = origin;
-    region.span = span;
+    region.span = bufferedSpan;
+    
+    // Set the region.
     [self.mapView setRegion:region];
-    
-    
-    
-    // Draw the overlay
-    //CLLocationCoordinate2D pointsToUse[3];
-    //pointsToUse[0].latitude = -12.401087;
-    //pointsToUse[0].longitude = 130.864336;
-    //pointsToUse[1].latitude = -12.422568;
-    //pointsToUse[1].longitude = 130.894805;
-    //pointsToUse[2].latitude = -12.432568;
-    //pointsToUse[2].longitude = 130.904805;
-    //MKPolyline *myPolyline = [MKPolyline polylineWithCoordinates:pointsToUse count:3];
-    //myPolyline.title = @"Colorado";
-    //[self.mapView addOverlay:myPolyline level:MKOverlayLevelAboveLabels];
-    
-    
-    
-    for (Sensor *sensor in [self.repository.sensors allValues])
-    {
-        //NSRange range = [[sensor sensorDescription] rangeOfString:@"Airport"];
-        //if (range.location != NSNotFound)
-            [self.mapView addOverlay:sensor level:MKOverlayLevelAboveLabels];
-    }
-    
-    
-    AlarmAnnotation *annotation = [[AlarmAnnotation alloc] initWithLocation:origin
-                                                                      title:@"Zone 1"
-                                                                   subtitle:@"Intrusion at 42m."
-                                                                    eventId:[NSNumber numberWithInt:42]];
-    
-    //[self.mapView addAnnotation:annotation];
 }
 
-- (void)didReceiveMemoryWarning
+//
+// Draws the sensors
+-(void) drawSensors
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    for (Sensor *sensor in [self.repository.sensors allValues])
+        [[self mapView] addOverlay:sensor level:MKOverlayLevelAboveLabels];
+}
+
+//
+// Draw annotations
+-(void) drawAnnotations
+{
+    MyAlarmAnnotation *annotation = [[MyAlarmAnnotation alloc] initWithLocation:region.center
+                                                                          title:@"Zone 1"
+                                                                       subtitle:@"Intrusion at 42m."
+                                                                        eventId:[NSNumber numberWithInt:42]];
+    [self.mapView addAnnotation:annotation];
 }
 
 #pragma mark Navigation functions
@@ -109,8 +116,8 @@
 {
 	MKAnnotationView *annotationView = [views objectAtIndex:0];
 	id <MKAnnotation> mp = [annotationView annotation];
-	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
-	[mv setRegion:region animated:YES];
+	MKCoordinateRegion annotationRegion = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
+	[mv setRegion:annotationRegion animated:YES];
 	[mv selectAnnotation:mp animated:YES];
 }
 
@@ -120,9 +127,9 @@
 //
 - (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    if ([annotation isKindOfClass:[AlarmAnnotation class]])
+    if ([annotation isKindOfClass:[MyAlarmAnnotation class]])
     {
-        AlarmAnnotation *alarmAnno = (AlarmAnnotation*) annotation;
+        MyAlarmAnnotation *alarmAnno = (MyAlarmAnnotation*) annotation;
         MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [mv dequeueReusableAnnotationViewWithIdentifier:@"MyCustomAnnotation"];
         
         if (annotationView == nil)
@@ -143,7 +150,7 @@
 //
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    AlarmAnnotation *annotation = (AlarmAnnotation*)view.annotation;
+    MyAlarmAnnotation *annotation = (MyAlarmAnnotation*)view.annotation;
     NSString *message = [[NSString alloc] initWithFormat:@"Event %@:", [[annotation eventId] stringValue]];
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Intrusion!"
@@ -156,12 +163,12 @@
     
 }
 
-
+//
 // Called when the overlay is added in iOS 7
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
     CGFloat transparency = 0.6f;
-    CGFloat lineWidth = 2.0f;
+    CGFloat lineWidth = 1.0f;
     
     if ([overlay isKindOfClass:MKPolyline.class]) {
         MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];

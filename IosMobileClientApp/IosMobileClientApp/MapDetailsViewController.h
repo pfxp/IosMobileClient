@@ -24,11 +24,14 @@
 
 
 @interface MapDetailsViewController : UIViewController <MKMapViewDelegate>
-
+{
+    MKCoordinateRegion region;
+}
 
 @property (nonatomic, weak) id <MapDetailsViewControllerDelegate> delegate;
 @property (readwrite, weak) CamsObjectRepository *repository;
 @property (nonatomic, strong) Map *map;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 - (IBAction)back:(id)sender;
 @end

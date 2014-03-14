@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-@interface AlarmAnnotation : NSObject <MKAnnotation>
+@interface MyAlarmAnnotation : NSObject <MKAnnotation>
 {
-    //NSString *title;
-    //NSString *subtitle;
-    CLLocationCoordinate2D coordinate;
+       CLLocationCoordinate2D coordinate;
 }
 
 @property (nonatomic, copy) NSString *title;

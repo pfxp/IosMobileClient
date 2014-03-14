@@ -160,29 +160,10 @@
 		7600C1E118A71C8300A27FDC /* IosMobileClientLib */ = {
 			isa = PBXGroup;
 			children = (
-				7623B41618B6D2000096F024 /* Cams.h */,
-				7623B41718B6D2000096F024 /* Cams.m */,
-				7600C21B18A724D800A27FDC /* CamsObjectRepository.h */,
-				7600C21C18A724D800A27FDC /* CamsObjectRepository.m */,
-				7600C20518A71CB400A27FDC /* Controller.h */,
-				7600C20618A71CB400A27FDC /* Controller.m */,
-				7600C21E18A725B100A27FDC /* GlobalSettings.h */,
-				7600C21F18A725B100A27FDC /* GlobalSettings.m */,
-				762F661718B9D91000195CE9 /* IosSessionDataTask.h */,
-				762F661818B9D91000195CE9 /* IosSessionDataTask.m */,
-				7600C21518A71FC700A27FDC /* Map.h */,
-				7600C21618A71FC700A27FDC /* Map.m */,
-				7600C21218A71F8400A27FDC /* Points.h */,
-				7600C21318A71F8400A27FDC /* Points.m */,
-				76B18AB918C2D73E0031EA0A /* RequestQueue.h */,
-				76B18ABA18C2D73E0031EA0A /* RequestQueue.m */,
-				7600C20B18A71EAF00A27FDC /* Sensor.h */,
-				7600C20C18A71EAF00A27FDC /* Sensor.m */,
+				768E253318D26AC000101399 /* Global data */,
+				768E252F18D268C900101399 /* CAMS classes */,
+				768E253118D269CB00101399 /* Data communications */,
 				7600C1E218A71C8300A27FDC /* Supporting Files */,
-				7600C20F18A71F3A00A27FDC /* Zone.h */,
-				7600C21018A71F3A00A27FDC /* Zone.m */,
-				761C801D18C003D5009EC655 /* ZoneEvent.h */,
-				761C801E18C003D5009EC655 /* ZoneEvent.m */,
 			);
 			path = IosMobileClientLib;
 			sourceTree = "<group>";
@@ -211,6 +192,49 @@
 				7600C1F818A71C8300A27FDC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		768E252F18D268C900101399 /* CAMS classes */ = {
+			isa = PBXGroup;
+			children = (
+				7600C20518A71CB400A27FDC /* Controller.h */,
+				7600C20618A71CB400A27FDC /* Controller.m */,
+				7600C21518A71FC700A27FDC /* Map.h */,
+				7600C21618A71FC700A27FDC /* Map.m */,
+				7600C21218A71F8400A27FDC /* Points.h */,
+				7600C21318A71F8400A27FDC /* Points.m */,
+				7600C20B18A71EAF00A27FDC /* Sensor.h */,
+				7600C20C18A71EAF00A27FDC /* Sensor.m */,
+				7600C20F18A71F3A00A27FDC /* Zone.h */,
+				7600C21018A71F3A00A27FDC /* Zone.m */,
+				761C801D18C003D5009EC655 /* ZoneEvent.h */,
+				761C801E18C003D5009EC655 /* ZoneEvent.m */,
+			);
+			name = "CAMS classes";
+			sourceTree = "<group>";
+		};
+		768E253118D269CB00101399 /* Data communications */ = {
+			isa = PBXGroup;
+			children = (
+				762F661718B9D91000195CE9 /* IosSessionDataTask.h */,
+				762F661818B9D91000195CE9 /* IosSessionDataTask.m */,
+				76B18AB918C2D73E0031EA0A /* RequestQueue.h */,
+				76B18ABA18C2D73E0031EA0A /* RequestQueue.m */,
+			);
+			name = "Data communications";
+			sourceTree = "<group>";
+		};
+		768E253318D26AC000101399 /* Global data */ = {
+			isa = PBXGroup;
+			children = (
+				7600C21E18A725B100A27FDC /* GlobalSettings.h */,
+				7600C21F18A725B100A27FDC /* GlobalSettings.m */,
+				7623B41618B6D2000096F024 /* Cams.h */,
+				7623B41718B6D2000096F024 /* Cams.m */,
+				7600C21B18A724D800A27FDC /* CamsObjectRepository.h */,
+				7600C21C18A724D800A27FDC /* CamsObjectRepository.m */,
+			);
+			name = "Global data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

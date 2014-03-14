@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Future Fibre Technologies Pty Ltd. All rights reserved.
 //
 
-#import "AlarmAnnotation.h"
+#import "MyAlarmAnnotation.h"
 
-@implementation AlarmAnnotation
+@implementation MyAlarmAnnotation
 
 @synthesize coordinate;
 

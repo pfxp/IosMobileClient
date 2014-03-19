@@ -335,10 +335,10 @@
             </objects>
             <point key="canvasLocation" x="1062" y="-347"/>
         </scene>
-        <!--Alarm Details View Controller - Intrusion-->
+        <!--Intrusion View Controller - Intrusion-->
         <scene sceneID="Qiv-0h-dpD">
             <objects>
-                <viewController id="gqM-8F-DiB" customClass="AlarmDetailsViewController" sceneMemberID="viewController">
+                <viewController id="gqM-8F-DiB" customClass="IntrusionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NIL-ng-rkq"/>
                         <viewControllerLayoutGuide type="bottom" id="y9w-fh-q0g"/>

@@ -8,27 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
-@class AlarmDetailsViewController;
+@class IntrusionViewController;
 @class ZoneEvent;
 @class LaserAlarm;
 @class SystemAlarm;
 @class Zone;
 
 @protocol AlarmDetailsViewControllerDelegate <NSObject>
-- (void)alarmDetailsViewControllerDidCancel:(AlarmDetailsViewController *)controller;
-- (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller;
-- (void)alarmDetailsViewControllerDidGoToMap:(AlarmDetailsViewController *)controller;
+- (void)alarmDetailsViewControllerDidGoBack:(IntrusionViewController *)controller;
+- (void)alarmDetailsViewControllerDidAcknowledge:(IntrusionViewController *)controller;
+- (void)alarmDetailsViewControllerDidGoToMap:(IntrusionViewController *)controller;
 @end
 
 
-@interface AlarmDetailsViewController : UIViewController
+@interface IntrusionViewController : UIViewController
 {
-    IBOutlet UILabel *timeLabel;
     IBOutlet UILabel *zoneLabel;
     IBOutlet UILabel *perimeterLabel;
+    IBOutlet UILabel *timeLabel;
 }
 
-@property (nonatomic, weak) id <AlarmDetailsViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<AlarmDetailsViewControllerDelegate> delegate;
 @property (nonatomic, weak) ZoneEvent *zoneEvent;
 @property (nonatomic, weak) Zone *zone;
 

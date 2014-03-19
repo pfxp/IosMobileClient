@@ -31,10 +31,11 @@
     // Do any additional setup after loading the view.
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
-    timeLabel.text = [formatter stringFromDate:[_laserAlarm alarmTimeUtc]];
+    //[formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    [formatter setDateFormat:@"HH:mm:ss"];
     alarmTypeLabel.text = [GlobalSettings alarmTypeAsString:[_laserAlarm alarmType]];
     sensorLabel.text = [_sensor sensorDescription];
+    timeLabel.text = [formatter stringFromDate:[_laserAlarm alarmTimeUtc]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,13 +55,13 @@
 }
 */
 
-#pragma mark My Event handlers
+#pragma mark LaserAlarmViewControllerDelegate delegate functions.
 //
-// Go back to the previous screen.
+// Go back to the previous scene.
 //
 - (IBAction)back:(id)sender
 {
-    [self.delegate laserAlarmViewControllerDidCancel:self];
+    [self.delegate laserAlarmViewControllerDidGoBack:self];
 }
 
 @end

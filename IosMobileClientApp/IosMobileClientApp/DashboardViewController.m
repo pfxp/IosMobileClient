@@ -9,6 +9,8 @@
 #import "DashboardViewController.h"
 #import "IosMobileClientLib/Cams.h"
 #import "IosMobileClientLib/Zone.h"
+#import "IosMobileClientLib/Sensor.h"
+#import "IosMobileClientLib/Controller.h"
 #import "IosMobileClientLib/ZoneEvent.h"
 #import "IosMobileClientLib/LaserAlarm.h"
 #import "IosMobileClientLib/SystemAlarm.h"
@@ -207,7 +209,7 @@
                 Sensor *sensor = [self.cams.repository getSensorById:sensorId];
                 
                 cell.textLabel.text = [GlobalSettings alarmTypeAsString:[laserAlarm alarmType]];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"Check cable."];
+                cell.detailTextLabel.text = [sensor sensorDescription];
             }
             break;
         }
@@ -222,9 +224,9 @@
                 cell.detailTextLabel.text = @"Error";
                 return cell;
             }
-            
+            Controller *controller = [self.cams.repository getControllerById:[systemAlarm controllerId]];
             cell.textLabel.text = [GlobalSettings alarmTypeAsString:[systemAlarm alarmType]];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"Check controller."];
+            cell.detailTextLabel.text = [controller name];
             break;
         }
             
@@ -239,7 +241,7 @@
 //
 // Go back to the previous screen.
 //
-- (void)alarmDetailsViewControllerDidCancel:(AlarmDetailsViewController *)controller
+- (void)alarmDetailsViewControllerDidGoBack:(IntrusionViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -247,7 +249,7 @@
 //
 // Acknowledge the alarm.
 //
-- (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller
+- (void)alarmDetailsViewControllerDidAcknowledge:(IntrusionViewController *)controller
 {
     NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
     BOOL confirmAck = [standaloneUserDefaults boolForKey:@"confirm_ack_pref"];
@@ -270,7 +272,7 @@
 //
 // Go to a map.
 //
-- (void)alarmDetailsViewControllerDidGoToMap:(AlarmDetailsViewController *)controller
+- (void)alarmDetailsViewControllerDidGoToMap:(IntrusionViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -279,7 +281,7 @@
 //
 // User clicked 'Back' in the System Alarm VC.
 //
-- (void)systemAlarmViewControllerDidCancel:(SystemAlarmViewController *)controller
+- (void)systemAlarmViewControllerDidGoBack:(SystemAlarmViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -288,7 +290,7 @@
 //
 // User clicked 'Back' in the Laser Alarm VC.
 //
-- (void)laserAlarmViewControllerDidCancel:(LaserAlarmViewController *)controller
+- (void)laserAlarmViewControllerDidGoBack:(LaserAlarmViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -329,7 +331,7 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         UINavigationController *navigationController = segue.destinationViewController;
-        AlarmDetailsViewController *alarmDetailsViewController = [navigationController viewControllers][0];
+        IntrusionViewController *alarmDetailsViewController = [navigationController viewControllers][0];
         
         alarmDetailsViewController.delegate = self;
         int row = indexPath.row;

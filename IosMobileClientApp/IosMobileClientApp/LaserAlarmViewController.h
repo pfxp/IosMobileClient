@@ -13,7 +13,7 @@
 @class Sensor;
 
 @protocol LaserAlarmViewControllerDelegate <NSObject>
-- (void)laserAlarmViewControllerDidCancel:(LaserAlarmViewController *)controller;
+- (void)laserAlarmViewControllerDidGoBack:(LaserAlarmViewController *)controller;
 @end
 
 @interface LaserAlarmViewController : UIViewController

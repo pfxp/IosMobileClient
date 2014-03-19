@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AlarmDetailsViewController.h"
+#import "IntrusionViewController.h"
 #import "SystemAlarmViewController.h"
 #import "LaserAlarmViewController.h"
 

@@ -21,7 +21,7 @@
 		76164FB518D947C6002A2AB2 /* LaserAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FB418D947C6002A2AB2 /* LaserAlarmViewController.m */; };
 		7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7623B41418B6C2170096F024 /* MapKit.framework */; };
 		7628962818BEB735003FC83F /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7628962718BEB735003FC83F /* DashboardViewController.m */; };
-		762ED5A418C04C2700C95382 /* AlarmDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762ED5A318C04C2700C95382 /* AlarmDetailsViewController.m */; };
+		762ED5A418C04C2700C95382 /* IntrusionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762ED5A318C04C2700C95382 /* IntrusionViewController.m */; };
 		76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76609E8A18A9E7CD00D56FD0 /* MapDetailsViewController.m */; };
 		76609E8D18AB300200D56FD0 /* documents in Resources */ = {isa = PBXBuildFile; fileRef = 76609E8C18AB300200D56FD0 /* documents */; };
 		7661475E18A2F90F007D734A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661475D18A2F90F007D734A /* Foundation.framework */; };
@@ -71,8 +71,8 @@
 		7623B41418B6C2170096F024 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7628962618BEB735003FC83F /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		7628962718BEB735003FC83F /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
-		762ED5A218C04C2700C95382 /* AlarmDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmDetailsViewController.h; sourceTree = "<group>"; };
-		762ED5A318C04C2700C95382 /* AlarmDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmDetailsViewController.m; sourceTree = "<group>"; };
+		762ED5A218C04C2700C95382 /* IntrusionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntrusionViewController.h; sourceTree = "<group>"; };
+		762ED5A318C04C2700C95382 /* IntrusionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntrusionViewController.m; sourceTree = "<group>"; };
 		76609E8918A9E7CD00D56FD0 /* MapDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDetailsViewController.h; sourceTree = "<group>"; };
 		76609E8A18A9E7CD00D56FD0 /* MapDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDetailsViewController.m; sourceTree = "<group>"; };
 		76609E8C18AB300200D56FD0 /* documents */ = {isa = PBXFileReference; lastKnownFileType = folder; name = documents; path = ../documents; sourceTree = "<group>"; };
@@ -238,8 +238,8 @@
 		768E253518D26BAB00101399 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				762ED5A218C04C2700C95382 /* AlarmDetailsViewController.h */,
-				762ED5A318C04C2700C95382 /* AlarmDetailsViewController.m */,
+				762ED5A218C04C2700C95382 /* IntrusionViewController.h */,
+				762ED5A318C04C2700C95382 /* IntrusionViewController.m */,
 				7628962618BEB735003FC83F /* DashboardViewController.h */,
 				7628962718BEB735003FC83F /* DashboardViewController.m */,
 				76164FB318D947C6002A2AB2 /* LaserAlarmViewController.h */,
@@ -372,7 +372,7 @@
 				7661476A18A2F90F007D734A /* main.m in Sources */,
 				7628962818BEB735003FC83F /* DashboardViewController.m in Sources */,
 				768E252E18CFFB8D00101399 /* MyCustomAnnotationView.m in Sources */,
-				762ED5A418C04C2700C95382 /* AlarmDetailsViewController.m in Sources */,
+				762ED5A418C04C2700C95382 /* IntrusionViewController.m in Sources */,
 				76164FB518D947C6002A2AB2 /* LaserAlarmViewController.m in Sources */,
 				76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */,
 				768E252B18CFE1DA00101399 /* MyAlarmAnnotation.m in Sources */,

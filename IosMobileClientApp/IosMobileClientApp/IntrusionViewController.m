@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Future Fibre Technologies Pty Ltd. All rights reserved.
 //
 
-#import "AlarmDetailsViewController.h"
+#import "IntrusionViewController.h"
 #import "IosMobileClientLib/Zone.h"
 #import "IosMobileClientLib/ZoneEvent.h"
 #import "IosMobileClientLib/LaserAlarm.h"
 #import "IosMobileClientLib/SystemAlarm.h"
 
-@interface AlarmDetailsViewController ()
+@interface IntrusionViewController ()
 
 @end
 
-@implementation AlarmDetailsViewController
+@implementation IntrusionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,13 +35,16 @@
 	// Do any additional setup after loading the view.
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    //[formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    
     //Optionally for time zone converstions
     //[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
-    timeLabel.text = [formatter stringFromDate:[_zoneEvent eventTimeUtc]];
-
+    
     zoneLabel.text = [_zone name];
     perimeterLabel.text = [[_zoneEvent perimeterDistance] stringValue];
+    timeLabel.text = [formatter stringFromDate:[_zoneEvent eventTimeUtc]];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,17 +53,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark AlarmDetailsViewControllerDelegate functions
+//
+// Go back to previous scene
+//
 - (IBAction)back:(id)sender
 {
-    [self.delegate alarmDetailsViewControllerDidCancel:self];
+    [self.delegate alarmDetailsViewControllerDidGoBack:self];
 }
 
+
+
+//
+// Acknowledge the intrusion
+//
 - (IBAction)acknowledge:(id)sender
 {
        
     [self.delegate alarmDetailsViewControllerDidAcknowledge:self];
 }
 
+
+
+//
+// Go to the relevant map
+//
 - (IBAction)goToMap:(id)sender
 {
     [self.delegate alarmDetailsViewControllerDidGoToMap:self];

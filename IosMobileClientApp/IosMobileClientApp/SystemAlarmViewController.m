@@ -54,13 +54,13 @@
 }
 */
 
-#pragma mark My Event handlers
+#pragma mark SystemAlarmViewControllerDelegate delegate functions.
 //
 // Go back to the previous screen.
 //
 - (IBAction)back:(id)sender
 {
-   [self.delegate systemAlarmViewControllerDidCancel:self];
+   [self.delegate systemAlarmViewControllerDidGoBack:self];
 }
 
 @end

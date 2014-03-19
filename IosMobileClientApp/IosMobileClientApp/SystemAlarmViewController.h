@@ -13,14 +13,14 @@
 @class Controller;
 
 @protocol SystemAlarmViewControllerDelegate <NSObject>
-- (void)systemAlarmViewControllerDidCancel:(SystemAlarmViewController *)controller;
+- (void)systemAlarmViewControllerDidGoBack:(SystemAlarmViewController *)controller;
 @end
 
 @interface SystemAlarmViewController : UIViewController
 {
     IBOutlet UILabel *alarmTypeLabel;
-    IBOutlet UILabel *timeLabel;
     IBOutlet UILabel *controllerLabel;
+    IBOutlet UILabel *timeLabel;
 }
 
 @property (nonatomic, weak) id <SystemAlarmViewControllerDelegate> delegate;

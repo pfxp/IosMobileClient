@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SystemAlarm.h"
-
+#import "GlobalSettings.h"
 @class CamsGeoPoint;
 
 @interface LaserAlarm : SystemAlarm
@@ -16,12 +16,12 @@
 @property (readwrite) BOOL validLocation;
 @property (readwrite) CamsGeoPoint *location;
 @property (readwrite) BOOL isOTDR;
-@property (readwrite) NSArray *sensorIds;
+@property (readwrite, strong) NSArray *sensorIds;
 
 -(id) initWithAlarmId:(NSNumber *)alarmId
             alarmTime:(NSDate *)alarmTimeUtc
          acknowledged:(BOOL)acknowledged
-            alarmType:(NSNumber*)alarmType
+            alarmType:(AlarmType)alarmType
          controllerId:(NSNumber*)controllerId
          validLocation:(BOOL)validLocation
              location:(CamsGeoPoint *)location

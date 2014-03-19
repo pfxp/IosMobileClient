@@ -13,7 +13,7 @@
 -(id) initWithAlarmId:(NSNumber *)alarmId
             alarmTime:(NSDate *)alarmTimeUtc
          acknowledged:(BOOL)acknowledged
-            alarmType:(NSNumber*)alarmType
+            alarmType:(AlarmType)alarmType
          controllerId:(NSNumber*)controllerId
         validLocation:(BOOL)validLocation
              location:(CamsGeoPoint *)location

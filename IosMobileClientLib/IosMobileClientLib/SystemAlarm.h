@@ -7,20 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GlobalSettings.h"
 
 @interface SystemAlarm : NSObject
 
 @property (readwrite, copy) NSNumber *alarmId;
 @property (readwrite) NSDate *alarmTimeUtc;
 @property (readwrite) BOOL acknowledged;
-@property (readwrite) NSNumber *alarmType;
+@property (readwrite) AlarmType alarmType;
 @property (readwrite) NSNumber *controllerId;
 
 
 -(id) initWithAlarmId:(NSNumber *)alarmId
             alarmTime:(NSDate *)alarmTimeUtc
          acknowledged:(BOOL)acknowledged
-            alarmType:(NSNumber*)alarmType
+            alarmType:(AlarmType)alarmType
          controllerId:(NSNumber*)controllerId;
 
 - (NSString*) description;

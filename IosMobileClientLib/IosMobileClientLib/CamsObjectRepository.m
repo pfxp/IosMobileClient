@@ -448,17 +448,18 @@
     NSString *validLocationString = [dict objectForKey:@"ValidLocation"];
     NSDictionary *locInfoDict = [dict objectForKey:@"Location"];
     NSString *isOtdrAsString = [dict objectForKey:@"IsOTDR"];
-    NSDictionary *sensorIdsDict = [dict objectForKey:@"SensorIds"];
+    NSArray *sensorIds = [dict objectForKey:@"SensorIds"];
     
     // Convert into constructor-suitable types.
     NSNumber *alarmId = [NSNumber numberWithLongLong:[alarmIdAsString longLongValue]];
     NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
-    NSNumber *alarmType = [NSNumber numberWithLongLong:[alarmTypeString longLongValue]];
+    AlarmType alarmType = [GlobalSettings alarmTypeFromNumber:[NSNumber numberWithLongLong:[alarmTypeString longLongValue]]];
     NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
     CamsGeoPoint *locationGeoPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[locInfoDict objectForKey:@"Location"]];
     if (locationGeoPoint == nil)
         locationGeoPoint = [[CamsGeoPoint alloc] initWithLat:0 long:0 alt:0];
     
+    //NSArray *sensors = [sensorIdsDict allValues];
     return [[LaserAlarm alloc] initWithAlarmId:alarmId
                                      alarmTime:alarmTime
                                   acknowledged:[acknowledgedAsString boolValue]
@@ -467,7 +468,7 @@
                                  validLocation:[validLocationString boolValue]
                                       location:locationGeoPoint
                                         isOTDR:[isOtdrAsString boolValue]
-                                     sensorIds:[sensorIdsDict allValues]];
+                                     sensorIds:sensorIds];
 }
 
 
@@ -486,7 +487,7 @@
     // Convert into constructor-suitable types.
     NSNumber *alarmId = [NSNumber numberWithLongLong:[alarmIdAsString longLongValue]];
     NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
-    NSNumber *alarmType = [NSNumber numberWithLongLong:[alarmTypeString longLongValue]];
+    AlarmType alarmType = [GlobalSettings alarmTypeFromNumber:[NSNumber numberWithLongLong:[alarmTypeString longLongValue]]];
     NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
     
     return [[SystemAlarm alloc] initWithAlarmId:alarmId

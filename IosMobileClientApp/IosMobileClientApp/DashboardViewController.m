@@ -208,8 +208,8 @@
                 NSNumber *sensorId = [[laserAlarm sensorIds] objectAtIndex:0];
                 Sensor *sensor = [self.cams.repository getSensorById:sensorId];
                 
-                cell.textLabel.text = [NSString stringWithFormat:@"Laser alarm"];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"Laser alarm."];
+                cell.textLabel.text = [GlobalSettings alarmTypeAsString:[laserAlarm alarmType]];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"Check cable."];
             }
             break;
         }
@@ -225,8 +225,8 @@
                 return cell;
             }
             
-            cell.textLabel.text = [NSString stringWithFormat:@"System alarm"];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"System alarm."];
+            cell.textLabel.text = [GlobalSettings alarmTypeAsString:[systemAlarm alarmType]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Check controller."];
             break;
         }
             

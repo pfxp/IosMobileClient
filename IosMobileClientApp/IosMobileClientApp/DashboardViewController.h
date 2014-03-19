@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "AlarmDetailsViewController.h"
 #import "SystemAlarmViewController.h"
+#import "LaserAlarmViewController.h"
 
 @class Cams;
 
-
-@interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate, SystemAlarmViewControllerDelegate, UIAlertViewDelegate>
+@interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate,SystemAlarmViewControllerDelegate,LaserAlarmViewControllerDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIButton *refreshButton;
     ZoneEvent *event;

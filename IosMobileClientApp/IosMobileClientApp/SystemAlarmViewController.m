@@ -7,6 +7,8 @@
 //
 
 #import "SystemAlarmViewController.h"
+#import "IosMobileClientLib/SystemAlarm.h"
+#import "IosMobileClientLib/Controller.h"
 
 @interface SystemAlarmViewController ()
 
@@ -27,6 +29,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    timeLabel.text = [formatter stringFromDate:[_systemAlarm alarmTimeUtc]];
+    alarmTypeLabel.text = [GlobalSettings alarmTypeAsString:[_systemAlarm alarmType]];
+    controllerLabel.text = [_controller name];
 }
 
 - (void)didReceiveMemoryWarning

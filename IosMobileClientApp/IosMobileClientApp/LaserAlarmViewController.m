@@ -7,6 +7,8 @@
 //
 
 #import "LaserAlarmViewController.h"
+#import "IosMobileClientLib/LaserAlarm.h"
+#import "IosMobileClientLib/Sensor.h"
 
 @interface LaserAlarmViewController ()
 
@@ -27,6 +29,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    timeLabel.text = [formatter stringFromDate:[_laserAlarm alarmTimeUtc]];
+    alarmTypeLabel.text = [GlobalSettings alarmTypeAsString:[_laserAlarm alarmType]];
+    sensorLabel.text = [_sensor sensorDescription];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,5 +53,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark My Event handlers
+//
+// Go back to the previous screen.
+//
+- (IBAction)back:(id)sender
+{
+    [self.delegate laserAlarmViewControllerDidCancel:self];
+}
 
 @end

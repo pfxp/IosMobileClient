@@ -179,9 +179,7 @@
             }
             
             Zone *zone = [self.cams.repository getZoneById:[event zoneId]];
-            
-            NSString *zoneName = [zone name];
-            cell.textLabel.text = [NSString stringWithFormat:@"Zone alarm in %@", zoneName];
+            cell.textLabel.text = [zone name];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"Perimeter distance %dm.", [[event perimeterDistance] intValue]];
             break;
         }
@@ -263,6 +261,10 @@
         
         [alertView show];
     }
+    else
+    {
+        [self acknowledgeEvent];
+    }
 }
 
 //
@@ -282,8 +284,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark SystemAlarmViewControllerDelegate
+//
+// User clicked 'Back' in the Laser Alarm VC.
+//
+- (void)laserAlarmViewControllerDidCancel:(LaserAlarmViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
-#pragma mark Button clicked.
+
+#pragma mark Button clicked in alarm acknowledgement alert confirmation
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
@@ -293,12 +304,19 @@
     else
     {
         NSLog(@"user pressed ok");
-        [self.cams acknowledgeAlarm:[event eventId]];
-        [self.cams getAlarms];
+        [self acknowledgeEvent];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
+//
+// Acknowledges the event.
+//
+-(void) acknowledgeEvent
+{
+    [self.cams acknowledgeAlarm:[event eventId]];
+    [self.cams getAlarms];
+}
 
 
 #pragma mark Segue
@@ -317,7 +335,6 @@
         int row = indexPath.row;
         ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
         Zone *zone = [self.cams.repository getZoneById:[zoneEvent zoneId]];
-        
         [alarmDetailsViewController setZoneEvent:zoneEvent];
         [alarmDetailsViewController setZone:zone];
     }
@@ -326,38 +343,30 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         UINavigationController *navigationController = segue.destinationViewController;
         
-        
         SystemAlarmViewController *systemAlarmViewController = [navigationController viewControllers][0];
-        
         systemAlarmViewController.delegate = self;
         int row = indexPath.row;
-        SystemAlarm *systemAlarm = [self.cams.repository getSystemAlarmOrderedByTimeDesc:row];
-        Controller *controller = [self.cams.repository getControllerById:[systemAlarm controllerId]];
-        
-        //[alarmDetailsViewController setZoneEvent:zoneEvent];
-        //[alarmDetailsViewController setZone:zone];
-        
+        SystemAlarm *sysAlarm = [self.cams.repository getSystemAlarmOrderedByTimeDesc:row];
+        Controller *controller = [self.cams.repository getControllerById:[sysAlarm controllerId]];
+        [systemAlarmViewController setSystemAlarm:sysAlarm];
+        [systemAlarmViewController setController:controller];
     }
     else if ([segue.identifier isEqualToString:@"DisplayLaserAlarm"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         UINavigationController *navigationController = segue.destinationViewController;
         
-        /*
-         AlarmDetailsViewController *alarmDetailsViewController = [navigationController viewControllers][0];
-         
-         alarmDetailsViewController.delegate = self;
-         int row = indexPath.row;
-         ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
-         Zone *zone = [self.cams.repository getZoneById:[zoneEvent zoneId]];
-         
-         [alarmDetailsViewController setZoneEvent:zoneEvent];
-         [alarmDetailsViewController setZone:zone];
-         */
+        LaserAlarmViewController *laserAlarmViewController = [navigationController viewControllers][0];
+        laserAlarmViewController.delegate = self;
+        int row = indexPath.row;
+        LaserAlarm *lasAlarm = [self.cams.repository getLaserAlarmOrderedByTimeDesc:row];
+        
+        NSNumber *num = [[lasAlarm sensorIds] objectAtIndex:0];
+        Sensor *sensor = [self.cams.repository getSensorById:num];
+        
+        [laserAlarmViewController setLaserAlarm:lasAlarm];
+        [laserAlarmViewController setSensor:sensor];
     }
-
-    
-    
 }
 
 

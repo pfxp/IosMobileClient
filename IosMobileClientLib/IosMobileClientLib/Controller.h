@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Controller : NSObject
+
 @property (readonly) BOOL connected;
 @property (readonly, copy) NSString *controllerDescription;
 @property (readonly, copy) NSString *hostname;

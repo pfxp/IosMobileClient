@@ -7,8 +7,27 @@
 //
 
 #import "GlobalSettings.h"
-                                        
+
 @implementation  GlobalSettings
 
++(NSString *) alarmTypeAsString:(NSUInteger *)alarmType
+{
+    return @"Unknown";
+    /*
+    switch (alarmType)
+    {
+        case 1:
+        {
+            return @"1";
+            break;
+        }
+        default:
+        {
+            return @"Unknown";
+            break;
+        }
+    }
+     */
+}
 
 @end

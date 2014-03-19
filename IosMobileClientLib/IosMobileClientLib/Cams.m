@@ -110,6 +110,8 @@
 -(void) addAlarmsRequests
 {
     [_requeustQueue addRequest:GetZoneEvents];
+    [_requeustQueue addRequest:GetLaserAlarms];
+    [_requeustQueue addRequest:GetSystemAlarms];
 }
 
 

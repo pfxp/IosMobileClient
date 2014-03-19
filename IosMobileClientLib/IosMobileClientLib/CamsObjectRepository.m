@@ -14,7 +14,8 @@
 #import "Points.h"
 #import "Map.h"
 #import "ZoneEvent.h"
-
+#import "LaserAlarm.h"
+#import "SystemAlarm.h"
 
 @implementation CamsObjectRepository
 
@@ -28,6 +29,8 @@
         _zones = [NSMutableDictionary new];
         _maps = [NSMutableDictionary new];
         _zoneEvents = [NSMutableDictionary new];
+        _laserAlarms = [NSMutableDictionary new];
+        _systemAlarms = [NSMutableDictionary new];
     }
     
     return self;
@@ -56,6 +59,10 @@
         return [self parseJsonDictionary:dict command:GetMaps];
     else if ([dict objectForKey:@"GetZoneEventsResult"] != nil)
         return [self parseJsonDictionary:dict command:GetZoneEvents];
+    else if ([dict objectForKey:@"GetLaserAlarmsResult"] != nil)
+        return [self parseJsonDictionary:dict command:GetLaserAlarms];
+    else if ([dict objectForKey:@"GetSystemAlarmsResult"] != nil)
+        return [self parseJsonDictionary:dict command:GetSystemAlarms];
     else
     {
         NSLog(@"UNKNOWN Parsing JSON dictionary. %@", dict);
@@ -113,7 +120,7 @@
                 
                 if (!alreadyShownLogMessage)
                     NSLog(@"%@", sensor);
-            
+                
                 alreadyShownLogMessage=true;
                 if (sensor)
                     self.sensors[[sensor sensorId]] = sensor;
@@ -182,6 +189,48 @@
                     self.zoneEvents[[zoneEvent eventId]] = zoneEvent;
             }
             return GetZoneEvents;
+            break;
+            
+        case GetLaserAlarms:
+            jsonArray = [dict objectForKey:@"GetLaserAlarmsResult"];
+            
+            if (!jsonArray)
+                return Unknown;
+            
+            [self.laserAlarms removeAllObjects];
+            for (NSDictionary *laserAlarmDict in jsonArray)
+            {
+                LaserAlarm *laserAlarm = [CamsObjectRepository parseLaserAlarmJsonDictionary:laserAlarmDict];
+                
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", laserAlarm);
+                
+                alreadyShownLogMessage=true;
+                if (laserAlarm)
+                    self.laserAlarms[[laserAlarm alarmId]] = laserAlarm;
+            }
+            return GetLaserAlarms;
+            break;
+            
+        case GetSystemAlarms:
+            jsonArray = [dict objectForKey:@"GetSystemAlarmsResult"];
+            
+            if (!jsonArray)
+                return Unknown;
+            
+            [self.systemAlarms removeAllObjects];
+            for (NSDictionary *systemAlarmDict in jsonArray)
+            {
+                SystemAlarm *systemAlarm = [CamsObjectRepository parseSystemAlarmJsonDictionary:systemAlarmDict];
+                
+                if (!alreadyShownLogMessage)
+                    NSLog(@"%@", systemAlarm);
+                
+                alreadyShownLogMessage=true;
+                if (systemAlarm)
+                    self.systemAlarms[[systemAlarm alarmId]] = systemAlarm;
+            }
+            return GetSystemAlarms;
             break;
             
         case PostAPNSToken:
@@ -285,15 +334,15 @@
     CamsGeoPoint *centerPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"CenterPoint"]];
     
     return [[Sensor alloc] initWithDesc:description
-                                         sensorid:sensorIdNumber
-                                    channelNumber:channelNumberNumber
-                                       sensorGuid:sensorGuid
-                                     sensorPoints:pointsForSensor
-                                    topLeftCorner:boundsTopLeftPoint
-                                   topRightCorner:boundsTopRightPoint
-                                 bottomLeftCorner:boundsBottomLeftPoint
-                                bottomRightCorner:boundsBottomRightPoint
-                                      centerPoint:centerPoint];
+                               sensorid:sensorIdNumber
+                          channelNumber:channelNumberNumber
+                             sensorGuid:sensorGuid
+                           sensorPoints:pointsForSensor
+                          topLeftCorner:boundsTopLeftPoint
+                         topRightCorner:boundsTopRightPoint
+                       bottomLeftCorner:boundsBottomLeftPoint
+                      bottomRightCorner:boundsBottomRightPoint
+                            centerPoint:centerPoint];
 }
 
 
@@ -327,10 +376,10 @@
     CamsGeoPoint *bottomRightPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[dict objectForKey:@"BottomRightCorner"]];
     
     return [[Map alloc] initWithDisplayName:displayName
-                                          mapId:idString
-                                        topLeft:topLeftPoint
-                                       topRight:topRightPoint
-                                     bottomLeft:bottomLeftPoint
+                                      mapId:idString
+                                    topLeft:topLeftPoint
+                                   topRight:topRightPoint
+                                 bottomLeft:bottomLeftPoint
                                 bottomRight:bottomRightPoint];
 }
 
@@ -369,33 +418,105 @@
     NSNumber *locationWeightAsDouble = [NSNumber numberWithDouble:[locationWeightAsString doubleValue]];
     NSNumber *locationWeightThresholdAsDouble = [NSNumber numberWithDouble:[locationWeightThresholdAsString doubleValue]];
     
-    ZoneEvent *zoneEvent = [[ZoneEvent alloc] initWithEventId:eventId
-                                                    eventTime:eventTime
-                                                 acknowledged:[acknowledged boolValue]
-                                                       active:[active boolValue]
-                                                      dynamic:[dynamic boolValue]
-                                                       zoneId:zoneId
-                                                 controllerId:controllerId
-                                                     sensorId:sensorId
-                                                cableDistance:cableDistAsDouble
-                                                 locationGeoPoint:locationGeoPoint
-                                            perimeterDistance:perimeterDistAsDouble
-                                               locationWeight:locationWeightAsDouble
-                                      locationWeightThreshold:locationWeightThresholdAsDouble];
+    return [[ZoneEvent alloc] initWithEventId:eventId
+                                    eventTime:eventTime
+                                 acknowledged:[acknowledged boolValue]
+                                       active:[active boolValue]
+                                      dynamic:[dynamic boolValue]
+                                       zoneId:zoneId
+                                 controllerId:controllerId
+                                     sensorId:sensorId
+                                cableDistance:cableDistAsDouble
+                             locationGeoPoint:locationGeoPoint
+                            perimeterDistance:perimeterDistAsDouble
+                               locationWeight:locationWeightAsDouble
+                      locationWeightThreshold:locationWeightThresholdAsDouble];
     
-    
-    return zoneEvent;
 }
+
+
+// Parses laser alarms
+// TODO Ensure no precision is lost with integer conversions.
++ (LaserAlarm *) parseLaserAlarmJsonDictionary:(NSDictionary *) dict
+{
+    // Read the raw data
+    NSString *alarmIdAsString = [dict objectForKey:@"Id"];
+    NSString *eventTimeUtc1970sec = [dict objectForKey:@"TimeUtc1970sec"];
+    NSString *acknowledgedAsString = [dict objectForKey:@"Acked"];
+    NSString *alarmTypeString = [dict objectForKey:@"AlarmType"];
+    NSString *controllerIdAsString = [dict objectForKey:@"CtrlId"];
+    NSString *validLocationString = [dict objectForKey:@"ValidLocation"];
+    NSDictionary *locInfoDict = [dict objectForKey:@"Location"];
+    NSString *isOtdrAsString = [dict objectForKey:@"IsOTDR"];
+    NSDictionary *sensorIdsDict = [dict objectForKey:@"SensorIds"];
+    
+    // Convert into constructor-suitable types.
+    NSNumber *alarmId = [NSNumber numberWithLongLong:[alarmIdAsString longLongValue]];
+    NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
+    NSNumber *alarmType = [NSNumber numberWithLongLong:[alarmTypeString longLongValue]];
+    NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
+    CamsGeoPoint *locationGeoPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[locInfoDict objectForKey:@"Location"]];
+    if (locationGeoPoint == nil)
+        locationGeoPoint = [[CamsGeoPoint alloc] initWithLat:0 long:0 alt:0];
+    
+    return [[LaserAlarm alloc] initWithAlarmId:alarmId
+                                     alarmTime:alarmTime
+                                  acknowledged:[acknowledgedAsString boolValue]
+                                     alarmType:alarmType
+                                  controllerId:controllerId
+                                 validLocation:[validLocationString boolValue]
+                                      location:locationGeoPoint
+                                        isOTDR:[isOtdrAsString boolValue]
+                                     sensorIds:[sensorIdsDict allValues]];
+}
+
+
+//
+// Parses system alarms
+//
++ (SystemAlarm *) parseSystemAlarmJsonDictionary:(NSDictionary *) dict
+{
+    // Read the raw data
+    NSString *alarmIdAsString = [dict objectForKey:@"Id"];
+    NSString *eventTimeUtc1970sec = [dict objectForKey:@"TimeUtc1970sec"];
+    NSString *acknowledgedAsString = [dict objectForKey:@"Acked"];
+    NSString *alarmTypeString = [dict objectForKey:@"AlarmType"];
+    NSString *controllerIdAsString = [dict objectForKey:@"CtrlId"];
+    
+    // Convert into constructor-suitable types.
+    NSNumber *alarmId = [NSNumber numberWithLongLong:[alarmIdAsString longLongValue]];
+    NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
+    NSNumber *alarmType = [NSNumber numberWithLongLong:[alarmTypeString longLongValue]];
+    NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
+    
+    return [[SystemAlarm alloc] initWithAlarmId:alarmId
+                                      alarmTime:alarmTime
+                                   acknowledged:[acknowledgedAsString boolValue]
+                                      alarmType:alarmType
+                                   controllerId:controllerId];
+}
+
+
 
 //
 // Parses CamsGeoPoint
 //
 + (CamsGeoPoint *) parseCamsGeoPointDictionary:(NSDictionary *) dict
 {
+    if (dict == nil ||
+        [dict objectForKey:@"Lat"] == nil ||
+        [dict objectForKey:@"Long"] == nil ||
+        [dict objectForKey:@"Alt"] == nil)
+    {
+        return nil;
+    }
+    
     return [[CamsGeoPoint alloc] initWithLatStr:[dict objectForKey:@"Lat"]
                                         longStr:[dict objectForKey:@"Long"]
                                          altStr:[dict objectForKey:@"Alt"]];
 }
+
+
 
 //
 // Returns zone event using a 0-based index in reverse chronological order.
@@ -419,13 +540,84 @@
     return [mutableIntrusions objectAtIndex:index];
 }
 
+
+
+//
+//
+//
+-(LaserAlarm*) getLaserAlarmOrderedByTimeDesc:(int) index
+{
+    NSArray *alarms = [_laserAlarms allValues];
+    if ([alarms count] == 0 || index > ([alarms count] -1 ))
+        return nil;
+    
+    // Sort laser alarms in reverse chronological order.
+    NSMutableArray *mutableIntrusions = [[NSMutableArray alloc]  initWithArray:alarms];
+    [mutableIntrusions sortUsingComparator:^(id obj1, id obj2) {
+        LaserAlarm *event1 = (LaserAlarm *)obj1;
+        LaserAlarm *event2 = (LaserAlarm *)obj2;
+        NSDate *eventDate1 = [event1 alarmTimeUtc];
+        NSDate *eventDate2 = [event2 alarmTimeUtc];
+        return [eventDate2 compare:eventDate1];
+    }];
+    
+    return [mutableIntrusions objectAtIndex:index];
+
+}
+
+-(SystemAlarm*) getSystemAlarmOrderedByTimeDesc:(int) index
+{
+    NSArray *alarms = [_systemAlarms allValues];
+    if ([alarms count] == 0 || index > ([alarms count] -1 ))
+        return nil;
+    
+    // Sort system alarms in reverse chronological order.
+    NSMutableArray *mutableIntrusions = [[NSMutableArray alloc]  initWithArray:alarms];
+    [mutableIntrusions sortUsingComparator:^(id obj1, id obj2) {
+        LaserAlarm *event1 = (LaserAlarm *)obj1;
+        LaserAlarm *event2 = (LaserAlarm *)obj2;
+        NSDate *eventDate1 = [event1 alarmTimeUtc];
+        NSDate *eventDate2 = [event2 alarmTimeUtc];
+        return [eventDate2 compare:eventDate1];
+    }];
+    
+    return [mutableIntrusions objectAtIndex:index];
+}
+
+
+
 //
 // Get a zone by its ZoneId.
+//
 -(Zone *) getZoneById:(NSNumber *)zoneId
 {
     Zone *zone = [_zones objectForKey:zoneId];
     return zone;
 }
+
+
+
+//
+// Get a sensor by its SensorId
+//
+-(Sensor *) getSensorById:(NSNumber *)sensorId
+{
+    Sensor *sensor = [_sensors objectForKey:sensorId];
+    return sensor;
+}
+
+
+
+//
+// Get a controller by its ControllerId
+//
+-(Controller *) getControllerById:(NSNumber *)controllerId
+{
+    Controller *controller = [_controllers objectForKey:controllerId];
+    return controller;
+}
+
+
 
 //
 // Get maps by an arbitrary index. This is not really correct.

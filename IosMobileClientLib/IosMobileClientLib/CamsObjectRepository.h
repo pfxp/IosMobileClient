@@ -12,8 +12,10 @@
 @class Controller;
 @class Sensor;
 @class Zone;
-@class ZoneEvent;
 @class Map;
+@class ZoneEvent;
+@class LaserAlarm;
+@class SystemAlarm;
 @class CamsGeoPoint;
 
 @interface CamsObjectRepository : NSObject
@@ -23,11 +25,17 @@
 @property (readwrite) NSMutableDictionary *zones;
 @property (readwrite) NSMutableDictionary *maps;
 @property (readwrite) NSMutableDictionary *zoneEvents;
+@property (readwrite) NSMutableDictionary *laserAlarms;
+@property (readwrite) NSMutableDictionary *systemAlarms;
 
 -(CamsWsRequest) parseJsonDictionary:(NSDictionary *)dict;
 -(CamsWsRequest) parseJsonDictionary:(NSDictionary *)dict command:(CamsWsRequest) req;
 -(ZoneEvent*) getZoneEventOrderedByTimeDesc:(int) index;
+-(LaserAlarm*) getLaserAlarmOrderedByTimeDesc:(int) index;
+-(SystemAlarm*) getSystemAlarmOrderedByTimeDesc:(int) index;
 -(Zone *) getZoneById:(NSNumber *)zoneId;
+-(Sensor *) getSensorById:(NSNumber *)sensorId;
+-(Controller *) getControllerById:(NSNumber *)controllerId;
 -(Map *) getMapByIndex:(int) index;
 
 + (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict;
@@ -35,6 +43,8 @@
 + (Zone *) parseZoneJsonDictionary:(NSDictionary *) dict;
 + (Map *) parseMapJsonDictionary:(NSDictionary *) dict;
 + (ZoneEvent *) parseZoneEventJsonDictionary:(NSDictionary *) dict;
++ (LaserAlarm *) parseLaserAlarmJsonDictionary:(NSDictionary *) dict;
++ (SystemAlarm *) parseSystemAlarmJsonDictionary:(NSDictionary *) dict;
 + (CamsGeoPoint *) parseCamsGeoPointDictionary:(NSDictionary *) dict;
 
 @end

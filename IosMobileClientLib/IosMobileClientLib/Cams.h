@@ -18,8 +18,6 @@
     - (void)mapsArrivedFromServer;
 @end
 
-
-
 @interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate>
 {
     dispatch_queue_t backgroundQueue;

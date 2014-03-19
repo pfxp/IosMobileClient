@@ -10,6 +10,8 @@
 
 @class AlarmDetailsViewController;
 @class ZoneEvent;
+@class LaserAlarm;
+@class SystemAlarm;
 @class Zone;
 
 @protocol AlarmDetailsViewControllerDelegate <NSObject>

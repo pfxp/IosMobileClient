@@ -16,11 +16,19 @@
 {
     IBOutlet UIButton *refreshButton;
     ZoneEvent *event;
+    LaserAlarm *laserAlarm;
+    SystemAlarm *systemAlarm;
 }
 
 @property (readwrite, weak) Cams *cams;
+@property (readwrite) BOOL hasZoneEventsSection;
+@property (readwrite) BOOL hasLaserAlarmsSection;
+@property (readwrite) BOOL hasSystemAlarmsSection;
+@property (readwrite) int numSections;
+@property (readwrite) NSMutableArray *sectionsToDisplay;
+@property (readwrite) NSMutableArray *rowsInSection;
 
+-(void) calculateSections;
 - (IBAction) refreshButtonClicked:(id)sender;
--(void) drawAlarms;
 
 @end

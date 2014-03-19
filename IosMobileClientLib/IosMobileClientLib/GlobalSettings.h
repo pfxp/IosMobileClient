@@ -10,6 +10,7 @@
 
 typedef enum CamsWsRequest : NSInteger CamsWsRequest;
 typedef enum RequestPriority : NSInteger RequestPriority;
+typedef enum AlarmSection : NSInteger AlarmSection;
 
 enum CamsWsRequest : NSInteger {
     Unknown,
@@ -18,6 +19,8 @@ enum CamsWsRequest : NSInteger {
     GetSensors,
     GetMaps,
     GetZoneEvents,
+    GetLaserAlarms,
+    GetSystemAlarms,
     PostAPNSToken,
     PostAcknowledgeAlarm
 };
@@ -28,6 +31,13 @@ enum RequestPriority : NSInteger {
     High
 };
 
+enum AlarmSection : NSInteger {
+    IntrusionSection=0,
+    LaserAlarmSection=1,
+    SystemAlarmSection=2
+};
+
 @interface GlobalSettings : NSObject
 
++(NSString *) alarmTypeAsString:(NSUInteger *)alarmType;
 @end

@@ -9,7 +9,8 @@
 #import "AlarmDetailsViewController.h"
 #import "IosMobileClientLib/Zone.h"
 #import "IosMobileClientLib/ZoneEvent.h"
-
+#import "IosMobileClientLib/LaserAlarm.h"
+#import "IosMobileClientLib/SystemAlarm.h"
 @interface AlarmDetailsViewController ()
 
 @end

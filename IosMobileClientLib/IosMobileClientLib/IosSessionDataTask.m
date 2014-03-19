@@ -56,6 +56,12 @@
         case GetZoneEvents:
             return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetZoneEvents", baseUrl]];
             break;
+        case GetLaserAlarms:
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetLaserAlarms", baseUrl]];
+            break;
+        case GetSystemAlarms:
+            return [NSURL URLWithString:[NSString stringWithFormat:@"%@/json/GetSystemAlarms", baseUrl]];
+            break;
         default:
             return nil;
             break;

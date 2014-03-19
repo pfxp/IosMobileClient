@@ -17,6 +17,8 @@
 		761012FF18A9D19C0067C5B2 /* Players.png in Resources */ = {isa = PBXBuildFile; fileRef = 761012F818A9D19C0067C5B2 /* Players.png */; };
 		7610130018A9D19C0067C5B2 /* Players@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 761012F918A9D19C0067C5B2 /* Players@2x.png */; };
 		7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610130218A9D7030067C5B2 /* MapsViewController.m */; };
+		76164FB218D947B5002A2AB2 /* SystemAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FB118D947B5002A2AB2 /* SystemAlarmViewController.m */; };
+		76164FB518D947C6002A2AB2 /* LaserAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FB418D947C6002A2AB2 /* LaserAlarmViewController.m */; };
 		7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7623B41418B6C2170096F024 /* MapKit.framework */; };
 		7628962818BEB735003FC83F /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7628962718BEB735003FC83F /* DashboardViewController.m */; };
 		762ED5A418C04C2700C95382 /* AlarmDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762ED5A318C04C2700C95382 /* AlarmDetailsViewController.m */; };
@@ -62,6 +64,10 @@
 		761012F918A9D19C0067C5B2 /* Players@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Players@2x.png"; path = "../images/Players@2x.png"; sourceTree = "<group>"; };
 		7610130118A9D7030067C5B2 /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapsViewController.h; path = IosMobileClientApp/MapsViewController.h; sourceTree = SOURCE_ROOT; };
 		7610130218A9D7030067C5B2 /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapsViewController.m; path = IosMobileClientApp/MapsViewController.m; sourceTree = SOURCE_ROOT; };
+		76164FB018D947B5002A2AB2 /* SystemAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAlarmViewController.h; sourceTree = "<group>"; };
+		76164FB118D947B5002A2AB2 /* SystemAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemAlarmViewController.m; sourceTree = "<group>"; };
+		76164FB318D947C6002A2AB2 /* LaserAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserAlarmViewController.h; sourceTree = "<group>"; };
+		76164FB418D947C6002A2AB2 /* LaserAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserAlarmViewController.m; sourceTree = "<group>"; };
 		7623B41418B6C2170096F024 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7628962618BEB735003FC83F /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		7628962718BEB735003FC83F /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
@@ -232,10 +238,14 @@
 		768E253518D26BAB00101399 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				7628962618BEB735003FC83F /* DashboardViewController.h */,
-				7628962718BEB735003FC83F /* DashboardViewController.m */,
 				762ED5A218C04C2700C95382 /* AlarmDetailsViewController.h */,
 				762ED5A318C04C2700C95382 /* AlarmDetailsViewController.m */,
+				7628962618BEB735003FC83F /* DashboardViewController.h */,
+				7628962718BEB735003FC83F /* DashboardViewController.m */,
+				76164FB318D947C6002A2AB2 /* LaserAlarmViewController.h */,
+				76164FB418D947C6002A2AB2 /* LaserAlarmViewController.m */,
+				76164FB018D947B5002A2AB2 /* SystemAlarmViewController.h */,
+				76164FB118D947B5002A2AB2 /* SystemAlarmViewController.m */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -363,11 +373,13 @@
 				7628962818BEB735003FC83F /* DashboardViewController.m in Sources */,
 				768E252E18CFFB8D00101399 /* MyCustomAnnotationView.m in Sources */,
 				762ED5A418C04C2700C95382 /* AlarmDetailsViewController.m in Sources */,
+				76164FB518D947C6002A2AB2 /* LaserAlarmViewController.m in Sources */,
 				76609E8B18A9E7CD00D56FD0 /* MapDetailsViewController.m in Sources */,
 				768E252B18CFE1DA00101399 /* MyAlarmAnnotation.m in Sources */,
 				7661476E18A2F90F007D734A /* AppDelegate.m in Sources */,
 				7661477418A2F90F007D734A /* UtilitiesViewController.m in Sources */,
 				7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */,
+				76164FB218D947B5002A2AB2 /* SystemAlarmViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

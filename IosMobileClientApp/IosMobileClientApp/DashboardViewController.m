@@ -238,11 +238,17 @@
 
 
 #pragma mark AlarmDetailsViewControllerDelegate
+//
+// Go back to the previous screen.
+//
 - (void)alarmDetailsViewControllerDidCancel:(AlarmDetailsViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+//
+// Acknowledge the alarm.
+//
 - (void)alarmDetailsViewControllerDidAcknowledge:(AlarmDetailsViewController *)controller
 {
     NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -259,6 +265,25 @@
     }
 }
 
+//
+// Go to a map.
+//
+- (void)alarmDetailsViewControllerDidGoToMap:(AlarmDetailsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark SystemAlarmViewControllerDelegate
+//
+// User clicked 'Back' in the System Alarm VC.
+//
+- (void)systemAlarmViewControllerDidCancel:(SystemAlarmViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark Button clicked.
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
@@ -275,15 +300,14 @@
 }
 
 
-- (void)alarmDetailsViewControllerDidGoToMap:(AlarmDetailsViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark Segue
+//
+// Passes the selected alarm onto the next view controller.
+//
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"DisplayAlarm"])
+    if ([segue.identifier isEqualToString:@"DisplayIntrusion"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         UINavigationController *navigationController = segue.destinationViewController;
@@ -297,7 +321,46 @@
         [alarmDetailsViewController setZoneEvent:zoneEvent];
         [alarmDetailsViewController setZone:zone];
     }
+    else if ([segue.identifier isEqualToString:@"DisplaySystemAlarm"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        UINavigationController *navigationController = segue.destinationViewController;
+        
+        
+        SystemAlarmViewController *systemAlarmViewController = [navigationController viewControllers][0];
+        
+        systemAlarmViewController.delegate = self;
+        int row = indexPath.row;
+        SystemAlarm *systemAlarm = [self.cams.repository getSystemAlarmOrderedByTimeDesc:row];
+        Controller *controller = [self.cams.repository getControllerById:[systemAlarm controllerId]];
+        
+        //[alarmDetailsViewController setZoneEvent:zoneEvent];
+        //[alarmDetailsViewController setZone:zone];
+        
+    }
+    else if ([segue.identifier isEqualToString:@"DisplayLaserAlarm"])
+    {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        UINavigationController *navigationController = segue.destinationViewController;
+        
+        /*
+         AlarmDetailsViewController *alarmDetailsViewController = [navigationController viewControllers][0];
+         
+         alarmDetailsViewController.delegate = self;
+         int row = indexPath.row;
+         ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
+         Zone *zone = [self.cams.repository getZoneById:[zoneEvent zoneId]];
+         
+         [alarmDetailsViewController setZoneEvent:zoneEvent];
+         [alarmDetailsViewController setZone:zone];
+         */
+    }
+
+    
+    
 }
+
+
 
 //
 // Called when the user clicks refresh

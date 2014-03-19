@@ -161,7 +161,83 @@
             </objects>
             <point key="canvasLocation" x="534" y="277"/>
         </scene>
-        <!--Alarm Details View Controller - Alarm Details-->
+        <!--Navigation Controller - Laser Alarm NC-->
+        <scene sceneID="lKK-Rg-HUj">
+            <objects>
+                <navigationController title="Laser Alarm NC" definesPresentationContext="YES" id="dVW-OG-rfM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="49E-CX-NRH">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="iZJ-ad-DDz" kind="relationship" relationship="rootViewController" id="e7e-PH-dEJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J1G-t1-GiT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="538" y="-979"/>
+        </scene>
+        <!--View Controller - Laser Alarm-->
+        <scene sceneID="Cgk-Lp-LSJ">
+            <objects>
+                <viewController title="Laser Alarm" id="iZJ-ad-DDz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8G4-VX-ghR"/>
+                        <viewControllerLayoutGuide type="bottom" id="nnp-4z-Gwu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LQK-Gl-E9i">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Laser Alarm" id="95R-U4-hsp">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="YHh-CK-TE0"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AU4-Rk-Hlo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1062" y="-979"/>
+        </scene>
+        <!--Navigation Controller - SystemAlarmNC-->
+        <scene sceneID="GJj-SY-OTd">
+            <objects>
+                <navigationController title="SystemAlarmNC" definesPresentationContext="YES" id="1vx-MC-Eem" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uFl-K3-hhn">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bex-6G-ZVo" kind="relationship" relationship="rootViewController" id="0v0-1I-bEs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yeb-tg-lOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="538" y="-347"/>
+        </scene>
+        <!--System Alarm View Controller - System Alarm Details-->
+        <scene sceneID="OZe-cr-Fc2">
+            <objects>
+                <viewController title="System Alarm Details" id="bex-6G-ZVo" customClass="SystemAlarmViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fB0-PZ-Ctz"/>
+                        <viewControllerLayoutGuide type="bottom" id="SAd-gI-DpK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IPL-Iw-BE1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="System Alarm" id="KKz-KG-ryB">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="lvU-Bw-5Vg">
+                            <connections>
+                                <action selector="back:" destination="bex-6G-ZVo" id="TDy-xY-O26"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MvM-uQ-Qz5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1062" y="-347"/>
+        </scene>
+        <!--Alarm Details View Controller - Intrusion-->
         <scene sceneID="Qiv-0h-dpD">
             <objects>
                 <viewController id="gqM-8F-DiB" customClass="AlarmDetailsViewController" sceneMemberID="viewController">
@@ -235,7 +311,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Alarm Details" id="6YH-Vc-LTi">
+                    <navigationItem key="navigationItem" title="Intrusion" id="6YH-Vc-LTi">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="oeA-vB-0vp">
                             <connections>
                                 <action selector="back:" destination="gqM-8F-DiB" id="beW-Yw-HWZ"/>
@@ -365,7 +441,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <segue destination="amN-o9-TDO" kind="modal" identifier="DisplayAlarm" id="uM8-I1-1bx"/>
+                                    <segue destination="amN-o9-TDO" kind="modal" identifier="DisplayIntrusion" id="uM8-I1-1bx"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SystemAlarmCell" textLabel="8Ug-oI-9K9" detailTextLabel="drV-ID-BuX" imageView="yZz-5Z-Q28" style="IBUITableViewCellStyleSubtitle" id="gTQ-Qa-W7w">
@@ -396,6 +472,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="1vx-MC-Eem" kind="modal" identifier="DisplaySystemAlarm" id="yNh-NO-mSN"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LaserAlarmCell" textLabel="yAL-8v-ZpO" detailTextLabel="T5d-1n-c1O" imageView="nDp-h2-R1O" style="IBUITableViewCellStyleSubtitle" id="62E-qw-PmL">
                                 <rect key="frame" x="0.0" y="207" width="320" height="44"/>
@@ -425,6 +504,9 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.88300356660000001" green="0.38652835660000001" blue="0.80655242250000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="dVW-OG-rfM" kind="modal" identifier="DisplayLaserAlarm" id="sPW-JB-E2P"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

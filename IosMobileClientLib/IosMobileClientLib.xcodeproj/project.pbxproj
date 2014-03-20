@@ -36,6 +36,9 @@
 		76164FAD18D6B717002A2AB2 /* SystemAlarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FAC18D6B717002A2AB2 /* SystemAlarm.m */; };
 		76164FAE18D9173A002A2AB2 /* LaserAlarm.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76164FA818D6B6CE002A2AB2 /* LaserAlarm.h */; };
 		76164FAF18D9173D002A2AB2 /* SystemAlarm.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76164FAB18D6B717002A2AB2 /* SystemAlarm.h */; };
+		76164FB918DA69DB002A2AB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76164FB818DA69DA002A2AB2 /* CoreLocation.framework */; };
+		76164FBC18DA8A68002A2AB2 /* FFTCLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FBB18DA8A68002A2AB2 /* FFTCLLocation.m */; };
+		76164FBD18DA8AFA002A2AB2 /* FFTCLLocation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76164FBA18DA8A68002A2AB2 /* FFTCLLocation.h */; };
 		761C801F18C003D5009EC655 /* ZoneEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 761C801E18C003D5009EC655 /* ZoneEvent.m */; };
 		7623B41818B6D2000096F024 /* Cams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7623B41718B6D2000096F024 /* Cams.m */; };
 		762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F661818B9D91000195CE9 /* IosSessionDataTask.m */; };
@@ -61,6 +64,7 @@
 			files = (
 				76077F2A18B6F97D001CD284 /* Cams.h in CopyFiles */,
 				7600C22218A726B200A27FDC /* GlobalSettings.h in CopyFiles */,
+				76164FBD18DA8AFA002A2AB2 /* FFTCLLocation.h in CopyFiles */,
 				7616386B18C96FEA00E692BD /* RequestQueue.h in CopyFiles */,
 				7616386A18C96FDD00E692BD /* IosSessionDataTask.h in CopyFiles */,
 				7600C20A18A71D4C00A27FDC /* Controller.h in CopyFiles */,
@@ -105,6 +109,9 @@
 		76164FA918D6B6CE002A2AB2 /* LaserAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserAlarm.m; sourceTree = "<group>"; };
 		76164FAB18D6B717002A2AB2 /* SystemAlarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAlarm.h; sourceTree = "<group>"; };
 		76164FAC18D6B717002A2AB2 /* SystemAlarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemAlarm.m; sourceTree = "<group>"; };
+		76164FB818DA69DA002A2AB2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		76164FBA18DA8A68002A2AB2 /* FFTCLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFTCLLocation.h; sourceTree = "<group>"; };
+		76164FBB18DA8A68002A2AB2 /* FFTCLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFTCLLocation.m; sourceTree = "<group>"; };
 		761C801D18C003D5009EC655 /* ZoneEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneEvent.h; sourceTree = "<group>"; };
 		761C801E18C003D5009EC655 /* ZoneEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneEvent.m; sourceTree = "<group>"; };
 		7623B41618B6D2000096F024 /* Cams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cams.h; sourceTree = "<group>"; };
@@ -120,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76164FB918DA69DB002A2AB2 /* CoreLocation.framework in Frameworks */,
 				7600C1E018A71C8300A27FDC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,6 +168,7 @@
 		7600C1DE18A71C8300A27FDC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76164FB818DA69DA002A2AB2 /* CoreLocation.framework */,
 				7600C1DF18A71C8300A27FDC /* Foundation.framework */,
 				7600C1ED18A71C8300A27FDC /* XCTest.framework */,
 				7600C1F018A71C8300A27FDC /* UIKit.framework */,
@@ -247,6 +256,8 @@
 				7623B41718B6D2000096F024 /* Cams.m */,
 				7600C21B18A724D800A27FDC /* CamsObjectRepository.h */,
 				7600C21C18A724D800A27FDC /* CamsObjectRepository.m */,
+				76164FBA18DA8A68002A2AB2 /* FFTCLLocation.h */,
+				76164FBB18DA8A68002A2AB2 /* FFTCLLocation.m */,
 			);
 			name = "Global data";
 			sourceTree = "<group>";
@@ -342,6 +353,7 @@
 				7600C21D18A724D800A27FDC /* CamsObjectRepository.m in Sources */,
 				7623B41818B6D2000096F024 /* Cams.m in Sources */,
 				7600C20D18A71EAF00A27FDC /* Sensor.m in Sources */,
+				76164FBC18DA8A68002A2AB2 /* FFTCLLocation.m in Sources */,
 				76164FAD18D6B717002A2AB2 /* SystemAlarm.m in Sources */,
 				762F661918B9D91000195CE9 /* IosSessionDataTask.m in Sources */,
 				7600C22018A725B100A27FDC /* GlobalSettings.m in Sources */,

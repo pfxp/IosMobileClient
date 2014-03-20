@@ -8,6 +8,8 @@
 // Handles all Web Service communications with the CAMS Server.
 // Contains the CAMS Object Repository which contains lists of Zones,
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
 #import "CamsObjectRepository.h"
 #import <dispatch/dispatch.h>
 
@@ -18,13 +20,16 @@
     - (void)mapsArrivedFromServer;
 @end
 
-@interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate>
+@interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate, CLLocationManagerDelegate>
 {
     dispatch_queue_t backgroundQueue;
+    
 }
 
-@property (assign) id<MapsArrivedFromServerProtocol> delegateMapsArrived;
+@property (readwrite) CLLocationManager *locationManager;
+@property (readwrite) CLLocation *currentLocation;
 
+@property (assign) id<MapsArrivedFromServerProtocol> delegateMapsArrived;
 @property (readwrite) RequestQueue *requeustQueue;
 @property (readwrite) CamsObjectRepository *repository;
 @property (readwrite, copy) NSURL *baseUrl;
@@ -36,6 +41,7 @@
 -(void) initializeCamsObjectsReceived;
 -(void) camsObjectReceived:(CamsWsRequest) request;
 -(void) startup;
+-(void) startStandardLocationService;
 -(void) createSession;
 -(void) addConfigurationRequests;
 -(void) addAlarmsRequests;

@@ -29,6 +29,7 @@
         _requeustQueue = [[RequestQueue alloc] initWithBaseUrl:url session:[self session]];
         
         backgroundQueue = dispatch_queue_create("com.fftsecurity.bgqueue", NULL);
+        _locationManager = [[CLLocationManager alloc] init];
     }
     return self;
 }
@@ -93,6 +94,29 @@
     });
     
 }
+
+
+
+//
+// Start receiving updates using the Standard Location Service.
+// TODO In release mode, reduce the accuracy.
+//
+-(void) startStandardLocationService
+{
+    if (_locationManager == nil)
+        _locationManager = [[CLLocationManager alloc] init];
+    
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    // Set movement threshold for new event
+    _locationManager.distanceFilter = 200;
+    
+    [_locationManager startUpdatingLocation];
+}
+
+
+
 //
 // Add requests to get the controllers, sensors, zones and maps.
 //
@@ -269,6 +293,20 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
     [self addAlarmsRequests];
     [self executeRequests];
+}
+
+#pragma mark Standard Location service delegate functions
+//
+// Get location updates.
+//
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    int locationCount = [locations count];
+    if (locationCount==0)
+        return;
+    
+    CLLocation *loc =[locations objectAtIndex:locationCount-1];
+    [self setCurrentLocation:loc];
 }
 
 @end

@@ -122,7 +122,7 @@
 			<key>Key</key>
 			<string>confirm_ack_pref</string>
 			<key>DefaultValue</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Type</key>

@@ -337,6 +337,7 @@
         int row = indexPath.row;
         ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
         Zone *zone = [self.cams.repository getZoneById:[zoneEvent zoneId]];
+        [alarmDetailsViewController setCams:_cams];
         [alarmDetailsViewController setZoneEvent:zoneEvent];
         [alarmDetailsViewController setZone:zone];
     }

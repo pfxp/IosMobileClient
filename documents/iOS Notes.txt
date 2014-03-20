@@ -93,3 +93,10 @@ To display a polyline
     //MKPolyline *myPolyline = [MKPolyline polylineWithCoordinates:pointsToUse count:3];
     //myPolyline.title = @"Colorado";
     //[self.mapView addOverlay:myPolyline level:MKOverlayLevelAboveLabels];
+    
+
+Location Services
+=================
+Settings -> Privacy -> Location Services
+
+

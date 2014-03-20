@@ -19,6 +19,7 @@
 		7610130318A9D7030067C5B2 /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7610130218A9D7030067C5B2 /* MapsViewController.m */; };
 		76164FB218D947B5002A2AB2 /* SystemAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FB118D947B5002A2AB2 /* SystemAlarmViewController.m */; };
 		76164FB518D947C6002A2AB2 /* LaserAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76164FB418D947C6002A2AB2 /* LaserAlarmViewController.m */; };
+		76164FB718DA5A1E002A2AB2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76164FB618DA5A1E002A2AB2 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7623B41418B6C2170096F024 /* MapKit.framework */; };
 		7628962818BEB735003FC83F /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7628962718BEB735003FC83F /* DashboardViewController.m */; };
 		762ED5A418C04C2700C95382 /* IntrusionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762ED5A318C04C2700C95382 /* IntrusionViewController.m */; };
@@ -68,6 +69,7 @@
 		76164FB118D947B5002A2AB2 /* SystemAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemAlarmViewController.m; sourceTree = "<group>"; };
 		76164FB318D947C6002A2AB2 /* LaserAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaserAlarmViewController.h; sourceTree = "<group>"; };
 		76164FB418D947C6002A2AB2 /* LaserAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaserAlarmViewController.m; sourceTree = "<group>"; };
+		76164FB618DA5A1E002A2AB2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7623B41418B6C2170096F024 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7628962618BEB735003FC83F /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
 		7628962718BEB735003FC83F /* DashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardViewController.m; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76164FB718DA5A1E002A2AB2 /* CoreLocation.framework in Frameworks */,
 				7623B41518B6C2170096F024 /* MapKit.framework in Frameworks */,
 				7600C20918A71CF100A27FDC /* libIosMobileClientLib.a in Frameworks */,
 				7661476018A2F90F007D734A /* CoreGraphics.framework in Frameworks */,
@@ -166,6 +169,7 @@
 		7661475C18A2F90F007D734A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76164FB618DA5A1E002A2AB2 /* CoreLocation.framework */,
 				7623B41418B6C2170096F024 /* MapKit.framework */,
 				7600C20818A71CF100A27FDC /* libIosMobileClientLib.a */,
 				7661475D18A2F90F007D734A /* Foundation.framework */,

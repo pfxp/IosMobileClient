@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Peter Pellegrini. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+
 #import "AppDelegate.h"
 #import "IosMobileClientLib/Map.h"
 #import "DashboardViewController.h"
@@ -54,7 +56,36 @@
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
     utilitiesVC.cams = cams;
 
+    [cams startStandardLocationService];
     [cams startup];
+    
+    
+    // test if system-wide location services are enabled.
+    if (![CLLocationManager locationServicesEnabled])
+    {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Location Service"
+                                                         message:@"Location services are required. "
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        alert.alertViewStyle = UIAlertViewStyleDefault;
+        [alert show];
+    }
+    
+    
+    // Test if application is allowed to use location services.
+    CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+    if (authorizationStatus!=kCLAuthorizationStatusAuthorized)
+    {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"App requires Location Services"
+                                                         message:@"Location services must be enabled for this app."
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        alert.alertViewStyle = UIAlertViewStyleDefault;
+        [alert show];
+    }
+
     
     return YES;
 }

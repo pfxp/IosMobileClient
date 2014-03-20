@@ -116,9 +116,13 @@
 {
 	MKAnnotationView *annotationView = [views objectAtIndex:0];
 	id <MKAnnotation> mp = [annotationView annotation];
-	MKCoordinateRegion annotationRegion = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
-	[mv setRegion:annotationRegion animated:YES];
-	[mv selectAnnotation:mp animated:YES];
+    
+    if ([mp isKindOfClass:[MyAlarmAnnotation class]])
+    {
+        MKCoordinateRegion annotationRegion = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
+        [mv setRegion:annotationRegion animated:YES];
+        [mv selectAnnotation:mp animated:YES];
+    }
 }
 
 

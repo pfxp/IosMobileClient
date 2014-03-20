@@ -10,6 +10,18 @@
 
 @implementation  GlobalSettings
 
+static NSArray *compassBearings = nil;
+
+//
+// Static initializer of sorts
+// Refer to http://stackoverflow.com/questions/992070/static-constructor-equivalent-in-objective-c
++ (void) initialize
+{
+    if (compassBearings == nil)
+    {
+        compassBearings = [[NSArray alloc] initWithObjects:@"North",@"NNE",@"NE",@"ENE",@"East",@"ESE",@"SE", @"SSE",@"South",@"SSW",@"SW",@"WSW",@"West",@"WNW",@"NW",@"NNW",nil];
+    }
+}
 
 //
 // TODO Redundant function
@@ -60,7 +72,7 @@
         case SopAlarm:
             return @"Sop Alarm";
             break;
-
+            
             // System alarms
             
         case FossShutdown:
@@ -69,7 +81,7 @@
         case SopDegraded:
             return @"SOP Degraded";
             break;
-
+            
         case FossDegraded:
             return @"FOSS Degraded";
             break;
@@ -91,11 +103,20 @@
         case FotechLaserOff:
             return @"Fotech Laser Off";
             break;
-      
+            
         default:
             return @"Bad Alarm";
             break;
     }
+}
+
+//
+// TODO Fix this logic.
+//
++(NSString *) convertHeadingToCompassBearing:(float) direction
+{
+    int val=abs((int) ((direction/22.5)+.5));
+    return [compassBearings objectAtIndex:val];
 }
 
 @end

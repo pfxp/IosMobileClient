@@ -52,7 +52,7 @@
     
     _eventLocation = [self generateEventLocation];
     [zoneLabel setText:[_zone name]];
-    [perimeterLabel setText:[[_zoneEvent perimeterDistance] stringValue]];
+    [perimeterLabel setText:[[NSString alloc] initWithFormat:@"%@ m.", [_zoneEvent perimeterDistance]]];
     [timeLabel setText:[formatter stringFromDate:[_zoneEvent eventTimeUtc]]];
     [directionsLabel setText:[self generateDirections]];
 }
@@ -123,21 +123,27 @@
     return location;
 }
 
+
+
 //
-// Generate the results
+// Generate directions to the intrusion in the format "42m NW"
 //
 -(NSString *) generateDirections
 {
     CLLocation *curr = [self.cams currentLocation];
     CLLocationDistance locationDistance = [ curr distanceFromLocation:[self eventLocation]];
     
-    CLLocationDirection direction = [curr directionToLocation:[self eventLocation]];
-    
     float dir = [self getHeadingForDirectionFromCoordinate:[curr coordinate] toCoordinate:[[self eventLocation] coordinate]];
+    NSString *compassbearing = [GlobalSettings convertHeadingToCompassBearing:dir];
     
-    return [[NSString alloc] initWithFormat:@"Dir: %.0f\nDistance: %.0f", dir, locationDistance ];
+    return [[NSString alloc] initWithFormat:@"%.0fm. %@", locationDistance, compassbearing];
 }
 
+
+
+//
+// Returns a heading between 0-360.
+//
 - (float)getHeadingForDirectionFromCoordinate:(CLLocationCoordinate2D)fromLoc toCoordinate:(CLLocationCoordinate2D)toLoc
 {
     float fLat = degreesToRadians(fromLoc.latitude);

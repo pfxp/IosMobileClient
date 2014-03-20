@@ -31,7 +31,8 @@
     // Do any additional setup after loading the view.
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    //[formatter setDateFormat:@"HH:mm:ss yyyy-mm-dd"];
+    [formatter setDateFormat:@"HH:mm:ss"];
     timeLabel.text = [formatter stringFromDate:[_systemAlarm alarmTimeUtc]];
     alarmTypeLabel.text = [GlobalSettings alarmTypeAsString:[_systemAlarm alarmType]];
     controllerLabel.text = [_controller name];

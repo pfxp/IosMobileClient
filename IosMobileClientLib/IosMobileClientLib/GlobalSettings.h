@@ -59,7 +59,8 @@ enum AlarmType : NSInteger {
 };
 
 @interface GlobalSettings : NSObject
-
 +(AlarmType) alarmTypeFromNumber:(NSNumber *)alarmTypeAsNumber;
 +(NSString *) alarmTypeAsString:(AlarmType) alarmType;
++(NSString *) convertHeadingToCompassBearing:(float) direction;
+
 @end

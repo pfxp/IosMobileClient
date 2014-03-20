@@ -455,9 +455,18 @@
     NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
     AlarmType alarmType = [GlobalSettings alarmTypeFromNumber:[NSNumber numberWithLongLong:[alarmTypeString longLongValue]]];
     NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
-    CamsGeoPoint *locationGeoPoint = [CamsObjectRepository parseCamsGeoPointDictionary:[locInfoDict objectForKey:@"Location"]];
-    if (locationGeoPoint == nil)
+    
+    CamsGeoPoint *locationGeoPoint;
+    if ([validLocationString boolValue])
+    {
+        NSDictionary *locationDict = [locInfoDict objectForKey:@"Location"];
+        locationGeoPoint = [CamsObjectRepository parseCamsGeoPointDictionary:locationDict];
+    }
+    else
+    {
+        // No location
         locationGeoPoint = [[CamsGeoPoint alloc] initWithLat:0 long:0 alt:0];
+    }
     
     //NSArray *sensors = [sensorIdsDict allValues];
     return [[LaserAlarm alloc] initWithAlarmId:alarmId

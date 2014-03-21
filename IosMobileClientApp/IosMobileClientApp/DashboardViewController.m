@@ -42,7 +42,6 @@
     _sectionsToDisplay = [[NSMutableArray alloc] init];
     _rowsInSection = [[NSMutableArray alloc] init];
     
-    
     [self.tableView reloadData];
 }
 
@@ -330,8 +329,10 @@
     if ([segue.identifier isEqualToString:@"DisplayIntrusion"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        UINavigationController *navigationController = segue.destinationViewController;
-        IntrusionViewController *alarmDetailsViewController = [navigationController viewControllers][0];
+        //UINavigationController *navigationController = segue.destinationViewController;
+        //IntrusionViewController *alarmDetailsViewController = [navigationController viewControllers][0];
+        
+        IntrusionViewController *alarmDetailsViewController = segue.destinationViewController;
         
         alarmDetailsViewController.delegate = self;
         int row = indexPath.row;
@@ -344,9 +345,10 @@
     else if ([segue.identifier isEqualToString:@"DisplaySystemAlarm"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        UINavigationController *navigationController = segue.destinationViewController;
+        //UINavigationController *navigationController = segue.destinationViewController;
+        //SystemAlarmViewController *systemAlarmViewController = [navigationController viewControllers][0];
+        SystemAlarmViewController *systemAlarmViewController = segue.destinationViewController;
         
-        SystemAlarmViewController *systemAlarmViewController = [navigationController viewControllers][0];
         systemAlarmViewController.delegate = self;
         int row = indexPath.row;
         SystemAlarm *sysAlarm = [self.cams.repository getSystemAlarmOrderedByTimeDesc:row];
@@ -357,9 +359,10 @@
     else if ([segue.identifier isEqualToString:@"DisplayLaserAlarm"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        UINavigationController *navigationController = segue.destinationViewController;
+        //UINavigationController *navigationController = segue.destinationViewController;
+        //LaserAlarmViewController *laserAlarmViewController = [navigationController viewControllers][0];
+        LaserAlarmViewController *laserAlarmViewController = segue.destinationViewController;
         
-        LaserAlarmViewController *laserAlarmViewController = [navigationController viewControllers][0];
         laserAlarmViewController.delegate = self;
         int row = indexPath.row;
         LaserAlarm *lasAlarm = [self.cams.repository getLaserAlarmOrderedByTimeDesc:row];

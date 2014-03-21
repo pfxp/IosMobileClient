@@ -133,7 +133,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="rUU-V8-vzV" kind="modal" identifier="DisplayMap" id="v61-39-Ivb"/>
+                                    <segue destination="9nY-ER-LEo" kind="push" identifier="DisplayMap" id="WCM-Gv-gld"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -145,36 +145,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1P-Jt-GxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="41" y="931"/>
-        </scene>
-        <!--Navigation Controller - Alarm Details NC-->
-        <scene sceneID="x4r-Tg-VDs">
-            <objects>
-                <navigationController title="Alarm Details NC" definesPresentationContext="YES" id="amN-o9-TDO" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="an8-2M-cId">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="gqM-8F-DiB" kind="relationship" relationship="rootViewController" id="ybE-em-w95"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3a9-Ju-rQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="534" y="277"/>
-        </scene>
-        <!--Navigation Controller - Laser Alarm NC-->
-        <scene sceneID="lKK-Rg-HUj">
-            <objects>
-                <navigationController title="Laser Alarm NC" definesPresentationContext="YES" id="dVW-OG-rfM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="49E-CX-NRH">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="iZJ-ad-DDz" kind="relationship" relationship="rootViewController" id="e7e-PH-dEJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J1G-t1-GiT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="538" y="-979"/>
         </scene>
         <!--Laser Alarm View Controller - Laser Alarm-->
         <scene sceneID="Cgk-Lp-LSJ">
@@ -232,11 +202,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Laser Alarm" id="95R-U4-hsp">
-                        <barButtonItem key="leftBarButtonItem" title="Dashboard" id="YHh-CK-TE0">
-                            <connections>
-                                <action selector="back:" destination="iZJ-ad-DDz" id="ZT6-uI-ZUV"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="Dashboard" id="n2E-Aj-cOx"/>
                     </navigationItem>
                     <connections>
                         <outlet property="alarmTypeLabel" destination="LZf-3L-IYx" id="Pl0-Q3-T7n"/>
@@ -246,22 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AU4-Rk-Hlo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="-979"/>
-        </scene>
-        <!--Navigation Controller - SystemAlarmNC-->
-        <scene sceneID="GJj-SY-OTd">
-            <objects>
-                <navigationController title="SystemAlarmNC" definesPresentationContext="YES" id="1vx-MC-Eem" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uFl-K3-hhn">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="bex-6G-ZVo" kind="relationship" relationship="rootViewController" id="0v0-1I-bEs"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yeb-tg-lOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="538" y="-347"/>
+            <point key="canvasLocation" x="543" y="-949"/>
         </scene>
         <!--System Alarm View Controller - System Alarm Details-->
         <scene sceneID="OZe-cr-Fc2">
@@ -319,11 +270,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="System Alarm" id="KKz-KG-ryB">
-                        <barButtonItem key="leftBarButtonItem" title="Dashboard" id="lvU-Bw-5Vg">
-                            <connections>
-                                <action selector="back:" destination="bex-6G-ZVo" id="TDy-xY-O26"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="Peter" id="5u4-Fp-Hc3"/>
                     </navigationItem>
                     <connections>
                         <outlet property="alarmTypeLabel" destination="L13-6e-8Ti" id="QU1-h0-Tom"/>
@@ -333,12 +280,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MvM-uQ-Qz5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="-347"/>
+            <point key="canvasLocation" x="543" y="-344"/>
         </scene>
-        <!--Intrusion View Controller - Intrusion-->
+        <!--Intrusion View Controller - IntrusionVC-->
         <scene sceneID="Qiv-0h-dpD">
             <objects>
-                <viewController id="gqM-8F-DiB" customClass="IntrusionViewController" sceneMemberID="viewController">
+                <viewController title="IntrusionVC" id="gqM-8F-DiB" customClass="IntrusionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NIL-ng-rkq"/>
                         <viewControllerLayoutGuide type="bottom" id="y9w-fh-q0g"/>
@@ -347,7 +294,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDE-Mz-K5T">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDE-Mz-K5T">
                                 <rect key="frame" x="207" y="392" width="93" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Acknowledge">
@@ -357,7 +304,7 @@
                                     <action selector="acknowledge:" destination="gqM-8F-DiB" eventType="touchUpInside" id="Hlk-p3-hTv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJr-s3-cQB">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJr-s3-cQB">
                                 <rect key="frame" x="10" y="392" width="86" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Display Map">
@@ -421,17 +368,8 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="KJr-s3-cQB" firstAttribute="bottom" secondItem="lDE-Mz-K5T" secondAttribute="bottom" id="gpv-Au-L2E"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Intrusion" id="6YH-Vc-LTi">
-                        <barButtonItem key="leftBarButtonItem" title="Dashboard" id="oeA-vB-0vp">
-                            <connections>
-                                <action selector="back:" destination="gqM-8F-DiB" id="beW-Yw-HWZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Intrusion" id="6YH-Vc-LTi"/>
                     <connections>
                         <outlet property="directionsLabel" destination="FDz-k6-IXr" id="tf7-6D-Fm9"/>
                         <outlet property="perimeterLabel" destination="DYY-pA-BCu" id="mXa-oh-Tcd"/>
@@ -441,22 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hd-Vh-KMx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="277"/>
-        </scene>
-        <!--Navigation Controller - Map Details NC-->
-        <scene sceneID="RUx-hV-1ST">
-            <objects>
-                <navigationController title="Map Details NC" definesPresentationContext="YES" id="rUU-V8-vzV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e1x-T2-3C4">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="9nY-ER-LEo" kind="relationship" relationship="rootViewController" id="113-ZQ-Rdw"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="npi-uG-P1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="534" y="931"/>
+            <point key="canvasLocation" x="543" y="231"/>
         </scene>
         <!--Map Details View Controller - The Map-->
         <scene sceneID="Ap9-Gu-q7l">
@@ -486,25 +409,19 @@
                             <constraint firstItem="xv8-QA-iMg" firstAttribute="leading" secondItem="TwF-23-N0i" secondAttribute="leading" constant="8" id="v4P-Sh-N33"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="The Map" id="je1-yX-2Yi">
-                        <barButtonItem key="leftBarButtonItem" title="Maps" id="n9n-Bc-Mof">
-                            <connections>
-                                <action selector="back:" destination="9nY-ER-LEo" id="2er-Bf-J5N"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="The Map" id="je1-yX-2Yi"/>
                     <connections>
                         <outlet property="mapView" destination="xv8-QA-iMg" id="WuU-dV-UbO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSv-zH-Hu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="931"/>
+            <point key="canvasLocation" x="747" y="931"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Controller - Home TBC-->
         <scene sceneID="fRD-Np-xEF">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="CPq-Ux-iyV" sceneMemberID="viewController">
+                <tabBarController title="Home TBC" definesPresentationContext="YES" id="CPq-Ux-iyV" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="XeM-Gb-yIb">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -555,7 +472,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="amN-o9-TDO" kind="modal" identifier="DisplayIntrusion" id="uM8-I1-1bx"/>
+                                    <segue destination="gqM-8F-DiB" kind="push" identifier="DisplayIntrusion" id="5Lz-DO-gf8"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SystemAlarmCell" textLabel="8Ug-oI-9K9" detailTextLabel="drV-ID-BuX" style="IBUITableViewCellStyleSubtitle" id="gTQ-Qa-W7w">
@@ -582,7 +499,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1vx-MC-Eem" kind="modal" identifier="DisplaySystemAlarm" id="yNh-NO-mSN"/>
+                                    <segue destination="bex-6G-ZVo" kind="push" identifier="DisplaySystemAlarm" id="ktA-Jh-jpx"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LaserAlarmCell" textLabel="yAL-8v-ZpO" detailTextLabel="T5d-1n-c1O" style="IBUITableViewCellStyleSubtitle" id="62E-qw-PmL">
@@ -609,7 +526,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="dVW-OG-rfM" kind="modal" identifier="DisplayLaserAlarm" id="sPW-JB-E2P"/>
+                                    <segue destination="iZJ-ad-DDz" kind="push" identifier="DisplayLaserAlarm" id="LpG-3i-TJ0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -619,6 +536,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Dashboard" id="IkX-uy-MzM">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Wmz-w1-fke"/>
                         <barButtonItem key="rightBarButtonItem" title="Refresh" id="KFa-nl-tIP">
                             <connections>
                                 <action selector="refreshButtonClicked:" destination="T5O-z6-c0C" id="JAi-cu-NPF"/>
@@ -628,23 +546,27 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBP-3i-cU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="41" y="277"/>
+            <point key="canvasLocation" x="41" y="-344"/>
         </scene>
-        <!--Navigation Controller - DashboardNavigController-->
+        <!--Navigation Controller - DashboardNAVC-->
         <scene sceneID="V3O-2P-dht">
             <objects>
-                <navigationController title="DashboardNavigController" definesPresentationContext="YES" id="DGG-75-Sal" sceneMemberID="viewController">
+                <navigationController title="DashboardNAVC" definesPresentationContext="YES" id="DGG-75-Sal" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Dashboard" image="Players.png" id="k6f-M0-A9n"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dPP-UF-zsl">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ilU-bP-QLT">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="T5O-z6-c0C" kind="relationship" relationship="rootViewController" id="AIX-ZY-aHk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="41N-G1-mFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="277"/>
+            <point key="canvasLocation" x="-506" y="-344"/>
         </scene>
         <!--Navigation Controller - MapsNavigController-->
         <scene sceneID="PhO-Qu-Tyw">

@@ -103,9 +103,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayMap"]) {
+        NSString *ti = [self title];
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        UINavigationController *navigationController = segue.destinationViewController;
-        MapDetailsViewController *mapDetailsViewController = [navigationController viewControllers][0];
+        //UINavigationController *navigationController = segue.destinationViewController;
+        //MapDetailsViewController *mapDetailsViewController = [navigationController viewControllers][0];
+        
+        MapDetailsViewController *mapDetailsViewController = segue.destinationViewController;
         mapDetailsViewController.delegate = self;
         mapDetailsViewController.map = [self.cams.repository getMapByIndex:indexPath.row];
         mapDetailsViewController.repository = self.cams.repository;

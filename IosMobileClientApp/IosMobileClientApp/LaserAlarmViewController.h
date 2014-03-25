@@ -12,21 +12,14 @@
 @class LaserAlarm;
 @class Sensor;
 
-@protocol LaserAlarmViewControllerDelegate <NSObject>
-- (void)laserAlarmViewControllerDidGoBack:(LaserAlarmViewController *)controller;
-@end
-
-@interface LaserAlarmViewController : UIViewController
+@interface LaserAlarmViewController : UIViewController <UIAlertViewDelegate>
 {
     IBOutlet UILabel *timeLabel;
     IBOutlet UILabel *alarmTypeLabel;
     IBOutlet UILabel *sensorLabel;
 }
 
-@property (nonatomic, weak) id <LaserAlarmViewControllerDelegate> delegate;
 @property (nonatomic) LaserAlarm *laserAlarm;
 @property (nonatomic) Sensor *sensor;
-
-- (IBAction)back:(id)sender;
 
 @end

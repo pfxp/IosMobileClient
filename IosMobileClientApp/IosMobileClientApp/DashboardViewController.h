@@ -13,7 +13,7 @@
 
 @class Cams;
 
-@interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate,SystemAlarmViewControllerDelegate,LaserAlarmViewControllerDelegate, UIAlertViewDelegate>
+@interface DashboardViewController : UITableViewController <IntrusionDetailsViewControllerDelegate, UIAlertViewDelegate>
 {
     ZoneEvent *event;
     LaserAlarm *laserAlarm;

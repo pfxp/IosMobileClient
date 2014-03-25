@@ -100,3 +100,14 @@ Location Services
 Settings -> Privacy -> Location Services
 
 
+Navigation
+==========
+[self dismissViewControllerAnimated:YES completion:nil];
+[self.navigationController popToRootViewControllerAnimated:TRUE];
+
+// The details views would call this function.
+- (IBAction)back:(id)sender
+{
+    [self.delegate laserAlarmViewControllerDidGoBack:self];
+}
+

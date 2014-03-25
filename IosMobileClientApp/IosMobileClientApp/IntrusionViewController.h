@@ -18,8 +18,7 @@
 
 
 
-@protocol AlarmDetailsViewControllerDelegate <NSObject>
-- (void)alarmDetailsViewControllerDidGoBack:(IntrusionViewController *)controller;
+@protocol IntrusionDetailsViewControllerDelegate <NSObject>
 - (void)alarmDetailsViewControllerDidAcknowledge:(IntrusionViewController *)controller;
 - (void)alarmDetailsViewControllerDidGoToMap:(IntrusionViewController *)controller;
 @end
@@ -34,7 +33,7 @@
 }
 
 @property (readwrite, weak) Cams *cams;
-@property (nonatomic, weak) id<AlarmDetailsViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IntrusionDetailsViewControllerDelegate> delegate;
 @property (nonatomic, weak) ZoneEvent *zoneEvent;
 @property (nonatomic, weak) Zone *zone;
 @property (nonatomic) CLLocation *eventLocation;

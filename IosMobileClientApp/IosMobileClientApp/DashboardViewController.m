@@ -323,6 +323,7 @@
     else
     {
         [self acknowledgeEvent];
+        [self.navigationController popToRootViewControllerAnimated:TRUE];
     }
 }
 
@@ -334,14 +335,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark SystemAlarmViewControllerDelegate
-//
-// User clicked 'Back' in the System Alarm VC.
-//
-- (void)systemAlarmViewControllerDidGoBack:(SystemAlarmViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 #pragma mark SystemAlarmViewControllerDelegate
 //
@@ -353,7 +347,10 @@
 }
 
 
-#pragma mark Button clicked in alarm acknowledgement alert confirmation
+#pragma mark UIAlertViewDelegate function.
+//
+// Does nothing or acknowledges the intrusion.
+//
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
@@ -364,7 +361,7 @@
     {
         NSLog(@"user pressed ok");
         [self acknowledgeEvent];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popToRootViewControllerAnimated:TRUE];
     }
 }
 
@@ -401,7 +398,6 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         SystemAlarmViewController *systemAlarmViewController = segue.destinationViewController;
-        systemAlarmViewController.delegate = self;
         
         int row = indexPath.row;
         SystemAlarm *sysAlarm = [self.cams.repository getSystemAlarmOrderedByTimeDesc:row];
@@ -413,7 +409,6 @@
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         LaserAlarmViewController *laserAlarmViewController = segue.destinationViewController;
-        laserAlarmViewController.delegate = self;
         
         int row = indexPath.row;
         LaserAlarm *lasAlarm = [self.cams.repository getLaserAlarmOrderedByTimeDesc:row];

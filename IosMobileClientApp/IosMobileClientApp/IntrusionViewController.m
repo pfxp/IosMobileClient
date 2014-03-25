@@ -66,22 +66,12 @@
 }
 
 #pragma mark AlarmDetailsViewControllerDelegate functions
-//
-// Go back to previous scene
-//
-- (IBAction)back:(id)sender
-{
-    [self.delegate alarmDetailsViewControllerDidGoBack:self];
-}
-
-
 
 //
 // Acknowledge the intrusion
 //
 - (IBAction)acknowledge:(id)sender
 {
-       
     [self.delegate alarmDetailsViewControllerDidAcknowledge:self];
 }
 

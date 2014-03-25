@@ -97,7 +97,6 @@
                                                                       options:0
                                                                         error:NULL];
              
-             
              NSString *idValue = [[greeting objectForKey:@"id"] stringValue];
              NSString *content = [greeting objectForKey:@"content"];
              NSString *results = [NSString stringWithFormat:@"Hello World! ID: %@ Content: %@", idValue, content];
@@ -121,6 +120,14 @@
     [_cams addConfigurationRequests];
     [_cams addAlarmsRequests];
     [_cams executeRequests];
+}
+
+//
+// Acknowledge all zone events.
+//
+- (IBAction) acknowledgeAllZoneEventsButtonClicked:(id)sender
+{
+    NSLog(@"Acknowledging all zone events.");
 }
 
 @end

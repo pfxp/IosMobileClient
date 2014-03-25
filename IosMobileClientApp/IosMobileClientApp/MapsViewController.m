@@ -73,15 +73,15 @@
 }
 
 
-
 #pragma mark Segue data preparation
+//
 // Pass the selected map to the MapDetailsViewController
+//
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayMap"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         MapDetailsViewController *mapDetailsViewController = segue.destinationViewController;
-        mapDetailsViewController.delegate = self;
         mapDetailsViewController.map = [self.cams.repository getMapByIndex:indexPath.row];
         mapDetailsViewController.repository = self.cams.repository;
     }
@@ -102,7 +102,7 @@
 
 
 
-#pragma mark Notification handler.
+#pragma mark Notification handler for Web Service data.
 //
 // Called when maps are received from the Web Service. Redraws the list of maps.
 //

@@ -38,7 +38,6 @@
 @property (nonatomic, weak) Zone *zone;
 @property (nonatomic) CLLocation *eventLocation;
 
-- (IBAction)back:(id)sender;
 - (IBAction)acknowledge:(id)sender;
 - (IBAction)goToMap:(id)sender;
 

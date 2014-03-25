@@ -106,13 +106,6 @@
 }
 
 
-#pragma mark Navigation functions
-// Go back to previous screens.
-- (IBAction)back:(id)sender
-{
-    [self.delegate mapDetailsViewControllerDidGoBack:self];
-}
-
 #pragma mark MKPamViewDelegate functions
 //
 // When an annotation is added, zoom into a region 1000m x 1000m

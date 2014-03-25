@@ -18,6 +18,7 @@
     IBOutlet UIButton *getMapsButton;
     IBOutlet UIButton *getZoneEventsButton;
     IBOutlet UIButton *getCamsObjectsButton;
+    IBOutlet UIButton *acknowledgeAllZoneEventsButton;
     IBOutlet UILabel *outputLabel;
 }
 
@@ -30,7 +31,7 @@
 - (IBAction) getMapsButtonClicked:(id)sender;
 - (IBAction) getZoneEventsButtonClicked:(id)sender;
 - (IBAction) getsCamsObjectsButtonClicked:(id)sender;
-
+- (IBAction) acknowledgeAllZoneEventsButtonClicked:(id)sender;
 + (NSString *) displayDictionaryAsString:(NSDictionary *) dict;
 
 @end

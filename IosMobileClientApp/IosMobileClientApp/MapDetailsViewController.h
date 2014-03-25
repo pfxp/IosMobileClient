@@ -14,24 +14,13 @@
 @class MapDetailsViewController;
 @class Cams;
 
-//Uses delegation. The child view controller defines a delegate protocol that the parent view controller implements. Before the parent view controller displays the child view controller, it sets itself as the delegate of the child view controller. When the user has selected a row or what ever in the child view, the child view controller calls a method on its delegate and dismisses itself.
-
-// This protocol enables a Cancel or Save button to be used in the navigation bar.
-@protocol MapDetailsViewControllerDelegate <NSObject>
-- (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller;
-- (void)mapDetailsViewControllerDidSave:(MapDetailsViewController *)controller;
-@end
-
-
 @interface MapDetailsViewController : UIViewController <MKMapViewDelegate>
 {
     MKCoordinateRegion region;
 }
 
-@property (nonatomic, weak) id <MapDetailsViewControllerDelegate> delegate;
 @property (readwrite, weak) CamsObjectRepository *repository;
 @property (nonatomic, strong) Map *map;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
-- (IBAction)back:(id)sender;
 @end

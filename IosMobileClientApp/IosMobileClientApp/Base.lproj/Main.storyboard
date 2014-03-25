@@ -369,7 +369,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Intrusion" id="6YH-Vc-LTi"/>
+                    <navigationItem key="navigationItem" title="Intrusion" id="6YH-Vc-LTi">
+                        <barButtonItem key="backBarButtonItem" title="Dashboard" id="9Jv-gA-nQg"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="directionsLabel" destination="FDz-k6-IXr" id="tf7-6D-Fm9"/>
                         <outlet property="perimeterLabel" destination="DYY-pA-BCu" id="mXa-oh-Tcd"/>
@@ -393,7 +395,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xv8-QA-iMg">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xv8-QA-iMg">
                                 <rect key="frame" x="8" y="77" width="304" height="389"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
@@ -416,7 +418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSv-zH-Hu4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="747" y="931"/>
+            <point key="canvasLocation" x="543" y="931"/>
         </scene>
         <!--Tab Bar Controller - Home TBC-->
         <scene sceneID="fRD-Np-xEF">
@@ -438,10 +440,10 @@
             </objects>
             <point key="canvasLocation" x="-1195" y="845"/>
         </scene>
-        <!--Dashboard View Controller - Dashboard-->
+        <!--Dashboard View Controller - Dashboard Title-->
         <scene sceneID="Ivw-ed-Qqw">
             <objects>
-                <tableViewController title="Dashboard" id="T5O-z6-c0C" customClass="DashboardViewController" sceneMemberID="viewController">
+                <tableViewController title="Dashboard Title" id="T5O-z6-c0C" customClass="DashboardViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="auN-2e-lmg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

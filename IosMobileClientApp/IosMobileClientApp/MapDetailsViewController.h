@@ -19,7 +19,7 @@
 // This protocol enables a Cancel or Save button to be used in the navigation bar.
 @protocol MapDetailsViewControllerDelegate <NSObject>
 - (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller;
-- (void)playerDetailsViewControllerDidSave:(MapDetailsViewController *)controller;
+- (void)mapDetailsViewControllerDidSave:(MapDetailsViewController *)controller;
 @end
 
 

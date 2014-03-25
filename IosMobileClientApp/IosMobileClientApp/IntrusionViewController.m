@@ -136,7 +136,7 @@
     float dir = [self getHeadingForDirectionFromCoordinate:[curr coordinate] toCoordinate:[[self eventLocation] coordinate]];
     NSString *compassbearing = [GlobalSettings convertHeadingToCompassBearing:dir];
     
-    return [[NSString alloc] initWithFormat:@"%.0f meters %@.", locationDistance, compassbearing];
+    return [[NSString alloc] initWithFormat:@"Go %.0f m. %@.", locationDistance, compassbearing];
 }
 
 

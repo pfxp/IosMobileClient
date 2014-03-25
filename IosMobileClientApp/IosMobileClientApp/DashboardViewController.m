@@ -333,7 +333,6 @@
         //IntrusionViewController *alarmDetailsViewController = [navigationController viewControllers][0];
         
         IntrusionViewController *alarmDetailsViewController = segue.destinationViewController;
-        
         alarmDetailsViewController.delegate = self;
         int row = indexPath.row;
         ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];

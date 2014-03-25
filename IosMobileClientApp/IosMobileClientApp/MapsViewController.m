@@ -54,40 +54,21 @@
     return [self.cams.repository.maps count];
 }
 
+
+
+//
+// Creates a new cell from a prototype.
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapCell"];
-    
     Map *map = [self.cams.repository getMapByIndex:indexPath.row];
     cell.textLabel.text = map.displayName;
-    //cell.detailTextLabel.text = player.game;
     return cell;
 }
 
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-
 #pragma mark My functions
-
 
 - (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller
 {
@@ -103,11 +84,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"DisplayMap"]) {
-        NSString *ti = [self title];
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        //UINavigationController *navigationController = segue.destinationViewController;
-        //MapDetailsViewController *mapDetailsViewController = [navigationController viewControllers][0];
-        
         MapDetailsViewController *mapDetailsViewController = segue.destinationViewController;
         mapDetailsViewController.delegate = self;
         mapDetailsViewController.map = [self.cams.repository getMapByIndex:indexPath.row];

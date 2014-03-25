@@ -40,7 +40,7 @@
     [self defineMapRegion];
     [self drawSensors];
     //[self drawAnnotations];
-  }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -82,6 +82,8 @@
     [self.mapView setRegion:region];
 }
 
+
+
 //
 // Draws the sensors
 -(void) drawSensors
@@ -89,6 +91,8 @@
     for (Sensor *sensor in [self.repository.sensors allValues])
         [[self mapView] addOverlay:sensor level:MKOverlayLevelAboveLabels];
 }
+
+
 
 //
 // Draw annotations
@@ -100,6 +104,7 @@
                                                                         eventId:[NSNumber numberWithInt:42]];
     [self.mapView addAnnotation:annotation];
 }
+
 
 #pragma mark Navigation functions
 // Go back to previous screens.

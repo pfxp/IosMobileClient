@@ -21,7 +21,7 @@ static NSArray *compassBearings = nil;
 {
     if (compassBearings == nil)
     {
-        compassBearings = [[NSArray alloc] initWithObjects:@"North",@"NNE",@"NE",@"ENE",@"East",@"ESE",@"SE", @"SSE",@"South",@"SSW",@"SW",@"WSW",@"West",@"WNW",@"NW",@"NNW",nil];
+        compassBearings = [[NSArray alloc] initWithObjects:@"north",@"NNE",@"NE",@"ENE",@"east",@"ESE",@"SE", @"SSE",@"south",@"SSW",@"SW",@"WSW",@"west",@"WNW",@"NW",@"NNW",nil];
     }
 }
 

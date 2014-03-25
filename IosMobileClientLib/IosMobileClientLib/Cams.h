@@ -23,7 +23,6 @@
 @interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate, CLLocationManagerDelegate>
 {
     dispatch_queue_t backgroundQueue;
-    
 }
 
 @property (readwrite) CLLocationManager *locationManager;

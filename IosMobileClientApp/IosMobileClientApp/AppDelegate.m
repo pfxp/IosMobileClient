@@ -47,8 +47,8 @@
     dashViewController.cams = cams;
 
     // Give CAMS data to Maps view
-    UINavigationController *navigationController = [tabBarController viewControllers][1];
-    MapsViewController *mapsViewController = [navigationController viewControllers][0];
+    UINavigationController *mapsNavController = [tabBarController viewControllers][1];
+    MapsViewController *mapsViewController = [mapsNavController viewControllers][0];
     mapsViewController.cams = cams;
     [cams setDelegateMapsArrived:mapsViewController];
     

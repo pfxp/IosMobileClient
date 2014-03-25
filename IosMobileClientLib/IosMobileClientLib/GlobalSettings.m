@@ -8,11 +8,18 @@
 
 #import "GlobalSettings.h"
 
+#pragma mark Notification identifiers.
+NSString *ControllersReceivedFromServerNotification = @"ControllersReceivedFromServer";
+NSString *SensorsReceivedFromServerNotification = @"SensorsReceivedFromServer";
+NSString *ZonesReceivedFromServerNotification = @"ZonesReceivedFromServer";
+NSString *MapsReceivedFromServerNotification = @"MapsReceivedFromServer";
+NSString *ZoneEventsReceivedFromServerNotification = @"ZoneEventsReceivedFromServer";
+NSString *LaserAlarmsReceivedFromServerNotification = @"LaserAlarmsReceivedFromServer";
+NSString *SystemAlarmsReceivedFromServerNotification = @"SystemAlarmsReceivedFromServer";
+
 @implementation  GlobalSettings
 
 static NSArray *compassBearings = nil;
-
-
 
 //
 // Static initializer of sorts

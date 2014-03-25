@@ -39,16 +39,118 @@
     [self setHasLaserAlarmsSection:NO];
     [self setHasSystemAlarmsSection:NO];
     [self setNumSections:0];
+    
     _sectionsToDisplay = [[NSMutableArray alloc] init];
     _rowsInSection = [[NSMutableArray alloc] init];
     
-    [self.tableView reloadData];
+    [[self tableView] reloadData];
+    [self registerForNotifications];
 }
+
+//
+// Allow this view controller to know when new data arrives from the CAMS Web Service.
+// TODO Implement a way to reduce the number of redraws at startup time.
+-(void) registerForNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedZoneEvents:)
+                                                 name:ZoneEventsReceivedFromServerNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedLaserAlarms:)
+                                                 name:LaserAlarmsReceivedFromServerNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedSystemAlarms:)
+                                                 name:SystemAlarmsReceivedFromServerNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedZones:)
+                                                 name:ZonesReceivedFromServerNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedSensors:)
+                                                 name:SensorsReceivedFromServerNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedControllers:)
+                                                 name:ControllersReceivedFromServerNotification
+                                               object:nil];
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Notification handlers.
+//
+// Called when zone events are received. No need for thread safety as they are placed into the main
+// thread's queue.
+//
+- (void)receivedZoneEvents:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshAlarms];
+                   });
+}
+
+- (void)receivedLaserAlarms:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshAlarms];
+                   });
+}
+
+- (void)receivedSystemAlarms:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshAlarms];
+                   });
+}
+
+//
+// Called when zones are received.
+//
+- (void)receivedZones:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshAlarms];
+                   });
+}
+
+//
+// Called when sensors are received.
+//
+- (void)receivedSensors:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshAlarms];
+                   });
+}
+
+//
+// Called when controllers are received.
+//
+- (void)receivedControllers:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshAlarms];
+                   });
 }
 
 #pragma mark - UITableViewDataSource protocol
@@ -64,54 +166,6 @@
 }
 
 
-//
-// Works out how many sections are
--(void) calculateSections
-{
-    int numZoneEvents, numLaserAlarms, numSystemAlarms;
-    
-    numZoneEvents = [[[_cams repository] zoneEvents] count];
-    numLaserAlarms = [[[_cams repository] laserAlarms] count];
-    numSystemAlarms = [[[_cams repository] systemAlarms] count];
-    
-    [self setHasZoneEventsSection:(numZoneEvents > 0)];
-    [self setHasLaserAlarmsSection:(numLaserAlarms > 0)];
-    [self setHasSystemAlarmsSection:(numSystemAlarms > 0)];
-    
-    [self setNumSections:0];
-    [[self sectionsToDisplay] removeAllObjects];
-    
-    if ([self hasZoneEventsSection])
-    {
-        self.numSections++;
-        NSNumber *sect = [[NSNumber alloc] initWithInteger:IntrusionSection];
-        [[self sectionsToDisplay] addObject:sect];
-        
-        NSNumber *num =[[NSNumber alloc] initWithInt:numZoneEvents];
-        [[self rowsInSection] addObject:num];
-    }
-    
-    if ([self hasLaserAlarmsSection])
-    {
-        self.numSections++;
-        NSNumber *sect = [[NSNumber alloc] initWithInteger:LaserAlarmSection];
-        [[self sectionsToDisplay] addObject:sect];
-        
-        NSNumber *num =[[NSNumber alloc] initWithInt:numLaserAlarms];
-        [[self rowsInSection] addObject:num];
-    }
-    
-    if ([self hasSystemAlarmsSection])
-    {
-        self.numSections++;
-        NSNumber *sect = [[NSNumber alloc] initWithInteger:SystemAlarmSection];
-        [[self sectionsToDisplay] addObject:sect];
-        
-        NSNumber *num =[[NSNumber alloc] initWithInt:numSystemAlarms];
-        [[self rowsInSection] addObject:num];
-        
-    }
-}
 
 //
 // Number of rows in each section.
@@ -123,6 +177,7 @@
     
     return [[[self rowsInSection] objectAtIndex:section] integerValue];
 }
+
 
 //
 // Sets the title title text
@@ -155,6 +210,9 @@
     return sectionName;
 }
 
+//
+// Builds rows from the cell prototypes.
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int section = indexPath.section;
@@ -329,11 +387,9 @@
     if ([segue.identifier isEqualToString:@"DisplayIntrusion"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        //UINavigationController *navigationController = segue.destinationViewController;
-        //IntrusionViewController *alarmDetailsViewController = [navigationController viewControllers][0];
-        
         IntrusionViewController *alarmDetailsViewController = segue.destinationViewController;
         alarmDetailsViewController.delegate = self;
+        
         int row = indexPath.row;
         ZoneEvent *zoneEvent = [self.cams.repository getZoneEventOrderedByTimeDesc:row];
         Zone *zone = [self.cams.repository getZoneById:[zoneEvent zoneId]];
@@ -344,11 +400,9 @@
     else if ([segue.identifier isEqualToString:@"DisplaySystemAlarm"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        //UINavigationController *navigationController = segue.destinationViewController;
-        //SystemAlarmViewController *systemAlarmViewController = [navigationController viewControllers][0];
         SystemAlarmViewController *systemAlarmViewController = segue.destinationViewController;
-        
         systemAlarmViewController.delegate = self;
+        
         int row = indexPath.row;
         SystemAlarm *sysAlarm = [self.cams.repository getSystemAlarmOrderedByTimeDesc:row];
         Controller *controller = [self.cams.repository getControllerById:[sysAlarm controllerId]];
@@ -358,11 +412,9 @@
     else if ([segue.identifier isEqualToString:@"DisplayLaserAlarm"])
     {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        //UINavigationController *navigationController = segue.destinationViewController;
-        //LaserAlarmViewController *laserAlarmViewController = [navigationController viewControllers][0];
         LaserAlarmViewController *laserAlarmViewController = segue.destinationViewController;
-        
         laserAlarmViewController.delegate = self;
+        
         int row = indexPath.row;
         LaserAlarm *lasAlarm = [self.cams.repository getLaserAlarmOrderedByTimeDesc:row];
         
@@ -374,16 +426,63 @@
     }
 }
 
-
-
+#pragma mark My functions.
 //
-// Called when the user clicks refresh
+// Refreshes the alarms
 //
-- (IBAction) refreshButtonClicked:(id)sender
+- (void) refreshAlarms
 {
     [self calculateSections];
     [self.tableView reloadData];
 }
 
+//
+// Works out how many sections are
+//
+-(void) calculateSections
+{
+    int numZoneEvents, numLaserAlarms, numSystemAlarms;
+    
+    numZoneEvents = [[[_cams repository] zoneEvents] count];
+    numLaserAlarms = [[[_cams repository] laserAlarms] count];
+    numSystemAlarms = [[[_cams repository] systemAlarms] count];
+    
+    [self setHasZoneEventsSection:(numZoneEvents > 0)];
+    [self setHasLaserAlarmsSection:(numLaserAlarms > 0)];
+    [self setHasSystemAlarmsSection:(numSystemAlarms > 0)];
+    
+    [self setNumSections:0];
+    [[self sectionsToDisplay] removeAllObjects];
+    
+    if ([self hasZoneEventsSection])
+    {
+        self.numSections++;
+        NSNumber *sect = [[NSNumber alloc] initWithInteger:IntrusionSection];
+        [[self sectionsToDisplay] addObject:sect];
+        
+        NSNumber *num =[[NSNumber alloc] initWithInt:numZoneEvents];
+        [[self rowsInSection] addObject:num];
+    }
+    
+    if ([self hasLaserAlarmsSection])
+    {
+        self.numSections++;
+        NSNumber *sect = [[NSNumber alloc] initWithInteger:LaserAlarmSection];
+        [[self sectionsToDisplay] addObject:sect];
+        
+        NSNumber *num =[[NSNumber alloc] initWithInt:numLaserAlarms];
+        [[self rowsInSection] addObject:num];
+    }
+    
+    if ([self hasSystemAlarmsSection])
+    {
+        self.numSections++;
+        NSNumber *sect = [[NSNumber alloc] initWithInteger:SystemAlarmSection];
+        [[self sectionsToDisplay] addObject:sect];
+        
+        NSNumber *num =[[NSNumber alloc] initWithInt:numSystemAlarms];
+        [[self rowsInSection] addObject:num];
+    }
+}
 
 @end

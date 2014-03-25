@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark Notification identifiers
+extern NSString *ControllersReceivedFromServerNotification;
+extern NSString *SensorsReceivedFromServerNotification;
+extern NSString *ZonesReceivedFromServerNotification;
+extern NSString *MapsReceivedFromServerNotification;
+extern NSString *ZoneEventsReceivedFromServerNotification;
+extern NSString *LaserAlarmsReceivedFromServerNotification;
+extern NSString *SystemAlarmsReceivedFromServerNotification;
+
+#pragma mark Enumerations
 typedef enum CamsWsRequest : NSInteger CamsWsRequest;
 typedef enum RequestPriority : NSInteger RequestPriority;
 typedef enum AlarmSection : NSInteger AlarmSection;

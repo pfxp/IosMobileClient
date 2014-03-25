@@ -7,6 +7,7 @@
 //
 
 #import "MapsViewController.h"
+#import "IosMobileClientLib/GlobalSettings.h"
 #import "IosMobileClientLib/Map.h"
 
 @interface MapsViewController ()
@@ -26,13 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self refreshMapsList];
+    [self registerForNotifications];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -40,8 +38,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITableViewDataSource protocol
 
+-(void) registerForNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedMaps:)
+                                                 name:MapsReceivedFromServerNotification
+                                               object:nil];
+}
+
+
+#pragma mark - UITableViewDataSource protocol
 // Return the number of sections.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -53,8 +60,6 @@
 {
     return [self.cams.repository.maps count];
 }
-
-
 
 //
 // Creates a new cell from a prototype.
@@ -68,18 +73,8 @@
 }
 
 
-#pragma mark My functions
 
-- (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)playerDetailsViewControllerDidSave:(MapDetailsViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
+#pragma mark Segue data preparation
 // Pass the selected map to the MapDetailsViewController
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -92,17 +87,42 @@
     }
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+
+#pragma mark MapDetailsViewControllerDelegate functions.
+- (void)mapDetailsViewControllerDidGoBack:(MapDetailsViewController *)controller
 {
-    //NSUInteger row = [indexPath row];
-    //self.selectedMap = (self.maps)[row];
-    //int k=0;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark MapsArrivedFromServerProtocol methods
-- (void)mapsArrivedFromServer
+- (void)playerDetailsViewControllerDidSave:(MapDetailsViewController *)controller
 {
-   [self.tableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+#pragma mark Notification handler.
+//
+// Called when maps are received from the Web Service. Redraws the list of maps.
+//
+- (void)receivedMaps:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                       [self refreshMapsList];
+                   });
+}
+
+
+
+#pragma mark Redraw the list of maps.
+//
+// Refreshes the maps list.
+//
+- (void)refreshMapsList
+{
+   [[self tableView] reloadData];
 }
 
 @end

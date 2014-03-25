@@ -50,16 +50,16 @@
     UINavigationController *mapsNavController = [tabBarController viewControllers][1];
     MapsViewController *mapsViewController = [mapsNavController viewControllers][0];
     mapsViewController.cams = cams;
-    [cams setDelegateMapsArrived:mapsViewController];
     
     // Give CAMS data to Utilities view.
     UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
     utilitiesVC.cams = cams;
 
+    // Start downloading data
     [cams startStandardLocationService];
     [cams startup];
     
-    
+
     // test if system-wide location services are enabled.
     if (![CLLocationManager locationServicesEnabled])
     {

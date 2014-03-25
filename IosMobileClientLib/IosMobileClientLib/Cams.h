@@ -16,9 +16,6 @@
 @class IosSessionDataTask;
 @class RequestQueue;
 
-@protocol MapsArrivedFromServerProtocol <NSObject>
-    - (void)mapsArrivedFromServer;
-@end
 
 @interface Cams : NSObject<NSURLSessionDelegate, NSURLSessionDataDelegate, CLLocationManagerDelegate>
 {
@@ -28,7 +25,6 @@
 @property (readwrite) CLLocationManager *locationManager;
 @property (readwrite) CLLocation *currentLocation;
 
-@property (assign) id<MapsArrivedFromServerProtocol> delegateMapsArrived;
 @property (readwrite) RequestQueue *requeustQueue;
 @property (readwrite) CamsObjectRepository *repository;
 @property (readwrite, copy) NSURL *baseUrl;
@@ -36,9 +32,12 @@
 @property (readwrite) NSMutableDictionary *dataFromWebService;
 @property (readwrite) NSMutableDictionary *camsObjectsReceived;
 
+
 -(id) initWithBaseUrl:(NSURL*) url;
 -(void) initializeCamsObjectsReceived;
 -(void) camsObjectReceived:(CamsWsRequest) request;
+-(BOOL) hasCamsObjectBeenReceived:(CamsWsRequest) request;
+
 -(void) startup;
 -(void) startStandardLocationService;
 -(void) createSession;
@@ -52,3 +51,4 @@
 -(void) joinTogetherWsData:(NSUInteger)taskId  data:(NSData*)data;
 -(void) getAlarms;
 @end
+

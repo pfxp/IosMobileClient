@@ -539,11 +539,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Dashboard" id="IkX-uy-MzM">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Wmz-w1-fke"/>
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="KFa-nl-tIP">
-                            <connections>
-                                <action selector="refreshButtonClicked:" destination="T5O-z6-c0C" id="JAi-cu-NPF"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBP-3i-cU2" userLabel="First Responder" sceneMemberID="firstResponder"/>

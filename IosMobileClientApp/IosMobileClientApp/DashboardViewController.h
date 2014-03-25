@@ -15,7 +15,6 @@
 
 @interface DashboardViewController : UITableViewController <AlarmDetailsViewControllerDelegate,SystemAlarmViewControllerDelegate,LaserAlarmViewControllerDelegate, UIAlertViewDelegate>
 {
-    IBOutlet UIButton *refreshButton;
     ZoneEvent *event;
     LaserAlarm *laserAlarm;
     SystemAlarm *systemAlarm;
@@ -29,7 +28,8 @@
 @property (readwrite) NSMutableArray *sectionsToDisplay;
 @property (readwrite) NSMutableArray *rowsInSection;
 
+-(void) registerForNotifications;
 -(void) calculateSections;
-- (IBAction) refreshButtonClicked:(id)sender;
+-(void) refreshAlarms;
 
 @end

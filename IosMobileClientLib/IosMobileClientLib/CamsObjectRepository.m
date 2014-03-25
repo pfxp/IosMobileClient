@@ -103,6 +103,7 @@
                 if (controller)
                     self.controllers[[controller ctrlId]] = controller;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:ControllersReceivedFromServerNotification object:self];
             return GetControllers;
             break;
             
@@ -125,6 +126,7 @@
                 if (sensor)
                     self.sensors[[sensor sensorId]] = sensor;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:SensorsReceivedFromServerNotification object:self];
             return GetSensors;
             break;
             
@@ -146,6 +148,7 @@
                 if (zone)
                     self.zones[[zone zoneId]] = zone;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:ZonesReceivedFromServerNotification object:self];
             return GetZones;
             break;
             
@@ -167,6 +170,7 @@
                 if (map)
                     self.maps[[map mapId]] = map;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:MapsReceivedFromServerNotification object:self];
             return GetMaps;
             break;
             
@@ -188,6 +192,7 @@
                 if (zoneEvent)
                     self.zoneEvents[[zoneEvent eventId]] = zoneEvent;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:ZoneEventsReceivedFromServerNotification object:self];
             return GetZoneEvents;
             break;
             
@@ -209,6 +214,7 @@
                 if (laserAlarm)
                     self.laserAlarms[[laserAlarm alarmId]] = laserAlarm;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:LaserAlarmsReceivedFromServerNotification object:self];
             return GetLaserAlarms;
             break;
             
@@ -230,6 +236,7 @@
                 if (systemAlarm)
                     self.systemAlarms[[systemAlarm alarmId]] = systemAlarm;
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:SystemAlarmsReceivedFromServerNotification object:self];
             return GetSystemAlarms;
             break;
             
@@ -381,6 +388,7 @@
                                    topRight:topRightPoint
                                  bottomLeft:bottomLeftPoint
                                 bottomRight:bottomRightPoint];
+    
 }
 
 //
@@ -572,7 +580,7 @@
     }];
     
     return [mutableIntrusions objectAtIndex:index];
-
+    
 }
 
 -(SystemAlarm*) getSystemAlarmOrderedByTimeDesc:(int) index

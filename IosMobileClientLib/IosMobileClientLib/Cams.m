@@ -27,7 +27,6 @@
         [self setBaseUrl:url];
         [self createSession];
         _requeustQueue = [[RequestQueue alloc] initWithBaseUrl:url session:[self session]];
-        
         backgroundQueue = dispatch_queue_create("com.fftsecurity.bgqueue", NULL);
         _locationManager = [[CLLocationManager alloc] init];
     }
@@ -35,7 +34,9 @@
 }
 
 #pragma mark Session and data
-
+//
+// Initially no CAMS objects have been received.
+//
 -(void) initializeCamsObjectsReceived
 {
     [_camsObjectsReceived setObject:[NSNumber numberWithBool:NO] forKey:[NSNumber numberWithInt:GetControllers]];
@@ -44,16 +45,22 @@
     [_camsObjectsReceived setObject:[NSNumber numberWithBool:NO] forKey:[NSNumber numberWithInt:GetMaps]];
 }
 
+
+//
+// Keeps a record of which CAMS objects have been received.
+//
 -(void) camsObjectReceived:(CamsWsRequest) request
 {
     NSNumber *keyAsNumber = [NSNumber numberWithInt:request];
     [_camsObjectsReceived setObject:[NSNumber numberWithBool:YES] forKey:keyAsNumber];
-    
-    if (request == GetMaps)
-    {
-        [_delegateMapsArrived mapsArrivedFromServer];
-    }
-        
+}
+
+//
+// Returns true if the CAMS object has been received.
+//
+-(BOOL) hasCamsObjectBeenReceived:(CamsWsRequest) request
+{
+    return ([_camsObjectsReceived objectForKey:[NSNumber numberWithInt:request]] != nil);
 }
 
 //
@@ -310,3 +317,4 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 }
 
 @end
+

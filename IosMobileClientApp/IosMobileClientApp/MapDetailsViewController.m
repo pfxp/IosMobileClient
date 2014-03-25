@@ -12,6 +12,10 @@
 #import "IosMobileClientLib/CamsObjectRepository.h"
 #import "IosMobileClientLib/Sensor.h"
 #import "IosMobileClientLib/GlobalSettings.h"
+#import "IosMobileClientLib/ZoneEvent.h"
+#import "IosMobileClientLib/Zone.h"
+#import "IosMobileClientLib/Points.h"
+
 
 @interface MapDetailsViewController ()
 
@@ -40,6 +44,7 @@
     [self defineMapRegion];
     [self drawSensors];
     //[self drawAnnotations];
+    [self drawIntrusions];
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,8 +110,40 @@
     [self.mapView addAnnotation:annotation];
 }
 
+//
+// Generates annotations.
+//
+-(NSArray *) generateIntrusionAnnotations
+{
+    NSMutableArray *annots = [[NSMutableArray alloc] init];
+    
+    for (ZoneEvent *event in [self.repository.zoneEvents allValues])
+    {
+        Zone *zone = [self.repository getZoneById:[event zoneId]];
+        NSString *message = [[NSString alloc] initWithFormat: @"Intrusion at %@m.", [event perimeterDistance]];
+        
+        CLLocationCoordinate2D location = [CamsGeoPoint convertCamsGeoPointToCoordinate:[event camsGeoPoint]];
+        
+        MyAlarmAnnotation *annotation = [[MyAlarmAnnotation alloc] initWithLocation:location
+                                                                              title:[zone zoneDescription]
+                                                                           subtitle:message
+                                                                            eventId:[event eventId]];
+        [annots addObject:annotation];
+    }
+    
+    return annots;
+}
 
-#pragma mark MKPamViewDelegate functions
+//
+// Draw
+-(void) drawIntrusions
+{
+    NSArray *array = [self generateIntrusionAnnotations];
+    [self.mapView addAnnotations:array];
+}
+
+
+#pragma mark MKMapViewDelegate functions
 //
 // When an annotation is added, zoom into a region 1000m x 1000m
 //
@@ -117,8 +154,8 @@
     
     if ([mp isKindOfClass:[MyAlarmAnnotation class]])
     {
-        MKCoordinateRegion annotationRegion = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
-        [mv setRegion:annotationRegion animated:YES];
+        //MKCoordinateRegion annotationRegion = MKCoordinateRegionMakeWithDistance([mp coordinate], 1000, 1000);
+        //[mv setRegion:annotationRegion animated:YES];
         [mv selectAnnotation:mp animated:YES];
     }
 }
@@ -148,7 +185,7 @@
 }
 
 //
-// Called when the annotation is tapped.
+// Called when the callout is tapped.
 //
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {

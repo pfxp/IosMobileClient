@@ -190,7 +190,9 @@
                 
                 alreadyShownLogMessage=true;
                 if (zoneEvent)
+                {
                     self.zoneEvents[[zoneEvent eventId]] = zoneEvent;
+                }
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:ZoneEventsReceivedFromServerNotification object:self];
             return GetZoneEvents;

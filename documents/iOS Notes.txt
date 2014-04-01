@@ -111,3 +111,9 @@ Navigation
     [self.delegate laserAlarmViewControllerDidGoBack:self];
 }
 
+
+TODO
+====
+
+* Ensure the mobile client can recover if it does not receive zones information. This happened once
+where the alarms were displayed in the dashboard but the zones had not been received.

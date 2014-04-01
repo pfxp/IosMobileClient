@@ -117,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="-501" y="1649"/>
         </scene>
-        <!--Maps View Controller - Maps-->
+        <!--Maps View Controller - Sensors-->
         <scene sceneID="BYX-Xo-2oo">
             <objects>
-                <tableViewController title="Maps" id="n4k-RU-igf" customClass="MapsViewController" sceneMemberID="viewController">
+                <tableViewController title="Sensors" id="n4k-RU-igf" customClass="MapsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="P5E-XM-ess">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +148,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Maps" id="BPY-tF-Ehd">
+                    <navigationItem key="navigationItem" title="Sensors" id="BPY-tF-Ehd">
                         <barButtonItem key="backBarButtonItem" title="Back" id="s3Y-u8-fcM"/>
                     </navigationItem>
                 </tableViewController>
@@ -421,7 +421,7 @@
                             <constraint firstItem="xv8-QA-iMg" firstAttribute="leading" secondItem="TwF-23-N0i" secondAttribute="leading" constant="8" id="v4P-Sh-N33"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="The Map" id="je1-yX-2Yi"/>
+                    <navigationItem key="navigationItem" title="The Sensor" id="je1-yX-2Yi"/>
                     <connections>
                         <outlet property="mapView" destination="xv8-QA-iMg" id="WuU-dV-UbO"/>
                     </connections>
@@ -450,10 +450,10 @@
             </objects>
             <point key="canvasLocation" x="-1195" y="845"/>
         </scene>
-        <!--Dashboard View Controller - Dashboard Title-->
+        <!--Dashboard View Controller - Alarms-->
         <scene sceneID="Ivw-ed-Qqw">
             <objects>
-                <tableViewController title="Dashboard Title" id="T5O-z6-c0C" customClass="DashboardViewController" sceneMemberID="viewController">
+                <tableViewController title="Alarms" id="T5O-z6-c0C" customClass="DashboardViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="auN-2e-lmg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -547,7 +547,7 @@
                             <outlet property="delegate" destination="T5O-z6-c0C" id="9Mv-6N-8yD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dashboard" id="IkX-uy-MzM">
+                    <navigationItem key="navigationItem" title="Alarms" id="IkX-uy-MzM">
                         <barButtonItem key="backBarButtonItem" title="Back" id="Wmz-w1-fke"/>
                     </navigationItem>
                 </tableViewController>
@@ -559,7 +559,7 @@
         <scene sceneID="V3O-2P-dht">
             <objects>
                 <navigationController title="DashboardNAVC" definesPresentationContext="YES" id="DGG-75-Sal" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" image="Players.png" id="k6f-M0-A9n"/>
+                    <tabBarItem key="tabBarItem" title="Alarms" image="Players.png" id="k6f-M0-A9n"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dPP-UF-zsl">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -579,7 +579,7 @@
         <scene sceneID="PhO-Qu-Tyw">
             <objects>
                 <navigationController title="MapsNavigController" definesPresentationContext="YES" id="nDl-cM-aqi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Maps" image="Gestures.png" id="PFH-bD-ZMY"/>
+                    <tabBarItem key="tabBarItem" title="Sensors" image="Gestures.png" id="PFH-bD-ZMY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Bd-1c-ByX">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

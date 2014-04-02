@@ -10,12 +10,14 @@
 
 @interface Zone : NSObject
 
+@property (readonly, copy) NSString *zoneGuid;
 @property (readonly, copy) NSNumber *zoneId;
 @property (readonly, copy) NSString *name;
 @property (readonly, copy) NSString *zoneDescription;
 @property (readwrite, strong) NSArray *points;
 
 - (id) initWithZoneId:(NSNumber*)zid
+             zoneGuid:(NSString*)zoneGuid
                  name:(NSString *)name
           zoneDescription:(NSString *)desc;
 

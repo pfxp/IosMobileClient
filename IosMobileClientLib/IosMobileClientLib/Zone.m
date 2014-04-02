@@ -11,6 +11,7 @@
 @implementation Zone
 
 - (id) initWithZoneId:(NSNumber*)zid
+             zoneGuid:(NSString*)zoneGuid
                  name:(NSString *)name
           zoneDescription:(NSString *)desc
 {
@@ -19,6 +20,7 @@
     if (self)
     {
         _zoneId = zid;
+        _zoneGuid=zoneGuid;
         _name = name;
         _zoneDescription=desc;
     }

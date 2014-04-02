@@ -11,8 +11,13 @@
 
 @implementation Controller
 
-- (id) initWithAllValues:(BOOL)conn description:(NSString *)desc hostname:(NSString *)host
-                  ctrlid:(NSNumber *)cId locator:(BOOL)loc name:(NSString*)nm
+- (id) initWithAllValues:(BOOL)conn
+             description:(NSString *)desc
+                hostname:(NSString *)host
+                  ctrlid:(NSNumber *)cId
+                 locator:(BOOL)loc
+                    name:(NSString*)nm
+          controllerGuid:(NSString*)controllerGuid
 {
     self = [super init];
     if (self)
@@ -23,6 +28,7 @@
         _ctrlId=cId;
         _locator=loc;
         _name=nm;
+        _controllerGuid=controllerGuid;
     }
     return self;
 }

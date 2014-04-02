@@ -16,13 +16,15 @@
 @property (readonly, copy) NSNumber *ctrlId;
 @property (readonly) BOOL locator;
 @property (readonly, copy) NSString *name;
+@property (readonly, copy) NSString *controllerGuid;
 
 - (id) initWithAllValues:(BOOL)conn
              description:(NSString*)desc
                 hostname:(NSString *)host
                   ctrlid:(NSNumber *)cId
                  locator:(BOOL)loc
-                    name:(NSString*)nm;
+                    name:(NSString*)nm
+          controllerGuid:(NSString*)controllerGuid;
 
 - (NSString *)description;
 @end

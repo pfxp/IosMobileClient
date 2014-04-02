@@ -267,6 +267,7 @@
 //
 + (Controller *) parseControllerJsonDictionary:(NSDictionary *) dict
 {
+    NSString *controllerGuidAsString = [dict objectForKey:@"ControllerGuid"];
     NSString *connected = [dict objectForKey:@"Connected"];
     NSString *description = [dict objectForKey:@"Description"];
     NSString *hostname = [dict objectForKey:@"Hostname"];
@@ -283,7 +284,8 @@
                                         hostname:hostname
                                           ctrlid:idNumber
                                          locator:locatorAsBool
-                                            name:name];
+                                            name:name
+                                  controllerGuid:controllerGuidAsString];
 }
 
 
@@ -361,12 +363,13 @@
 //
 + (Zone *) parseZoneJsonDictionary:(NSDictionary *) dict
 {
+    NSString *zoneGuidAsString = [dict objectForKey:@"ZoneGuid"];
     NSString *zoneIdAsString = [dict objectForKey:@"ZoneId"];
     NSString *name = [dict objectForKey:@"Name"];
     NSString *description = [dict objectForKey:@"Description"];
     NSNumber *zoneIdNumber = [NSNumber numberWithInteger:[zoneIdAsString integerValue]];
     
-    return [[Zone alloc] initWithZoneId:zoneIdNumber name:name zoneDescription:description];
+    return [[Zone alloc] initWithZoneId:zoneIdNumber zoneGuid:zoneGuidAsString name:name zoneDescription:description];
 }
 
 

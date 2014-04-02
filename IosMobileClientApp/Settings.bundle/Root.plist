@@ -67,22 +67,6 @@
 			<string>Server Communications</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Server URL</string>
-			<key>Key</key>
-			<string>url_pref</string>
-			<key>AutocapitalizationType</key>
-			<string>None</string>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>KeyboardType</key>
-			<string>URL</string>
-			<key>DefaultValue</key>
-			<string>http://peterpc.fft.local:4567/RestService.svc</string>
-		</dict>
-		<dict>
 			<key>Values</key>
 			<array>
 				<string>5</string>

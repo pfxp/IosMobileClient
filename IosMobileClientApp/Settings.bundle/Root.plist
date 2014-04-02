@@ -59,6 +59,8 @@
 			</array>
 		</dict>
 		<dict>
+			<key>New item</key>
+			<string></string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
@@ -107,6 +109,14 @@
 			<string>polling_interval_pref</string>
 			<key>DefaultValue</key>
 			<string>15</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Servers</string>
+			<key>File</key>
+			<string>servers</string>
 		</dict>
 		<dict>
 			<key>Type</key>

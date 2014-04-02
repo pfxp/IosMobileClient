@@ -72,7 +72,7 @@
 //
 - (IBAction)acknowledge:(id)sender
 {
-    [self.delegate alarmDetailsViewControllerDidAcknowledge:self];
+    [self.delegate intrusionViewControllerDidAcknowledge:self];
 }
 
 
@@ -82,7 +82,7 @@
 //
 - (IBAction)goToMap:(id)sender
 {
-    [self.delegate alarmDetailsViewControllerDidGoToMap:self];
+    [self.delegate intrusionViewControllerDidGoToMap:self];
 }
 
 

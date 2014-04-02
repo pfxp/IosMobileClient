@@ -7,6 +7,7 @@
 //
 
 #import "DashboardViewController.h"
+#import "MapDetailsViewController.h"
 #import "IosMobileClientLib/Cams.h"
 #import "IosMobileClientLib/Zone.h"
 #import "IosMobileClientLib/Sensor.h"
@@ -294,11 +295,11 @@
 }
 
 
-#pragma mark AlarmDetailsViewControllerDelegate
+#pragma mark IntrusionViewControllerDelegate
 //
 // Go back to the previous screen.
 //
-- (void)alarmDetailsViewControllerDidGoBack:(IntrusionViewController *)controller
+- (void)intrusionViewControllerDidGoBack:(IntrusionViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -306,7 +307,7 @@
 //
 // Acknowledge the alarm.
 //
-- (void)alarmDetailsViewControllerDidAcknowledge:(IntrusionViewController *)controller
+- (void)intrusionViewControllerDidAcknowledge:(IntrusionViewController *)controller
 {
     NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
     BOOL confirmAck = [standaloneUserDefaults boolForKey:@"confirm_ack_pref"];
@@ -330,9 +331,19 @@
 //
 // Go to a map.
 //
-- (void)alarmDetailsViewControllerDidGoToMap:(IntrusionViewController *)controller
+- (void)intrusionViewControllerDidGoToMap:(IntrusionViewController *)controller
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:TRUE];
+    
+    // The sensorId to display.
+    //NSNumber *number = [event sensorId];
+    
+    //MapDetailsViewController *mapDetailsViewController = [[MapDetailsViewController alloc] init];
+    //mapDetailsViewController.map = [self.cams.repository getMapByIndex:0];
+    //mapDetailsViewController.repository = self.cams.repository;
+
+    //[self.navigationController pushViewController:mapDetailsViewController animated:YES];
 }
 
 

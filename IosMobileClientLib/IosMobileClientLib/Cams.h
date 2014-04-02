@@ -27,13 +27,14 @@
 
 @property (readwrite) RequestQueue *requeustQueue;
 @property (readwrite) CamsObjectRepository *repository;
+@property (readwrite) NSDictionary *urls;
 @property (readwrite, copy) NSURL *baseUrl;
 @property (readwrite) NSURLSession *session;
 @property (readwrite) NSMutableDictionary *dataFromWebService;
 @property (readwrite) NSMutableDictionary *camsObjectsReceived;
 
 
--(id) initWithBaseUrl:(NSURL*) url;
+-(id) initWithUrls:(NSDictionary*) urls;
 -(void) initializeCamsObjectsReceived;
 -(void) camsObjectReceived:(CamsWsRequest) request;
 -(BOOL) hasCamsObjectBeenReceived:(CamsWsRequest) request;

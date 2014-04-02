@@ -17,10 +17,9 @@
 @class Cams;
 
 
-
 @protocol IntrusionDetailsViewControllerDelegate <NSObject>
-- (void)alarmDetailsViewControllerDidAcknowledge:(IntrusionViewController *)controller;
-- (void)alarmDetailsViewControllerDidGoToMap:(IntrusionViewController *)controller;
+- (void)intrusionViewControllerDidAcknowledge:(IntrusionViewController *)controller;
+- (void)intrusionViewControllerDidGoToMap:(IntrusionViewController *)controller;
 @end
 
 

@@ -29,22 +29,20 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound| UIRemoteNotificationTypeAlert)];
     
     NSUserDefaults *standaloneUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *url_preference = [standaloneUserDefaults objectForKey:@"url_pref"];
-    if (!url_preference)
-    {
-        [self registerDefaultsFromSettingsBundle];
-    }
+    [self registerDefaultsFromSettingsBundle];
+    
+    // Get a dictionary of valid URLS
+    NSDictionary *urls = [self processUrls:standaloneUserDefaults];
     
     // Initialize the CAMS object, request configuration data and alarm data.
-    cams = [[Cams alloc] initWithBaseUrl:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"url_pref"]]];
-    
+    cams = [[Cams alloc] initWithUrls:urls];
     
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     
-    // Give CAMS data to Dashboard
-    UINavigationController *dashboardNavController = [tabBarController viewControllers][0];
-    DashboardViewController *dashViewController = [dashboardNavController viewControllers][0];
-    dashViewController.cams = cams;
+    // Give CAMS data to Alarm List
+    UINavigationController *alarmListNavController = [tabBarController viewControllers][0];
+    DashboardViewController *alarmListViewController = [alarmListNavController viewControllers][0];
+    alarmListViewController.cams = cams;
 
     // Give CAMS data to Maps view
     UINavigationController *mapsNavController = [tabBarController viewControllers][1];
@@ -152,25 +150,78 @@
 {
     // this function writes default settings as settings
     NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
-    if(!settingsBundle) {
+    if(!settingsBundle)
+    {
         NSLog(@"Could not find Settings.bundle");
         return;
     }
     
-    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
-    NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+    NSDictionary *settingsRoot = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+    NSArray *preferencesRoot = [settingsRoot objectForKey:@"PreferenceSpecifiers"];
     
-    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+    NSDictionary *settingsServers = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"servers.plist"]];
+    NSArray *preferencesServers = [settingsServers objectForKey:@"PreferenceSpecifiers"];
+
+    NSDictionary *settingsSounds = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"sounds.plist"]];
+    NSArray *preferencesSounds = [settingsSounds objectForKey:@"PreferenceSpecifiers"];
+
+    unsigned long defaultsCount = [preferencesRoot count] + [preferencesServers count] + [preferencesSounds count];
     
-    for(NSDictionary *prefSpecification in preferences) {
+    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:defaultsCount];
+    
+    // root.plist
+    for(NSDictionary *prefSpecification in preferencesRoot) {
         NSString *key = [prefSpecification objectForKey:@"Key"];
-        if(key) {
+        if(key)
+        {
             [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
             //NSLog(@"writing as default %@ to the key %@",[prefSpecification objectForKey:@"DefaultValue"],key);
         }
     }
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+    // servers.plist
+    for(NSDictionary *prefSpecification in preferencesServers) {
+        NSString *key = [prefSpecification objectForKey:@"Key"];
+        if(key)
+        {
+            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+        }
+    }
 
+    // sounds.plist
+    for(NSDictionary *prefSpecification in preferencesSounds) {
+        NSString *key = [prefSpecification objectForKey:@"Key"];
+        if(key)
+        {
+            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+        }
+    }
+
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+}
+
+
+
+//
+// Reads the non-blank URLS from the settings.
+// TODO tighten the logic
+//
+- (NSDictionary *) processUrls:(NSUserDefaults *) defaults
+{
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    
+    for (int i=1; i <= 8; i++)
+    {
+        NSString *key = [[NSString alloc] initWithFormat:@"pref_server_%d", i];
+        NSString *value = [defaults stringForKey:key];
+        NSURL *url = [NSURL URLWithString:value];
+        
+        if ([value length] > 5 && url != nil)
+        {
+            [dictionary setValue:url forKey:key];
+        }
+    }
+    
+    return dictionary;
 }
 @end

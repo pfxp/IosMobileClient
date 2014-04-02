@@ -14,7 +14,7 @@
 
 @implementation Cams
 
--(id) initWithBaseUrl:(NSURL *)url
+-(id) initWithUrls:(NSDictionary *)urls
 {
     self = [super init];
     
@@ -23,9 +23,14 @@
         _repository = [[CamsObjectRepository alloc] init];
         _dataFromWebService = [[NSMutableDictionary alloc] init];
         _camsObjectsReceived = [[NSMutableDictionary alloc] init];
+        _urls = urls;
+        
+        NSURL *url = [_urls objectForKey:@"pref_server_1"];
+        
         [self initializeCamsObjectsReceived];
         [self setBaseUrl:url];
         [self createSession];
+        
         _requeustQueue = [[RequestQueue alloc] initWithBaseUrl:url session:[self session]];
         backgroundQueue = dispatch_queue_create("com.fftsecurity.bgqueue", NULL);
         _locationManager = [[CLLocationManager alloc] init];

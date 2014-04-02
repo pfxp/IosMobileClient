@@ -115,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="1649"/>
+            <point key="canvasLocation" x="-506" y="2167"/>
         </scene>
         <!--Maps View Controller - Sensors-->
         <scene sceneID="BYX-Xo-2oo">
@@ -155,6 +155,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1P-Jt-GxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="41" y="931"/>
+        </scene>
+        <!--Messages View Controller - Messages-->
+        <scene sceneID="Xfr-jv-LKP">
+            <objects>
+                <tableViewController id="lhh-zz-TIC" customClass="MessagesViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KJO-9p-qaP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="B6Y-fh-oqu">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B6Y-fh-oqu" id="CDX-vl-1xU">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lhh-zz-TIC" id="qk0-61-Jeu"/>
+                            <outlet property="delegate" destination="lhh-zz-TIC" id="6ru-ii-cim"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Messages" id="X16-Tr-XnC">
+                        <barButtonItem key="backBarButtonItem" title="Back!" id="DZW-bT-y7A"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pwv-dd-TcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28" y="1548"/>
+        </scene>
+        <!--Navigation Controller - Messages-->
+        <scene sceneID="fqi-GX-V0Y">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="jtQ-q7-xF6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Messages" image="1Star.png" id="bI3-36-hGU"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="i1k-jT-1ZA">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lhh-zz-TIC" kind="relationship" relationship="rootViewController" id="Ajv-Hk-OYw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cze-S0-ndj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-506" y="1548"/>
         </scene>
         <!--Laser Alarm View Controller - Laser Alarm-->
         <scene sceneID="Cgk-Lp-LSJ">
@@ -443,6 +490,7 @@
                     <connections>
                         <segue destination="DGG-75-Sal" kind="relationship" relationship="viewControllers" id="2tT-iO-0Fw"/>
                         <segue destination="nDl-cM-aqi" kind="relationship" relationship="viewControllers" id="2qi-fz-hSk"/>
+                        <segue destination="jtQ-q7-xF6" kind="relationship" relationship="viewControllers" id="6Nf-xL-Udo"/>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="aZr-La-Sb7"/>
                     </connections>
                 </tabBarController>

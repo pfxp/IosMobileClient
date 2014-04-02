@@ -39,6 +39,7 @@
 		7661477F18A2F90F007D734A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7661476118A2F90F007D734A /* UIKit.framework */; };
 		7661478718A2F90F007D734A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7661478518A2F90F007D734A /* InfoPlist.strings */; };
 		7661478918A2F90F007D734A /* IosMobileClientAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7661478818A2F90F007D734A /* IosMobileClientAppTests.m */; };
+		76765F8318EB81BE0094548E /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76765F8218EB81BE0094548E /* MessagesViewController.m */; };
 		768E252B18CFE1DA00101399 /* MyAlarmAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 768E252A18CFE1DA00101399 /* MyAlarmAnnotation.m */; };
 		768E252E18CFFB8D00101399 /* MyCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768E252D18CFFB8D00101399 /* MyCustomAnnotationView.m */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,8 @@
 		7661478418A2F90F007D734A /* IosMobileClientAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IosMobileClientAppTests-Info.plist"; sourceTree = "<group>"; };
 		7661478618A2F90F007D734A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7661478818A2F90F007D734A /* IosMobileClientAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IosMobileClientAppTests.m; sourceTree = "<group>"; };
+		76765F8118EB81BE0094548E /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		76765F8218EB81BE0094548E /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		768E252918CFE1DA00101399 /* MyAlarmAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlarmAnnotation.h; sourceTree = "<group>"; };
 		768E252A18CFE1DA00101399 /* MyAlarmAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlarmAnnotation.m; sourceTree = "<group>"; };
 		768E252C18CFFB8D00101399 /* MyCustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomAnnotationView.h; sourceTree = "<group>"; };
@@ -183,12 +186,13 @@
 		7661476318A2F90F007D734A /* IosMobileClientApp */ = {
 			isa = PBXGroup;
 			children = (
+				768E253518D26BAB00101399 /* Alarm List */,
 				7661476C18A2F90F007D734A /* AppDelegate.h */,
 				7661476D18A2F90F007D734A /* AppDelegate.m */,
-				768E253518D26BAB00101399 /* Dashboard */,
 				7661477518A2F90F007D734A /* Images.xcassets */,
 				7661476F18A2F90F007D734A /* Main.storyboard */,
 				768E253418D26B8700101399 /* Mapping */,
+				76765F8018EB7F9E0094548E /* Messages */,
 				7661476418A2F90F007D734A /* Supporting Files */,
 				768E253618D26BCC00101399 /* Utilities */,
 			);
@@ -224,6 +228,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		76765F8018EB7F9E0094548E /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				76765F8118EB81BE0094548E /* MessagesViewController.h */,
+				76765F8218EB81BE0094548E /* MessagesViewController.m */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
 		768E253418D26B8700101399 /* Mapping */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +252,7 @@
 			name = Mapping;
 			sourceTree = "<group>";
 		};
-		768E253518D26BAB00101399 /* Dashboard */ = {
+		768E253518D26BAB00101399 /* Alarm List */ = {
 			isa = PBXGroup;
 			children = (
 				762ED5A218C04C2700C95382 /* IntrusionViewController.h */,
@@ -251,7 +264,7 @@
 				76164FB018D947B5002A2AB2 /* SystemAlarmViewController.h */,
 				76164FB118D947B5002A2AB2 /* SystemAlarmViewController.m */,
 			);
-			name = Dashboard;
+			name = "Alarm List";
 			sourceTree = "<group>";
 		};
 		768E253618D26BCC00101399 /* Utilities */ = {
@@ -375,6 +388,7 @@
 			files = (
 				7661476A18A2F90F007D734A /* main.m in Sources */,
 				7628962818BEB735003FC83F /* DashboardViewController.m in Sources */,
+				76765F8318EB81BE0094548E /* MessagesViewController.m in Sources */,
 				768E252E18CFFB8D00101399 /* MyCustomAnnotationView.m in Sources */,
 				762ED5A418C04C2700C95382 /* IntrusionViewController.m in Sources */,
 				76164FB518D947C6002A2AB2 /* LaserAlarmViewController.m in Sources */,

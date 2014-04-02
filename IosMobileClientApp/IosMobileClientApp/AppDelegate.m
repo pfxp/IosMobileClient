@@ -52,7 +52,7 @@
     mapsViewController.cams = cams;
     
     // Give CAMS data to Utilities view.
-    UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][2];
+    UtilitiesViewController *utilitiesVC = [tabBarController viewControllers][3];
     utilitiesVC.cams = cams;
 
     // Start downloading data

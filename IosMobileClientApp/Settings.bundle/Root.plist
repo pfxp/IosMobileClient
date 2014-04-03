@@ -9,6 +9,8 @@
 			<string>Sound</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
+			<string>Use this section to configure your alarm sounds.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -33,8 +35,8 @@
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Location Format</string>
-			<key>New item</key>
-			<string></string>
+			<key>FooterText</key>
+			<string>You can display intrusion information in degrees-minutes-seconds or decimal format.</string>
 		</dict>
 		<dict>
 			<key>New item</key>
@@ -59,8 +61,8 @@
 			</array>
 		</dict>
 		<dict>
-			<key>New item</key>
-			<string></string>
+			<key>FooterText</key>
+			<string>This app can connect to multiple CAMS Web Services.</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
@@ -107,6 +109,8 @@
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Acknowledgement</string>
+			<key>FooterText</key>
+			<string>Defines how the app acknowledges alarms.</string>
 		</dict>
 		<dict>
 			<key>Type</key>

@@ -114,6 +114,18 @@ Navigation
 
 TODO
 ====
-
 * Ensure the mobile client can recover if it does not receive zones information. This happened once
 where the alarms were displayed in the dashboard but the zones had not been received.
+
+
+HTTPS
+=====
+This post has a discussion on HTTPS
+
+http://stackoverflow.com/questions/19507207/how-do-i-accept-a-self-signed-ssl-certificate-using-ios-7s-nsurlsession-and-its
+http://stackoverflow.com/questions/20230169/nsurlsession-server-with-self-signed-cert
+
+Web servers will need a certifcate from a certificate naming authority. Or, customers can create their own Certificate Authority.
+Install the CA certificate on the devices and then create a certificate using the CA for the CAMS Web Service machine.
+
+

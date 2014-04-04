@@ -190,10 +190,19 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 
 //
 // Called when using HTTPS
+// TODO Very dangerous. I am accepting a self-signed certificate from my development computer.
 //
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
-    NSLog(@"didReceiveChallenge");
+    NSLog(@"didReceiveChallenge called. Using HTTPS.");
+    
+     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+     {
+        if([challenge.protectionSpace.host isEqualToString:@"peterpc.fft.local"]){
+            NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+            completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
+        }
+    }
 }
 
 

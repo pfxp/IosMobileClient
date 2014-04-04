@@ -402,7 +402,7 @@
 + (ZoneEvent *) parseZoneEventJsonDictionary:(NSDictionary *) dict
 {
     NSString *eventIdAsString = [dict objectForKey:@"Id"];
-    NSString *eventTimeUtc1970sec = [dict objectForKey:@"TimeUtc1970sec"];
+    NSString *eventTimeUtc1970msec = [dict objectForKey:@"TimeUtc1970msec"];
     NSString *acknowledged = [dict objectForKey:@"Acked"];
     NSString *active = [dict objectForKey:@"Active"];
     NSString *dynamic = [dict objectForKey:@"Dynamic"];
@@ -413,7 +413,7 @@
     NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
     NSNumber *sensorId = [NSNumber numberWithInt:[sensorIdAsString intValue]];
     NSNumber *zoneId = [NSNumber numberWithInt:[zoneIdAsString intValue]];
-    NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970sec longLongValue]];
+    NSNumber *epoch = [NSNumber numberWithLongLong:[eventTimeUtc1970msec longLongValue] / 1000];
     NSDate *eventTime = [NSDate dateWithTimeIntervalSince1970:[epoch doubleValue]];
     NSNumber *eventId = [NSNumber numberWithInteger:[eventIdAsString integerValue]];
     
@@ -454,7 +454,7 @@
 {
     // Read the raw data
     NSString *alarmIdAsString = [dict objectForKey:@"Id"];
-    NSString *eventTimeUtc1970sec = [dict objectForKey:@"TimeUtc1970sec"];
+    NSString *eventTimeUtc1970msec = [dict objectForKey:@"TimeUtc1970msec"];
     NSString *acknowledgedAsString = [dict objectForKey:@"Acked"];
     NSString *alarmTypeString = [dict objectForKey:@"AlarmType"];
     NSString *controllerIdAsString = [dict objectForKey:@"CtrlId"];
@@ -465,7 +465,7 @@
     
     // Convert into constructor-suitable types.
     NSNumber *alarmId = [NSNumber numberWithLongLong:[alarmIdAsString longLongValue]];
-    NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
+    NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970msec doubleValue]/1000];
     AlarmType alarmType = [GlobalSettings alarmTypeFromNumber:[NSNumber numberWithLongLong:[alarmTypeString longLongValue]]];
     NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
     
@@ -501,14 +501,14 @@
 {
     // Read the raw data
     NSString *alarmIdAsString = [dict objectForKey:@"Id"];
-    NSString *eventTimeUtc1970sec = [dict objectForKey:@"TimeUtc1970sec"];
+    NSString *eventTimeUtc1970msec = [dict objectForKey:@"TimeUtc1970msec"];
     NSString *acknowledgedAsString = [dict objectForKey:@"Acked"];
     NSString *alarmTypeString = [dict objectForKey:@"AlarmType"];
     NSString *controllerIdAsString = [dict objectForKey:@"CtrlId"];
     
     // Convert into constructor-suitable types.
     NSNumber *alarmId = [NSNumber numberWithLongLong:[alarmIdAsString longLongValue]];
-    NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970sec doubleValue]];
+    NSDate *alarmTime = [NSDate dateWithTimeIntervalSince1970:[eventTimeUtc1970msec doubleValue]/1000];
     AlarmType alarmType = [GlobalSettings alarmTypeFromNumber:[NSNumber numberWithLongLong:[alarmTypeString longLongValue]]];
     NSNumber *controllerId = [NSNumber numberWithInt:[controllerIdAsString intValue]];
     

@@ -188,7 +188,9 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     NSLog(@"didBecomeInvalidWithError");
 }
 
-
+//
+// Called when using HTTPS
+//
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     NSLog(@"didReceiveChallenge");

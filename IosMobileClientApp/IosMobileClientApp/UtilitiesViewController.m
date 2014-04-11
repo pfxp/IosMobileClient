@@ -130,4 +130,12 @@
     NSLog(@"Acknowledging all zone events.");
 }
 
+//
+// Authenticates a user by OAuth 1.0
+//
+- (IBAction) authenticateButtonClicked:(id)sender
+{
+        
+}
+
 @end

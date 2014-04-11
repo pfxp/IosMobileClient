@@ -20,6 +20,10 @@
     IBOutlet UIButton *getCamsObjectsButton;
     IBOutlet UIButton *acknowledgeAllZoneEventsButton;
     IBOutlet UILabel *outputLabel;
+    
+    IBOutlet UITextField *usernameTextBox;
+    IBOutlet UITextField *passwordTextBox;
+    IBOutlet UIButton *authenticate;
 }
 
 @property (readwrite, weak) Cams *cams;
@@ -32,6 +36,7 @@
 - (IBAction) getZoneEventsButtonClicked:(id)sender;
 - (IBAction) getsCamsObjectsButtonClicked:(id)sender;
 - (IBAction) acknowledgeAllZoneEventsButtonClicked:(id)sender;
+- (IBAction) authenticateButtonClicked:(id)sender;
 + (NSString *) displayDictionaryAsString:(NSDictionary *) dict;
 
 @end

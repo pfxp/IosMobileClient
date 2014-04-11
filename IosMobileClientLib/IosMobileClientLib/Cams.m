@@ -70,11 +70,22 @@
 
 //
 // Create the NSURLSession
+// TODO Remove the hardcoded username and password.
 //
 -(void) createSession
 {
     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json"}];
+   
+    
+    NSString *userPasswordString = [NSString stringWithFormat:@"%@:%@", @"test", @"test"];
+    NSData * userPasswordData = [userPasswordString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64EncodedCredential = [userPasswordData base64EncodedStringWithOptions:0];
+    NSString *authString = [NSString stringWithFormat:@"Basic %@", base64EncodedCredential];
+    NSString *userAgentString = @"IosMobileClientApp/com.fftsecurity";
+    
+    [sessionConfig setHTTPAdditionalHeaders:@{@"Accept": @"application/json",
+                                              @"Authorization": authString,
+                                              @"User-Agent": userAgentString}];
     [sessionConfig setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
     [sessionConfig setTimeoutIntervalForRequest:10.0];
     [sessionConfig setTimeoutIntervalForResource:30.0];
@@ -190,19 +201,26 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 
 //
 // Called when using HTTPS
-// TODO Very dangerous. I am accepting a self-signed certificate from my development computer.
+
 //
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     NSLog(@"didReceiveChallenge called. Using HTTPS.");
     
+    completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+    
+    // TODO Very dangerous. I am accepting a self-signed certificate from my development computer.
+    /*
      if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
      {
-        if([challenge.protectionSpace.host isEqualToString:@"peterpc.fft.local"]){
+         NSString *host = challenge.protectionSpace.host;
+        if([challenge.protectionSpace.host isEqualToString:@"peterpc.fft.local"] || [challenge.protectionSpace.host isEqualToString:@"ghost"]
+           || [challenge.protectionSpace.host isEqualToString:@"10.0.0.62"]){
             NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
             completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
         }
     }
+     */
 }
 
 
